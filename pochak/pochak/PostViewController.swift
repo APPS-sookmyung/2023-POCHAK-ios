@@ -19,6 +19,10 @@ class PostViewController: UIViewController {
         // 크키에 맞게
         scrollView.updateContentSize()
         
+        // 네비게이션 바 밑줄 없애기
+        self.navigationController?.navigationBar.standardAppearance.shadowColor = .white  // 스크롤하지 않는 상태
+        self.navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .white  // 스크롤하고 있는 상태
+        
         // 내비게이션 바 타이틀 세팅
         postOwner = "Jal"  // 임시로 Jal 로 세팅
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]

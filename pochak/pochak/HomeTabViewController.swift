@@ -23,6 +23,12 @@ class HomeTabViewController: UIViewController {
 
         self.navigationItem.titleView = logoImageView
         
+        // 네비게이션 바 줄 없애기
+        //self.navigationController?.navigationBar.shadowImage = UIImage() -> 안됨
+        // self.navigationController?.navigationBar.standardAppearance.shadowImage = UIImage() -> 안됨...
+        self.navigationController?.navigationBar.standardAppearance.shadowColor = .white  // 스크롤하지 않는 상태
+        self.navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .white  // 스크롤하고 있는 상태
+        
         // info 버튼
         //create a new button
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))

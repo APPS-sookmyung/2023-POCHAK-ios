@@ -19,6 +19,9 @@ class InfoViewController: UIViewController {
         logoImageView.contentMode = .scaleAspectFit
 
         self.navigationItem.titleView = UIImageView(image: logoImage)
+        
+        // 네비게이션 바 밑줄 없애기
+        self.navigationController?.navigationBar.standardAppearance.shadowColor = .white
     }
     
 
