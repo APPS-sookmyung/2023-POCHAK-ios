@@ -129,6 +129,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		37F145202A592C9D00CC2FB3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		EA1718232A590F8E009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +193,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				37F145202A592C9D00CC2FB3 /* Onboarding */,
 				EA1718272A591271009168E6 /* Upload */,
 				089C757A2A51713C003AAB94 /* Fonts */,
 				EAAACDB42A5168280041B1B9 /* Main.storyboard */,
