@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MyW-us-nuD">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -9,6 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+
         <!--Home Tab View Controller-->
         <scene sceneID="B4z-8G-upW">
             <objects>
@@ -23,6 +24,14 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w2I-ZS-Tgt"/>
+        <!--View Controller-->
+        <scene sceneID="dTD-FW-NXB">
+            <objects>
+                <viewController id="gOX-DQ-uL0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pWc-Hk-MMN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="fPT-vi-dep"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7vA-Dd-pp8" firstAttribute="top" secondItem="w2I-ZS-Tgt" secondAttribute="top" id="NfF-Oy-NHE"/>
@@ -104,6 +113,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ylx-Zq-sig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="606" y="653"/>
+                    <navigationItem key="navigationItem" id="igb-VL-yAm"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mrd-iR-KTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="856" y="670"/>
+        </scene>
+        <!--홈-->
+        <scene sceneID="OSL-aK-neq">
+            <objects>
+                <navigationController storyboardIdentifier="HomeTab" id="MyW-us-nuD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="홈" image="home" selectedImage="home_fill" id="BK2-7s-OVR"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bdT-0g-MU8">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gOX-DQ-uL0" kind="relationship" relationship="rootViewController" id="uAj-DT-wMe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kPz-aW-7DD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34" y="671"/>
         </scene>
     </scenes>
     <resources>
