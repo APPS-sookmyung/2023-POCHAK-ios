@@ -115,7 +115,7 @@
             <point key="canvasLocation" x="606" y="653"/>
                     <navigationItem key="navigationItem" id="igb-VL-yAm"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
+                <!-- </viewController> -->
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mrd-iR-KTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="856" y="670"/>
