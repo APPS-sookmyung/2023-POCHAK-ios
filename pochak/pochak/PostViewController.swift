@@ -37,8 +37,7 @@ class PostViewController: UIViewController {
     @IBAction func moreCommentsBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "PostTab", bundle: nil)
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
-        commentVC.modalPresentationStyle = .
-        present(commentVC, animated: true)
+//        commentVC.modalPresentationStyle = .present(commentVC, animated: true)
 //        let storyboard = UIStoryboard(name: "NewAlarm", bundle: nil)
 //            let vc = storyboard.instantiateViewController(withIdentifier: "NewAlarmViewController") as! NewAlarmViewController
 //        //        vc.modalPresentationStyle = .fullScreen
