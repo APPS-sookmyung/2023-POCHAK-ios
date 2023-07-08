@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA1718152A5172C0009168E6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1718142A5172C0009168E6 /* CameraViewController.swift */; };
+		EA17181B2A5537B8009168E6 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA17181A2A5537B8009168E6 /* UploadViewController.swift */; };
+		EA17181F2A58F278009168E6 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA17181D2A58F278009168E6 /* AlarmTableViewCell.swift */; };
+		EA1718202A58F278009168E6 /* AlarmTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA17181E2A58F278009168E6 /* AlarmTableViewCell.xib */; };
 		EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B5A2A49D23A00F86FBC /* AppDelegate.swift */; };
 		EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B5C2A49D23A00F86FBC /* SceneDelegate.swift */; };
 		EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B5E2A49D23A00F86FBC /* ViewController.swift */; };
@@ -42,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA1718142A5172C0009168E6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		EA17181A2A5537B8009168E6 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		EA17181D2A58F278009168E6 /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
+		EA17181E2A58F278009168E6 /* AlarmTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmTableViewCell.xib; sourceTree = "<group>"; };
 		EA1B0B572A49D23A00F86FBC /* pochak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pochak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA1B0B5A2A49D23A00F86FBC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA1B0B5C2A49D23A00F86FBC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +96,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA1718162A517BF6009168E6 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				EA1718172A517C01009168E6 /* Camera */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		EA1718172A517C01009168E6 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				EA1718142A5172C0009168E6 /* CameraViewController.swift */,
+				EA17181A2A5537B8009168E6 /* UploadViewController.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		EA17181C2A58F22D009168E6 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				EA17181D2A58F278009168E6 /* AlarmTableViewCell.swift */,
+				EA17181E2A58F278009168E6 /* AlarmTableViewCell.xib */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
 		EA1B0B4E2A49D23A00F86FBC = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +145,8 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				EA17181C2A58F22D009168E6 /* Alarm */,
+				EA1718162A517BF6009168E6 /* Upload */,
 				EAAACDB42A5168280041B1B9 /* Main.storyboard */,
 				EA1B0B5A2A49D23A00F86FBC /* AppDelegate.swift */,
 				EA1B0B5C2A49D23A00F86FBC /* SceneDelegate.swift */,
@@ -253,6 +289,7 @@
 				EAFB4B872A5147A300E0F2FA /* ProfileTab.storyboard in Resources */,
 				EA99B63C2A5143A800EBA2AD /* CameraTab.storyboard in Resources */,
 				EAFB4B842A51478600E0F2FA /* HomeTab.storyboard in Resources */,
+				EA1718202A58F278009168E6 /* AlarmTableViewCell.xib in Resources */,
 				EA1B0B672A49D23B00F86FBC /* LaunchScreen.storyboard in Resources */,
 				EAAACDB62A5168280041B1B9 /* Main.storyboard in Resources */,
 				EAFB4B8B2A5147C400E0F2FA /* AlarmTab.storyboard in Resources */,
@@ -282,8 +319,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
+				EA17181B2A5537B8009168E6 /* UploadViewController.swift in Sources */,
+				EA1718152A5172C0009168E6 /* CameraViewController.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
+				EA17181F2A58F278009168E6 /* AlarmTableViewCell.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

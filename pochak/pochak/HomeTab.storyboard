@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MyW-us-nuD">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
@@ -8,27 +8,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--홈-->
-        <scene sceneID="s0d-6b-0kx">
+        <!--View Controller-->
+        <scene sceneID="dTD-FW-NXB">
             <objects>
-                <viewController storyboardIdentifier="HomeTab" id="Y6W-OH-hqX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController id="gOX-DQ-uL0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pWc-Hk-MMN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <viewLayoutGuide key="safeArea" id="fPT-vi-dep"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="홈" image="home" selectedImage="home_fill" id="5dT-Yy-DGJ"/>
+                    <navigationItem key="navigationItem" id="igb-VL-yAm"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mrd-iR-KTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="35" y="-2"/>
+            <point key="canvasLocation" x="856" y="670"/>
+        </scene>
+        <!--홈-->
+        <scene sceneID="OSL-aK-neq">
+            <objects>
+                <navigationController storyboardIdentifier="HomeTab" id="MyW-us-nuD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="홈" image="home" selectedImage="home_fill" id="BK2-7s-OVR"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bdT-0g-MU8">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gOX-DQ-uL0" kind="relationship" relationship="rootViewController" id="uAj-DT-wMe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kPz-aW-7DD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34" y="671"/>
         </scene>
     </scenes>
     <resources>
-        <image name="home" width="24" height="24"/>
-        <image name="home_fill" width="24" height="24"/>
+        <image name="home" width="23.333333969116211" height="23.333333969116211"/>
+        <image name="home_fill" width="23.333333969116211" height="23.333333969116211"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
