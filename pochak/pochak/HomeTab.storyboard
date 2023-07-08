@@ -117,7 +117,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 <!-- </viewController> -->
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mrd-iR-KTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
+            <!-- </objects> -->
             <point key="canvasLocation" x="856" y="670"/>
         </scene>
         <!--홈-->
