@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA1718152A5172C0009168E6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1718142A5172C0009168E6 /* CameraViewController.swift */; };
+		EA17181B2A5537B8009168E6 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA17181A2A5537B8009168E6 /* UploadViewController.swift */; };
 		089C75882A51728A003AAB94 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C757F2A517289003AAB94 /* Pretendard-Regular.ttf */; };
 		089C75892A51728A003AAB94 /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75802A517289003AAB94 /* Pretendard-Thin.ttf */; };
 		089C758A2A51728A003AAB94 /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75812A517289003AAB94 /* Pretendard-Black.ttf */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA1718142A5172C0009168E6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		EA17181A2A5537B8009168E6 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		089C757F2A517289003AAB94 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		089C75802A517289003AAB94 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		089C75812A517289003AAB94 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -106,6 +110,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA1718162A517BF6009168E6 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				EA1718172A517C01009168E6 /* Camera */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		EA1718172A517C01009168E6 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				EA1718142A5172C0009168E6 /* CameraViewController.swift */,
+				EA17181A2A5537B8009168E6 /* UploadViewController.swift */,
+			);
+			path = Camera;
 		089C757A2A51713C003AAB94 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +164,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				EA1718162A517BF6009168E6 /* Upload */,
 				089C757A2A51713C003AAB94 /* Fonts */,
 				EAAACDB42A5168280041B1B9 /* Main.storyboard */,
 				EA1B0B5A2A49D23A00F86FBC /* AppDelegate.swift */,
@@ -326,6 +346,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
+				EA17181B2A5537B8009168E6 /* UploadViewController.swift in Sources */,
+				EA1718152A5172C0009168E6 /* CameraViewController.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
