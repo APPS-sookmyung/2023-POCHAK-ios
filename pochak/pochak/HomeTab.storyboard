@@ -24,6 +24,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w2I-ZS-Tgt"/>
+                    </view>
                 </viewController>
             </objects>
         </scene>
