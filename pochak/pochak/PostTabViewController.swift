@@ -11,13 +11,13 @@ class PostTabViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func viewPostBtnTapped(_ sender: Any) {
         print("view post btn tapped")
-        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController else { return }
+        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+            else { return }
         print(postVC)
         self.navigationController?.pushViewController(postVC, animated: true)
 //        let sb = UIStoryboard(name: "PostTab", bundle: nil)
