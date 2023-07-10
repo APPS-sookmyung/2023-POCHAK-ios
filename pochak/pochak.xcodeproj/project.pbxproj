@@ -140,6 +140,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		37F145202A592C9D00CC2FB3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +196,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				37F145202A592C9D00CC2FB3 /* Onboarding */,
 				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
 				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
 				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
