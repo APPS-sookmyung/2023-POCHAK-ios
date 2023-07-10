@@ -12,6 +12,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     var postOwner: String = ""
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var btnLike: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +61,19 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         present(commentVC, animated: true)
     }
 
+    @IBAction func likeBtnTapped(_ sender: Any) {
+        // 좋아요 취소
+        if btnLike.isSelected {
+            btnLike.isSelected = false
+        }
+        // 좋아요 하기
+        else{
+            btnLike.isSelected = true
+        }
+    }
+    
 }
+
 
 // MARK: - Extensions
 
