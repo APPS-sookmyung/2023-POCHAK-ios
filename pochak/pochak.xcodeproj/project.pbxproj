@@ -78,8 +78,6 @@
 		EA0107972A59556800A3AE85 /* PostTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTabViewController.swift; sourceTree = "<group>"; };
 		EA0107982A59556800A3AE85 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		EA0107992A59556800A3AE85 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		EA1718252A590F8E009168E6 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		EA1718262A590F8E009168E6 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		EA1718292A5912A7009168E6 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		EA17182A2A5912A7009168E6 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		EA1718342A592BE3009168E6 /* AlarmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 		089C757A2A51713C003AAB94 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				EA1718232A590F8E009168E6 /* Upload */,
 				089C75812A517289003AAB94 /* Pretendard-Black.ttf */,
 				089C75842A51728A003AAB94 /* Pretendard-Bold.ttf */,
 				089C75852A51728A003AAB94 /* Pretendard-ExtraBold.ttf */,
@@ -147,21 +144,11 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		EA1718232A590F8E009168E6 /* Upload */ = {
+		37F145202A592C9D00CC2FB3 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				EA1718242A590F8E009168E6 /* Camera */,
 			);
-			path = Upload;
-			sourceTree = "<group>";
-		};
-		EA1718242A590F8E009168E6 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				EA1718252A590F8E009168E6 /* CameraViewController.swift */,
-				EA1718262A590F8E009168E6 /* UploadViewController.swift */,
-			);
-			path = Camera;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		EA1718272A591271009168E6 /* Upload */ = {
@@ -213,6 +200,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				37F145202A592C9D00CC2FB3 /* Onboarding */,
 				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
 				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
 				0823B0732A5B0E780085002F /* CommentTableViewCell.xib */,
