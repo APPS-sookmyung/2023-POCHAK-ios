@@ -128,6 +128,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0823B0762A5D6BC20085002F /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107992A59556800A3AE85 /* PostViewController.swift */,
+				0823B0772A5D6C290085002F /* Comment */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		0823B0772A5D6C290085002F /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				0823B0782A5D6DA40085002F /* cell */,
+				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		0823B0782A5D6DA40085002F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				0823B0732A5B0E780085002F /* CommentTableViewCell.xib */,
+				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		0823B0792A5D6F1E0085002F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
+				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		089C757A2A51713C003AAB94 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,13 +237,9 @@
 			isa = PBXGroup;
 			children = (
 				37F145202A592C9D00CC2FB3 /* Onboarding */,
-				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
-				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
-				0823B0732A5B0E780085002F /* CommentTableViewCell.xib */,
-				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
-				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
 				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
-				EA0107992A59556800A3AE85 /* PostViewController.swift */,
+				0823B0792A5D6F1E0085002F /* Home */,
+				0823B0762A5D6BC20085002F /* Post */,
 				EA17182D2A592A08009168E6 /* Alarm */,
 				EA1718272A591271009168E6 /* Upload */,
 				089C757A2A51713C003AAB94 /* Fonts */,
