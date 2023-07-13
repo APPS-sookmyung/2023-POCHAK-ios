@@ -157,7 +157,6 @@
 		37F145202A592C9D00CC2FB3 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				EA0107B02A5ECB6E00A3AE85 /* Post */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -223,6 +222,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				EA0107B02A5ECB6E00A3AE85 /* Post */,
 				37F145202A592C9D00CC2FB3 /* Onboarding */,
 				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
 				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
