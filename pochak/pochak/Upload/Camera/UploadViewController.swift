@@ -18,14 +18,16 @@ class UploadViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(image:UIImage(named: "back_btn"), style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
         
 
-        backBarButtonItem.tintColor = UIColor.black  // 색상 변경
+        backBarButtonItem.tintColor = UIColor.black
         return backBarButtonItem
         }()
 
     lazy var rightButton: UIBarButtonItem = { // 업로드 버튼
         let button = UIBarButtonItem(title: "업로드", style: .plain, target: self, action: #selector(uploadbuttonPressed(_:)))
-        
-        button.tintColor = UIColor.red // 색 노란색으로 바꾸기
+        button.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "Pretendard-bold", size: 14)!
+        ], for: .normal)
+        button.tintColor = UIColor(named: "yellow00")// 색 노란색으로 바꾸기
         return button
         }()
     
@@ -53,7 +55,7 @@ class UploadViewController: UIViewController {
 //
 //        self.navigationController?.navigationBar.topItem?.backAction = UIAction(handler: backbuttonPressed(_:))
         captionField.delegate = self
-        
+        captionCountText.font = UIFont(name: "Pretendard-medium", size: 12)
         tagSearch.searchBarStyle = .minimal
         
         
@@ -64,10 +66,12 @@ class UploadViewController: UIViewController {
         
         //태그검색 창 글씨 크기 설정
         let attributedString = NSMutableAttributedString(string: "친구를 태그해보세요!", attributes: [
-               NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12) as Any
+            NSAttributedString.Key.font: UIFont(name: "Pretendard-medium",size:12) as Any
            ])
+        
+
         tagSearch.searchTextField.attributedPlaceholder = attributedString
-        tagSearch.searchTextField.font = UIFont.boldSystemFont(ofSize: 12)
+        tagSearch.searchTextField.font = UIFont(name: "Pretendard-medium",size:12)
         /*
          // MARK: - Navigation
          
