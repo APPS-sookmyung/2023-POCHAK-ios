@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823B0722A5B0E780085002F /* CommentTableViewCell.swift */; };
 		0823B0752A5B0E780085002F /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0823B0732A5B0E780085002F /* CommentTableViewCell.xib */; };
+		084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AF4C52A5D831100C6454A /* HomeCollectionViewCell.swift */; };
+		084AF4C82A5D831100C6454A /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 084AF4C62A5D831100C6454A /* HomeCollectionViewCell.xib */; };
 		089C75882A51728A003AAB94 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C757F2A517289003AAB94 /* Pretendard-Regular.ttf */; };
 		089C75892A51728A003AAB94 /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75802A517289003AAB94 /* Pretendard-Thin.ttf */; };
 		089C758A2A51728A003AAB94 /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75812A517289003AAB94 /* Pretendard-Black.ttf */; };
@@ -69,6 +71,8 @@
 /* Begin PBXFileReference section */
 		0823B0722A5B0E780085002F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0823B0732A5B0E780085002F /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		084AF4C52A5D831100C6454A /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		084AF4C62A5D831100C6454A /* HomeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		089C757F2A517289003AAB94 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		089C75802A517289003AAB94 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.ttf"; sourceTree = "<group>"; };
 		089C75812A517289003AAB94 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.ttf"; sourceTree = "<group>"; };
@@ -138,6 +142,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0823B0762A5D6BC20085002F /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107992A59556800A3AE85 /* PostViewController.swift */,
+				0823B0772A5D6C290085002F /* Comment */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		0823B0772A5D6C290085002F /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				0823B0782A5D6DA40085002F /* cell */,
+				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		0823B0782A5D6DA40085002F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				0823B0732A5B0E780085002F /* CommentTableViewCell.xib */,
+				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		0823B0792A5D6F1E0085002F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0823B07A2A5D771B0085002F /* cell */,
+				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
+				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0823B07A2A5D771B0085002F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				084AF4C52A5D831100C6454A /* HomeCollectionViewCell.swift */,
+				084AF4C62A5D831100C6454A /* HomeCollectionViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		089C757A2A51713C003AAB94 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,13 +274,9 @@
 			children = (
 				EA0107B02A5ECB6E00A3AE85 /* Post */,
 				37F145202A592C9D00CC2FB3 /* Onboarding */,
-				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
-				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
-				0823B0732A5B0E780085002F /* CommentTableViewCell.xib */,
-				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
-				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
 				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
-				EA0107992A59556800A3AE85 /* PostViewController.swift */,
+				0823B0792A5D6F1E0085002F /* Home */,
+				0823B0762A5D6BC20085002F /* Post */,
 				EA17182D2A592A08009168E6 /* Alarm */,
 				EA1718272A591271009168E6 /* Upload */,
 				089C757A2A51713C003AAB94 /* Fonts */,
@@ -389,6 +435,7 @@
 				EA1B0B642A49D23B00F86FBC /* Assets.xcassets in Resources */,
 				0823B0752A5B0E780085002F /* CommentTableViewCell.xib in Resources */,
 				089C758A2A51728A003AAB94 /* Pretendard-Black.ttf in Resources */,
+				084AF4C82A5D831100C6454A /* HomeCollectionViewCell.xib in Resources */,
 				089C758C2A51728A003AAB94 /* Pretendard-Medium.ttf in Resources */,
 				089C75902A51728A003AAB94 /* Pretendard-ExtraLight.ttf in Resources */,
 				089C758B2A51728A003AAB94 /* Pretendard-SemiBold.ttf in Resources */,
@@ -427,6 +474,7 @@
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
 				EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */,
 				EA17182B2A5912A7009168E6 /* CameraViewController.swift in Sources */,
+				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
 				EA01079B2A59556800A3AE85 /* HomeTabViewController.swift in Sources */,

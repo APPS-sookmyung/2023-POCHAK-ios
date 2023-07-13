@@ -17,21 +17,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7vA-Dd-pp8">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mRC-fe-Pyh" userLabel="CollectionView">
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VgV-qr-k8U">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="1" minY="0.0" maxX="1" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="w2I-ZS-Tgt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7vA-Dd-pp8" firstAttribute="top" secondItem="w2I-ZS-Tgt" secondAttribute="top" id="NfF-Oy-NHE"/>
-                            <constraint firstItem="w2I-ZS-Tgt" firstAttribute="bottom" secondItem="7vA-Dd-pp8" secondAttribute="bottom" id="VFk-gt-Rv1"/>
-                            <constraint firstItem="7vA-Dd-pp8" firstAttribute="leading" secondItem="w2I-ZS-Tgt" secondAttribute="leading" id="aMV-7A-CXj"/>
-                            <constraint firstItem="w2I-ZS-Tgt" firstAttribute="trailing" secondItem="7vA-Dd-pp8" secondAttribute="trailing" id="sk1-Vx-eyj"/>
+                            <constraint firstItem="mRC-fe-Pyh" firstAttribute="top" secondItem="w2I-ZS-Tgt" secondAttribute="top" id="4b5-Kk-z75"/>
+                            <constraint firstItem="w2I-ZS-Tgt" firstAttribute="trailing" secondItem="mRC-fe-Pyh" secondAttribute="trailing" id="Bek-nj-QL1"/>
+                            <constraint firstItem="w2I-ZS-Tgt" firstAttribute="bottom" secondItem="mRC-fe-Pyh" secondAttribute="bottom" id="EAD-Ex-Ptk"/>
+                            <constraint firstItem="mRC-fe-Pyh" firstAttribute="leading" secondItem="w2I-ZS-Tgt" secondAttribute="leading" id="pMz-cK-d8T"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EJG-mE-k5P"/>
+                    <connections>
+                        <outlet property="collectionView" destination="mRC-fe-Pyh" id="VFE-yL-RM9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vka-r6-roe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,7 +62,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aY-hl-rwH">
-                                <rect key="frame" x="20" y="751" width="353" height="67"/>
+                                <rect key="frame" x="20" y="752.33333333333337" width="353" height="65.666666666666629"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="공유하기">
