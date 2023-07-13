@@ -15,13 +15,16 @@ class UploadViewController: UIViewController {
     
     
     lazy var backButton: UIBarButtonItem = { // 업로드 버튼
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
+        let backBarButtonItem = UIBarButtonItem(image:UIImage(named: "back_btn"), style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
+        
+
         backBarButtonItem.tintColor = UIColor.black  // 색상 변경
         return backBarButtonItem
         }()
 
     lazy var rightButton: UIBarButtonItem = { // 업로드 버튼
         let button = UIBarButtonItem(title: "업로드", style: .plain, target: self, action: #selector(uploadbuttonPressed(_:)))
+        
         button.tintColor = UIColor.red // 색 노란색으로 바꾸기
         return button
         }()
@@ -41,10 +44,14 @@ class UploadViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.rightBarButtonItem = self.rightButton // 업로드 버튼
- 
-        self.navigationItem.backBarButtonItem = self.backButton
-        
-        
+        self.navigationItem.leftBarButtonItem = self.backButton
+//        // back button 커스텀
+//        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
+//        self.navigationController?.navigationBar.tintColor = .black
+//
+//        btnBack.addTarget(self, action: #selector(btnBackTapped), for: .touchUpInside)
+//
+//        self.navigationController?.navigationBar.topItem?.backAction = UIAction(handler: backbuttonPressed(_:))
         captionField.delegate = self
         
         tagSearch.searchBarStyle = .minimal
@@ -73,13 +80,22 @@ class UploadViewController: UIViewController {
     }
     // Button event.
     @objc private func backbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
-        print("good")
+        print("back")
 
-        let sheet = UIAlertController(title: "경고", message: "정말 휴지통으로 보내겠습니까?", preferredStyle: .alert)
+        let sheet = UIAlertController(title:"입력을 취소하고 페이지를 나갈까요?",message: "페이지를 벗어나면 현재 입력된 내용은 저장되지 않으며, 모두 사라집니다.", preferredStyle: UIAlertController.Style.alert)
 
-        sheet.addAction(UIAlertAction(title: "Yes!", style: .destructive, handler: { _ in print("yes 클릭")}))
+        sheet.addAction(UIAlertAction(title: "나가기", style: .destructive, handler: { _ in
+            if let navController = self.navigationController {
+                navController.popViewController(animated: true)
+            }
+            
+        }))
                 
-        sheet.addAction(UIAlertAction(title: "No!", style: .cancel, handler: { _ in print("yes 클릭") }))
+        sheet.addAction(UIAlertAction(title: "계속하기!", style: .cancel, handler: nil))
+        
+        
+        self.present(sheet,animated: true,completion: nil)
+        
         }
     
     @objc private func uploadbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
