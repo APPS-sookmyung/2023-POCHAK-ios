@@ -7,11 +7,12 @@
 
 import UIKit
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController, UISheetPresentationControllerDelegate {
     // MARK: - properties
     var postOwner: String = ""
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var btnLike: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +38,52 @@ class PostViewController: UIViewController {
     @IBAction func moreCommentsBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "PostTab", bundle: nil)
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
-//        commentVC.modalPresentationStyle = .present(commentVC, animated: true)
-//        let storyboard = UIStoryboard(name: "NewAlarm", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "NewAlarmViewController") as! NewAlarmViewController
-//        //        vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true)
+        
+        commentVC.modalPresentationStyle = .pageSheet
+        
+        // half sheet
+        if let sheet = commentVC.sheetPresentationController {
+            //지원할 크기 지정
+            sheet.detents = [.medium(), .large()]
+            //크기 변하는거 감지
+            sheet.delegate = self
+                   
+            //시트 상단에 그래버 표시 (기본 값은 false)
+            sheet.prefersGrabberVisible = true
+                    
+            //처음 크기 지정 (기본 값은 가장 작은 크기)
+            //sheet.selectedDetentIdentifier = .large
+                    
+            //뒤 배경 흐리게 제거 (기본 값은 모든 크기에서 배경 흐리게 됨)
+            //sheet.largestUndimmedDetentIdentifier = .medium
+        }
+                
+        present(commentVC, animated: true)
     }
 
+    @IBAction func likeBtnTapped(_ sender: Any) {
+        // 좋아요 취소
+        if btnLike.isSelected {
+            btnLike.isSelected = false
+        }
+        // 좋아요 하기
+        else{
+            btnLike.isSelected = true
+        }
+    }
+    
 }
 
+
 // MARK: - Extensions
+
+extension ViewController: UISheetPresentationControllerDelegate {
+    func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
+        //크기 변경 됐을 경우
+        print(sheetPresentationController.selectedDetentIdentifier == .large ? "large" : "medium")
+    }
+}
+
 extension UIScrollView {
     func updateContentSize() {
         let unionCalculatedTotalRect = recursiveUnionInDepthFor(view: self)

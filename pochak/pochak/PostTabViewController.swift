@@ -90,7 +90,8 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("view post btn tapped")
-        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController else { return }
+        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+            else { return }
         print(postVC)
         self.navigationController?.pushViewController(postVC, animated: true)
         //        let sb = UIStoryboard(name: "PostTab", bundle: nil)
