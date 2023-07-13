@@ -171,7 +171,7 @@
                             <constraint firstItem="Ka8-ey-aaL" firstAttribute="top" secondItem="3Tx-yR-Y3o" secondAttribute="top" constant="85" id="ucB-RZ-Idn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="오늘은 누구를 포착했나요?" style="editor" id="P6P-GH-9E4"/>
+                    <navigationItem key="navigationItem" title="오늘은 누구를 포착했나요?" id="P6P-GH-9E4"/>
                     <connections>
                         <outlet property="captionCountText" destination="Ka8-ey-aaL" id="Q9V-6D-Iuv"/>
                         <outlet property="captionField" destination="ubb-Iv-B4m" id="sdC-tk-GGc"/>

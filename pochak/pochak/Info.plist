@@ -16,6 +16,8 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>카메라 권한이 필요합니다</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>사진을 저장합니다.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
