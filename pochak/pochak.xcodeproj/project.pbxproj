@@ -25,6 +25,11 @@
 		EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107972A59556800A3AE85 /* PostTabViewController.swift */; };
 		EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107982A59556800A3AE85 /* InfoViewController.swift */; };
 		EA01079E2A59556800A3AE85 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107992A59556800A3AE85 /* PostViewController.swift */; };
+		EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107A62A5CF73900A3AE85 /* AlarmViewController.swift */; };
+		EA0107AE2A5EC23900A3AE85 /* OtherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107AC2A5EC23900A3AE85 /* OtherCollectionViewCell.swift */; };
+		EA0107AF2A5EC23900A3AE85 /* OtherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0107AD2A5EC23900A3AE85 /* OtherCollectionViewCell.xib */; };
+		EA0107B32A5ECB8A00A3AE85 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */; };
+		EA0107B42A5ECB8A00A3AE85 /* PostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */; };
 		EA17182B2A5912A7009168E6 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1718292A5912A7009168E6 /* CameraViewController.swift */; };
 		EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA17182A2A5912A7009168E6 /* UploadViewController.swift */; };
 		EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1718342A592BE3009168E6 /* AlarmCollectionViewCell.swift */; };
@@ -82,6 +87,11 @@
 		EA0107972A59556800A3AE85 /* PostTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTabViewController.swift; sourceTree = "<group>"; };
 		EA0107982A59556800A3AE85 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		EA0107992A59556800A3AE85 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		EA0107A62A5CF73900A3AE85 /* AlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
+		EA0107AC2A5EC23900A3AE85 /* OtherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA0107AD2A5EC23900A3AE85 /* OtherCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OtherCollectionViewCell.xib; sourceTree = "<group>"; };
+		EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCollectionViewCell.xib; sourceTree = "<group>"; };
 		EA1718292A5912A7009168E6 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		EA17182A2A5912A7009168E6 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		EA1718342A592BE3009168E6 /* AlarmCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -201,6 +211,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		EA0107B02A5ECB6E00A3AE85 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
+				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +242,9 @@
 			children = (
 				EA1718342A592BE3009168E6 /* AlarmCollectionViewCell.swift */,
 				EA1718352A592BE3009168E6 /* AlarmCollectionViewCell.xib */,
+				EA0107A62A5CF73900A3AE85 /* AlarmViewController.swift */,
+				EA0107AC2A5EC23900A3AE85 /* OtherCollectionViewCell.swift */,
+				EA0107AD2A5EC23900A3AE85 /* OtherCollectionViewCell.xib */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -250,6 +272,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				EA0107B02A5ECB6E00A3AE85 /* Post */,
 				37F145202A592C9D00CC2FB3 /* Onboarding */,
 				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 				0823B0792A5D6F1E0085002F /* Home */,
@@ -399,10 +422,12 @@
 				089C758D2A51728A003AAB94 /* Pretendard-Bold.ttf in Resources */,
 				089C758F2A51728A003AAB94 /* Pretendard-Light.ttf in Resources */,
 				EAFB4B872A5147A300E0F2FA /* ProfileTab.storyboard in Resources */,
+				EA0107B42A5ECB8A00A3AE85 /* PostCollectionViewCell.xib in Resources */,
 				089C75882A51728A003AAB94 /* Pretendard-Regular.ttf in Resources */,
 				EA99B63C2A5143A800EBA2AD /* CameraTab.storyboard in Resources */,
 				EAFB4B842A51478600E0F2FA /* HomeTab.storyboard in Resources */,
 				EA1B0B672A49D23B00F86FBC /* LaunchScreen.storyboard in Resources */,
+				EA0107AF2A5EC23900A3AE85 /* OtherCollectionViewCell.xib in Resources */,
 				EAAACDB62A5168280041B1B9 /* Main.storyboard in Resources */,
 				EAFB4B8B2A5147C400E0F2FA /* AlarmTab.storyboard in Resources */,
 				089C75892A51728A003AAB94 /* Pretendard-Thin.ttf in Resources */,
@@ -440,8 +465,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA01079E2A59556800A3AE85 /* PostViewController.swift in Sources */,
+				EA0107AE2A5EC23900A3AE85 /* OtherCollectionViewCell.swift in Sources */,
+				EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */,
 				EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */,
 				EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */,
+				EA0107B32A5ECB8A00A3AE85 /* PostCollectionViewCell.swift in Sources */,
 				EA01079A2A59556800A3AE85 /* CommentViewController.swift in Sources */,
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
 				EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */,

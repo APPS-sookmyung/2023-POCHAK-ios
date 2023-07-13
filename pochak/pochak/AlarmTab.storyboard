@@ -5,30 +5,79 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--알리미-->
-        <scene sceneID="s0d-6b-0kx">
+        <!--AlarmViewController-->
+        <scene sceneID="Q3u-hK-ZR5">
             <objects>
-                <viewController storyboardIdentifier="AlarmTab" id="Y6W-OH-hqX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController storyboardIdentifier="AlarmViewController" title="AlarmViewController" id="lFQ-2d-qRK" customClass="AlarmViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="seh-SF-KVh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4kS-Av-6sm">
+                                <rect key="frame" x="24" y="110" width="345" height="659"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8oy-2T-6hh">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Rpf-SF-DbS">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tfI-1y-oDK">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2YT-fm-shG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2YT-fm-shG" firstAttribute="trailing" secondItem="4kS-Av-6sm" secondAttribute="trailing" constant="24" id="8id-dZ-9IX"/>
+                            <constraint firstItem="2YT-fm-shG" firstAttribute="bottom" secondItem="4kS-Av-6sm" secondAttribute="bottom" id="A2L-Ul-u1s"/>
+                            <constraint firstItem="4kS-Av-6sm" firstAttribute="leading" secondItem="2YT-fm-shG" secondAttribute="leading" constant="24" id="BX2-6G-SKr"/>
+                            <constraint firstItem="4kS-Av-6sm" firstAttribute="top" secondItem="2YT-fm-shG" secondAttribute="top" constant="7" id="cft-EZ-M9i"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="알리미" image="alarm" selectedImage="alarm_fill" id="8hl-LE-8eI"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" id="zpX-gt-Jwx"/>
+                    <connections>
+                        <outlet property="collectionView" destination="4kS-Av-6sm" id="3bu-aG-jvM"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VHo-ix-x1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="35" y="-2"/>
+            <point key="canvasLocation" x="1474" y="682"/>
+        </scene>
+        <!--알리미-->
+        <scene sceneID="hDT-uN-t6P">
+            <objects>
+                <navigationController storyboardIdentifier="AlarmTab" id="7CC-Tw-VNh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="알리미" image="alarm" selectedImage="alarm_fill" id="0rl-yn-7d7"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ccf-ck-Ig3">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lFQ-2d-qRK" kind="relationship" relationship="rootViewController" id="gnX-Zs-aOe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x8p-5j-QU1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="727" y="682"/>
         </scene>
     </scenes>
     <resources>
-        <image name="alarm" width="26" height="24"/>
-        <image name="alarm_fill" width="26" height="24"/>
+        <image name="alarm" width="25.333333969116211" height="22.666666030883789"/>
+        <image name="alarm_fill" width="25.333333969116211" height="22.666666030883789"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
