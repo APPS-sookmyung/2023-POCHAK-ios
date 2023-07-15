@@ -211,15 +211,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		EA0107B02A5ECB6E00A3AE85 /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
-				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
-			);
-			path = Post;
-			sourceTree = "<group>";
-		};
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,9 +263,8 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
-				EA0107B02A5ECB6E00A3AE85 /* Post */,
+				EA2B09882A629EED0005EA8B /* PostTab */,
 				37F145202A592C9D00CC2FB3 /* Onboarding */,
-				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 				0823B0792A5D6F1E0085002F /* Home */,
 				0823B0762A5D6BC20085002F /* Post */,
 				EA17182D2A592A08009168E6 /* Alarm */,
@@ -312,6 +302,16 @@
 				EA1B0B7D2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift */,
 			);
 			path = pochakUITests;
+			sourceTree = "<group>";
+		};
+		EA2B09882A629EED0005EA8B /* PostTab */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
+				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
+				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
+			);
+			path = PostTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
