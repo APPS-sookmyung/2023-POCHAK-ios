@@ -95,7 +95,7 @@
         <scene sceneID="dR1-Gu-trL">
             <objects>
                 <navigationController storyboardIdentifier="HomeTab" id="pZH-TV-E91" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈" image="home" selectedImage="home_fill" id="a3n-uF-VSQ"/>
+                    <tabBarItem key="tabBarItem" title="홈" image="home_logo" selectedImage="home_logo_fill" id="a3n-uF-VSQ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Unu-cE-kon">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -117,8 +117,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home" width="23.333333969116211" height="23.333333969116211"/>
-        <image name="home_fill" width="23.333333969116211" height="23.333333969116211"/>
+        <image name="home_logo" width="15.666666984558105" height="18"/>
+        <image name="home_logo_fill" width="15.666666984558105" height="18"/>
         <namedColor name="navy00">
             <color red="0.086274509803921567" green="0.14117647058823529" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
