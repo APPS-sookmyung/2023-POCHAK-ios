@@ -106,13 +106,13 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
     
     // cell 양 옆 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 5
     }
     
     // cell 크기 지정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = CGFloat((collectionView.frame.width - 6) / 3)
+        let width = CGFloat((collectionView.frame.width - 58) / 3)  // 24+24+5+5 = 58
         return CGSize(width: width, height: width * 4 / 3)  // 3:4 비율로
     }
 }

@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mRC-fe-Pyh" userLabel="CollectionView">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="113" width="393" height="656"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VgV-qr-k8U">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="1" minY="0.0" maxX="1" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
@@ -32,7 +32,7 @@
                         <viewLayoutGuide key="safeArea" id="w2I-ZS-Tgt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="mRC-fe-Pyh" firstAttribute="top" secondItem="w2I-ZS-Tgt" secondAttribute="top" id="4b5-Kk-z75"/>
+                            <constraint firstItem="mRC-fe-Pyh" firstAttribute="top" secondItem="w2I-ZS-Tgt" secondAttribute="top" constant="10" id="4b5-Kk-z75"/>
                             <constraint firstItem="w2I-ZS-Tgt" firstAttribute="trailing" secondItem="mRC-fe-Pyh" secondAttribute="trailing" id="Bek-nj-QL1"/>
                             <constraint firstItem="w2I-ZS-Tgt" firstAttribute="bottom" secondItem="mRC-fe-Pyh" secondAttribute="bottom" id="EAD-Ex-Ptk"/>
                             <constraint firstItem="mRC-fe-Pyh" firstAttribute="leading" secondItem="w2I-ZS-Tgt" secondAttribute="leading" id="pMz-cK-d8T"/>
