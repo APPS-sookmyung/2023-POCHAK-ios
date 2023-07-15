@@ -32,13 +32,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9W-52-dmE">
-                        <rect key="frame" x="146" y="15.666666666666664" width="12.333333333333343" height="14"/>
+                        <rect key="frame" x="146" y="15" width="12.333333333333343" height="14"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIn-LI-pv1">
-                        <rect key="frame" x="75" y="15" width="66" height="15"/>
+                        <rect key="frame" x="75" y="15" width="66" height="14"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -65,6 +65,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="profileImageView" destination="xKW-KP-ndO" id="UTk-iD-GIL"/>
+            </connections>
             <point key="canvasLocation" x="143.5114503816794" y="12.323943661971832"/>
         </tableViewCell>
     </objects>

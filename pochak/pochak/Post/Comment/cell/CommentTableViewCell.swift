@@ -9,9 +9,14 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var profileImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // 크기 반만큼 radius
+        profileImageView.layer.cornerRadius = 17.5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

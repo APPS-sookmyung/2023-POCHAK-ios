@@ -13,6 +13,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var CommentInputViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var userProfileImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,9 @@ class CommentViewController: UIViewController {
         // nib은 CommentTableViewCell << 이 파일임
         let feedNib = UINib(nibName: "CommentTableViewCell", bundle: nil)
         tableView.register(feedNib, forCellReuseIdentifier: "CommentTableViewCell")  // tableview에 이 cell을 등록
+        
+        // 사용자 프로필 사진 크기 반만큼 radius
+        userProfileImageView.layer.cornerRadius = 17.5
 
     }
     

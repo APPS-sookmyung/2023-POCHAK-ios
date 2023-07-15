@@ -9,6 +9,7 @@ import UIKit
 
 class PostViewController: UIViewController, UISheetPresentationControllerDelegate {
     // MARK: - properties
+    @IBOutlet weak var profileImageView: UIImageView!
     var postOwner: String = ""
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -29,10 +30,12 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]
         self.navigationItem.title = postOwner+" 님의 게시물"
         
-        
         // back button 커스텀
         self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
         self.navigationController?.navigationBar.tintColor = .black
+        
+        // 프로필 사진 동그랗게 -> 크기 반만큼 radius
+        profileImageView.layer.cornerRadius = 25
     }
     
     @IBAction func moreCommentsBtnTapped(_ sender: Any) {
