@@ -15,7 +15,7 @@ class AlarmViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]
-        self.navigationItem.title = "알리미"
+        self.navigationItem.title = "알림"
         
         // Do any additional setup after loading the view.
         setupCollectionView()
