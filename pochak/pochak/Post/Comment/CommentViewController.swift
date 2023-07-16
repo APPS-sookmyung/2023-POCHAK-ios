@@ -40,8 +40,12 @@ class CommentViewController: UIViewController {
         tableView.estimatedRowHeight = 90
         
         // nib은 CommentTableViewCell << 이 파일임
-        let feedNib = UINib(nibName: "CommentTableViewCell", bundle: nil)
-        tableView.register(feedNib, forCellReuseIdentifier: "CommentTableViewCell")  // tableview에 이 cell을 등록
+        let commentNib = UINib(nibName: "CommentTableViewCell", bundle: nil)
+        tableView.register(commentNib, forCellReuseIdentifier: "CommentTableViewCell")  // tableview에 이 cell을 등록
+        
+        // 테이블뷰에 ReplyTableViewCell 등록
+        let replyNib = UINib(nibName: "ReplyTableViewCell", bundle: nil)
+        tableView.register(replyNib, forCellReuseIdentifier: "ReplyTableViewCell")
         
         // 사용자 프로필 사진 크기 반만큼 radius
         userProfileImageView.layer.cornerRadius = 17.5
@@ -90,18 +94,39 @@ class CommentViewController: UIViewController {
 
 // MARK: - Extensions
 extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // UI 보기 위해 임시로 섹션 2개로 함
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     // 한 섹션에 몇 개의 셀을 넣을지
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 10
     }
     
     // 어떤 셀을 보여줄지
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 추후에 댓글인지 대댓글인지 분기하는 방식으로 수정할 것
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
-            return UITableViewCell()
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
+//            return UITableViewCell()
+//        }
+//        return cell
+        let section = indexPath.section
+        
+        switch section{
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
+                return UITableViewCell()
+                
+            }
+            return cell
+        default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyTableViewCell", for: indexPath) as? ReplyTableViewCell else{
+                return UITableViewCell()
+            }
+            return cell
         }
-        return cell
     }
     
     // TableView의 rowHeight속성에 AutometicDimension을 통해 테이블의 row가 유동적이라는 것을 선언
