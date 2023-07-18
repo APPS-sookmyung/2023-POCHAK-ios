@@ -1,13 +1,13 @@
 //
-//  CommentTableViewCell.swift
+//  ReplyTableViewCell.swift
 //  pochak
 //
-//  Created by Suyeon Hwang on 2023/07/10.
+//  Created by Suyeon Hwang on 2023/07/16.
 //
 
 import UIKit
 
-class CommentTableViewCell: UITableViewCell {
+class ReplyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
     
@@ -15,8 +15,8 @@ class CommentTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        // 크기 반만큼 radius
-        profileImageView.layer.cornerRadius = 17.5
+        // 이미지뷰 반만큼 radius 적용 -> 동그랗게
+        profileImageView.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
