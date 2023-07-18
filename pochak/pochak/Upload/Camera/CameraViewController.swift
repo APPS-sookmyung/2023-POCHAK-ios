@@ -17,14 +17,14 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var photoData = Data(count: 0)
-
+    
     var flashMode: AVCaptureDevice.FlashMode = .off
     
     let hapticImpact = UIImpactFeedbackGenerator()
     
     var currentZoomFactor: CGFloat = 1.0
     var lastScale: CGFloat = 1.0
-
+    
     @Published var recentImage: UIImage?
     @Published var isCameraBusy = false
     
@@ -54,33 +54,27 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             
             
             stillImageOutput.capturePhoto(with: photoSettings, delegate: self)
-        
+            
             
             print("[Camera]: Photo's taken")
             print("[CameraViewModel]: Photo captured!")
         } else {
             print("[CameraViewModel]: Camera's busy.")
         }
-        
-        
-        guard let toupload = self.storyboard?.instantiateViewController(withIdentifier: "UploadViewController") else {return}
-        self.navigationController?.pushViewController(toupload, animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]
         self.navigationItem.title = "포착하기"
-
-
         
+ 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Setup your camera here...
         requestAndCheckPermissions()
-        
         
     }
     
@@ -91,19 +85,19 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
-        guard let imageData = photo.fileDataRepresentation() //이미지 저장 부분
-            else { return }
+        guard let imageData = photo.fileDataRepresentation(), let image = UIImage(data: imageData) else {
+                return
+            }
         
-        guard let image = UIImage(data: imageData) else { return }
-        
-        
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        print("[Camera]: Photo's saved")
-
-
+////         이미지 저장 코드 (옵션)
 //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-//        print("[Camera]: Photo's saved")
+//        print("[Camera]: Photo saved")
         
+        // 이미지 전달 및 페이지 전환
+        let uploadViewController = storyboard?.instantiateViewController(withIdentifier: "UploadViewController") as! UploadViewController
+        uploadViewController.receivedImage = image
+        navigationController?.pushViewController(uploadViewController, animated: true)
+
     }
     
     func requestAndCheckPermissions() {
@@ -135,6 +129,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     //카메라 세팅
     func setUpCamera(){
+
         captureSession = AVCaptureSession()
         captureSession.startRunning()
         
@@ -142,6 +137,14 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         
         do {
             let input = try AVCaptureDeviceInput(device: backCamera)
+            
+            let photoSettings = AVCapturePhotoSettings()
+            photoSettings.isHighResolutionPhotoEnabled = false // 고해상도 비활성화
+            
+            if backCamera.supportsSessionPreset(.photo) {
+                captureSession.sessionPreset = .photo
+            }
+            
             stillImageOutput = AVCapturePhotoOutput()
             
             if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
@@ -158,8 +161,13 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer.videoGravity = .resizeAspectFill
-
+            
             videoPreviewLayer.connection?.videoOrientation = .portrait
+            // 비디오 출력의 해상도를 4:3 비율로 설정
+            let previewSize = CGSize(width: 640, height: 480) // 4:3 비율로 원하는 해상도 설정
+            videoPreviewLayer.frame = CGRect(origin: .zero, size: previewSize)
+            videoPreviewLayer.position = CGPoint(x: previewView.bounds.midX, y: previewView.bounds.midY)
+            
             previewView.layer.addSublayer(videoPreviewLayer)
             
             DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
@@ -168,7 +176,6 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                     self.videoPreviewLayer.frame = self.previewView.bounds
                 }
             }
-            
         }
     }
 }

@@ -13,6 +13,11 @@ import SwiftUI
 
 class UploadViewController: UIViewController {
     
+    let textViewPlaceHolder = "한 줄 캡션 입력하기"
+    
+    var receivedImage : UIImage?
+    
+    @IBOutlet weak var captureImg: UIImageView!
     
     lazy var backButton: UIBarButtonItem = { // 업로드 버튼
         let backBarButtonItem = UIBarButtonItem(image:UIImage(named: "back_btn"), style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
@@ -42,22 +47,21 @@ class UploadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        // 이미지 설정
+        if let image = receivedImage {
+            captureImg.image = image
+        }
         
         self.navigationItem.rightBarButtonItem = self.rightButton // 업로드 버튼
         self.navigationItem.leftBarButtonItem = self.backButton
-//        // back button 커스텀
-//        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
-//        self.navigationController?.navigationBar.tintColor = .black
-//
-//        btnBack.addTarget(self, action: #selector(btnBackTapped), for: .touchUpInside)
-//
-//        self.navigationController?.navigationBar.topItem?.backAction = UIAction(handler: backbuttonPressed(_:))
+        
+        
+        captionField.text = textViewPlaceHolder
+        captionField.textColor = UIColor(named: "gray04")
         captionField.delegate = self
+        
         captionCountText.font = UIFont(name: "Pretendard-medium", size: 12)
         tagSearch.searchBarStyle = .minimal
-        
         
         //테그 검색 창 버튼 이미지 설정
         tagSearch.setImage(UIImage(named: "search"), for: UISearchBar.Icon.search, state: .normal)
@@ -72,15 +76,7 @@ class UploadViewController: UIViewController {
 
         tagSearch.searchTextField.attributedPlaceholder = attributedString
         tagSearch.searchTextField.font = UIFont(name: "Pretendard-medium",size:12)
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
+
     }
     // Button event.
     @objc private func backbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
@@ -115,13 +111,35 @@ class UploadViewController: UIViewController {
 extension UploadViewController : UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard let currentText = textView.text else {return false}
+        let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else {return false}
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
         captionCountText.text = "\(currentText.count)/50" // 글자수 보여주는 label 변경
         
+        if(currentText.count > 50){
+            textView.textColor = .red
+
+        }
+        else{
+            textView.textColor = .black
+
+        }
+        
         //최대 글자수(50자) 이상 입력 불가
-        return changedText.count <= 49
+        return changedText.count <= 50
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) { // placeholder 적용 ("한 줄 캡션 입력하기")
+        if textView.text == textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = .lightGray
+        }
     }
 }
 

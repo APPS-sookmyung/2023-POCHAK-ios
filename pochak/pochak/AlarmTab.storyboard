@@ -56,11 +56,11 @@
             </objects>
             <point key="canvasLocation" x="1474" y="682"/>
         </scene>
-        <!--알리미-->
+        <!--알림-->
         <scene sceneID="hDT-uN-t6P">
             <objects>
                 <navigationController storyboardIdentifier="AlarmTab" id="7CC-Tw-VNh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="알리미" image="alarm" selectedImage="alarm_fill" id="0rl-yn-7d7"/>
+                    <tabBarItem key="tabBarItem" title="알림" image="alarm" selectedImage="alarm_fill" id="0rl-yn-7d7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ccf-ck-Ig3">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
