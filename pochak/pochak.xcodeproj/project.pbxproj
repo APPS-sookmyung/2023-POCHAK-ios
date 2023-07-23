@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081228C62A69624000DFA094 /* PostLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081228C52A69624000DFA094 /* PostLikesViewController.swift */; };
+		081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081228C82A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift */; };
+		081228CB2A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081228C92A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib */; };
 		0820B1902A63A18100604DA8 /* ReplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820B18E2A63A18100604DA8 /* ReplyTableViewCell.swift */; };
 		0820B1912A63A18100604DA8 /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0820B18F2A63A18100604DA8 /* ReplyTableViewCell.xib */; };
 		0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823B0722A5B0E780085002F /* CommentTableViewCell.swift */; };
@@ -71,6 +74,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		081228C52A69624000DFA094 /* PostLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikesViewController.swift; sourceTree = "<group>"; };
+		081228C82A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPeopleListTableViewCell.swift; sourceTree = "<group>"; };
+		081228C92A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LikedPeopleListTableViewCell.xib; sourceTree = "<group>"; };
 		0820B18E2A63A18100604DA8 /* ReplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyTableViewCell.swift; sourceTree = "<group>"; };
 		0820B18F2A63A18100604DA8 /* ReplyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyTableViewCell.xib; sourceTree = "<group>"; };
 		0823B0722A5B0E780085002F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -146,9 +152,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		081228C72A699B1100DFA094 /* Likes */ = {
+			isa = PBXGroup;
+			children = (
+				081228C52A69624000DFA094 /* PostLikesViewController.swift */,
+				081228C82A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift */,
+				081228C92A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib */,
+			);
+			path = Likes;
+			sourceTree = "<group>";
+		};
 		0823B0762A5D6BC20085002F /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				081228C72A699B1100DFA094 /* Likes */,
 				EA0107992A59556800A3AE85 /* PostViewController.swift */,
 				0823B0772A5D6C290085002F /* Comment */,
 			);
@@ -428,6 +445,7 @@
 				089C758D2A51728A003AAB94 /* Pretendard-Bold.ttf in Resources */,
 				0820B1912A63A18100604DA8 /* ReplyTableViewCell.xib in Resources */,
 				089C758F2A51728A003AAB94 /* Pretendard-Light.ttf in Resources */,
+				081228CB2A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib in Resources */,
 				EAFB4B872A5147A300E0F2FA /* ProfileTab.storyboard in Resources */,
 				EA0107B42A5ECB8A00A3AE85 /* PostCollectionViewCell.xib in Resources */,
 				089C75882A51728A003AAB94 /* Pretendard-Regular.ttf in Resources */,
@@ -484,10 +502,12 @@
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
+				081228C62A69624000DFA094 /* PostLikesViewController.swift in Sources */,
 				EA01079B2A59556800A3AE85 /* HomeTabViewController.swift in Sources */,
 				0820B1902A63A18100604DA8 /* ReplyTableViewCell.swift in Sources */,
 				EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
+				081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
