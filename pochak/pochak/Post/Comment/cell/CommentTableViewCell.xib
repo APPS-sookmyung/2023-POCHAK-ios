@@ -8,6 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Pretendard-Bold.ttf">
+            <string>Pretendard-Bold</string>
+        </array>
         <array key="Pretendard-Medium.ttf">
             <string>Pretendard-Medium</string>
         </array>
@@ -32,21 +35,21 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9W-52-dmE">
-                        <rect key="frame" x="146" y="15" width="12.333333333333343" height="14"/>
+                        <rect key="frame" x="145" y="15" width="12.333333333333343" height="14"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="gray04"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIn-LI-pv1">
-                        <rect key="frame" x="75" y="15" width="66" height="14"/>
-                        <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                        <rect key="frame" x="75" y="15" width="65" height="14"/>
+                        <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdM-Nc-CFF">
                         <rect key="frame" x="75" y="36.000000000000007" width="220" height="71.666666666666686"/>
-                        <string key="text">Here goes the comment content which can be very very very very long.... still can be long and long and long and long and long... and long and long and ...</string>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <string key="text">Here goes the comment content which can be very very very very long....  @hello still can be long and long and long and long and long... and long and long and ...</string>
+                        <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -77,6 +80,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="commentLabel" destination="tdM-Nc-CFF" id="4F7-Eo-uIU"/>
                 <outlet property="profileImageView" destination="xKW-KP-ndO" id="UTk-iD-GIL"/>
             </connections>
             <point key="canvasLocation" x="143.5114503816794" y="34.154929577464792"/>
