@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0801765E2A74F4B0005E6953 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0801765D2A74F4B0005E6953 /* UITextView+Extension.swift */; };
 		081228C62A69624000DFA094 /* PostLikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081228C52A69624000DFA094 /* PostLikesViewController.swift */; };
 		081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081228C82A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift */; };
 		081228CB2A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081228C92A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib */; };
@@ -75,6 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0801765D2A74F4B0005E6953 /* UITextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		081228C52A69624000DFA094 /* PostLikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikesViewController.swift; sourceTree = "<group>"; };
 		081228C82A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPeopleListTableViewCell.swift; sourceTree = "<group>"; };
 		081228C92A699B5A00DFA094 /* LikedPeopleListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LikedPeopleListTableViewCell.xib; sourceTree = "<group>"; };
@@ -167,8 +169,8 @@
 		0823B0762A5D6BC20085002F /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				081228C72A699B1100DFA094 /* Likes */,
 				EA0107992A59556800A3AE85 /* PostViewController.swift */,
+				081228C72A699B1100DFA094 /* Likes */,
 				0823B0772A5D6C290085002F /* Comment */,
 			);
 			path = Post;
@@ -309,6 +311,7 @@
 				EAFB4B8A2A5147C400E0F2FA /* AlarmTab.storyboard */,
 				EAFB4B8E2A514B2600E0F2FA /* TabbarController.swift */,
 				0899350A2A6D16D0007F04EE /* UILabel+Extension.swift */,
+				0801765D2A74F4B0005E6953 /* UITextView+Extension.swift */,
 			);
 			path = pochak;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
+				0801765E2A74F4B0005E6953 /* UITextView+Extension.swift in Sources */,
 				081228C62A69624000DFA094 /* PostLikesViewController.swift in Sources */,
 				0899350B2A6D16D0007F04EE /* UILabel+Extension.swift in Sources */,
 				EA01079B2A59556800A3AE85 /* HomeTabViewController.swift in Sources */,

@@ -19,7 +19,6 @@ class CommentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         /* commentTextView 초기화 */
-        print("tableviewcell")
         
         // commentTextView의 inset 제거
         commentTextView.textContainerInset = .zero

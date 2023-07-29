@@ -63,12 +63,13 @@
                             <color key="baseForegroundColor" name="gray04"/>
                         </buttonConfiguration>
                     </button>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="대댓글대댓글대댓글대댓글대댓글대댓글대댓글대댓글대대대대대댓글ㄷㅅ댓글댓글댓글" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uov-ld-3z9">
-                        <rect key="frame" x="132.66666666666666" y="31.333333333333336" width="283.33333333333337" height="44.666666666666664"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="대댓글대댓글대댓글대댓글대댓글대댓글대댓글대댓글대대대대대댓글ㄷㅅ댓글댓글댓글  @suyeon" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uov-ld-3z9" customClass="MentionTextView" customModule="pochak" customModuleProvider="target">
+                        <rect key="frame" x="132.66666666666666" y="31.333333333333343" width="283.33333333333337" height="44.666666666666657"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
                 </subviews>
                 <constraints>
@@ -87,7 +88,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="profileImageView" destination="glQ-bV-w4i" id="ryC-5r-8Gz"/>
-                <outlet property="replyCommentTextView" destination="Uov-ld-3z9" id="OGC-im-09e"/>
+                <outlet property="replyCommentTextView" destination="Uov-ld-3z9" id="gUd-bg-Ldl"/>
             </connections>
             <point key="canvasLocation" x="270.99236641221376" y="18.30985915492958"/>
         </tableViewCell>
