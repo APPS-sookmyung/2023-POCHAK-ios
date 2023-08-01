@@ -19,6 +19,8 @@ class UploadViewController: UIViewController {
     
     @IBOutlet weak var captureImg: UIImageView!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     lazy var backButton: UIBarButtonItem = { // 업로드 버튼
         let backBarButtonItem = UIBarButtonItem(image:UIImage(named: "back_btn"), style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
         
@@ -36,8 +38,6 @@ class UploadViewController: UIViewController {
         return button
         }()
     
-    
-//    
     
     @IBOutlet weak var captionField: UITextView!
     
@@ -77,6 +77,9 @@ class UploadViewController: UIViewController {
         tagSearch.searchTextField.attributedPlaceholder = attributedString
         tagSearch.searchTextField.font = UIFont(name: "Pretendard-medium",size:12)
 
+        //아이디 태그 collectionview
+        setupCollectionView()
+
     }
     // Button event.
     @objc private func backbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
@@ -105,7 +108,17 @@ class UploadViewController: UIViewController {
         tabBarController?.selectedIndex = 0
         
         }
-    
+    private func setupCollectionView(){
+        //delegate 연결
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        //cell 등록
+        collectionView.register(UINib(
+            nibName: "TagCollectionViewCell",
+            bundle: nil),forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
+        
+    }
 }
 
 extension UploadViewController : UITextViewDelegate{
@@ -142,4 +155,69 @@ extension UploadViewController : UITextViewDelegate{
         }
     }
 }
+
+extension UploadViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else{
+            fatalError("셀 타입 캐스팅 실패2")
+        }
+        //                let itemIndex = indexPath.item
+        //                if let cellData = self.userPosts{
+        //                    // 데이터가 있는 경우, cell 데이터를 전달
+        //                    cell.setupData(cellData[itemIndex].postImgUrl)
+        //                }
+        // <- 데이터 전달
+        return cell
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("view post btn tapped")
+
+        let sheet = UIAlertController(title:"알림",message: "태그를 삭제하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+
+        sheet.addAction(UIAlertAction(title: "네", style: .destructive, handler: { _ in
+            if let navController = self.navigationController {
+                navController.popViewController(animated: true)
+            }
+            
+        }))
+                
+        sheet.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
+        
+        
+        self.present(sheet,animated: true,completion: nil)
+        
+        }
+
+}
+
+        
+extension UploadViewController: UICollectionViewDelegateFlowLayout {
+    
+    // 위 아래 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+        return CGFloat(4)
+
+    }
+
+    // 옆 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            return CGFloat(12)
+
+
+        }
+
+            
+    // cell 사이즈( 옆 라인을 고려하여 설정 )
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: 77, height: 32)
+//    }
+}
+
 
