@@ -10,11 +10,13 @@ import UIKit
 class PostViewController: UIViewController, UISheetPresentationControllerDelegate {
     // MARK: - properties
     @IBOutlet weak var profileImageView: UIImageView!
-    var postOwner: String = ""
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var btnLike: UIButton!
+    @IBOutlet weak var labelHowManyLikes: UILabel!
     
+    var postOwner: String = ""
+    
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,33 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 프로필 사진 동그랗게 -> 크기 반만큼 radius
         profileImageView.layer.cornerRadius = 25
+        
+        // 좋아요 누른 사람 수 라벨에 대한 제스쳐 등록 -> 액션 연결
+        let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
+        labelHowManyLikes.addGestureRecognizer(howManyLikesLabelGesture)
+            
+            
+    }
+    
+    // MARK: - Actions
+    
+    @objc func showPeopleWhoLiked(sender: UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: "PostTab", bundle: nil)
+        let postLikesVC = storyboard.instantiateViewController(withIdentifier: "PostLikesVC") as! PostLikesViewController
+        
+        postLikesVC.modalPresentationStyle = .pageSheet
+        
+        // half sheet
+        if let sheet = postLikesVC.sheetPresentationController {
+            //지원할 크기 지정
+            sheet.detents = [.medium(), .large()]
+            //크기 변하는거 감지
+            sheet.delegate = self
+            //시트 상단에 그래버 표시 (기본 값은 false)
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(postLikesVC, animated: true)
     }
     
     @IBAction func moreCommentsBtnTapped(_ sender: Any) {
