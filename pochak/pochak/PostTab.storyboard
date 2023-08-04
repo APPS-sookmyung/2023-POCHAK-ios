@@ -185,21 +185,21 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NM-hH-Q9c">
+                                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NM-hH-Q9c">
                                                 <rect key="frame" x="303" y="28.666666666666671" width="48" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="27" id="DMR-NW-fTZ"/>
                                                     <constraint firstAttribute="width" constant="48" id="dOh-Jz-lIe"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="팔로우">
-                                                    <backgroundConfiguration key="background" cornerRadius="4.9699999999999998">
-                                                        <color key="backgroundColor" name="yellow00"/>
-                                                    </backgroundConfiguration>
-                                                    <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
-                                                    <directionalEdgeInsets key="contentInsets" top="5" leading="5" bottom="5" trailing="5"/>
-                                                </buttonConfiguration>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="팔로우">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="followinBtnTapped:" destination="HEC-dG-qH7" eventType="touchUpInside" id="gBx-vn-0iL"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-qJ-kQ5">
                                                 <rect key="frame" x="24" y="79" width="327" height="436"/>
@@ -332,6 +332,7 @@
                     </view>
                     <connections>
                         <outlet property="btnLike" destination="vvh-0p-iKO" id="ryI-jF-OtB"/>
+                        <outlet property="followingBtn" destination="8NM-hH-Q9c" id="IBZ-Pw-2dJ"/>
                         <outlet property="labelHowManyLikes" destination="AA0-TV-f7h" id="mJP-IP-Btg"/>
                         <outlet property="profileImageView" destination="g1Z-gd-DZE" id="juV-dt-dkX"/>
                         <outlet property="scrollView" destination="aPT-RR-Xxk" id="yYS-Pd-SxV"/>
@@ -452,9 +453,6 @@
         </namedColor>
         <namedColor name="gray05">
             <color red="0.42399999499320984" green="0.45899999141693115" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="yellow00">
-            <color red="1" green="0.72200000286102295" blue="0.23100000619888306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
