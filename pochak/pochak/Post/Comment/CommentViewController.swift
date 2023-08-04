@@ -12,13 +12,28 @@ class CommentViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var CommentInputViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentView: UIView!
+    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userProfileImageView: UIImageView!
     
+    let textViewPlaceHolder = "이 게시물에 댓글을 달아보세요"
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        /* commentView 초기 설정*/
+        // commentView의 댓글 입력 창(uitextview) inset 제거
+        commentTextView.textContainerInset = .zero
+        commentTextView.textContainer.lineFragmentPadding = 0
+        // delegate 설정
+        commentTextView.delegate = self
+        // 최대 줄 설정
+        //commentTextView.textContainer.maximumNumberOfLines = 5
+        // placeholder 설정
+        commentTextView.text = textViewPlaceHolder
+        commentTextView.textColor = UIColor(named: "gray03")
         
-        // Keyboard 보여지고 숨겨질 때 발생되는 이벤트 등록
+        /* Keyboard 보여지고 숨겨질 때 발생되는 이벤트 등록 */
         NotificationCenter.default.addObserver(  // 키보드 보여질 때
             self,
             selector: #selector(keyboardWillShow),
@@ -90,9 +105,27 @@ class CommentViewController: UIViewController {
                 self.view.layoutIfNeeded()
         }
     }
+    
+//    private func updateDynamicHeight(){
+//        //        let width = commentTextView.superview?.frame.width
+//        //        let height = commentTextView.superview?.frame.height
+//        //        commentTextView.superview?.frame = CGRect(x: <#T##Int#>, y: <#T##Int#>, width: <#T##Int#>, height: <#T##Int#>)
+//        commentTextView.constraints.forEach { (constraint) in
+//
+//            /// 180 이하일때는 더 이상 줄어들지 않게하기
+//            if estimatedSize.height <= 180 {
+//
+//            }
+//            else {
+//                if constraint.firstAttribute == .height {
+//                    constraint.constant = estimatedSize.height
+//                }
+//            }
+//        }
+//    }
 }
 
-// MARK: - Extensions
+// MARK: - Extensions (TableView)
 extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     
     // UI 보기 위해 임시로 섹션 2개로 함
@@ -153,4 +186,61 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
 //        }
 //        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
 //    }
+}
+
+// MARK: - Extension (UITextView 동적 높이 조절)
+extension CommentViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        
+        //let maxHeight:CGFloat = 100.0  // textView의 최대 높이
+        
+        //let currentLineCnt = Int(estimatedSize.height / (textView.font!.lineHeight))
+        
+        textView.constraints.forEach { (constraint) in
+            
+            // -> 뭐가 문젠지 몰라서 일단 보류
+//            // 최대 높이보다 크면 더 이상 늘어나지 않게 하기
+//            if estimatedSize.height >= maxHeight {
+//                print("==============")
+//                print("최대 높이보다 큽니다")
+//                textView.isScrollEnabled = true
+//                print("현재 scroll가능 여부: \(textView.isScrollEnabled)")
+//                if constraint.firstAttribute == .height {
+//                    constraint.constant = 100.0
+//                }
+//                print("height: \(textView.frame.height)")
+//
+//            }
+//            else {  // 최대 높이보다는 작은 경우 크게
+//                print("==============")
+//                print("최대 높이보다 작습니다.")
+//                textView.isScrollEnabled = false
+//                if constraint.firstAttribute == .height {
+//                    constraint.constant = estimatedSize.height
+//                }
+//                print("height: \(textView.frame.height)")
+            
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+        }
+    }
+    
+    // 입력 시작되면
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor(named: "gray03") {
+            textView.text = nil // 텍스트를 날려줌(placeholder 날리기)
+            textView.textColor = UIColor.black
+        }
+        
+    }
+    // UITextView의 placeholder
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = UIColor(named: "gray03")
+        }
+    }
 }
