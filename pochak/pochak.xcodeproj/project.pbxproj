@@ -18,7 +18,6 @@
 		089C75902A51728A003AAB94 /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75872A51728A003AAB94 /* Pretendard-ExtraLight.ttf */; };
 		2FCBFE6DE98CEA8938EF93DC /* Pods_pochakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */; };
 		373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815152A89E6D30032066A /* SocialJoinViewController.swift */; };
-		373815182A89E7570032066A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815172A89E7570032066A /* OnboardingViewController.swift */; };
 		3738151A2A8A09DA0032066A /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815192A8A09DA0032066A /* MakeProfileViewController.swift */; };
 		376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F125A2A8B7440005F469B /* SocialLoginViewController.swift */; };
 		A6D48ED7F8B86CF57C481991 /* Pods_pochak_pochakUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC75B5747D3AC9026B862E11 /* Pods_pochak_pochakUITests.framework */; };
@@ -79,7 +78,6 @@
 		0994FB0CA794651C5C9BDE8F /* Pods-pochak-pochakUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak-pochakUITests.debug.xcconfig"; path = "Target Support Files/Pods-pochak-pochakUITests/Pods-pochak-pochakUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0DB83F3ED818C9AF01F6A8E0 /* Pods-pochak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.release.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.release.xcconfig"; sourceTree = "<group>"; };
 		373815152A89E6D30032066A /* SocialJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocialJoinViewController.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/2023-POCHAK-ios/pochak/pochak/Onboarding/SocialJoinViewController.swift"; sourceTree = "<group>"; };
-		373815172A89E7570032066A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingViewController.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/2023-POCHAK-ios/pochak/pochak/Onboarding/OnboardingViewController.swift"; sourceTree = "<group>"; };
 		373815192A8A09DA0032066A /* MakeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MakeProfileViewController.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/2023-POCHAK-ios/pochak/pochak/Onboarding/MakeProfileViewController.swift"; sourceTree = "<group>"; };
 		376F125A2A8B7440005F469B /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		67EA6B5B881844A22EE2A55B /* Pods-pochak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.debug.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.debug.xcconfig"; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				373815152A89E6D30032066A /* SocialJoinViewController.swift */,
-				373815172A89E7570032066A /* OnboardingViewController.swift */,
 				373815192A8A09DA0032066A /* MakeProfileViewController.swift */,
 				376F125A2A8B7440005F469B /* SocialLoginViewController.swift */,
 			);
@@ -187,7 +184,6 @@
 				9D5440AA571B5DB6291304B2 /* Pods-pochakTests.debug.xcconfig */,
 				A5D3B19C2AEC946ECCF7054B /* Pods-pochakTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -578,7 +574,6 @@
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				EA01079B2A59556800A3AE85 /* HomeTabViewController.swift in Sources */,
 				EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */,
-				373815182A89E7570032066A /* OnboardingViewController.swift in Sources */,
 				376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
