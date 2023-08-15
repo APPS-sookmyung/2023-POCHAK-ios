@@ -61,17 +61,9 @@ class UploadViewController: UIViewController {
            ])
         tagSearch.searchTextField.attributedPlaceholder = attributedString
         tagSearch.searchTextField.font = UIFont.boldSystemFont(ofSize: 12)
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
     }
-    // Button event.
+    
+    // Button event
     @objc private func backbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
         print("good")
 
