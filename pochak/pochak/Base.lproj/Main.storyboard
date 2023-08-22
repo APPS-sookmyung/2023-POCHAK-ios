@@ -2,10 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w5l-aB-8rx">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,119 +15,7 @@
         </array>
     </customFonts>
     <scenes>
-
         <!--Social Join View Controller-->
-
-        <!--View Controller-->
-        <scene sceneID="Lzc-iz-gT9">
-            <objects>
-                <viewController id="fv9-AE-ZSK" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dnl-6t-Evr">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pochak_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rOw-8d-Nmd">
-                                <rect key="frame" x="132.66666666666666" y="254" width="127.99999999999997" height="99"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="99" id="oHV-eD-eRd"/>
-                                    <constraint firstAttribute="width" constant="128" id="wZ2-ps-YY2"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pochak_word_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gqc-ro-Ib3">
-                                <rect key="frame" x="81.666666666666686" y="388" width="230" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="JnF-VI-5a1"/>
-                                    <constraint firstAttribute="height" constant="45" id="VkS-gM-a4g"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신의 순간, 포착" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkS-Vb-hWF">
-                                <rect key="frame" x="115.33333333333333" y="446" width="162.66666666666669" height="28"/>
-                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="DO7-Kz-pgb"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="gqc-ro-Ib3" firstAttribute="top" secondItem="rOw-8d-Nmd" secondAttribute="bottom" constant="35" id="0jS-jF-Eq4"/>
-                            <constraint firstItem="zkS-Vb-hWF" firstAttribute="centerX" secondItem="Dnl-6t-Evr" secondAttribute="centerX" id="4cY-ga-MJH"/>
-                            <constraint firstItem="rOw-8d-Nmd" firstAttribute="top" secondItem="DO7-Kz-pgb" secondAttribute="top" constant="195" id="6FH-Im-Zhv"/>
-                            <constraint firstItem="gqc-ro-Ib3" firstAttribute="centerX" secondItem="Dnl-6t-Evr" secondAttribute="centerX" id="SqI-cI-nUi"/>
-                            <constraint firstItem="zkS-Vb-hWF" firstAttribute="top" secondItem="gqc-ro-Ib3" secondAttribute="bottom" constant="13" id="bzz-8e-gao"/>
-                            <constraint firstItem="rOw-8d-Nmd" firstAttribute="centerX" secondItem="Dnl-6t-Evr" secondAttribute="centerX" id="zjQ-xG-oRm"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oUW-MZ-KLy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-863" y="16"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pochak_logo" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-3O-1be">
-                                <rect key="frame" x="131.33333333333334" y="254" width="128.00000000000003" height="99"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="96e-9F-TEb"/>
-                                    <constraint firstAttribute="height" constant="99" id="hkK-kC-3kV"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pochak_word_logo" translatesAutoresizingMaskIntoConstraints="NO" id="0LS-oA-WvS">
-                                <rect key="frame" x="79.999999999999986" y="383" width="230.66666666666663" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="9Tg-Wd-zPr"/>
-                                    <constraint firstAttribute="height" constant="45" id="nHw-y4-RGu"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2py-k9-ihZ">
-                                <rect key="frame" x="20.333333333333343" y="631" width="350" height="60"/>
-                                <color key="backgroundColor" name="navy00"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="eRP-jI-c5O"/>
-                                    <constraint firstAttribute="height" constant="60" id="vDU-YS-dC2"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="시작하기">
-                                    <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="22"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신의 순간, 포착" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7T-GU-oMi">
-                                <rect key="frame" x="113.99999999999999" y="446" width="162.66666666666663" height="28"/>
-                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0LS-oA-WvS" secondAttribute="trailing" constant="80" id="5PX-Ty-Et0"/>
-                            <constraint firstItem="2py-k9-ihZ" firstAttribute="top" secondItem="S7T-GU-oMi" secondAttribute="bottom" constant="157" id="QjX-ho-wjb"/>
-                            <constraint firstItem="cwg-3O-1be" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="32:213" id="RuN-7T-P9E"/>
-                            <constraint firstItem="S7T-GU-oMi" firstAttribute="top" secondItem="0LS-oA-WvS" secondAttribute="bottom" constant="18" id="YVI-fR-LKk"/>
-                            <constraint firstItem="0LS-oA-WvS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="asp-ES-zod"/>
-                            <constraint firstItem="2py-k9-ihZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cq2-a6-y6t"/>
-                            <constraint firstItem="cwg-3O-1be" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iJ3-Qp-1bn"/>
-                            <constraint firstItem="cwg-3O-1be" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="195" id="id9-Y0-fJZ"/>
-                            <constraint firstItem="S7T-GU-oMi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nof-ft-oec"/>
-                            <constraint firstItem="0LS-oA-WvS" firstAttribute="top" secondItem="cwg-3O-1be" secondAttribute="bottom" constant="30" id="vpK-Yv-fmZ"/>
-                            <constraint firstItem="0LS-oA-WvS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="x7k-b5-Mpm"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-60" y="15"/>
-        </scene>
-        <!--View Controller-->
-
         <scene sceneID="Jrj-R1-3fV">
             <objects>
                 <viewController storyboardIdentifier="SocialJoinVC" id="OU9-gK-Rev" customClass="SocialJoinViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
@@ -153,14 +39,12 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포착 시작하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxO-YY-JlX">
                                 <rect key="frame" x="0.0" y="641" width="393" height="18.666666666666629"/>
-
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0m9-lT-YBC">
                                 <rect key="frame" x="107.33333333333333" y="758.66666666666663" width="178.33333333333337" height="32.666666666666629"/>
-
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="이미 계정이 있으신가요?">
                                     <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="16"/>
@@ -172,7 +56,6 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신의 순간, 포착" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wV5-nd-x5e">
                                 <rect key="frame" x="115.33333333333333" y="490" width="162.66666666666669" height="28"/>
-
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,7 +63,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlY-ZQ-tEl">
                                 <rect key="frame" x="127.33333333333331" y="673.66666666666663" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="UuV-Mt-0TQ"/>
                                     <constraint firstAttribute="width" constant="60" id="kgl-mh-wN4"/>
@@ -190,7 +72,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iro-3g-pM1">
                                 <rect key="frame" x="205.66666666666666" y="673.66666666666663" width="59.999999999999972" height="60"/>
-
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="g3v-ut-zRm"/>
@@ -273,7 +154,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC7-wl-1nm">
                                 <rect key="frame" x="127.33333333333331" y="629.66666666666663" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="ZP1-Up-2nS"/>
                                     <constraint firstAttribute="height" constant="60" id="qhP-oD-GNv"/>
@@ -544,6 +424,7 @@
         <!--Navigation Controller-->
         <scene sceneID="WVW-3u-0ew">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pNQ-ax-br3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w5l-aB-8rx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Cl-l2-IMm">
@@ -555,9 +436,8 @@
                         <segue destination="OU9-gK-Rev" kind="relationship" relationship="rootViewController" id="I1M-RY-g9G"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pNQ-ax-br3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-863" y="-301"/>
+            <point key="canvasLocation" x="-863" y="-113"/>
         </scene>
     </scenes>
     <resources>
