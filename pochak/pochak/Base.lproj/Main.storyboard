@@ -2,10 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w5l-aB-8rx">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,9 +15,6 @@
         </array>
     </customFonts>
     <scenes>
-
-        <!--Social Join View Controller-->
-
         <!--View Controller-->
         <scene sceneID="Lzc-iz-gT9">
             <objects>
@@ -74,21 +69,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pochak_logo" translatesAutoresizingMaskIntoConstraints="NO" id="cwg-3O-1be">
-                                <rect key="frame" x="131.33333333333334" y="254" width="128.00000000000003" height="99"/>
+                                <rect key="frame" x="132.66666666666666" y="254" width="127.99999999999997" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="96e-9F-TEb"/>
                                     <constraint firstAttribute="height" constant="99" id="hkK-kC-3kV"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pochak_word_logo" translatesAutoresizingMaskIntoConstraints="NO" id="0LS-oA-WvS">
-                                <rect key="frame" x="79.999999999999986" y="383" width="230.66666666666663" height="45"/>
+                                <rect key="frame" x="80" y="383" width="233" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="9Tg-Wd-zPr"/>
                                     <constraint firstAttribute="height" constant="45" id="nHw-y4-RGu"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2py-k9-ihZ">
-                                <rect key="frame" x="20.333333333333343" y="631" width="350" height="60"/>
+                                <rect key="frame" x="21.666666666666657" y="631" width="350" height="60"/>
                                 <color key="backgroundColor" name="navy00"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="eRP-jI-c5O"/>
@@ -101,7 +96,7 @@
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신의 순간, 포착" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7T-GU-oMi">
-                                <rect key="frame" x="113.99999999999999" y="446" width="162.66666666666663" height="28"/>
+                                <rect key="frame" x="115.33333333333333" y="446" width="162.66666666666669" height="28"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -128,8 +123,7 @@
             </objects>
             <point key="canvasLocation" x="-60" y="15"/>
         </scene>
-        <!--View Controller-->
-
+        <!--Social Join View Controller-->
         <scene sceneID="Jrj-R1-3fV">
             <objects>
                 <viewController storyboardIdentifier="SocialJoinVC" id="OU9-gK-Rev" customClass="SocialJoinViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
@@ -153,14 +147,12 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포착 시작하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxO-YY-JlX">
                                 <rect key="frame" x="0.0" y="641" width="393" height="18.666666666666629"/>
-
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0m9-lT-YBC">
                                 <rect key="frame" x="107.33333333333333" y="758.66666666666663" width="178.33333333333337" height="32.666666666666629"/>
-
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="이미 계정이 있으신가요?">
                                     <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="16"/>
@@ -172,7 +164,6 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="당신의 순간, 포착" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wV5-nd-x5e">
                                 <rect key="frame" x="115.33333333333333" y="490" width="162.66666666666669" height="28"/>
-
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,7 +171,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlY-ZQ-tEl">
                                 <rect key="frame" x="127.33333333333331" y="673.66666666666663" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="UuV-Mt-0TQ"/>
                                     <constraint firstAttribute="width" constant="60" id="kgl-mh-wN4"/>
@@ -190,7 +180,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iro-3g-pM1">
                                 <rect key="frame" x="205.66666666666666" y="673.66666666666663" width="59.999999999999972" height="60"/>
-
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="g3v-ut-zRm"/>
@@ -273,7 +262,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC7-wl-1nm">
                                 <rect key="frame" x="127.33333333333331" y="629.66666666666663" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="ZP1-Up-2nS"/>
                                     <constraint firstAttribute="height" constant="60" id="qhP-oD-GNv"/>
@@ -569,6 +557,9 @@
         <image name="profile1" width="116" height="116"/>
         <namedColor name="gray01">
             <color red="0.91399997472763062" green="0.92500001192092896" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navy00">
+            <color red="0.086274509803921567" green="0.14117647058823529" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
