@@ -202,8 +202,8 @@
 		0823B0772A5D6C290085002F /* Comment */ = {
 			isa = PBXGroup;
 			children = (
-				0823B0782A5D6DA40085002F /* cell */,
 				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
+				0823B0782A5D6DA40085002F /* cell */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -222,9 +222,9 @@
 		0823B0792A5D6F1E0085002F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0823B07A2A5D771B0085002F /* cell */,
 				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
 				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
+				0823B07A2A5D771B0085002F /* cell */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -264,7 +264,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-
 		A526D36E9922857B343AC7F0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,24 +287,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA1718232A590F8E009168E6 /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-				EA1718242A590F8E009168E6 /* Camera */,
-			);
-			path = Upload;
-			sourceTree = "<group>";
-		};
-		EA1718242A590F8E009168E6 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				EA1718252A590F8E009168E6 /* CameraViewController.swift */,
-				EA1718262A590F8E009168E6 /* UploadViewController.swift */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
-
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,19 +343,10 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
-
 				373815142A89E6BE0032066A /* Onboarding */,
-				EA0107952A59556800A3AE85 /* CommentViewController.swift */,
-				EA0107962A59556800A3AE85 /* HomeTabViewController.swift */,
-				EA0107982A59556800A3AE85 /* InfoViewController.swift */,
-				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
-				EA0107992A59556800A3AE85 /* PostViewController.swift */,
-
 				EA2B09882A629EED0005EA8B /* PostTab */,
-				
 				0823B0792A5D6F1E0085002F /* Home */,
 				0823B0762A5D6BC20085002F /* Post */,
-
 				EA17182D2A592A08009168E6 /* Alarm */,
 				EA1718272A591271009168E6 /* Upload */,
 				089C757A2A51713C003AAB94 /* Fonts */,
@@ -416,8 +388,8 @@
 		EA2B09882A629EED0005EA8B /* PostTab */ = {
 			isa = PBXGroup;
 			children = (
-				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
+				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
 			);
 			path = PostTab;
