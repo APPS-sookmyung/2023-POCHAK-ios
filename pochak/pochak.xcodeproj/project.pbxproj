@@ -861,6 +861,9 @@
 				DEVELOPMENT_TEAM = UN58VJRXVV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pochak/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한이 필요합니다";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진을 저장합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범에서 사진 선택 ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -872,7 +875,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nari.pochak;
+				PRODUCT_BUNDLE_IDENTIFIER = site.apps.pochak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -891,6 +894,9 @@
 				DEVELOPMENT_TEAM = UN58VJRXVV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pochak/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한이 필요합니다";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진을 저장합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범에서 사진 선택 ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
