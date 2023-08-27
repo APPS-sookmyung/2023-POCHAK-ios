@@ -69,6 +69,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="google_login"/>
+                                <connections>
+                                    <action selector="googleLoginAction:" destination="OU9-gK-Rev" eventType="touchUpInside" id="5IB-9W-4nW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iro-3g-pM1">
                                 <rect key="frame" x="205.66666666666666" y="673.66666666666663" width="59.999999999999972" height="60"/>
@@ -424,7 +427,6 @@
         <!--Navigation Controller-->
         <scene sceneID="WVW-3u-0ew">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pNQ-ax-br3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w5l-aB-8rx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Cl-l2-IMm">
@@ -436,6 +438,7 @@
                         <segue destination="OU9-gK-Rev" kind="relationship" relationship="rootViewController" id="I1M-RY-g9G"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pNQ-ax-br3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-863" y="-113"/>
         </scene>
