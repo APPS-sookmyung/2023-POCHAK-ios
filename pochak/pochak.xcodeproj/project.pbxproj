@@ -48,6 +48,8 @@
 		EA1B0B722A49D23B00F86FBC /* pochakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B712A49D23B00F86FBC /* pochakTests.swift */; };
 		EA1B0B7C2A49D23B00F86FBC /* pochakUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B7B2A49D23B00F86FBC /* pochakUITests.swift */; };
 		EA1B0B7E2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B7D2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift */; };
+		EA694C172A85054200B10589 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA694C152A85054200B10589 /* SearchResultTableViewCell.swift */; };
+		EA694C182A85054200B10589 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA694C162A85054200B10589 /* SearchResultTableViewCell.xib */; };
 		EA99B63C2A5143A800EBA2AD /* CameraTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA99B63B2A5143A800EBA2AD /* CameraTab.storyboard */; };
 		EAAACDB62A5168280041B1B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAAACDB42A5168280041B1B9 /* Main.storyboard */; };
 		EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */; };
@@ -122,6 +124,8 @@
 		EA1B0B772A49D23B00F86FBC /* pochakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pochakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA1B0B7B2A49D23B00F86FBC /* pochakUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pochakUITests.swift; sourceTree = "<group>"; };
 		EA1B0B7D2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pochakUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EA694C152A85054200B10589 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		EA694C162A85054200B10589 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		EA99B63B2A5143A800EBA2AD /* CameraTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraTab.storyboard; sourceTree = "<group>"; };
 		EAAACDB52A5168280041B1B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -339,11 +343,21 @@
 		EA2B09882A629EED0005EA8B /* PostTab */ = {
 			isa = PBXGroup;
 			children = (
+				EA694C142A85051500B10589 /* cell */,
 				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
-				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
-				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
 			);
 			path = PostTab;
+			sourceTree = "<group>";
+		};
+		EA694C142A85051500B10589 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
+				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
+				EA694C152A85054200B10589 /* SearchResultTableViewCell.swift */,
+				EA694C162A85054200B10589 /* SearchResultTableViewCell.xib */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,6 +464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA694C182A85054200B10589 /* SearchResultTableViewCell.xib in Resources */,
 				EAFB4B892A5147B400E0F2FA /* PostTab.storyboard in Resources */,
 				089C758D2A51728A003AAB94 /* Pretendard-Bold.ttf in Resources */,
 				0820B1912A63A18100604DA8 /* ReplyTableViewCell.xib in Resources */,
@@ -511,6 +526,7 @@
 				EA17182B2A5912A7009168E6 /* CameraViewController.swift in Sources */,
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
+				EA694C172A85054200B10589 /* SearchResultTableViewCell.swift in Sources */,
 				EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
 				0801765E2A74F4B0005E6953 /* UITextView+Extension.swift in Sources */,
