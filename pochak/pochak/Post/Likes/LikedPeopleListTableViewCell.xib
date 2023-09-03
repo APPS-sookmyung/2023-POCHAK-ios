@@ -35,37 +35,36 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1uf-B7-CQH">
-                        <rect key="frame" x="85" y="16.333333333333329" width="65" height="28.666666666666671"/>
+                        <rect key="frame" x="85" y="16.666666666666668" width="65.666666666666686" height="28.000000000000004"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4O-NP-ikI">
-                                <rect key="frame" x="0.0" y="0.0" width="65" height="14.333333333333334"/>
+                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="14"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGL-3I-uJi">
-                                <rect key="frame" x="0.0" y="14.333333333333336" width="65" height="14.333333333333336"/>
+                                <rect key="frame" x="0.0" y="14" width="65.666666666666671" height="14"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                                 <color key="textColor" name="gray05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syj-wn-yiH">
+                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syj-wn-yiH">
                         <rect key="frame" x="220" y="18" width="75" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="g8j-qD-vL9"/>
                             <constraint firstAttribute="width" constant="75" id="q0v-53-AZ3"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="팔로우">
-                            <backgroundConfiguration key="background" cornerRadius="4.9699999999999998">
-                                <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </backgroundConfiguration>
-                            <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
-                            <directionalEdgeInsets key="contentInsets" top="4" leading="19" bottom="4" trailing="19"/>
-                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </buttonConfiguration>
+                        <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="팔로우">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="followBtnDidTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Qfx-qk-3Xr"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -81,6 +80,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="followingBtn" destination="syj-wn-yiH" id="NHA-HW-ppA"/>
                 <outlet property="profileImageView" destination="WiK-gX-cGQ" id="Uqe-qf-bAm"/>
             </connections>
             <point key="canvasLocation" x="71.755725190839698" y="-4.2253521126760569"/>

@@ -12,9 +12,13 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var btnLike: UIButton!
+    @IBOutlet weak var followingBtn: UIButton!
     @IBOutlet weak var labelHowManyLikes: UILabel!
     
     var postOwner: String = ""
+    private var isFollowing: Bool = false  // 임시로 초깃값은 false -> 나중에 변경
+    private var isFollowingColor: UIColor = UIColor(named: "gray03") ?? UIColor(hexCode: "FFB83A")
+    private var isNotFollowingColor: UIColor = UIColor(named: "yellow00") ?? UIColor(hexCode: "C6CDD2")
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -43,10 +47,33 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
         labelHowManyLikes.addGestureRecognizer(howManyLikesLabelGesture)
             
-            
+        // 팔로잉 상태 서버에서 확인 후 값 세팅
+        followingBtn.isSelected = isFollowing  // 팔로우 안된 상태
+        
+        followingBtn.setTitle("팔로우", for: .normal)
+        followingBtn.setTitle("팔로잉", for: .selected)
+        
+        followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
+        
+        followingBtn.backgroundColor = isNotFollowingColor
+        
+        followingBtn.layer.cornerRadius = 4.97
     }
     
     // MARK: - Actions
+    
+    @IBAction func followinBtnTapped(_ sender: Any) {
+        // 언팔로우하기
+        if followingBtn.isSelected {
+            followingBtn.isSelected = false
+            followingBtn.backgroundColor = isNotFollowingColor
+        }
+        // 팔로우하기
+        else{
+            followingBtn.isSelected = true
+            followingBtn.backgroundColor = isFollowingColor
+        }
+    }
     
     @objc func showPeopleWhoLiked(sender: UITapGestureRecognizer){
         let storyboard = UIStoryboard(name: "PostTab", bundle: nil)
