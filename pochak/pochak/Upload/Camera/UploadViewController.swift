@@ -75,13 +75,16 @@ class UploadViewController: UIViewController {
         
 
         tagSearch.searchTextField.attributedPlaceholder = attributedString
+
         tagSearch.searchTextField.font = UIFont(name: "Pretendard-medium",size:12)
 
         //아이디 태그 collectionview
         setupCollectionView()
 
+
     }
-    // Button event.
+    
+    // Button event
     @objc private func backbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
         print("back")
 
