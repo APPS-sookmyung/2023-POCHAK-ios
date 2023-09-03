@@ -7,31 +7,21 @@
 
 import UIKit
 
-class PostTabViewController: UIViewController, UISearchResultsUpdating{
+class PostTabViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var searchController = UISearchController()
-    var resultVC = UITableViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Delegate
         
-        searchController = UISearchController(searchResultsController: resultVC)
-        searchController.searchBar.tintColor = .black
-        // Change Cancel button value
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
-
-        //usally good to set the presentation context
-        self.definesPresentationContext = true
-        
-        
-        navigationItem.searchController = searchController
         setupCollectionView()
 
-   // Do any additional setup after loading the view.
-    }
-    
+        let searchController = UISearchController(searchResultsController: nil)
+        self.navigationItem.searchController = searchController
+        
 
+        // Do any additional setup after loading the view.
+    }
     private func setupCollectionView(){
         //delegate 연결
         collectionView.delegate = self
@@ -43,7 +33,6 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
             bundle: nil),forCellWithReuseIdentifier: PostCollectionViewCell.identifier)
         
     }
-
     
     private func setupData(){ // 서버 연결 시
         //        UserFeedDataManager().getUserFeed(self)
@@ -58,11 +47,8 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
      // Pass the selected object to the new view controller.
      }
      */
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else  {
-            return
-        }
-        print(text)
+    @objc private func cancelBtnAction(_ sender: Any){ // 취소 버튼 클릭시 텍스트 삭제? 키보드 내리기? 어떤 action 할건지
+        
     }
 }
     
