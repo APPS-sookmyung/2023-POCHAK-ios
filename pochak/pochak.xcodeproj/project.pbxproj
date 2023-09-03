@@ -405,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
+				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
 				EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */,
 				EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */,
