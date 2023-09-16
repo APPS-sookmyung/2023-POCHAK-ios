@@ -6,7 +6,7 @@ target 'pochak' do
   use_frameworks!
   pod 'GoogleSignIn'
   pod 'GoogleSignInSwiftSupport'
-
+  pod 'Tabman', '~> 3.0'
   # Pods for pochak
 
   target 'pochakTests' do

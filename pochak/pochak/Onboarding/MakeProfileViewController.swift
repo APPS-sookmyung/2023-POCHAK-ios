@@ -74,4 +74,8 @@ extension MakeProfileViewController: UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - 프로필 설정 유효성 검사
+    
+    
 }
+

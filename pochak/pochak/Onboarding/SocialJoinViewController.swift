@@ -73,7 +73,7 @@ class SocialJoinViewController: UIViewController {
                     // 서버에 토큰을 보내기. 이 때 idToken, accessToken 차이에 주의할 것
                 }
         // 가입 완료 시 프로필 설정 화면으로 전환하기
-//        toProfileSettingsPage()
+        toProfileSettingsPage()
         
     }
     // MARK: - Apple Login
