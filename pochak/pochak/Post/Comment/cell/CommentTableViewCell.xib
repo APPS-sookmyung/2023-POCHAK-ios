@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -48,7 +49,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vZe-Hw-lMG">
-                        <rect key="frame" x="75" y="134.66666666666666" width="41" height="13.333333333333343"/>
+                        <rect key="frame" x="75" y="135" width="41" height="13"/>
                         <color key="tintColor" name="gray04"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="답글 달기">
@@ -57,7 +58,7 @@
                         </buttonConfiguration>
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="T0j-xF-IY9" customClass="MentionTextView" customModule="pochak" customModuleProvider="target">
-                        <rect key="frame" x="75" y="36.000000000000007" width="255" height="93.666666666666686"/>
+                        <rect key="frame" x="75" y="36" width="255" height="94"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <string key="text">Here goes the comment content which can be very very very very long....  @hello still can be long and long and long and long and long... and long and long and ...</string>
                         <color key="textColor" systemColor="labelColor"/>
@@ -65,15 +66,26 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T1n-ll-SAv">
+                        <rect key="frame" x="131" y="134.66666666666666" width="20" height="14"/>
+                        <color key="tintColor" name="gray04"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="삭제">
+                            <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="11"/>
+                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                        </buttonConfiguration>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="E9W-52-dmE" firstAttribute="leading" secondItem="JIn-LI-pv1" secondAttribute="trailing" constant="5" id="1X4-Ja-3fX"/>
                     <constraint firstItem="E9W-52-dmE" firstAttribute="centerY" secondItem="JIn-LI-pv1" secondAttribute="centerY" id="3UJ-iB-xZY"/>
+                    <constraint firstItem="T1n-ll-SAv" firstAttribute="centerY" secondItem="vZe-Hw-lMG" secondAttribute="centerY" id="6gM-A1-Szb"/>
                     <constraint firstItem="T0j-xF-IY9" firstAttribute="leading" secondItem="JIn-LI-pv1" secondAttribute="leading" id="Adp-94-377"/>
                     <constraint firstAttribute="bottom" secondItem="vZe-Hw-lMG" secondAttribute="bottom" constant="10" id="CwB-uF-YKd"/>
                     <constraint firstItem="JIn-LI-pv1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="DtR-kx-YV7"/>
                     <constraint firstItem="T0j-xF-IY9" firstAttribute="leading" secondItem="vZe-Hw-lMG" secondAttribute="leading" id="GcL-0j-h9L"/>
                     <constraint firstItem="xKW-KP-ndO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="M2w-ya-V1W"/>
+                    <constraint firstItem="T1n-ll-SAv" firstAttribute="leading" secondItem="vZe-Hw-lMG" secondAttribute="trailing" constant="15" id="MjI-hg-bdN"/>
                     <constraint firstAttribute="trailing" secondItem="T0j-xF-IY9" secondAttribute="trailing" constant="25" id="Or4-td-J1z"/>
                     <constraint firstItem="vZe-Hw-lMG" firstAttribute="top" secondItem="T0j-xF-IY9" secondAttribute="bottom" constant="5" id="QHg-s1-BRa"/>
                     <constraint firstItem="T0j-xF-IY9" firstAttribute="top" secondItem="JIn-LI-pv1" secondAttribute="bottom" constant="7" id="VYX-VC-wJm"/>
@@ -84,6 +96,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="commentTextView" destination="T0j-xF-IY9" id="3gb-CG-2KI"/>
+                <outlet property="deleteBtn" destination="T1n-ll-SAv" id="P8a-fr-ajT"/>
                 <outlet property="profileImageView" destination="xKW-KP-ndO" id="UTk-iD-GIL"/>
             </connections>
             <point key="canvasLocation" x="170.22900763358777" y="33.098591549295776"/>

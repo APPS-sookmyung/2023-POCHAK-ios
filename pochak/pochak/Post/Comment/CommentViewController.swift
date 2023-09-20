@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommentViewController: UIViewController {
+class CommentViewController: UIViewController, DeleteAlert {
 
     // MARK: - Properties
     @IBOutlet weak var CommentInputViewBottomConstraint: NSLayoutConstraint!
@@ -17,6 +17,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var userProfileImageView: UIImageView!
     
     let textViewPlaceHolder = "이 게시물에 댓글을 달아보세요"
+    var deleteAlert: UIAlertController?  // 댓글 삭제 알림창 컨트롤러
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -64,7 +65,16 @@ class CommentViewController: UIViewController {
         
         // 사용자 프로필 사진 크기 반만큼 radius
         userProfileImageView.layer.cornerRadius = 17.5
-
+        
+        /* 댓글 삭제 알림창 만들기 */
+        deleteAlert = UIAlertController(title: "댓글을 삭제하시겠습니까?", message: nil, preferredStyle: .alert)
+        // 댓글 삭제 yes
+        let confirm = UIAlertAction(title: "네", style: .default, handler: nil)
+        // 댓글 삭제 no
+        let cancel = UIAlertAction(title: "아니요", style: .cancel, handler: nil)
+        // 알림창에 예 아니요 버튼 추가
+        deleteAlert?.addAction(confirm)
+        deleteAlert?.addAction(cancel)
     }
     
     // 키보드 보여질 때
@@ -104,6 +114,12 @@ class CommentViewController: UIViewController {
                 self.CommentInputViewBottomConstraint.constant = CGFloat(34)
                 self.view.layoutIfNeeded()
         }
+    }
+    
+    //
+    func presentDeleteAlert(_ sender: CommentTableViewCell) {
+        print("presentDeleteAlert called")
+        present(deleteAlert!, animated: true)
     }
     
 //    private func updateDynamicHeight(){
@@ -153,11 +169,15 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
                 
             }
+            // 댓글 삭제 버튼에 셀렉터 등록
+            cell.deleteBtn.addTarget(self, action: #selector(deleteBtnTapped(sender:)), for: .touchUpInside)
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyTableViewCell", for: indexPath) as? ReplyTableViewCell else{
                 return UITableViewCell()
             }
+            
+            cell.deleteBtn.addTarget(self, action: #selector(deleteBtnTapped(sender:)), for: .touchUpInside)
             return cell
         }
     }
@@ -186,6 +206,12 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
 //        }
 //        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
 //    }
+    
+    @objc func deleteBtnTapped(sender: UIButton){
+        print("presentDeleteAlert called")
+        present(deleteAlert!, animated: true)
+    }
+    
 }
 
 // MARK: - Extension (UITextView 동적 높이 조절)

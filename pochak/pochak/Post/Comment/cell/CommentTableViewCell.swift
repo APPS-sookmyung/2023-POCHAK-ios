@@ -7,17 +7,27 @@
 
 import UIKit
 
+protocol DeleteAlert {
+    func presentDeleteAlert(_: CommentTableViewCell)
+}
+
 class CommentTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     @IBOutlet weak var commentTextView: MentionTextView!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var deleteBtn: UIButton!
     
     var taggedId: String = ""
+    var alarmDelegate: DeleteAlert?
+    var commentViewController: CommentViewController?
     
     // MARK: - Action
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        commentViewController = (self.superview as? UITableView)?.delegate as? CommentViewController
+        
         /* commentTextView 초기화 */
         
         // commentTextView의 inset 제거
@@ -42,13 +52,12 @@ class CommentTableViewCell: UITableViewCell {
         //let recognizer = UITapGestureRecognizer(target: self, action: #selector(taggedIdTapped))
         //commentLabel.addGestureRecognizer(recognizer)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    
 }
 
 // commentTextView를 위한 delegate
