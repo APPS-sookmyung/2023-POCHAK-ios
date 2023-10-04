@@ -61,6 +61,10 @@
 		EAAACDB62A5168280041B1B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAAACDB42A5168280041B1B9 /* Main.storyboard */; };
 		EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */; };
 		EABD20662A6CF5CC007543E9 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */; };
+		EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */; };
+		EAF9184F2AA462C50037C270 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */; };
+		EAF918512AA468670037C270 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF918502AA468670037C270 /* APIConstants.swift */; };
+		EAF918542AA4692E0037C270 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF918532AA4692E0037C270 /* NetworkResult.swift */; };
 		EAFB4B842A51478600E0F2FA /* HomeTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFB4B832A51478600E0F2FA /* HomeTab.storyboard */; };
 		EAFB4B872A5147A300E0F2FA /* ProfileTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFB4B862A5147A300E0F2FA /* ProfileTab.storyboard */; };
 		EAFB4B892A5147B400E0F2FA /* PostTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAFB4B882A5147B400E0F2FA /* PostTab.storyboard */; };
@@ -149,6 +153,10 @@
 		EAAACDB52A5168280041B1B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
+		EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
+		EAF918502AA468670037C270 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		EAF918532AA4692E0037C270 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		EAFB4B832A51478600E0F2FA /* HomeTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeTab.storyboard; sourceTree = "<group>"; };
 		EAFB4B862A5147A300E0F2FA /* ProfileTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileTab.storyboard; sourceTree = "<group>"; };
 		EAFB4B882A5147B400E0F2FA /* PostTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PostTab.storyboard; sourceTree = "<group>"; };
@@ -376,6 +384,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				EAF918522AA468FF0037C270 /* Network */,
 				373815142A89E6BE0032066A /* Onboarding */,
 				EA2B09882A629EED0005EA8B /* PostTab */,
 				0823B0792A5D6F1E0085002F /* Home */,
@@ -426,6 +435,26 @@
 				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
 			);
 			path = PostTab;
+			sourceTree = "<group>";
+		};
+		EAF9184B2AA462930037C270 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				EA0107B12A5ECB8A00A3AE85 /* PostCollectionViewCell.swift */,
+				EA0107B22A5ECB8A00A3AE85 /* PostCollectionViewCell.xib */,
+				EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */,
+				EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		EAF918522AA468FF0037C270 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EAF918502AA468670037C270 /* APIConstants.swift */,
+				EAF918532AA4692E0037C270 /* NetworkResult.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -537,6 +566,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF9184F2AA462C50037C270 /* SearchResultTableViewCell.xib in Resources */,
 				EAFB4B892A5147B400E0F2FA /* PostTab.storyboard in Resources */,
 				089C758D2A51728A003AAB94 /* Pretendard-Bold.ttf in Resources */,
 				0820B1912A63A18100604DA8 /* ReplyTableViewCell.xib in Resources */,
@@ -705,6 +735,7 @@
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
 				08F977762ACD40D600505D53 /* PostDataManager.swift in Sources */,
+				EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */,
 				EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
 				0801765E2A74F4B0005E6953 /* UITextView+Extension.swift in Sources */,
@@ -714,9 +745,11 @@
 				0820B1902A63A18100604DA8 /* ReplyTableViewCell.swift in Sources */,
 				EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */,
 				376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */,
+				EAF918512AA468670037C270 /* APIConstants.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
 				081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
+				EAF918542AA4692E0037C270 /* NetworkResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

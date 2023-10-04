@@ -7,6 +7,8 @@ target 'pochak' do
   pod 'GoogleSignIn'
   pod 'GoogleSignInSwiftSupport'
 
+  pod 'Alamofire', '~> 5.2'
+
   # Pods for pochak
 
   target 'pochakTests' do
