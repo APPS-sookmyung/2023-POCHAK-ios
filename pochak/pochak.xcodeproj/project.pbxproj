@@ -58,6 +58,7 @@
 		EAAACDB62A5168280041B1B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAAACDB42A5168280041B1B9 /* Main.storyboard */; };
 		EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */; };
 		EABD20662A6CF5CC007543E9 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */; };
+		EAD53F842ACD4EC20043F6BD /* UploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD53F832ACD4EC20043F6BD /* UploadModel.swift */; };
 		EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */; };
 		EAF9184F2AA462C50037C270 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */; };
 		EAF918512AA468670037C270 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF918502AA468670037C270 /* APIConstants.swift */; };
@@ -147,6 +148,7 @@
 		EAAACDB52A5168280041B1B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
+		EAD53F832ACD4EC20043F6BD /* UploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadModel.swift; sourceTree = "<group>"; };
 		EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		EAF918502AA468670037C270 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -298,12 +300,13 @@
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
-				EA1718282A591282009168E6 /* Camera */,
+				EAD53F822ACD4EAA0043F6BD /* Model */,
+				EA1718282A591282009168E6 /* View */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
 		};
-		EA1718282A591282009168E6 /* Camera */ = {
+		EA1718282A591282009168E6 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				EA1718292A5912A7009168E6 /* CameraViewController.swift */,
@@ -311,7 +314,7 @@
 				EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */,
 				EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */,
 			);
-			path = Camera;
+			path = View;
 			sourceTree = "<group>";
 		};
 		EA17182D2A592A08009168E6 /* Alarm */ = {
@@ -401,6 +404,14 @@
 				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 			);
 			path = PostTab;
+			sourceTree = "<group>";
+		};
+		EAD53F822ACD4EAA0043F6BD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EAD53F832ACD4EC20043F6BD /* UploadModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		EAF9184B2AA462930037C270 /* cell */ = {
@@ -695,6 +706,7 @@
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
 				EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */,
 				373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */,
+				EAD53F842ACD4EC20043F6BD /* UploadModel.swift in Sources */,
 				3738151A2A8A09DA0032066A /* MakeProfileViewController.swift in Sources */,
 				EA17182B2A5912A7009168E6 /* CameraViewController.swift in Sources */,
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
@@ -890,7 +902,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UN58VJRXVV;
+				DEVELOPMENT_TEAM = 5JW43Z44U6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pochak/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한이 필요합니다";
@@ -923,7 +935,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UN58VJRXVV;
+				DEVELOPMENT_TEAM = 5JW43Z44U6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pochak/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한이 필요합니다";
@@ -940,7 +952,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = nari.pochak;
+				PRODUCT_BUNDLE_IDENTIFIER = site.apps.pochak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
