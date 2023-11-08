@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -72,22 +71,11 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21w-mP-4S0">
-                        <rect key="frame" x="188.66666666666666" y="81" width="19.333333333333343" height="37"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="삭제">
-                            <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="11"/>
-                            <directionalEdgeInsets key="contentInsets" top="5" leading="0.0" bottom="0.0" trailing="0.0"/>
-                            <color key="baseForegroundColor" name="gray04"/>
-                        </buttonConfiguration>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Uov-ld-3z9" firstAttribute="top" secondItem="eP6-qx-116" secondAttribute="bottom" constant="7" id="0a9-7B-VHe"/>
                     <constraint firstItem="1qp-H6-h2q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="31K-KJ-Iec"/>
                     <constraint firstItem="Uov-ld-3z9" firstAttribute="leading" secondItem="eur-Ui-z9y" secondAttribute="leading" id="9gL-7Q-g3h"/>
-                    <constraint firstItem="21w-mP-4S0" firstAttribute="centerY" secondItem="eur-Ui-z9y" secondAttribute="centerY" id="Dw4-Gp-nem"/>
-                    <constraint firstItem="21w-mP-4S0" firstAttribute="leading" secondItem="eur-Ui-z9y" secondAttribute="trailing" constant="15" id="K9t-aO-ckO"/>
                     <constraint firstItem="Uov-ld-3z9" firstAttribute="leading" secondItem="eP6-qx-116" secondAttribute="leading" id="Ltg-n6-DMa"/>
                     <constraint firstAttribute="bottom" secondItem="eur-Ui-z9y" secondAttribute="bottom" constant="10" id="Qxd-XA-WVA"/>
                     <constraint firstItem="eP6-qx-116" firstAttribute="leading" secondItem="1qp-H6-h2q" secondAttribute="trailing" constant="15" id="aXA-Vp-q9t"/>
@@ -99,7 +87,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="deleteBtn" destination="21w-mP-4S0" id="KEH-DN-sic"/>
                 <outlet property="profileImageView" destination="glQ-bV-w4i" id="ryC-5r-8Gz"/>
                 <outlet property="replyCommentTextView" destination="Uov-ld-3z9" id="gUd-bg-Ldl"/>
             </connections>

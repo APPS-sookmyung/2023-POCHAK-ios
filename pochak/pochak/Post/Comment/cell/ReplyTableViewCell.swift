@@ -11,7 +11,6 @@ class ReplyTableViewCell: UITableViewCell {
 
     @IBOutlet weak var replyCommentTextView: MentionTextView!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var deleteBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
