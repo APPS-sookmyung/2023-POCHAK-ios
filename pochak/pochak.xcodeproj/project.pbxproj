@@ -26,8 +26,9 @@
 		089C758E2A51728A003AAB94 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75852A51728A003AAB94 /* Pretendard-ExtraBold.ttf */; };
 		089C758F2A51728A003AAB94 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75862A51728A003AAB94 /* Pretendard-Light.ttf */; };
 		089C75902A51728A003AAB94 /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75872A51728A003AAB94 /* Pretendard-ExtraLight.ttf */; };
-		08D98C472AFEE8B300E9A097 /* PostDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C462AFEE8B300E9A097 /* PostDataResponse.swift */; };
-		08D98C4A2AFEE8D700E9A097 /* LikedUsersDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C492AFEE8D700E9A097 /* LikedUsersDataResponse.swift */; };
+		08D98C472AFEE8B300E9A097 /* PostDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C462AFEE8B300E9A097 /* PostDataModel.swift */; };
+		08D98C4A2AFEE8D700E9A097 /* LikedUsersDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C492AFEE8D700E9A097 /* LikedUsersDataModel.swift */; };
+		08D98C4C2AFEEB1600E9A097 /* PostDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C4B2AFEEB1600E9A097 /* PostDataManager.swift */; };
 		2FCBFE6DE98CEA8938EF93DC /* Pods_pochakTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */; };
 		373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815152A89E6D30032066A /* SocialJoinViewController.swift */; };
 		3738151A2A8A09DA0032066A /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815192A8A09DA0032066A /* MakeProfileViewController.swift */; };
@@ -108,8 +109,9 @@
 		089C75852A51728A003AAB94 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
 		089C75862A51728A003AAB94 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.ttf"; sourceTree = "<group>"; };
 		089C75872A51728A003AAB94 /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
-		08D98C462AFEE8B300E9A097 /* PostDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataResponse.swift; sourceTree = "<group>"; };
-		08D98C492AFEE8D700E9A097 /* LikedUsersDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedUsersDataResponse.swift; sourceTree = "<group>"; };
+		08D98C462AFEE8B300E9A097 /* PostDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataModel.swift; sourceTree = "<group>"; };
+		08D98C492AFEE8D700E9A097 /* LikedUsersDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedUsersDataModel.swift; sourceTree = "<group>"; };
+		08D98C4B2AFEEB1600E9A097 /* PostDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataManager.swift; sourceTree = "<group>"; };
 		0994FB0CA794651C5C9BDE8F /* Pods-pochak-pochakUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak-pochakUITests.debug.xcconfig"; path = "Target Support Files/Pods-pochak-pochakUITests/Pods-pochak-pochakUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0DB83F3ED818C9AF01F6A8E0 /* Pods-pochak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.release.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.release.xcconfig"; sourceTree = "<group>"; };
 		373815152A89E6D30032066A /* SocialJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialJoinViewController.swift; sourceTree = "<group>"; };
@@ -271,7 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				08D98C482AFEE8C100E9A097 /* LikesDataManager */,
-				08D98C462AFEE8B300E9A097 /* PostDataResponse.swift */,
+				08D98C462AFEE8B300E9A097 /* PostDataModel.swift */,
+				08D98C4B2AFEEB1600E9A097 /* PostDataManager.swift */,
 			);
 			path = PostDataManager;
 			sourceTree = "<group>";
@@ -279,7 +282,7 @@
 		08D98C482AFEE8C100E9A097 /* LikesDataManager */ = {
 			isa = PBXGroup;
 			children = (
-				08D98C492AFEE8D700E9A097 /* LikedUsersDataResponse.swift */,
+				08D98C492AFEE8D700E9A097 /* LikedUsersDataModel.swift */,
 			);
 			path = LikesDataManager;
 			sourceTree = "<group>";
@@ -712,10 +715,10 @@
 				EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */,
 				EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */,
 				EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */,
-				08D98C4A2AFEE8D700E9A097 /* LikedUsersDataResponse.swift in Sources */,
+				08D98C4A2AFEE8D700E9A097 /* LikedUsersDataModel.swift in Sources */,
 				EA0107B32A5ECB8A00A3AE85 /* PostCollectionViewCell.swift in Sources */,
 				EA01079A2A59556800A3AE85 /* CommentViewController.swift in Sources */,
-				08D98C472AFEE8B300E9A097 /* PostDataResponse.swift in Sources */,
+				08D98C472AFEE8B300E9A097 /* PostDataModel.swift in Sources */,
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
 				EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */,
 				373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */,
@@ -723,6 +726,7 @@
 				EA17182B2A5912A7009168E6 /* CameraViewController.swift in Sources */,
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
+				08D98C4C2AFEEB1600E9A097 /* PostDataManager.swift in Sources */,
 				EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */,
 				EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
