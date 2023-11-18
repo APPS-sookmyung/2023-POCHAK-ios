@@ -14,7 +14,7 @@ struct PostDataReponse: Decodable {
 
 struct PostDataResponseResult: Decodable {
     let taggedUserHandles: [String]?
-    let postOwnerhandle: String?
+    let postOwnerHandle: String?
     let isFollow: Bool?
     let postImageUrl: String?
     let numOfHeart: Int?

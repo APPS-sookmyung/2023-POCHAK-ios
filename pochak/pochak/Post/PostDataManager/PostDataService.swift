@@ -1,8 +1,8 @@
 //
-//  PostDataManager.swift
+//  PostDataService.swift
 //  pochak
 //
-//  Created by Suyeon Hwang on 11/10/23.
+//  Created by Suyeon Hwang on 11/18/23.
 //
 
 import Alamofire
@@ -18,9 +18,7 @@ struct PostDataService{
     // 네트워크 작업이 끝나면 completion 클로저에 네트워크의 결과를 담아서 호출하게 되고, VC에서 꺼내서 처리할 예정
     func getPostDetail(_ postId: String/*, completion: @escaping (NetworkResult<Any>) -> Void*/){
         // json 형태로 받아오기 위해
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
-                                    "Content-type": "application/json"  // multiart/form-data ???
-                                    ]
+        // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
         
         // 임시로 사용하는 loginUser
         let body : Parameters = [
@@ -44,8 +42,6 @@ struct PostDataService{
                 guard let value = dataResponse.value else {return}
                 print("statusCode =")
                 print(statusCode)
-                print("value =")
-                print(value)
                 print("description=")
                 print(value.description)
                 print("dataresponse = ")
@@ -91,12 +87,10 @@ struct PostDataService{
         
         // data를 PostDataResponse형으로 decode
         // 실패하면 pathErr 리턴, 성공하면 decodedData에 값을 추출
-        guard let decodedData = try? decoder.decode(PostDataResponseResult.self, from: data) else { return .pathErr }
+        guard let decodedData = try? decoder.decode(PostDataReponse.self, from: data) else { return .pathErr }
         //let decodedData = decoder.decode(PostDataResponse.self, from: data)
         
-        print(decodedData)
-        
         // 성공적으로 decode를 마치면 success에다가 data 부분을 담아서 completion을 호출
-        return .success(decodedData)
+        return .success(decodedData.result)
     }
 }
