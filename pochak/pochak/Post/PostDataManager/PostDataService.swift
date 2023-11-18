@@ -44,6 +44,8 @@ struct PostDataService{
                 guard let value = dataResponse.value else {return}
                 print("statusCode =")
                 print(statusCode)
+                print("value =")
+                print(value)
                 print("description=")
                 print(value.description)
                 print("dataresponse = ")
@@ -89,10 +91,12 @@ struct PostDataService{
         
         // data를 PostDataResponse형으로 decode
         // 실패하면 pathErr 리턴, 성공하면 decodedData에 값을 추출
-        guard let decodedData = try? decoder.decode(PostDataReponse.self, from: data) else { return .pathErr }
+        guard let decodedData = try? decoder.decode(PostDataResponseResult.self, from: data) else { return .pathErr }
         //let decodedData = decoder.decode(PostDataResponse.self, from: data)
         
+        print(decodedData)
+        
         // 성공적으로 decode를 마치면 success에다가 data 부분을 담아서 completion을 호출
-        return .success(decodedData.result)
+        return .success(decodedData)
     }
 }
