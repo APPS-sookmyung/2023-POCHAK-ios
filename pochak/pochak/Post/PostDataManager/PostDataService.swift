@@ -25,6 +25,7 @@ struct PostDataService{
                     "loginUser": "jisoo"
                 ]
         
+        
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
         // Request를 보내기 위한 정보
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId,
@@ -80,17 +81,18 @@ struct PostDataService{
     
     // 통신 성공 시 데이터를 가공하기 위한 함수
     private func isValidData(data: Data) -> NetworkResult<Any> {
-        print("inside isValidData")
-        
-        // JSON 데이터를 해독하기 위해 JSONDecoder() 선언
-        let decoder = JSONDecoder()
-        
-        // data를 PostDataResponse형으로 decode
-        // 실패하면 pathErr 리턴, 성공하면 decodedData에 값을 추출
-        guard let decodedData = try? decoder.decode(PostDataReponse.self, from: data) else { return .pathErr }
-        //let decodedData = decoder.decode(PostDataResponse.self, from: data)
-        
-        // 성공적으로 decode를 마치면 success에다가 data 부분을 담아서 completion을 호출
-        return .success(decodedData.result)
+        do {
+            let decoder = JSONDecoder()
+            let decodedData = try decoder.decode(PostDataResponse.self, from: data)
+            return .success(decodedData.result)
+        } catch {
+            print("Decoding error:", error)
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Received JSON: \(jsonString)")
+            } else {
+                print("Invalid JSON data received")
+            }
+            return .pathErr
+        }
     }
 }
