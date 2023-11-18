@@ -15,6 +15,8 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var followingBtn: UIButton!
     @IBOutlet weak var labelHowManyLikes: UILabel!
     
+    let tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    
     var postOwner: String = ""
     private var isFollowing: Bool = false  // 임시로 초깃값은 false -> 나중에 변경
     private var isFollowingColor: UIColor = UIColor(named: "gray03") ?? UIColor(hexCode: "FFB83A")
@@ -23,6 +25,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /* 서버 통신 */
+        PostDataService.shared.getPostDetail(tempPostId)
+        
         
         // 크키에 맞게
         scrollView.updateContentSize()
