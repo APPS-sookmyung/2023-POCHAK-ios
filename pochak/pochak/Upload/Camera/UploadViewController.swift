@@ -105,6 +105,29 @@ class UploadViewController: UIViewController {
         }
     
     @objc private func uploadbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
+        
+        let captionText = captionField.text ?? ""
+        
+        let uploadService = UploadDataService()
+        
+        / dataRequest 메서드를 호출하여 서버에 요청 보내기
+        uploadService.dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success:
+                // 성공 시 상태코드와 데이터(value) 수신
+                guard let statusCode = dataResponse.response?.statusCode else { return }
+                guard let value = dataResponse.value else { return }
+                print("statusCode = \(statusCode)")
+                print("description = \(value.description)")
+                let networkResult = uploadService.judgeStatus(by: statusCode, value)
+                print(networkResult)
+                // 처리할 내용 작성
+            case .failure:
+                // 실패 시 처리
+                print("failed \(dataResponse)")
+            }
+        }
+        
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }

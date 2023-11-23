@@ -55,6 +55,8 @@
 		EA1B0B7C2A49D23B00F86FBC /* pochakUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B7B2A49D23B00F86FBC /* pochakUITests.swift */; };
 		EA1B0B7E2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1B0B7D2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift */; };
 		EA99B63C2A5143A800EBA2AD /* CameraTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA99B63B2A5143A800EBA2AD /* CameraTab.storyboard */; };
+		EA9F5CB22B0EF7BB0021951F /* UploadDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5CB12B0EF7BB0021951F /* UploadDataModel.swift */; };
+		EA9F5CB42B0EF7CC0021951F /* UploadDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F5CB32B0EF7CC0021951F /* UploadDataService.swift */; };
 		EAAACDB62A5168280041B1B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAAACDB42A5168280041B1B9 /* Main.storyboard */; };
 		EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */; };
 		EABD20662A6CF5CC007543E9 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */; };
@@ -144,6 +146,8 @@
 		EA1B0B7B2A49D23B00F86FBC /* pochakUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pochakUITests.swift; sourceTree = "<group>"; };
 		EA1B0B7D2A49D23B00F86FBC /* pochakUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pochakUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA99B63B2A5143A800EBA2AD /* CameraTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CameraTab.storyboard; sourceTree = "<group>"; };
+		EA9F5CB12B0EF7BB0021951F /* UploadDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDataModel.swift; sourceTree = "<group>"; };
+		EA9F5CB32B0EF7CC0021951F /* UploadDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDataService.swift; sourceTree = "<group>"; };
 		EAAACDB52A5168280041B1B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EABD20632A6CF5CC007543E9 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
+				EA9F5CB02B0EF7930021951F /* UploadDataManager */,
 				EA1718282A591282009168E6 /* Camera */,
 			);
 			path = Upload;
@@ -401,6 +406,15 @@
 				EA0107972A59556800A3AE85 /* PostTabViewController.swift */,
 			);
 			path = PostTab;
+			sourceTree = "<group>";
+		};
+		EA9F5CB02B0EF7930021951F /* UploadDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				EA9F5CB12B0EF7BB0021951F /* UploadDataModel.swift */,
+				EA9F5CB32B0EF7CC0021951F /* UploadDataService.swift */,
+			);
+			path = UploadDataManager;
 			sourceTree = "<group>";
 		};
 		EAF9184B2AA462930037C270 /* cell */ = {
@@ -687,6 +701,8 @@
 			files = (
 				EA01079E2A59556800A3AE85 /* PostViewController.swift in Sources */,
 				EA0107AE2A5EC23900A3AE85 /* OtherCollectionViewCell.swift in Sources */,
+				EA9F5CB42B0EF7CC0021951F /* UploadDataService.swift in Sources */,
+				EA9F5CB22B0EF7BB0021951F /* UploadDataModel.swift in Sources */,
 				EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */,
 				EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */,
 				EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */,
