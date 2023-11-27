@@ -9,10 +9,14 @@ struct LikedUsersDataResponse {
     let isSuccess: Bool?
     let code: Int?
     let message: String?
-    let likedUsersList: [likedUserDataResult]
+    let result: LikedUserDataResult
 }
 
-struct likedUserDataResult {
+struct LikedUserDataResult {
+    let likedUsers: [LikedUsers]
+}
+
+struct LikedUsers {
     let userHandle: String?
     let profileImage: String?
     let name: String?

@@ -9,21 +9,20 @@ struct PostDataResponse: Codable {
     let isSuccess: Bool
     let code: Int
     let message: String
-    let result: PostResult
+    let result: PostDataResponseResult
 }
 
-struct PostResult: Codable {
+struct PostDataResponseResult: Codable {
     let taggedUserHandles: [String]
     let postOwnerHandle: String
     let isFollow: Bool
     let postImageUrl: String
     let numOfHeart: Int
     let caption: String
-    let mainComment: MainComment
+    let mainComment: MainComment?
 }
 
 struct MainComment: Codable {
     let userHandle: String
     let content: String
 }
-

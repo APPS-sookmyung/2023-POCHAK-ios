@@ -16,7 +16,7 @@ struct PostDataService{
     // completion 클로저를 @escaping closure로 정의
     // -> getPersonInfo 함수가 종료되든 말든 상관없이 completion은 탈출 클로저이기 때문에, 전달된다면 이후에 외부에서도 사용가능
     // 네트워크 작업이 끝나면 completion 클로저에 네트워크의 결과를 담아서 호출하게 되고, VC에서 꺼내서 처리할 예정
-    func getPostDetail(_ postId: String/*, completion: @escaping (NetworkResult<Any>) -> Void*/){
+    func getPostDetail(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         // json 형태로 받아오기 위해
         // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
         
@@ -36,28 +36,30 @@ struct PostDataService{
         
         // 통신 성공했는지에 대한 여부
         dataRequest.responseData { dataResponse in
+            // dataResponse 안에는 통신에 대한 결과물
+            // dataResponse.result는 통신 성공/실패 여부
             switch dataResponse.result{
             case .success:
                 // 성공 시 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
-                print("statusCode =")
-                print(statusCode)
-                print("description=")
-                print(value.description)
-                print("dataresponse = ")
-                print(dataResponse)
-                print("error")
-                print(dataResponse.error)
-                print("request")
-                print(dataResponse.request)
+//                print("statusCode =")
+//                print(statusCode)
+//                print("description=")
+//                print(value.description)
+//                print("dataresponse = ")
+//                print(dataResponse)
+//                print("error")
+//                print(dataResponse.error)
+//                print("request")
+//                print(dataResponse.request)
                 let networkResult = self.judgeStatus(by: statusCode, value)
-                print(networkResult)
-                //completion(networkResult)
+                //print(networkResult)
+                completion(networkResult)
             case .failure:
-                //completion(.networkFail)
-                print("failed")
-                print(dataResponse)
+                completion(.networkFail)
+//                print("failed")
+//                print(dataResponse)
             }
         }
     }
@@ -84,7 +86,7 @@ struct PostDataService{
         do {
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(PostDataResponse.self, from: data)
-            return .success(decodedData.result)
+            return .success(decodedData)
         } catch {
             print("Decoding error:", error)
             if let jsonString = String(data: data, encoding: .utf8) {

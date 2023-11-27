@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -169,16 +170,16 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Kgl-pj-DSt">
-                                                <rect key="frame" x="89.000000000000014" y="24.666666666666671" width="131.33333333333337" height="35"/>
+                                                <rect key="frame" x="89" y="-8" width="129" height="100"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jal 님 • jyle_kim 님" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-sL-ED1">
-                                                        <rect key="frame" x="0.0" y="0.0" width="131.33333333333334" height="19.333333333333332"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-sL-ED1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="129" height="50"/>
                                                         <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kyle 님이 포착" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI1-I5-NSd">
-                                                        <rect key="frame" x="0.0" y="19.333333333333329" width="131.33333333333334" height="15.666666666666664"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gI1-I5-NSd">
+                                                        <rect key="frame" x="0.0" y="50" width="129" height="50"/>
                                                         <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -203,7 +204,7 @@
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-qJ-kQ5">
                                                 <rect key="frame" x="24" y="79" width="327" height="436"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VHa-nq-QVw">
                                                 <rect key="frame" x="24" y="530" width="78.666666666666671" height="31"/>
@@ -334,8 +335,15 @@
                         <outlet property="btnLike" destination="vvh-0p-iKO" id="ryI-jF-OtB"/>
                         <outlet property="followingBtn" destination="8NM-hH-Q9c" id="IBZ-Pw-2dJ"/>
                         <outlet property="labelHowManyLikes" destination="AA0-TV-f7h" id="mJP-IP-Btg"/>
+                        <outlet property="mainCommentContent" destination="Qrv-h9-BEv" id="wkQ-3B-afW"/>
+                        <outlet property="mainCommentHandle" destination="2G4-E0-LJR" id="fmw-R2-r0R"/>
+                        <outlet property="pochakUser" destination="gI1-I5-NSd" id="EE6-b3-PgP"/>
+                        <outlet property="postContent" destination="wZB-Xn-bjF" id="KTa-Pe-TAg"/>
+                        <outlet property="postImage" destination="9aE-qJ-kQ5" id="XfM-hX-1KM"/>
+                        <outlet property="postOwnerHandle" destination="DiP-WD-doD" id="kar-iA-aSf"/>
                         <outlet property="profileImageView" destination="g1Z-gd-DZE" id="juV-dt-dkX"/>
                         <outlet property="scrollView" destination="aPT-RR-Xxk" id="yYS-Pd-SxV"/>
+                        <outlet property="taggedUsers" destination="TZj-sL-ED1" id="HGo-4W-OpC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ND-cG-8cX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
