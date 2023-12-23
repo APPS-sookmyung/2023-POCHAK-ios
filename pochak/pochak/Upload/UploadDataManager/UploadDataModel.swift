@@ -9,7 +9,7 @@ struct UploadDataResponse: Codable {
     let isSuccess: Bool
     let code: Int
     let message: String
-    let result: PostResult
+    let result: UploadResult
 }
 
 struct UploadResult: Codable {
@@ -22,7 +22,7 @@ struct UploadResult: Codable {
 }
 
 struct UploadDataRequest:Codable{
-    let postImageUrl: String
+    let postImage: String
     let caption: String
     let taggedUserHandles: [String]
 }

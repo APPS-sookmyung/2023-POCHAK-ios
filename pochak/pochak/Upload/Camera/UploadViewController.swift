@@ -108,32 +108,29 @@ class UploadViewController: UIViewController {
         
         let captionText = captionField.text ?? ""
         
-        let uploadService = UploadDataService()
-        
-        / dataRequest 메서드를 호출하여 서버에 요청 보내기
-        uploadService.dataRequest.responseData { dataResponse in
-            switch dataResponse.result {
-            case .success:
-                // 성공 시 상태코드와 데이터(value) 수신
-                guard let statusCode = dataResponse.response?.statusCode else { return }
-                guard let value = dataResponse.value else { return }
-                print("statusCode = \(statusCode)")
-                print("description = \(value.description)")
-                let networkResult = uploadService.judgeStatus(by: statusCode, value)
-                print(networkResult)
-                // 처리할 내용 작성
-            case .failure:
-                // 실패 시 처리
-                print("failed \(dataResponse)")
+        let imageData : Data? = captureImg.image?.jpegData(compressionQuality: 0.5)
+
+        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: ["goeun"]){
+            response in
+                switch response {
+                case .success(let data):
+                    print("success")
+                    print(data)
+                    if let navController = self.navigationController {
+                        navController.popViewController(animated: true)
+                    }
+                    self.tabBarController?.selectedIndex = 0
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                }
             }
-        }
-        
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
-        tabBarController?.selectedIndex = 0
-        
-        }
+    }
     private func setupCollectionView(){
         //delegate 연결
         collectionView.delegate = self
@@ -245,5 +242,4 @@ extension UploadViewController: UICollectionViewDelegateFlowLayout {
 //        return CGSize(width: 77, height: 32)
 //    }
 }
-
 
