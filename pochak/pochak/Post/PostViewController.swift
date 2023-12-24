@@ -217,6 +217,9 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let postLikesVC = storyboard.instantiateViewController(withIdentifier: "PostLikesVC") as! PostLikesViewController
         
         postLikesVC.modalPresentationStyle = .pageSheet
+        // 좋아요 누른 사람 페이지에 포스트 아이디, 포스트 게시자 아이디 전달
+        postLikesVC.postId = self.tempPostId
+        postLikesVC.postOwnerHandle = self.postDataResult.postOwnerHandle
         
         // half sheet
         if let sheet = postLikesVC.sheetPresentationController {

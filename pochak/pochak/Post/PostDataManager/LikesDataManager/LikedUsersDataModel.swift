@@ -5,18 +5,18 @@
 //  Created by Suyeon Hwang on 11/10/23.
 //
 
-struct LikedUsersDataResponse {
+struct LikedUsersDataResponse: Codable {
     let isSuccess: Bool?
     let code: Int?
     let message: String?
     let result: LikedUserDataResult
 }
 
-struct LikedUserDataResult {
+struct LikedUserDataResult: Codable {
     let likedUsers: [LikedUsers]
 }
 
-struct LikedUsers {
+struct LikedUsers: Codable {
     let userHandle: String?
     let profileImage: String?
     let name: String?
