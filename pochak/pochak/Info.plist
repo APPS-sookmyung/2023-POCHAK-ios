@@ -50,6 +50,10 @@
 	</dict>
     <!-- API 통신 위한 키 -->
     <key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
         <dict>
             <key>NSAllowsArbitraryLoads</key>
             <true/>
