@@ -105,12 +105,32 @@ class UploadViewController: UIViewController {
         }
     
     @objc private func uploadbuttonPressed(_ sender: Any) {//업로드 버튼 클릭시 어디로 이동할지
-        if let navController = self.navigationController {
-            navController.popViewController(animated: true)
-        }
-        tabBarController?.selectedIndex = 0
         
-        }
+        let captionText = captionField.text ?? ""
+        
+        let imageData : Data? = captureImg.image?.jpegData(compressionQuality: 0.5)
+
+        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: ["goeun"]){
+            response in
+                switch response {
+                case .success(let data):
+                    print("success")
+                    print(data)
+                    if let navController = self.navigationController {
+                        navController.popViewController(animated: true)
+                    }
+                    self.tabBarController?.selectedIndex = 0
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                }
+            }
+    }
     private func setupCollectionView(){
         //delegate 연결
         collectionView.delegate = self
@@ -222,5 +242,4 @@ extension UploadViewController: UICollectionViewDelegateFlowLayout {
 //        return CGSize(width: 77, height: 32)
 //    }
 }
-
 
