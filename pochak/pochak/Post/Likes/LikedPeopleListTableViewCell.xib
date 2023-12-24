@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -27,7 +28,7 @@
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WiK-gX-cGQ">
                         <rect key="frame" x="25" y="8" width="45" height="45"/>
-                        <color key="backgroundColor" name="pink00"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="lKW-CY-wSd"/>
                             <constraint firstAttribute="height" constant="45" id="lnA-M0-iVj"/>
@@ -35,16 +36,16 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1uf-B7-CQH">
-                        <rect key="frame" x="85" y="16.666666666666668" width="65.666666666666686" height="28.000000000000004"/>
+                        <rect key="frame" x="85" y="16.333333333333329" width="65" height="28.666666666666671"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4O-NP-ikI">
-                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="14"/>
+                                <rect key="frame" x="0.0" y="0.0" width="65" height="14.333333333333334"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGL-3I-uJi">
-                                <rect key="frame" x="0.0" y="14" width="65.666666666666671" height="14"/>
+                                <rect key="frame" x="0.0" y="14.333333333333336" width="65" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                                 <color key="textColor" name="gray05"/>
                                 <nil key="highlightedColor"/>
@@ -82,6 +83,8 @@
             <connections>
                 <outlet property="followingBtn" destination="syj-wn-yiH" id="NHA-HW-ppA"/>
                 <outlet property="profileImageView" destination="WiK-gX-cGQ" id="Uqe-qf-bAm"/>
+                <outlet property="userHandleLabel" destination="J4O-NP-ikI" id="Jo5-x8-5dB"/>
+                <outlet property="userNameLabel" destination="vGL-3I-uJi" id="tVi-KU-Phm"/>
             </connections>
             <point key="canvasLocation" x="71.755725190839698" y="-4.2253521126760569"/>
         </tableViewCell>
@@ -89,9 +92,6 @@
     <resources>
         <namedColor name="gray05">
             <color red="0.42399999499320984" green="0.45899999141693115" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="pink00">
-            <color red="1" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -1,36 +1,33 @@
 //
-//  PostDataService.swift
+//  LikedUsersDataService.swift
 //  pochak
 //
-//  Created by Suyeon Hwang on 11/18/23.
+//  Created by Suyeon Hwang on 12/22/23.
 //
 
 import Alamofire
 
-struct PostDataService{
+struct LikedUsersDataService{
     // static을 통해 shared 프로퍼티에 싱글턴 인스턴스 저장하여 생성
     // shared를 통해 여러 VC가 같은 인스턴스에 접근 가능
-    static let shared = PostDataService()
+    static let shared = LikedUsersDataService()
     
-    // 포스트 상세 페이지 가져오기
+    // 해당 포스트에 좋아요 누른 회원 조회하기
     // completion 클로저를 @escaping closure로 정의
     // -> getPersonInfo 함수가 종료되든 말든 상관없이 completion은 탈출 클로저이기 때문에, 전달된다면 이후에 외부에서도 사용가능
     // 네트워크 작업이 끝나면 completion 클로저에 네트워크의 결과를 담아서 호출하게 되고, VC에서 꺼내서 처리할 예정
-    func getPostDetail(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+    func getLikedUsers(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         // json 형태로 받아오기 위해
         // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
+                                    "Content-type": "application/json"
+                                    ]
         
-        
-        // 임시로 사용하는 loginUser
-        let body : Parameters = [
-                    "loginUser": "jisoo"
-                ]
         
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
         // Request를 보내기 위한 정보
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId,
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/like",
                                     method: .get,
-                                    parameters: body,
                                     encoding: URLEncoding.default,
                                     headers: header)
         
@@ -40,38 +37,19 @@ struct PostDataService{
             // dataResponse.result는 통신 성공/실패 여부
             switch dataResponse.result{
             case .success:
-                // 성공 시 상태코드와 데이터(value) 수신
+                // 성공 시 통신 자체의 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
-//                print("statusCode =")
-//                print(statusCode)
-//                print("description=")
-//                print(value.description)
-//                print("dataresponse = ")
-//                print(dataResponse)
-//                print("error")
-//                print(dataResponse.error)
-//                print("request")
-//                print(dataResponse.request)
-                let networkResult = self.judgeStatus(by: statusCode, value)
-                //print(networkResult)
+                let networkResult = self.judgeStatus(by: statusCode, value)  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
                 completion(networkResult)
             case .failure:
                 completion(.networkFail)
-//                print("failed")
-//                print(dataResponse)
             }
         }
     }
     
     // 요청 후 받은 statusCode를 바탕으로 어떻게 결과값을 처리할 지 정의
     private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
-//        let decoder = JSONDecoder()
-//
-//        guard let decodedData = try? decoder.decode(PostDataReponse.self, from: data)
-//        else { return .pathErr }
-//
-//        print(decodedData.result?.numOfHeart)
         
         switch statusCode{
         case 200: return isValidData(data: data)  // 성공 -> 데이터 가공해서 전달해야하므로 isValidData라는 함수로 데이터 넘겨주기
@@ -85,10 +63,10 @@ struct PostDataService{
     private func isValidData(data: Data) -> NetworkResult<Any> {
         do {
             let decoder = JSONDecoder()
-            let decodedData = try decoder.decode(PostDataResponse.self, from: data)
+            let decodedData = try decoder.decode(LikedUsersDataResponse.self, from: data)  // 디코딩
             return .success(decodedData)
         } catch {
-            print("Decoding error:", error)
+            print("Decoding error, likedusers:", error)
             if let jsonString = String(data: data, encoding: .utf8) {
                 print("Received JSON: \(jsonString)")
             } else {
