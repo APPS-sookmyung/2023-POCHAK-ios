@@ -20,7 +20,6 @@ struct PostDataService{
         // json 형태로 받아오기 위해
         // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
         
-        
         // 임시로 사용하는 loginUser
         let body : Parameters = [
                     "loginUser": "jisoo"
