@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.7.1)
   - AppAuth (1.6.2):
     - AppAuth/Core (= 1.6.2)
     - AppAuth/ExternalUserAgent (= 1.6.2)
@@ -20,12 +21,14 @@ PODS:
     - Pageboy (~> 4.0.2)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.2)
   - GoogleSignIn
   - GoogleSignInSwiftSupport
   - Tabman (~> 3.0)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - AppAuth
     - GoogleSignIn
     - GoogleSignInSwiftSupport
@@ -35,6 +38,7 @@ SPEC REPOS:
     - Tabman
 
 SPEC CHECKSUMS:
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GoogleSignInSwiftSupport: 6ca6e5a978faa4cd43451b6b9b38b96ab5db1734
@@ -43,6 +47,6 @@ SPEC CHECKSUMS:
   Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
   Tabman: 6326ec3a792da1c2a6e79c7eddb56af7b591c9d6
 
-PODFILE CHECKSUM: d42199de4568a7823fc838802983cf6ca90941dd
+PODFILE CHECKSUM: 1cae9b11348a5f9e865faa06538b2c0578a54a33
 
 COCOAPODS: 1.12.1
