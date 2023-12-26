@@ -14,8 +14,10 @@ struct PostDataResponse: Codable {
 
 struct PostDataResponseResult: Codable {
     let taggedUserHandles: [String]
+    let postOwnerProfileImage: String
     let postOwnerHandle: String
     let isFollow: Bool
+    let isLike: Bool
     let postImageUrl: String
     let numOfHeart: Int
     let caption: String
