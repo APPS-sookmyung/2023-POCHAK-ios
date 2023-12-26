@@ -32,6 +32,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     private var postDataResponse: PostDataResponse!
     private var postDataResult: PostDataResponseResult!
     
+    private var likeUsersDataResponse: LikedUsersDataResponse!
+    private var likedUsers: [LikedUsers]!
+    private var likePostResponse: LikePostDataResponse!
+    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +64,23 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                     print("networkFail")
                 }
             }
+        
+        LikedUsersDataService.shared.getLikedUsers(tempPostId) {(response) in
+            // NetworkResult형 enum으로 분기 처리
+            switch(response){
+            case .success(let likedUsersData):
+                self.likeUsersDataResponse = likedUsersData as? LikedUsersDataResponse
+                self.likedUsers = self.likeUsersDataResponse.result.likedUsers
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serveErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
 //        }
         
 //        queue.sync{
@@ -127,8 +148,8 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         // 크키에 맞게
         scrollView.updateContentSize()
         
-        // 이미지
-        let url = URL(string: postDataResult.postImageUrl)
+        // 포스트 이미지
+        var url = URL(string: postDataResult.postImageUrl)
         // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
         // 이를 방지하기 위해 다른 thread에서 처리함.
         DispatchQueue.global().async { [weak self] in
@@ -137,6 +158,18 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                     //UI 변경 작업은 main thread에서 해야함.
                     DispatchQueue.main.async {
                         self?.postImage.image = image
+                    }
+                }
+            }
+        }
+        
+        // 프로필 이미지
+        url = URL(string: postDataResult.postOwnerProfileImage)
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url!) {
+                if let image = UIImage(data: data){
+                    DispatchQueue.main.async {
+                        self?.profileImageView.image = image
                     }
                 }
             }
@@ -182,6 +215,9 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 프로필 사진 동그랗게 -> 크기 반만큼 radius
         profileImageView.layer.cornerRadius = 25
+        
+        // 좋아요 버튼 (내가 눌렀는지 안했는지)
+        self.btnLike.isSelected = postDataResult.isLike
         
         // 좋아요 누른 사람 수 라벨에 대한 제스쳐 등록 -> 액션 연결
         let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
@@ -261,6 +297,28 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     }
 
     @IBAction func likeBtnTapped(_ sender: Any) {
+        // 서버 연결
+        LikedUsersDataService.shared.postLikeRequest(tempPostId){(response) in
+            // NetworkResult형 enum으로 분기 처리
+            switch(response){
+            case .success(let likePostResponse):
+                self.likePostResponse = likePostResponse as? LikePostDataResponse
+                if(!self.likePostResponse.isSuccess!){
+                    // 인스턴스 생성
+                    //let alert = UIAlertController(title: "알림", message: "좋아요가 반영되지 못했습니다.", preferredStyle: .alert)
+                    print(self.likePostResponse.message)
+                }
+                print(self.likePostResponse.message)
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serveErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
         // 좋아요 취소
         if btnLike.isSelected {
             btnLike.isSelected = false
