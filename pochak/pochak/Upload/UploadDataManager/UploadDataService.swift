@@ -16,9 +16,6 @@ class UploadDataService{
             "taggedUserHandles":taggedUserHandles
         ]
     
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
-                                    "Content-type": "multipart/form-data"
-        ]
         
         let dataRequest = AF.upload(multipartFormData: { multipartFormData in
             // 이미지 데이터를 multipart form data에 추가
