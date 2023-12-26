@@ -66,23 +66,33 @@ class SocialJoinViewController: UIViewController {
     
     // MARK: - Google Login
     @IBAction func googleLoginAction(_ sender: Any) {
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [weak self] signInResult, _ in
-                    guard let self,
-                          let result = signInResult,
-                          let token = result.user.idToken?.tokenString else { return }
-                    // 서버에 토큰을 보내기. 이 때 idToken, accessToken 차이에 주의할 것
-                }
-        // 가입 완료 시 프로필 설정 화면으로 전환하기
-//        toProfileSettingsPage()
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+            guard error == nil else { return }
+            guard let signInResult = signInResult else { return }
+            
+            // Get User Info
+            let user = signInResult.user
+            let accessToken = user.accessToken.tokenString
+            GoogleLoginDataManager.shared.googleLoginDataManager(accessToken, {resultData in
+                guard let isNewMember = resultData.isNewMember else { return }
+                self.toProfileSettingsPage(isNewMember)
+            })
+        }
         
     }
     // MARK: - Apple Login
     
     
     // MARK: - profileSettingPage로 전환하기
-    private func toProfileSettingsPage(){
-        guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
-        self.navigationController?.pushViewController(makeProfileVC, animated: true)
+    private func toProfileSettingsPage(_ isNewMember : Bool){
+        if isNewMember == true {
+            guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
+            self.navigationController?.pushViewController(makeProfileVC, animated: true)
+        }else{
+            guard let homeTabVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController else {return}
+            self.navigationController?.pushViewController(homeTabVC, animated: true)
+        }
     }
+
     
 }
