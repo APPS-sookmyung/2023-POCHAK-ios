@@ -22,7 +22,8 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var taggedUsers: UILabel!
     @IBOutlet weak var pochakUser: UILabel!
     
-    let tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    var receivedData: String?
+    var tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
     
     //var postOwner: String = ""
     //private var isFollowing: Bool = false  // 임시로 초깃값은 false -> 나중에 변경
@@ -35,6 +36,17 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        /*postId 전달 - 실시간인기포스트에서 전달하는 postId 입니다
+        전달되는 id 없으면 위에서 설정된 id로 될거에요..
+        나중에 홈에서도 id 이렇게 전달해서 쓰면 될 것 같습니다 ㅎㅎ */
+        if let data = receivedData {
+            // receivedData를 사용하여 원하는 작업을 수행합니다.
+            // 예를 들어, 데이터를 표시하거나 다른 로직에 활용할 수 있습니다.
+            print("Received Data: \(data)")
+            tempPostId = data
+        } else {
+            print("No data received.")
+        }
         
         /* 서버 통신 */
         // PostDataService 구조체에서 shared라는 공용 인스턴스에 접근 -> 싱글턴 패턴
