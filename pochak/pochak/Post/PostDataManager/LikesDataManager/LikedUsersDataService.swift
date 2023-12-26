@@ -19,9 +19,7 @@ struct LikedUsersDataService{
     func getLikedUsers(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         // json 형태로 받아오기 위해
         // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
-                                    "Content-type": "application/json"
-                                    ]
+        
         
         
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
@@ -40,7 +38,7 @@ struct LikedUsersDataService{
                 // 성공 시 통신 자체의 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
-                let networkResult = self.judgeStatus(by: statusCode, value)  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
+                let networkResult = self.judgeStatus(by: statusCode, value, dataType: "LikedUsersDataResponse")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
                 completion(networkResult)
             case .failure:
                 completion(.networkFail)
@@ -48,11 +46,33 @@ struct LikedUsersDataService{
         }
     }
     
+    func postLikeRequest(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+        /* header 있는 자리 */
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/like",
+                                     method: .post,
+                                     encoding: URLEncoding.default,
+                                     headers: header)
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result{
+            case .success:
+                // 성공 시 통신 자체의 상태코드와 데이터 수신
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.value else{return}
+                let networkResult = self.judgeStatus(by: statusCode, value, dataType: "LikePostDataResponse")
+                completion(networkResult)
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    // MARK: -- Helper function
+    
     // 요청 후 받은 statusCode를 바탕으로 어떻게 결과값을 처리할 지 정의
-    private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+    private func judgeStatus(by statusCode: Int, _ data: Data, dataType: String) -> NetworkResult<Any> {
         
         switch statusCode{
-        case 200: return isValidData(data: data)  // 성공 -> 데이터 가공해서 전달해야하므로 isValidData라는 함수로 데이터 넘겨주기
+        case 200: return isValidData(data: data, dataType: dataType)  // 성공 -> 데이터 가공해서 전달해야하므로 isValidData라는 함수로 데이터 넘겨주기
         case 400: return .pathErr  // 잘못된 요청
         case 500: return .serverErr  // 서버 에러
         default: return .networkFail  // 네트워크 에러
@@ -60,11 +80,18 @@ struct LikedUsersDataService{
     }
     
     // 통신 성공 시 데이터를 가공하기 위한 함수
-    private func isValidData(data: Data) -> NetworkResult<Any> {
+    private func isValidData(data: Data, dataType: String) -> NetworkResult<Any> {
         do {
             let decoder = JSONDecoder()
-            let decodedData = try decoder.decode(LikedUsersDataResponse.self, from: data)  // 디코딩
-            return .success(decodedData)
+            if(dataType == "LikedUsersDataResponse"){  // 좋아요 누른 사람 조회
+                let decodedData = try decoder.decode(LikedUsersDataResponse.self, from: data)  // 디코딩
+                return .success(decodedData)
+            }
+            else{  // 좋아요 누르기 요청
+                let decodedData = try decoder.decode(LikePostDataResponse.self, from: data)
+                return .success(decodedData)
+            }
+            
         } catch {
             print("Decoding error, likedusers:", error)
             if let jsonString = String(data: data, encoding: .utf8) {

@@ -32,55 +32,57 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     private var postDataResponse: PostDataResponse!
     private var postDataResult: PostDataResponseResult!
     
-    private var likeUsersDataResponse: LikedUsersDataResponse!
-    private var likedUsers: [LikedUsers]!
+//    private var likeUsersDataResponse: LikedUsersDataResponse!
+
     private var likePostResponse: LikePostDataResponse!
     
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadPostDetailData()
+        
         /* 서버 통신 */
         // PostDataService 구조체에서 shared라는 공용 인스턴스에 접근 -> 싱글턴 패턴
 //        let queue = DispatchQueue.global()
 //        queue.sync{
-            PostDataService.shared.getPostDetail(tempPostId) { (response) in
-//                print("1 queue")
-                // NetworkResult형 enum으로 분기 처리
-                switch(response){
-                case .success(let postData):
-                    self.postDataResponse = postData as? PostDataResponse
-                    self.postDataResult = self.postDataResponse.result
-//                    print(self.postDataResult)
-//                    print(self.postDataResponse)
-                    self.initUI()
-                case .requestErr(let message):
-                    print("requestErr", message)
-                case .pathErr:
-                    print("pathErr")
-                case .serverErr:
-                    print("serveErr")
-                case .networkFail:
-                    print("networkFail")
-                }
-            }
-        
-        LikedUsersDataService.shared.getLikedUsers(tempPostId) {(response) in
-            // NetworkResult형 enum으로 분기 처리
-            switch(response){
-            case .success(let likedUsersData):
-                self.likeUsersDataResponse = likedUsersData as? LikedUsersDataResponse
-                self.likedUsers = self.likeUsersDataResponse.result.likedUsers
-            case .requestErr(let message):
-                print("requestErr", message)
-            case .pathErr:
-                print("pathErr")
-            case .serverErr:
-                print("serveErr")
-            case .networkFail:
-                print("networkFail")
-            }
-        }
+//            PostDataService.shared.getPostDetail(tempPostId) { (response) in
+////                print("1 queue")
+//                // NetworkResult형 enum으로 분기 처리
+//                switch(response){
+//                case .success(let postData):
+//                    self.postDataResponse = postData as? PostDataResponse
+//                    self.postDataResult = self.postDataResponse.result
+////                    print(self.postDataResult)
+////                    print(self.postDataResponse)
+//                    self.initUI()
+//                case .requestErr(let message):
+//                    print("requestErr", message)
+//                case .pathErr:
+//                    print("pathErr")
+//                case .serverErr:
+//                    print("serveErr")
+//                case .networkFail:
+//                    print("networkFail")
+//                }
+//            }
+//
+//        LikedUsersDataService.shared.getLikedUsers(tempPostId) {(response) in
+//            // NetworkResult형 enum으로 분기 처리
+//            switch(response){
+//            case .success(let likedUsersData):
+//                self.likeUsersDataResponse = likedUsersData as? LikedUsersDataResponse
+//                self.likedUsers = self.likeUsersDataResponse.result.likedUsers
+//            case .requestErr(let message):
+//                print("requestErr", message)
+//            case .pathErr:
+//                print("pathErr")
+//            case .serverErr:
+//                print("serveErr")
+//            case .networkFail:
+//                print("networkFail")
+//            }
+//        }
 //        }
         
 //        queue.sync{
@@ -218,6 +220,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 좋아요 버튼 (내가 눌렀는지 안했는지)
         self.btnLike.isSelected = postDataResult.isLike
+        print("isLike: ")
+        print(postDataResult.isLike)
+        print("like button status: ")
+        print(self.btnLike.isSelected)
         
         // 좋아요 누른 사람 수 라벨에 대한 제스쳐 등록 -> 액션 연결
         let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
@@ -232,6 +238,29 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         self.followingBtn.setTitle("팔로우", for: .normal)
         self.followingBtn.setTitle("팔로잉", for: .selected)
         followingBtn.layer.cornerRadius = 4.97
+    }
+    
+    func loadPostDetailData(){
+        PostDataService.shared.getPostDetail(tempPostId) { (response) in
+//                print("1 queue")
+            // NetworkResult형 enum으로 분기 처리
+            switch(response){
+            case .success(let postData):
+                self.postDataResponse = postData as? PostDataResponse
+                self.postDataResult = self.postDataResponse.result
+//                    print(self.postDataResult)
+//                    print(self.postDataResponse)
+                self.initUI()
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serveErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
     
     // MARK: - Actions
@@ -309,6 +338,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                     print(self.likePostResponse.message)
                 }
                 print(self.likePostResponse.message)
+                self.loadPostDetailData()
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
@@ -319,22 +349,21 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                 print("networkFail")
             }
         }
-        // 좋아요 취소
-        if btnLike.isSelected {
-            btnLike.isSelected = false
-        }
-        // 좋아요 하기
-        else{
-            btnLike.isSelected = true
-        }
+//        loadPostDetailData()
+        
+//        // 좋아요 취소
+//        if btnLike.isSelected {
+//            btnLike.isSelected = false
+//        }
+//        // 좋아요 하기
+//        else{
+//            btnLike.isSelected = true
+//        }
     }
-    
 }
 
 
-
 // MARK: - Extensions
-
 extension ViewController: UISheetPresentationControllerDelegate {
     func sheetPresentationControllerDidChangeSelectedDetentIdentifier(_ sheetPresentationController: UISheetPresentationController) {
         //크기 변경 됐을 경우
