@@ -152,15 +152,30 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("view post btn tapped")
-        var selectedData = imageArray[indexPath.item].postId
-        let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+        let section = indexPath.section
+        switch section {
+        case 0:
+            print("view post btn tapped")
+            var selectedData = imageArray[indexPath.item].postId
+            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
 
-        guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-            else { return }
-        print(postVC)
-        postVC.receivedData = modifiedString
-        self.navigationController?.pushViewController(postVC, animated: true)
+            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            print(postVC)
+            postVC.receivedData = modifiedString
+            self.navigationController?.pushViewController(postVC, animated: true)
+        default:
+            print("view post btn tapped")
+            var selectedData = imageArray[indexPath.item+2].postId
+            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+
+            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            print(postVC)
+            postVC.receivedData = modifiedString
+            self.navigationController?.pushViewController(postVC, animated: true)
+        }
+        
         //        let sb = UIStoryboard(name: "PostTab", bundle: nil)
         //        let postVC = sb.instantiateViewController(withIdentifier: "PostVC") as! PostViewController
         //        postVC.modalPresentationStyle = .fullScreen
