@@ -11,9 +11,6 @@ class UploadDataService{
     static let shared = UploadDataService()
 
     func upload(postImage:Data?, caption:String, taggedUserHandles:Array<String>,completion: @escaping(NetworkResult<Any>) -> Void){
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
-                                            "Content-type": "application/json"  // multipart/form-data ???
-                                            ]
         let body : Parameters = [
             "caption":caption,
             "taggedUserHandles":taggedUserHandles
