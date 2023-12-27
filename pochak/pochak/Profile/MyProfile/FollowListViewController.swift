@@ -11,16 +11,8 @@ import UIKit
 
 class FollowListViewController: TabmanViewController {
 
-    
-    
-    // MARK: - Properties
-    @IBOutlet weak var tabBarHeaderCollectionView: UICollectionView!
-    @IBOutlet weak var tabBarPageCollectionView: UICollectionView!
-    
     // Tabbar로 넘길 VC 배열 선언
     private var viewControllers: [UIViewController] = []
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +27,10 @@ class FollowListViewController: TabmanViewController {
         
         // Tabman 사용
         // tab에 보여질 VC 추가
-        if let firstVC = storyboard?.instantiateViewController(withIdentifier: "FirstTabVC") as? FirstTabViewController {
+        if let firstVC = storyboard?.instantiateViewController(withIdentifier: "FirstTabmanVC") as? FirstTabmanViewController {
                     viewControllers.append(firstVC)
                 }
-        if let secondVC = storyboard?.instantiateViewController(withIdentifier: "SecondTabVC") as? SecondTabViewController {
+        if let secondVC = storyboard?.instantiateViewController(withIdentifier: "SecondTabmanVC") as? SecondTabmanViewController {
                     viewControllers.append(secondVC)
                 }
         
@@ -72,6 +64,7 @@ class FollowListViewController: TabmanViewController {
         }
         
         addBar(bar, dataSource: self, at:.top)
+        
         
     
     }
@@ -117,34 +110,6 @@ class FollowListViewController: TabmanViewController {
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension FollowListViewController : UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // cell 생성
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: TabbarHeadingCollectionViewCell.identifier,
-            for: indexPath) as? TabbarHeadingCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        return cell
-    }
-    
-    
-}
-
-// CollecitonView 사이즈 조절
-extension FollowListViewController : UICollectionViewDelegateFlowLayout{
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: tabBarHeaderCollectionView.frame.width/2,
-                      height: tabBarHeaderCollectionView.frame.height)
-    }
-}
-
 // DataSource Extension
 extension FollowListViewController: PageboyViewControllerDataSource, TMBarDataSource {
 
@@ -165,7 +130,6 @@ extension FollowListViewController: PageboyViewControllerDataSource, TMBarDataSo
     
     // 추가 구현해야 하는 기능
     // 팔로워 / 팔로잉에 따라 defualtPage 다르게 하기
-
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         switch index {
            case 0:

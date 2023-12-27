@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Bold.ttf">
+            <string>Pretendard-Bold</string>
+        </array>
+        <array key="Pretendard-Medium.ttf">
+            <string>Pretendard-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FollowerCollectionViewCell" customModule="pochak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="111"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="418" height="111"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfR-SN-GsJ">
+                        <rect key="frame" x="25" y="20.666666666666671" width="70" height="70"/>
+                        <color key="backgroundColor" name="pink00"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="BiH-F3-b1N"/>
+                            <constraint firstAttribute="width" constant="70" id="koW-1n-cDr"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain"/>
+                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u2x-vq-ScL">
+                        <rect key="frame" x="110" y="38.666666666666671" width="35" height="33.666666666666671"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bbaek" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCD-m9-ruE">
+                                <rect key="frame" x="0.0" y="0.0" width="35" height="14.333333333333334"/>
+                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="12"/>
+                                <color key="textColor" name="gray07"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모경수" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1o-wR-N5d">
+                                <rect key="frame" x="0.0" y="19.333333333333336" width="35" height="14.333333333333336"/>
+                                <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                                <color key="textColor" name="gray06"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeb-rw-ZRP">
+                        <rect key="frame" x="344" y="40.666666666666664" width="49" height="29.999999999999993"/>
+                        <color key="backgroundColor" name="gray04"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="7qf-Rm-EwP"/>
+                            <constraint firstAttribute="height" constant="30" id="azG-55-LgS"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="삭제">
+                            <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
+                            <color key="baseForegroundColor" name="gray07"/>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xeb-rw-ZRP" firstAttribute="centerY" secondItem="KfR-SN-GsJ" secondAttribute="centerY" id="0BC-6u-Gby"/>
+                <constraint firstItem="u2x-vq-ScL" firstAttribute="centerY" secondItem="KfR-SN-GsJ" secondAttribute="centerY" id="41a-zd-Lrv"/>
+                <constraint firstItem="u2x-vq-ScL" firstAttribute="leading" secondItem="KfR-SN-GsJ" secondAttribute="trailing" constant="15" id="A6o-hd-XVe"/>
+                <constraint firstItem="KfR-SN-GsJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="25" id="Dh8-Rg-8jK"/>
+                <constraint firstItem="KfR-SN-GsJ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="aJI-hv-LQ2"/>
+                <constraint firstAttribute="trailing" secondItem="xeb-rw-ZRP" secondAttribute="trailing" constant="25" id="euV-3w-nVA"/>
+            </constraints>
+            <size key="customSize" width="418" height="111"/>
+            <connections>
+                <outlet property="deleteBtn" destination="xeb-rw-ZRP" id="sTG-u2-fH3"/>
+                <outlet property="profileImageBtn" destination="KfR-SN-GsJ" id="BbH-SY-TZk"/>
+                <outlet property="userId" destination="cCD-m9-ruE" id="OUh-Xl-et4"/>
+                <outlet property="userName" destination="M1o-wR-N5d" id="SWr-Tz-Ja4"/>
+            </connections>
+            <point key="canvasLocation" x="172.51908396946564" y="25.704225352112676"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="gray04">
+            <color red="0.63499999046325684" green="0.66699999570846558" blue="0.69800001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gray06">
+            <color red="0.20399999618530273" green="0.22699999809265137" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gray07">
+            <color red="0.1289999932050705" green="0.14499999582767487" blue="0.16099999845027924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="pink00">
+            <color red="1" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
