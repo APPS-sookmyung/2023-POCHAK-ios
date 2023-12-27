@@ -29,14 +29,14 @@ class LikedPeopleListTableViewCell: UITableViewCell {
         profileImageView.layer.cornerRadius = 22.5
         
         // 팔로잉 상태 서버에서 확인 후 값 세팅
-        followingBtn.isSelected = isFollowing  // 팔로우 안된 상태
+        //followingBtn.isSelected = isFollowing  // 팔로우 안된 상태
         
         followingBtn.setTitle("팔로우", for: .normal)
         followingBtn.setTitle("팔로잉", for: .selected)
         
         followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
         
-        followingBtn.backgroundColor = isNotFollowingColor
+        //followingBtn.backgroundColor = isNotFollowingColor
         
         followingBtn.layer.cornerRadius = 4.97
     }
@@ -93,6 +93,7 @@ class LikedPeopleListTableViewCell: UITableViewCell {
         else{
             followingBtn.isSelected = false
         }
+        followingBtn.backgroundColor = likedUser.follow! ? self.isFollowingColor : self.isNotFollowingColor
     }
     
 }
