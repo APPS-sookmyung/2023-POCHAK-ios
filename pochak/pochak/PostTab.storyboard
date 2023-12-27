@@ -339,6 +339,7 @@
                         <outlet property="labelHowManyLikes" destination="AA0-TV-f7h" id="mJP-IP-Btg"/>
                         <outlet property="mainCommentContent" destination="Qrv-h9-BEv" id="wkQ-3B-afW"/>
                         <outlet property="mainCommentHandle" destination="2G4-E0-LJR" id="fmw-R2-r0R"/>
+                        <outlet property="moreCommentsBtn" destination="6bF-q8-xuo" id="PVf-of-ZdP"/>
                         <outlet property="pochakUser" destination="gI1-I5-NSd" id="EE6-b3-PgP"/>
                         <outlet property="postContent" destination="wZB-Xn-bjF" id="KTa-Pe-TAg"/>
                         <outlet property="postImage" destination="9aE-qJ-kQ5" id="XfM-hX-1KM"/>
@@ -383,6 +384,9 @@
                                             <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
                                             <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="postNewCommentBtnTapped:" destination="Lyl-go-KQg" eventType="touchUpInside" id="2Is-aH-lVw"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qMX-go-Y6c">
                                         <rect key="frame" x="83" y="15" width="207.66666666666663" height="33"/>
