@@ -1,5 +1,5 @@
 //
-//  MyProfilePostModel.swift
+//  MyProfilePochakedPostModel.swift
 //  pochak
 //
 //  Created by Seo Cindy on 12/28/23.
