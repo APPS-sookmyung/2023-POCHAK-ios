@@ -48,16 +48,23 @@ class ProfileTabViewController: TabmanViewController {
     // MARK: - view Follower / Following List
     //  UITapGestureRecognizer 사용
     private func viewFollowerList() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewFollowTapped))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewFollowerTapped))
         followerList.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func viewFollowingList() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewFollowTapped))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewFollowingTapped))
         followingList.addGestureRecognizer(tapGestureRecognizer)
     }
         
-    @objc private func viewFollowTapped(){
+    @objc private func viewFollowingTapped(){
+        guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
+        self.navigationController?.pushViewController(followListVC, animated: true)
+        
+        
+    }
+    
+    @objc private func viewFollowerTapped(){
         guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
         self.navigationController?.pushViewController(followListVC, animated: true)
         
