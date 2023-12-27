@@ -316,9 +316,9 @@ class CommentViewController: UIViewController {
 // MARK: - Extensions (TableView)
 extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     
-    // UI 보기 위해 임시로 섹션 2개로 함
+    // 다시 1개로 함 나중에 수정하기
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     // 한 섹션에 몇 개의 셀을 넣을지
