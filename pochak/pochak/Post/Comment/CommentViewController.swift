@@ -121,7 +121,9 @@ class CommentViewController: UIViewController {
 //                    }
 //                }
                     // 대댓글있는지 다 확인?
-                self.initUI()
+                if(self.commentDataList != nil){
+                    self.initUI()
+                }
                 self.tableView.reloadData()
             case .requestErr(let message):
                 print("requestErr", message)
