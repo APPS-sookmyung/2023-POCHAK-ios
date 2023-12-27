@@ -74,7 +74,7 @@ class AlarmViewController: UIViewController {
 }
 extension AlarmViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(self.responseData?.result.alarmList.count)
