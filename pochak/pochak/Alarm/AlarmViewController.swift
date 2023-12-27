@@ -10,6 +10,7 @@ import UIKit
 class AlarmViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var responseData : AlarmResponse? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,8 @@ class AlarmViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setupCollectionView()
+        loadAlarmData()
+        
 
     }
     private func setupCollectionView(){
@@ -38,9 +41,34 @@ class AlarmViewController: UIViewController {
             forCellWithReuseIdentifier: OtherCollectionViewCell.identifier)
     }
 
-    
-    private func setupData(){
-//        UserFeedDataManager().getUserFeed(self)
+    func loadAlarmData(){
+        AlarmDataService.shared.getAlarm{ [self]
+            response in
+            switch response {
+            case .success(let data):
+                print("success")
+                if let alarmResponse = data as? AlarmResponse {
+                    // 다운캐스팅 성공 시 데이터를 AlarmResponse로 변환하여 사용 가능
+                    // alarmResponse를 사용하여 원하는 작업을 수행할 수 있습니다.
+                    self.responseData = alarmResponse
+                } else {
+                    // 다운캐스팅 실패 시, 잘못된 데이터 형식이라고 가정하고 에러를 처리하거나 다른 작업을 수행합니다.
+                    print("Failed to cast to AlarmResponse")
+                }
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
+                }
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+        
     }
 
 }
@@ -49,27 +77,72 @@ extension AlarmViewController: UICollectionViewDelegate, UICollectionViewDataSou
         return 2
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10 //아이템 개수
+        print(self.responseData?.result.alarmList.count)
+        return self.responseData?.result.alarmList.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let section = indexPath.section
-        switch section {
-        case 0:
+        if(self.responseData?.result.alarmList[indexPath.item].alarmType == "COMMENT"){
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherCollectionViewCell.identifier, for: indexPath) as? OtherCollectionViewCell else{
+                fatalError("셀 타입 캐스팅 실패")
+            }
+            if let userSentAlarmHandle = self.responseData?.result.alarmList[indexPath.item].userSentAlarmHandle {
+                // 옵셔널이 아닌 문자열 값을 추출하여 사용합니다.
+                cell.comment.text = "\(userSentAlarmHandle) 님이 댓글을 달았습니다."
+            }
+            if let image = self.responseData?.result.alarmList[indexPath.item].userSentAlarmProfileImage{
+                cell.configure(with: image)
+
+            }
+            return cell
+        }
+        else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "FOLLOW"){
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherCollectionViewCell.identifier, for: indexPath) as? OtherCollectionViewCell else{
+                fatalError("셀 타입 캐스팅 실패")
+            }
+            if let userSentAlarmHandle = self.responseData?.result.alarmList[indexPath.item].userSentAlarmHandle {
+                // 옵셔널이 아닌 문자열 값을 추출하여 사용합니다.
+                cell.comment.text = "\(userSentAlarmHandle) 님이 회원님을 팔로우했습니다."
+            }
+            if let image = self.responseData?.result.alarmList[indexPath.item].userSentAlarmProfileImage{
+                cell.configure(with: image)
+
+            }
+            return cell
+        }
+        else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "LIKE"){
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherCollectionViewCell.identifier, for: indexPath) as? OtherCollectionViewCell else{
+                fatalError("셀 타입 캐스팅 실패")
+            }
+            if let userSentAlarmHandle = self.responseData?.result.alarmList[indexPath.item].userSentAlarmHandle {
+                // 옵셔널이 아닌 문자열 값을 추출하여 사용합니다.
+                cell.comment.text = "\(userSentAlarmHandle) 님이 좋아요를 눌렀습니다."
+            }
+            if let image = self.responseData?.result.alarmList[indexPath.item].userSentAlarmProfileImage{
+                cell.configure(with: image)
+
+            }
+            return cell
+        }
+        else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "POST_REQUEST"){
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmCollectionViewCell.identifier, for: indexPath) as? AlarmCollectionViewCell else{
                 fatalError("셀 타입 캐스팅 실패")
             }
-            return cell
-        default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherCollectionViewCell.identifier, for: indexPath) as? OtherCollectionViewCell else{
-                fatalError("셀 타입 캐스팅 실패2")
+            if let userSentAlarmHandle = self.responseData?.result.alarmList[indexPath.item].userSentAlarmHandle {
+                // 옵셔널이 아닌 문자열 값을 추출하여 사용합니다.
+                cell.comment.text = "\(userSentAlarmHandle) 님이 회원님을 포착했습니다."
             }
-            //                let itemIndex = indexPath.item
-            //                if let cellData = self.userPosts{
-            //                    // 데이터가 있는 경우, cell 데이터를 전달
-            //                    cell.setupData(cellData[itemIndex].postImgUrl)
-            //                }
-            // <- 데이터 전달
+            if let image = self.responseData?.result.alarmList[indexPath.item].userSentAlarmProfileImage{
+                cell.configure(with: image)
+
+            }
+            return cell
+        }
+        else{
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlarmCollectionViewCell.identifier, for: indexPath) as? AlarmCollectionViewCell else{
+                fatalError("셀 타입 캐스팅 실패")
+            }
             return cell
         }
     }
