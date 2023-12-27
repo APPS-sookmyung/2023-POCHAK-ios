@@ -53,8 +53,9 @@
 		3769D6D52B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6D32B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift */; };
 		3769D6D62B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */; };
 		3769D6D92B3C79C400294CD1 /* MyProfilePostDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6D82B3C79C400294CD1 /* MyProfilePostDataManager.swift */; };
-		3769D6DB2B3C79DA00294CD1 /* MyProfilePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6DA2B3C79DA00294CD1 /* MyProfilePostModel.swift */; };
+		3769D6DB2B3C79DA00294CD1 /* MyProfilePochakedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6DA2B3C79DA00294CD1 /* MyProfilePochakedPostModel.swift */; };
 		376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F125A2A8B7440005F469B /* SocialLoginViewController.swift */; };
+		37C3AF3A2B3CA72100B4C79C /* MyProfilePochakPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3AF392B3CA72100B4C79C /* MyProfilePochakPostModel.swift */; };
 		A6D48ED7F8B86CF57C481991 /* Pods_pochak_pochakUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC75B5747D3AC9026B862E11 /* Pods_pochak_pochakUITests.framework */; };
 		AF5AAB97DDEAC75EAEDDCFE4 /* Pods_pochak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65A7656D9D72CC873C98FD4 /* Pods_pochak.framework */; };
 		EA01079A2A59556800A3AE85 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107952A59556800A3AE85 /* CommentViewController.swift */; };
@@ -165,8 +166,9 @@
 		3769D6D32B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostCollectionViewCell.swift; sourceTree = "<group>"; };
 		3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePostCollectionViewCell.xib; sourceTree = "<group>"; };
 		3769D6D82B3C79C400294CD1 /* MyProfilePostDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePostDataManager.swift; sourceTree = "<group>"; };
-		3769D6DA2B3C79DA00294CD1 /* MyProfilePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePostModel.swift; sourceTree = "<group>"; };
+		3769D6DA2B3C79DA00294CD1 /* MyProfilePochakedPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePochakedPostModel.swift; sourceTree = "<group>"; };
 		376F125A2A8B7440005F469B /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
+		37C3AF392B3CA72100B4C79C /* MyProfilePochakPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyProfilePochakPostModel.swift; path = ../../../../../../../../MyProfilePochakPostModel.swift; sourceTree = "<group>"; };
 		67EA6B5B881844A22EE2A55B /* Pods-pochak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.debug.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pochakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5440AA571B5DB6291304B2 /* Pods-pochakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochakTests.debug.xcconfig"; path = "Target Support Files/Pods-pochakTests/Pods-pochakTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -449,7 +451,8 @@
 			isa = PBXGroup;
 			children = (
 				3769D6D82B3C79C400294CD1 /* MyProfilePostDataManager.swift */,
-				3769D6DA2B3C79DA00294CD1 /* MyProfilePostModel.swift */,
+				3769D6DA2B3C79DA00294CD1 /* MyProfilePochakedPostModel.swift */,
+				37C3AF392B3CA72100B4C79C /* MyProfilePochakPostModel.swift */,
 			);
 			path = MyProfilePostDataManager;
 			sourceTree = "<group>";
@@ -934,7 +937,7 @@
 				EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */,
 				EA12890A2B3B2836002EC93E /* AlarmDataService.swift in Sources */,
 				EABD20652A6CF5CC007543E9 /* TagCollectionViewCell.swift in Sources */,
-				3769D6DB2B3C79DA00294CD1 /* MyProfilePostModel.swift in Sources */,
+				3769D6DB2B3C79DA00294CD1 /* MyProfilePochakedPostModel.swift in Sources */,
 				0823B0742A5B0E780085002F /* CommentTableViewCell.swift in Sources */,
 				0801765E2A74F4B0005E6953 /* UITextView+Extension.swift in Sources */,
 				081228C62A69624000DFA094 /* PostLikesViewController.swift in Sources */,
@@ -953,6 +956,7 @@
 				3769D6D02B3C569C00294CD1 /* FirstPostTabmanViewController.swift in Sources */,
 				3769D6BB2B3C347000294CD1 /* FollowListViewController.swift in Sources */,
 				3769D6B42B3C301B00294CD1 /* JoinDataManager.swift in Sources */,
+				37C3AF3A2B3CA72100B4C79C /* MyProfilePochakPostModel.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
 				3769D6D22B3C56F100294CD1 /* SecondPostTabmanViewController.swift in Sources */,
 				EAF918542AA4692E0037C270 /* NetworkResult.swift in Sources */,

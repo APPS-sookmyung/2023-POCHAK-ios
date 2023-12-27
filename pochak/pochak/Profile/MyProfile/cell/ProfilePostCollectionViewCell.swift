@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfilePostCollectionViewCell: UICollectionViewCell {
     
@@ -14,6 +15,20 @@ class ProfilePostCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var profilePostImage: UIImageView!
+    
+    func configure(_ postDataModel : PostDataModel){
+        var imageURL = postDataModel.postImg ?? ""
+        if let url = URL(string: imageURL) {
+            profilePostImage.kf.setImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    print("Image successfully loaded: \(value.image)")
+                case .failure(let error):
+                    print("Image failed to load with error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
