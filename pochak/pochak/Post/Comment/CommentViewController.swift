@@ -120,7 +120,9 @@ class CommentViewController: UIViewController {
 //                        }
 //                    }
 //                }
-                    // 대댓글있는지 다 확인?
+                // title 내용 설정
+                self.titleLabel.text = self.postUserHandle!+" 님의 게시물 댓글"
+                // 대댓글있는지 다 확인?
                 if(self.commentDataList != nil){
                     self.initUI()
                 }
@@ -196,8 +198,8 @@ class CommentViewController: UIViewController {
         // 사용자 프로필 사진 크기 반만큼 radius
         userProfileImageView.layer.cornerRadius = 17.5
         
-        // title 내용 설정
-        titleLabel.text = postUserHandle!+" 님의 게시물 댓글"
+//        // title 내용 설정
+//        titleLabel.text = postUserHandle!+" 님의 게시물 댓글"
         
         //print(self.CommentInputViewBottomConstraint.constant)
     }
