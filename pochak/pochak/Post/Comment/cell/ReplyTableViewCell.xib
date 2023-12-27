@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -71,6 +72,12 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGg-BT-6f2">
+                        <rect key="frame" x="202.66666666666666" y="10" width="12.333333333333343" height="14.333333333333336"/>
+                        <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
+                        <color key="textColor" name="gray04"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Uov-ld-3z9" firstAttribute="top" secondItem="eP6-qx-116" secondAttribute="bottom" constant="7" id="0a9-7B-VHe"/>
@@ -79,6 +86,8 @@
                     <constraint firstItem="Uov-ld-3z9" firstAttribute="leading" secondItem="eP6-qx-116" secondAttribute="leading" id="Ltg-n6-DMa"/>
                     <constraint firstAttribute="bottom" secondItem="eur-Ui-z9y" secondAttribute="bottom" constant="10" id="Qxd-XA-WVA"/>
                     <constraint firstItem="eP6-qx-116" firstAttribute="leading" secondItem="1qp-H6-h2q" secondAttribute="trailing" constant="15" id="aXA-Vp-q9t"/>
+                    <constraint firstItem="kGg-BT-6f2" firstAttribute="centerY" secondItem="eP6-qx-116" secondAttribute="centerY" id="dwu-GV-ImR"/>
+                    <constraint firstItem="kGg-BT-6f2" firstAttribute="leading" secondItem="eP6-qx-116" secondAttribute="trailing" constant="5" id="keb-BI-Adl"/>
                     <constraint firstItem="eP6-qx-116" firstAttribute="top" secondItem="1qp-H6-h2q" secondAttribute="top" id="ntJ-Yf-YgO"/>
                     <constraint firstItem="eur-Ui-z9y" firstAttribute="top" secondItem="Uov-ld-3z9" secondAttribute="bottom" constant="5" id="pb6-pf-WL1"/>
                     <constraint firstItem="1qp-H6-h2q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="78" id="vZc-CJ-H9D"/>
@@ -89,6 +98,8 @@
             <connections>
                 <outlet property="profileImageView" destination="glQ-bV-w4i" id="ryC-5r-8Gz"/>
                 <outlet property="replyCommentTextView" destination="Uov-ld-3z9" id="gUd-bg-Ldl"/>
+                <outlet property="timePassedLabel" destination="kGg-BT-6f2" id="6Bb-dL-7Xd"/>
+                <outlet property="userHandleLabel" destination="eP6-qx-116" id="KzY-Dv-FlF"/>
             </connections>
             <point key="canvasLocation" x="270.99236641221376" y="18.30985915492958"/>
         </tableViewCell>

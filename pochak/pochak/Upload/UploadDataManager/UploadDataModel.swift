@@ -22,7 +22,6 @@ struct UploadResult: Codable {
 }
 
 struct UploadDataRequest:Codable{
-    let postImage: String
     let caption: String
     let taggedUserHandles: [String]
 }

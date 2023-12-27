@@ -220,6 +220,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 댓글 미리보기
         if(postDataResult.mainComment == nil){
+            self.mainCommentHandle.text = nil
             self.mainCommentContent.text = postDataResponse.message
         }
         else{
@@ -316,6 +317,8 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
         
         commentVC.modalPresentationStyle = .pageSheet
+        commentVC.postId = tempPostId
+        commentVC.postUserHandle = postDataResult.postOwnerHandle
         
         // half sheet
         if let sheet = commentVC.sheetPresentationController {

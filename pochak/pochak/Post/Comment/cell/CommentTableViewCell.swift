@@ -12,6 +12,9 @@ class CommentTableViewCell: UITableViewCell {
     // MARK: - Properties
     @IBOutlet weak var commentTextView: MentionTextView!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var commentUserHandleLabel: UILabel!
+    @IBOutlet weak var timePassedLabel: UILabel!
+    @IBOutlet weak var childCommentBtn: UIButton!
     
     var taggedId: String = ""
     
@@ -49,8 +52,33 @@ class CommentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Helpers
+    func setupData(_ comment: CommentData){
+        // 프로필 이미지
+        if let profileImgStr = comment.userProfileImg {
+            let url = URL(string: profileImgStr)
+            // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
+            // 이를 방지하기 위해 다른 thread에서 처리함.
+            DispatchQueue.global().async { [weak self] in
+                if let data = try? Data(contentsOf: url!) {
+                    if let image = UIImage(data: data) {
+                        //UI 변경 작업은 main thread에서 해야함.
+                        DispatchQueue.main.async {
+                            self?.profileImageView.image = image
+                        }
+                    }
+                }
+            }
+        }
+        self.commentUserHandleLabel.text = comment.userHandle
+        self.commentTextView.text = comment.content
+        self.timePassedLabel.text = comment.uploadedTime  // -> 계산해야 함
+    }
+
 }
 
+
+// MARK: - Extensions
 // commentTextView를 위한 delegate
 extension CommentTableViewCell: UITextViewDelegate {
     

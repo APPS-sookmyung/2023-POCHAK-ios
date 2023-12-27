@@ -24,11 +24,15 @@ class UploadDataService{
             // 이미지 데이터를 multipart form data에 추가
             multipartFormData.append(postImage!, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")
             
-            // 다른 필드를 추가하려면 아래와 같이 추가합니다.
-            for (key, value) in body {
-                if let data = String(describing: value).data(using: .utf8) {
-                    multipartFormData.append(data, withName: key)
-                }
+            if let captionData = caption.data(using: .utf8) {
+                multipartFormData.append(captionData, withName: "caption")
+            }
+
+            // Add taggedUserHandles data
+            for tag in taggedUserHandles {
+                if let tagData = tag.data(using: .utf8) {
+                            multipartFormData.append(tagData, withName: "taggedUserHandles")
+                        }
             }
         }, to: APIConstants.baseURL + "/api/v1/post", headers: header)
         
