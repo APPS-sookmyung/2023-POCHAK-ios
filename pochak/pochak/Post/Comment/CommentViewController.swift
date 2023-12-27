@@ -27,32 +27,13 @@ class CommentViewController: UIViewController {
     private var commentDataResult: CommentDataResult?
     private var commentList: [CommentData]?
     
+    private var postCommentResponse: PostCommentResponse?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        CommentDataService.shared.getComments(postId) {(response) in
-            // NetworkResult형 enum으로 분기 처리
-            switch(response){
-            case .success(let commentDataResponse):
-                self.commentDataResponse = commentDataResponse as? CommentDataResponse
-                self.commentDataResult = self.commentDataResponse?.result
-                self.commentList = self.commentDataResult?.comments
-                
-                // 대댓글있는지 다 확인?
-                
-                
-                self.initUI()
-            case .requestErr(let message):
-                print("requestErr", message)
-            case .pathErr:
-                print("pathErr")
-            case .serverErr:
-                print("serveErr")
-            case .networkFail:
-                print("networkFail")
-            }
-        }
+        loadCommentData()
         
         /* commentView 초기 설정*/
 //        // commentView의 댓글 입력 창(uitextview) inset 제거
@@ -98,6 +79,33 @@ class CommentViewController: UIViewController {
 //        // 사용자 프로필 사진 크기 반만큼 radius
 //        userProfileImageView.layer.cornerRadius = 17.5
 
+    }
+    
+    // MARK: - Helpers
+    private func loadCommentData(){
+        CommentDataService.shared.getComments(postId) {(response) in
+            // NetworkResult형 enum으로 분기 처리
+            switch(response){
+            case .success(let commentDataResponse):
+                self.commentDataResponse = commentDataResponse as? CommentDataResponse
+                self.commentDataResult = self.commentDataResponse?.result
+                self.commentList = self.commentDataResult?.comments
+                print(self.commentList)
+                
+                // 대댓글있는지 다 확인?
+                self.initUI()
+                
+                self.tableView.reloadData()
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serveErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
     
     private func initUI() {
@@ -161,6 +169,8 @@ class CommentViewController: UIViewController {
         
         // title 내용 설정
         titleLabel.text = postUserHandle!+" 님의 게시물을 좋아하는 사람"
+        
+        //print(self.CommentInputViewBottomConstraint.constant)
     }
     
     // 키보드 보여질 때
@@ -197,8 +207,9 @@ class CommentViewController: UIViewController {
         let animationDuration = notification.userInfo![ UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
                 
         UIView.animate(withDuration: animationDuration) {
-                self.CommentInputViewBottomConstraint.constant = CGFloat(34)
-                self.view.layoutIfNeeded()
+                //self.CommentInputViewBottomConstraint.constant = CGFloat(34)
+            self.CommentInputViewBottomConstraint.constant = 0
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -219,6 +230,54 @@ class CommentViewController: UIViewController {
 //            }
 //        }
 //    }
+    
+    // MARK: - Actions
+    @IBAction func postNewCommentBtnTapped(_ sender: UIButton) {
+        // 대댓글인지 댓글인지 확인해야 함
+        print(commentTextView.text!)
+        
+        // api 연결, 오류 나면 알림창 띄우기
+        
+        // 댓글 내용이 있는 경우에만 POST 요청
+        if(!commentTextView.text.isEmpty && commentTextView.text! != textViewPlaceHolder){
+            print("textview is not empty")
+            // 임시로 parentCommentSK는 nil로 지정
+            CommentDataService.shared.postComment(postId, commentTextView.text, nil) { (response) in
+                switch(response){
+                case .success(let data):
+                    self.postCommentResponse = (data as! PostCommentResponse)
+                    // 만약 실패한 경우 실패했다고 알림창
+                    if(self.postCommentResponse?.isSuccess == false){
+                        let alert = UIAlertController(title: "댓글 등록에 실패하였습니다.", message: "다시 시도해주세요.", preferredStyle: UIAlertController.Style.alert)
+                        let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+                        alert.addAction(action)
+                        self.present(alert, animated: true)
+                    }
+                    self.loadCommentData()
+                case .requestErr(let message):
+                    print("requestErr", message)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serveErr")
+                case .networkFail:
+                    print("networkFail")
+                }
+            }
+        }
+        else{
+            print("textview is empty")
+        }
+        
+        // 댓글창 비우기
+        //commentTextView.text = ""
+        
+        // 키보드 내리기
+        commentTextView.endEditing(true)
+        
+        // 뷰컨트롤러 새로고침하기(데이터 다시 받아오기)
+        
+    }
 }
 
 // MARK: - Extensions (TableView)
@@ -340,9 +399,9 @@ extension CommentViewController: UITextViewDelegate {
     }
     // UITextView의 placeholder
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
+//        if textView.text.isEmpty {
             textView.text = textViewPlaceHolder
             textView.textColor = UIColor(named: "gray03")
-        }
+//        }
     }
 }

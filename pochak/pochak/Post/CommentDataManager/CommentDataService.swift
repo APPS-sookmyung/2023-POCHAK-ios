@@ -10,6 +10,16 @@ import Alamofire
 struct CommentDataService {
     static let shared = CommentDataService()
     
+    // 댓글 등록 시 서버에 전달할 Body 만드는 함수
+    private func makeBodyParameter(content : String, parentCommentSK : String?) -> Parameters {
+        if(parentCommentSK != nil){
+            return ["content": content, "parentCommentSK": parentCommentSK!]
+        }
+        else{
+            return ["content" : content]
+        }
+    }
+    
     func getComments(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
         
@@ -33,9 +43,9 @@ struct CommentDataService {
         }
     }
     
+    // 대댓글 조회
     func getChildComments(_ postId: String, _ commentId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
-        
         
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/"+commentId+"/comment",
                                     method: .get,
@@ -49,6 +59,30 @@ struct CommentDataService {
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value, dataType: "ChildCommentData")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
+                completion(networkResult)
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    // 댓글 등록
+    func postComment(_ postId: String, _ content: String, _ parentCommentSK: String?, completion: @escaping (NetworkResult<Any>) -> Void){
+        /* 헤더 있는 자리 */
+        
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/comment",
+                                    method: .post,
+                                    parameters: makeBodyParameter(content: content, parentCommentSK: parentCommentSK),
+                                    encoding: JSONEncoding.default,
+                                    headers: header)
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result{
+            case .success:
+                // 성공 시 통신 자체의 상태코드와 데이터(value) 수신
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.value else {return}
+                let networkResult = self.judgeStatus(by: statusCode, value, dataType: "PostCommentResponse")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
                 completion(networkResult)
             case .failure:
                 completion(.networkFail)
@@ -75,8 +109,12 @@ struct CommentDataService {
                 let decodedData = try decoder.decode(CommentDataResponse.self, from: data)  // 디코딩
                 return .success(decodedData)
             }
-            else{  // 대댓글 조회
+            else if(dataType == "ChildCommentData"){  // 대댓글 조회
                 let decodedData = try decoder.decode(ChildCommentDataResponse.self, from: data)
+                return .success(decodedData)
+            }
+            else{  // 댓글 혹은 대댓글 등록
+                let decodedData = try decoder.decode(PostCommentResponse.self, from: data)
                 return .success(decodedData)
             }
         } catch {

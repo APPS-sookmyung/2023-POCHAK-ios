@@ -5,6 +5,7 @@
 //  Created by Suyeon Hwang on 12/26/23.
 //
 
+// MARK: - 댓글 조회 Data Model
 struct CommentDataResponse: Codable {
     let isSuccess: Bool?
     let code: Int?
@@ -31,7 +32,7 @@ struct RecentComment: Codable {
     let content: String?
 }
 
-/* 대댓글 데이터 모델 */
+// MARK: - 대댓글 조회 Data Model
 struct ChildCommentDataResponse: Codable {
     let isSuccess: Bool?
     let code: Int?
@@ -45,4 +46,11 @@ struct ChildCommentData: Codable {
     let commentId: String?  // 댓글 ID (추후 삭제.. 등등에 쓰시면 됨다)
     let uploadedTime: String?
     let content: String?
+}
+
+// MARK: - 댓글 등록 Data Model (Response만 존재)
+struct PostCommentResponse: Codable {
+    let isSuccess: Bool?
+    let code: Int?
+    let message: String?
 }
