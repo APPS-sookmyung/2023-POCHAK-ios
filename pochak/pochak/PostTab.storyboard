@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -147,6 +147,41 @@
             </objects>
             <point key="canvasLocation" x="172" y="678"/>
         </scene>
+        <!--Search Result View Controller-->
+        <scene sceneID="5Bk-bO-Vv1">
+            <objects>
+                <viewController id="uUh-xy-8Zg" customClass="SearchResultViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P99-rl-Lnd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uMW-TO-xkO">
+                                <rect key="frame" x="0.0" y="129" width="375" height="629"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qcK-SK-X1S">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qcK-SK-X1S" id="gF9-f5-g4Q">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TXI-7d-z2V"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="uMW-TO-xkO" id="0n0-bE-5fh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p8M-Gg-iBY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="172" y="1392.8571428571429"/>
+        </scene>
         <!--Post View Controller-->
         <scene sceneID="kPy-rr-5B2">
             <objects>
@@ -206,6 +241,9 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-qJ-kQ5">
                                                 <rect key="frame" x="24" y="79" width="327" height="436"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="9aE-qJ-kQ5" secondAttribute="height" multiplier="3:4" id="bPI-9p-mPp"/>
+                                                </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VHa-nq-QVw">
                                                 <rect key="frame" x="24" y="530" width="78.666666666666671" height="31"/>
@@ -304,7 +342,6 @@
                                             <constraint firstItem="g1Z-gd-DZE" firstAttribute="leading" secondItem="xjN-ru-9MC" secondAttribute="leading" constant="25" id="XQa-TL-3FZ"/>
                                             <constraint firstAttribute="trailing" secondItem="8NM-hH-Q9c" secondAttribute="trailing" constant="24" id="aUi-7M-EbV"/>
                                             <constraint firstItem="Kgl-pj-DSt" firstAttribute="leading" secondItem="g1Z-gd-DZE" secondAttribute="trailing" constant="14" id="ael-Xh-pUA"/>
-                                            <constraint firstItem="9aE-qJ-kQ5" firstAttribute="width" secondItem="9aE-qJ-kQ5" secondAttribute="height" multiplier="3:4" id="bPI-9p-mPp"/>
                                             <constraint firstItem="g1Z-gd-DZE" firstAttribute="top" secondItem="xjN-ru-9MC" secondAttribute="top" constant="17" id="bT9-dl-Zii"/>
                                             <constraint firstItem="tHn-2D-Kcr" firstAttribute="top" secondItem="qO5-uk-Y9S" secondAttribute="bottom" constant="11" id="bfr-d4-3I4"/>
                                             <constraint firstItem="8NM-hH-Q9c" firstAttribute="centerY" secondItem="g1Z-gd-DZE" secondAttribute="centerY" id="gmI-Ds-I35"/>
@@ -339,6 +376,7 @@
                         <outlet property="labelHowManyLikes" destination="AA0-TV-f7h" id="mJP-IP-Btg"/>
                         <outlet property="mainCommentContent" destination="Qrv-h9-BEv" id="wkQ-3B-afW"/>
                         <outlet property="mainCommentHandle" destination="2G4-E0-LJR" id="fmw-R2-r0R"/>
+                        <outlet property="moreCommentsBtn" destination="6bF-q8-xuo" id="PVf-of-ZdP"/>
                         <outlet property="pochakUser" destination="gI1-I5-NSd" id="EE6-b3-PgP"/>
                         <outlet property="postContent" destination="wZB-Xn-bjF" id="KTa-Pe-TAg"/>
                         <outlet property="postImage" destination="9aE-qJ-kQ5" id="XfM-hX-1KM"/>
@@ -383,6 +421,9 @@
                                             <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
                                             <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="postNewCommentBtnTapped:" destination="Lyl-go-KQg" eventType="touchUpInside" id="2Is-aH-lVw"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qMX-go-Y6c">
                                         <rect key="frame" x="83" y="15" width="207.66666666666663" height="33"/>
@@ -466,7 +507,7 @@
             <color red="0.42399999499320984" green="0.45899999141693115" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

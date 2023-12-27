@@ -21,6 +21,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var mainCommentContent: UILabel!
     @IBOutlet weak var taggedUsers: UILabel!
     @IBOutlet weak var pochakUser: UILabel!
+    @IBOutlet weak var moreCommentsBtn: UIButton!
     
     var receivedData: String?
     var tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
@@ -178,9 +179,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         }
         
         // 프로필 이미지
-        url = URL(string: postDataResult.postOwnerProfileImage)
+        var profileUrl = URL(string: postDataResult.postOwnerProfileImage)
+        print(profileUrl)
         DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url!) {
+            if let data = try? Data(contentsOf: profileUrl!) {
                 if let image = UIImage(data: data){
                     DispatchQueue.main.async {
                         self?.profileImageView.image = image
@@ -219,6 +221,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         
         // 댓글 미리보기
+        // 등록된 댓글이 없으면 없다는 내용 띄우고 댓글 더보기 버튼 삭제??
         if(postDataResult.mainComment == nil){
             self.mainCommentHandle.text = nil
             self.mainCommentContent.text = postDataResponse.message
