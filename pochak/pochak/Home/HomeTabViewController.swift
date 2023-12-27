@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeTabViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var imageArray: [HomeDataBody] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,8 @@ class HomeTabViewController: UIViewController {
         // set up collection view
         setupCollectionView()
 
+        setupData()
+        
         // 내비게이션 바에 로고 이미지
         let logoImage = UIImage(named: "logo_full.png")
         let logoImageView = UIImageView(image: logoImage)
@@ -63,7 +67,29 @@ class HomeTabViewController: UIViewController {
         // collection view에 셀 등록
         collectionView.register(
             UINib(nibName: "HomeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCollectionViewCell")
+    }
+    
+    private func setupData(){
+        // 임시로 유저 핸들 지수로
+        HomeDataService.shared.getHomeData("dxxynni") { response in
+            switch response {
+            case .success(let data):
+                self.imageArray = data as! [HomeDataBody]
+                print(self.imageArray)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
+                }
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
         }
+    }
 
 }
 
@@ -73,7 +99,7 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
     // section 당 아이템 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         /* 추후 수정 */
-        return 24
+        return imageArray.count
     }
     
     
@@ -85,7 +111,17 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
         
         /* 추후 수정 필요*/
         // cell.setupData()
-        
+//        cell.imageView.kf.setImage(with: imageArray[indexPath.item].imgUrl)
+        //url = URL(string: imageArray[indexPath.item].imgUrl)
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: URL(string: (self?.imageArray[indexPath.item].imgUrl!)!)!) {
+                if let image = UIImage(data: data){
+                    DispatchQueue.main.async {
+                        cell.imageView.image = image
+                    }
+                }
+            }
+        }
         return cell
     }
     
@@ -96,6 +132,7 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
         guard let postVC = postTabSb.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
             else { return }
         
+        postVC.receivedData = imageArray[indexPath.item].partitionKey!.replacingOccurrences(of: "#", with: "%23")
         self.navigationController?.pushViewController(postVC, animated: true)
     }
     
