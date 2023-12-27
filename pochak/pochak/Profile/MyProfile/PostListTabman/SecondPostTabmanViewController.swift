@@ -10,11 +10,16 @@ import UIKit
 class SecondPostTabmanViewController: UIViewController {
 
     @IBOutlet weak var postCollectionView: UICollectionView!
+    
+    var imageArray : [PostDataModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // MARK: - Collection View 구현
         setupCollectionView()
+        
+        loadImageData()
     }
     
 
@@ -27,13 +32,24 @@ class SecondPostTabmanViewController: UIViewController {
         postCollectionView.register(
             UINib(nibName: "ProfilePostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfilePostCollectionViewCell")
         }
+    
+    private func loadImageData() {
+        // 임시로 사용하는 loginUser
+        let handle = "dxxynni"
+        MyProfilePostDataManager.shared.myProfilePochakedPostDataManager(handle,{resultData in
+            self.imageArray = resultData
+            self.postCollectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
+        })
+    }
+
 
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension SecondPostTabmanViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        24
+        return max(0,(imageArray.count))
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -44,19 +60,22 @@ extension SecondPostTabmanViewController : UICollectionViewDelegate, UICollectio
             return UICollectionViewCell()
         }
         
+        let postData = imageArray[indexPath.item]
+        // indexPath 안에는 섹션에 대한 정보, 섹션에 들어가는 데이터 정보 등이 있다
+        cell.configure(postData)
         return cell
     }
     
     // cell의 위 아래 간격을 정함
-    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt: Int) -> CGFloat {
         return 5
     }
-    
-    // cell 양 옆 간격
+    // 옆 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
     
+    // cell 양 옆 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = CGFloat((collectionView.frame.width - 10) / 3)
