@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PostTabViewController: UIViewController, UISearchResultsUpdating{
     
     @IBOutlet weak var collectionView: UICollectionView!
     var searchController = UISearchController()
     var resultVC = UITableViewController()
+    var imageArray : [PostTabDataModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -27,7 +29,8 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
         
         navigationItem.searchController = searchController
         setupCollectionView()
-
+        
+        setupData()
    // Do any additional setup after loading the view.
     }
     
@@ -47,6 +50,27 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
     
     private func setupData(){ // 서버 연결 시
         //        UserFeedDataManager().getUserFeed(self)
+        PostTabDataService.shared.recommandGet(){
+            response in
+                switch response {
+                case .success(let data):
+                    print("success")
+                    print(data)
+                    self.imageArray = data as! [PostTabDataModel]
+                    print(self.imageArray)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
+                    }
+                case .requestErr(let err):
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                }
+            }
     }
     
     /*
@@ -75,8 +99,7 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
         case 0:
             return 2
         default:
-            return 24
-            
+            return max(0,(imageArray.count)-2)
         }
         
     }
@@ -88,25 +111,32 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCollectionViewCell.identifier, for: indexPath) as? PostCollectionViewCell else{
                 fatalError("셀 타입 캐스팅 실패")
             }
+            // 이미지 설정
+            if(!imageArray.isEmpty){
+                cell.configure(with: imageArray[indexPath.item])
+            }
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCollectionViewCell.identifier, for: indexPath) as? PostCollectionViewCell else{
                 fatalError("셀 타입 캐스팅 실패2")
             }
-            //                let itemIndex = indexPath.item
-            //                if let cellData = self.userPosts{
-            //                    // 데이터가 있는 경우, cell 데이터를 전달
-            //                    cell.setupData(cellData[itemIndex].postImgUrl)
-            //                }
-            // <- 데이터 전달
+            // 이미지 설정            
+            if(!imageArray.isEmpty){
+                cell.configure(with: imageArray[indexPath.item+2])
+            }
+            
             return cell
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("view post btn tapped")
+        var selectedData = imageArray[indexPath.item].postId
+        let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+
         guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
             else { return }
         print(postVC)
+        postVC.receivedData = modifiedString
         self.navigationController?.pushViewController(postVC, animated: true)
         //        let sb = UIStoryboard(name: "PostTab", bundle: nil)
         //        let postVC = sb.instantiateViewController(withIdentifier: "PostVC") as! PostViewController

@@ -17,7 +17,6 @@ class UploadDataService{
         ]
     
         
-        
         let dataRequest = AF.upload(multipartFormData: { multipartFormData in
             // 이미지 데이터를 multipart form data에 추가
             multipartFormData.append(postImage!, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")
