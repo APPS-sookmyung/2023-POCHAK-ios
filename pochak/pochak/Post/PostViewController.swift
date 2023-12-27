@@ -220,6 +220,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 댓글 미리보기
         if(postDataResult.mainComment == nil){
+            self.mainCommentHandle.text = nil
             self.mainCommentContent.text = postDataResponse.message
         }
         else{
