@@ -34,6 +34,10 @@
 		373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815152A89E6D30032066A /* SocialJoinViewController.swift */; };
 		3738151A2A8A09DA0032066A /* MakeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373815192A8A09DA0032066A /* MakeProfileViewController.swift */; };
 		376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F125A2A8B7440005F469B /* SocialLoginViewController.swift */; };
+		37FEC7DB2B3B40D8003B61B1 /* GoogleLoginDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FEC7DA2B3B40D8003B61B1 /* GoogleLoginDataManager.swift */; };
+		37FEC7DD2B3B40E4003B61B1 /* GoogleLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FEC7DC2B3B40E4003B61B1 /* GoogleLoginModel.swift */; };
+		37FEC7E02B3B4559003B61B1 /* JoinDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FEC7DF2B3B4559003B61B1 /* JoinDataManager.swift */; };
+		37FEC7E22B3B4566003B61B1 /* JoinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FEC7E12B3B4566003B61B1 /* JoinDataModel.swift */; };
 		A6D48ED7F8B86CF57C481991 /* Pods_pochak_pochakUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC75B5747D3AC9026B862E11 /* Pods_pochak_pochakUITests.framework */; };
 		AF5AAB97DDEAC75EAEDDCFE4 /* Pods_pochak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65A7656D9D72CC873C98FD4 /* Pods_pochak.framework */; };
 		EA01079A2A59556800A3AE85 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0107952A59556800A3AE85 /* CommentViewController.swift */; };
@@ -125,6 +129,10 @@
 		373815152A89E6D30032066A /* SocialJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialJoinViewController.swift; sourceTree = "<group>"; };
 		373815192A8A09DA0032066A /* MakeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeProfileViewController.swift; sourceTree = "<group>"; };
 		376F125A2A8B7440005F469B /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
+		37FEC7DA2B3B40D8003B61B1 /* GoogleLoginDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleLoginDataManager.swift; path = ../../../../../../GoogleLoginDataManager.swift; sourceTree = "<group>"; };
+		37FEC7DC2B3B40E4003B61B1 /* GoogleLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleLoginModel.swift; path = ../../../../../../GoogleLoginModel.swift; sourceTree = "<group>"; };
+		37FEC7DF2B3B4559003B61B1 /* JoinDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JoinDataManager.swift; path = ../../../../../../JoinDataManager.swift; sourceTree = "<group>"; };
+		37FEC7E12B3B4566003B61B1 /* JoinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JoinDataModel.swift; path = ../../../../../../JoinDataModel.swift; sourceTree = "<group>"; };
 		67EA6B5B881844A22EE2A55B /* Pods-pochak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.debug.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pochakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5440AA571B5DB6291304B2 /* Pods-pochakTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochakTests.debug.xcconfig"; path = "Target Support Files/Pods-pochakTests/Pods-pochakTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -305,11 +313,31 @@
 		373815142A89E6BE0032066A /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				37FEC7DE2B3B453A003B61B1 /* JoinDataManager */,
+				37FEC7D92B3B40B6003B61B1 /* GoogleLoginDataManager */,
 				373815152A89E6D30032066A /* SocialJoinViewController.swift */,
 				373815192A8A09DA0032066A /* MakeProfileViewController.swift */,
 				376F125A2A8B7440005F469B /* SocialLoginViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		37FEC7D92B3B40B6003B61B1 /* GoogleLoginDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				37FEC7DA2B3B40D8003B61B1 /* GoogleLoginDataManager.swift */,
+				37FEC7DC2B3B40E4003B61B1 /* GoogleLoginModel.swift */,
+			);
+			path = GoogleLoginDataManager;
+			sourceTree = "<group>";
+		};
+		37FEC7DE2B3B453A003B61B1 /* JoinDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				37FEC7DF2B3B4559003B61B1 /* JoinDataManager.swift */,
+				37FEC7E12B3B4566003B61B1 /* JoinDataModel.swift */,
+			);
+			path = JoinDataManager;
 			sourceTree = "<group>";
 		};
 		A526D36E9922857B343AC7F0 /* Pods */ = {
@@ -757,11 +785,14 @@
 			files = (
 				EA01079E2A59556800A3AE85 /* PostViewController.swift in Sources */,
 				EA0107AE2A5EC23900A3AE85 /* OtherCollectionViewCell.swift in Sources */,
+				37FEC7E02B3B4559003B61B1 /* JoinDataManager.swift in Sources */,
 				EA9F5CB42B0EF7CC0021951F /* UploadDataService.swift in Sources */,
 				EA9F5CB22B0EF7BB0021951F /* UploadDataModel.swift in Sources */,
+				37FEC7DB2B3B40D8003B61B1 /* GoogleLoginDataManager.swift in Sources */,
 				EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */,
 				EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */,
 				EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */,
+				37FEC7DD2B3B40E4003B61B1 /* GoogleLoginModel.swift in Sources */,
 				08D98C4A2AFEE8D700E9A097 /* LikedUsersDataModel.swift in Sources */,
 				EA0107B32A5ECB8A00A3AE85 /* PostCollectionViewCell.swift in Sources */,
 				EADE01862B383A9700CECD5B /* PostTabDataService.swift in Sources */,
@@ -787,6 +818,7 @@
 				EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */,
 				376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */,
 				EAF918512AA468670037C270 /* APIConstants.swift in Sources */,
+				37FEC7E22B3B4566003B61B1 /* JoinDataModel.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
 				08FD3A392B357E6400574880 /* LikedUsersDataService.swift in Sources */,
 				081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */,
@@ -970,7 +1002,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5JW43Z44U6;
+				DEVELOPMENT_TEAM = UN58VJRXVV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pochak/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한이 필요합니다";
@@ -987,7 +1019,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = site.apps.pochak;
+				PRODUCT_BUNDLE_IDENTIFIER = site.apps.pochak.cyndii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1003,7 +1035,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5JW43Z44U6;
+				DEVELOPMENT_TEAM = UN58VJRXVV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pochak/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 권한이 필요합니다";
@@ -1020,7 +1052,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = site.apps.pochak;
+				PRODUCT_BUNDLE_IDENTIFIER = site.apps.pochak.cyndii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
