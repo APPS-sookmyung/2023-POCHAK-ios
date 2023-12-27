@@ -47,6 +47,11 @@
 		3769D6C42B3C3A1600294CD1 /* FollowerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3769D6C22B3C3A1600294CD1 /* FollowerCollectionViewCell.xib */; };
 		3769D6C72B3C4F0900294CD1 /* FollowingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6C52B3C4F0900294CD1 /* FollowingCollectionViewCell.swift */; };
 		3769D6C82B3C4F0900294CD1 /* FollowingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3769D6C62B3C4F0900294CD1 /* FollowingCollectionViewCell.xib */; };
+		3769D6CE2B3C563A00294CD1 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6CD2B3C563A00294CD1 /* PostListViewController.swift */; };
+		3769D6D02B3C569C00294CD1 /* FirstPostTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6CF2B3C569C00294CD1 /* FirstPostTabmanViewController.swift */; };
+		3769D6D22B3C56F100294CD1 /* SecondPostTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6D12B3C56F100294CD1 /* SecondPostTabmanViewController.swift */; };
+		3769D6D52B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6D32B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift */; };
+		3769D6D62B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */; };
 		376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F125A2A8B7440005F469B /* SocialLoginViewController.swift */; };
 		A6D48ED7F8B86CF57C481991 /* Pods_pochak_pochakUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC75B5747D3AC9026B862E11 /* Pods_pochak_pochakUITests.framework */; };
 		AF5AAB97DDEAC75EAEDDCFE4 /* Pods_pochak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65A7656D9D72CC873C98FD4 /* Pods_pochak.framework */; };
@@ -155,6 +160,11 @@
 		3769D6C22B3C3A1600294CD1 /* FollowerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowerCollectionViewCell.xib; sourceTree = "<group>"; };
 		3769D6C52B3C4F0900294CD1 /* FollowingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingCollectionViewCell.swift; sourceTree = "<group>"; };
 		3769D6C62B3C4F0900294CD1 /* FollowingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowingCollectionViewCell.xib; sourceTree = "<group>"; };
+		3769D6CD2B3C563A00294CD1 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
+		3769D6CF2B3C569C00294CD1 /* FirstPostTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPostTabmanViewController.swift; sourceTree = "<group>"; };
+		3769D6D12B3C56F100294CD1 /* SecondPostTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPostTabmanViewController.swift; sourceTree = "<group>"; };
+		3769D6D32B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePostCollectionViewCell.swift; sourceTree = "<group>"; };
+		3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePostCollectionViewCell.xib; sourceTree = "<group>"; };
 		376F125A2A8B7440005F469B /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		67EA6B5B881844A22EE2A55B /* Pods-pochak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.debug.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pochakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -392,6 +402,8 @@
 				3769D6C22B3C3A1600294CD1 /* FollowerCollectionViewCell.xib */,
 				3769D6C52B3C4F0900294CD1 /* FollowingCollectionViewCell.swift */,
 				3769D6C62B3C4F0900294CD1 /* FollowingCollectionViewCell.xib */,
+				3769D6D32B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift */,
+				3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -399,9 +411,8 @@
 		3769D6C92B3C50D200294CD1 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				3769D6BC2B3C348800294CD1 /* FirstTabmanViewController.swift */,
-				3769D6BE2B3C349D00294CD1 /* SecondTabmanViewController.swift */,
-				3769D6BA2B3C347000294CD1 /* FollowListViewController.swift */,
+				3769D6CC2B3C560200294CD1 /* PostListTabman */,
+				3769D6CB2B3C55E500294CD1 /* FollowListTabman */,
 				3769D6B82B3C345800294CD1 /* ProfileTabViewController.swift */,
 				3769D6C02B3C39EA00294CD1 /* cell */,
 			);
@@ -413,6 +424,26 @@
 			children = (
 			);
 			path = OtherUserProfile;
+			sourceTree = "<group>";
+		};
+		3769D6CB2B3C55E500294CD1 /* FollowListTabman */ = {
+			isa = PBXGroup;
+			children = (
+				3769D6BE2B3C349D00294CD1 /* SecondTabmanViewController.swift */,
+				3769D6BC2B3C348800294CD1 /* FirstTabmanViewController.swift */,
+				3769D6BA2B3C347000294CD1 /* FollowListViewController.swift */,
+			);
+			path = FollowListTabman;
+			sourceTree = "<group>";
+		};
+		3769D6CC2B3C560200294CD1 /* PostListTabman */ = {
+			isa = PBXGroup;
+			children = (
+				3769D6CD2B3C563A00294CD1 /* PostListViewController.swift */,
+				3769D6CF2B3C569C00294CD1 /* FirstPostTabmanViewController.swift */,
+				3769D6D12B3C56F100294CD1 /* SecondPostTabmanViewController.swift */,
+			);
+			path = PostListTabman;
 			sourceTree = "<group>";
 		};
 		A526D36E9922857B343AC7F0 /* Pods */ = {
@@ -742,6 +773,7 @@
 				084AF4C82A5D831100C6454A /* HomeCollectionViewCell.xib in Resources */,
 				089C758C2A51728A003AAB94 /* Pretendard-Medium.ttf in Resources */,
 				089C75902A51728A003AAB94 /* Pretendard-ExtraLight.ttf in Resources */,
+				3769D6D62B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib in Resources */,
 				EABD20662A6CF5CC007543E9 /* TagCollectionViewCell.xib in Resources */,
 				089C758B2A51728A003AAB94 /* Pretendard-SemiBold.ttf in Resources */,
 				089C758E2A51728A003AAB94 /* Pretendard-ExtraBold.ttf in Resources */,
@@ -879,6 +911,7 @@
 				EA9F5CB22B0EF7BB0021951F /* UploadDataModel.swift in Sources */,
 				08FD3A3C2B3AF94A00574880 /* CommentDataModel.swift in Sources */,
 				08FD3A3E2B3AFE7B00574880 /* CommentDataService.swift in Sources */,
+				3769D6CE2B3C563A00294CD1 /* PostListViewController.swift in Sources */,
 				EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */,
 				EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */,
 				EA1289112B3C4F14002EC93E /* SearchDataService.swift in Sources */,
@@ -898,6 +931,7 @@
 				EA1289082B3B2823002EC93E /* AlarmDataModel.swift in Sources */,
 				3738151A2A8A09DA0032066A /* MakeProfileViewController.swift in Sources */,
 				EA17182B2A5912A7009168E6 /* CameraViewController.swift in Sources */,
+				3769D6D52B3C59F900294CD1 /* ProfilePostCollectionViewCell.swift in Sources */,
 				3769D6B62B3C302C00294CD1 /* JoinDataModel.swift in Sources */,
 				084AF4C72A5D831100C6454A /* HomeCollectionViewCell.swift in Sources */,
 				EAFB4B8F2A514B2600E0F2FA /* TabbarController.swift in Sources */,
@@ -919,9 +953,11 @@
 				3769D6B92B3C345800294CD1 /* ProfileTabViewController.swift in Sources */,
 				08FD3A392B357E6400574880 /* LikedUsersDataService.swift in Sources */,
 				081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */,
+				3769D6D02B3C569C00294CD1 /* FirstPostTabmanViewController.swift in Sources */,
 				3769D6BB2B3C347000294CD1 /* FollowListViewController.swift in Sources */,
 				3769D6B42B3C301B00294CD1 /* JoinDataManager.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
+				3769D6D22B3C56F100294CD1 /* SecondPostTabmanViewController.swift in Sources */,
 				EAF918542AA4692E0037C270 /* NetworkResult.swift in Sources */,
 				EA12890C2B3BF1A7002EC93E /* SearchResultViewController.swift in Sources */,
 				EADE01842B383A8B00CECD5B /* PostTabDataModel.swift in Sources */,

@@ -18,9 +18,6 @@ class ProfileTabViewController: TabmanViewController {
     @IBOutlet weak var whiteBackground1: UIView!
     @IBOutlet weak var whiteBackground2: UIView!
     
-    // Tabbar로 넘길 VC 배열 선언
-    private var viewControllers: [UIViewController] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -70,22 +67,6 @@ class ProfileTabViewController: TabmanViewController {
         
         
     }
-    
-    
-    
-    
-    
-    // MARK: - Navigation Bar for follower / following
-    // MARK: - 상단 커스텀 탭바 라이브러리 사용하여 구현
-    /*
-     
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
