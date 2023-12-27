@@ -25,6 +25,8 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
     
     var searchData : [idSearchResponse] = []
     
+    var tagId : [String] = []
+    
     lazy var backButton: UIBarButtonItem = { // 업로드 버튼
         let backBarButtonItem = UIBarButtonItem(image:UIImage(named: "back_btn"), style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
         
@@ -85,16 +87,6 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
         //아이디 태그 collectionview
         setupCollectionView()
         setupTableView()
-        let tag = ["goeun","dayeon"]
-        var taggedUserHandles : [String] = []
-        for taggedUserHandle in tag {
-            print(taggedUserHandle)
-            taggedUserHandles.append(taggedUserHandle)
-        }
-
-        print(taggedUserHandles)
-
-
     }
     
     // Button event
@@ -123,13 +115,13 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
         
         let imageData : Data? = captureImg.image?.jpegData(compressionQuality: 0.5)
         
-        let tag = ["goeun","dayeon"]
+        
         var taggedUserHandles : [String] = []
-        for taggedUserHandle in tag {
+        for taggedUserHandle in tagId {
             taggedUserHandles.append(taggedUserHandle)
         }
 
-        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: tag){
+        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: taggedUserHandles){
             response in
                 switch response {
                 case .success(let data):
@@ -168,9 +160,7 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
         tableView.dataSource = self
         tableView.isHidden = true
 
-        
-        //cell 등록
-        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: "SearchResultTableViewCell") // 셀 등록
+        tableView.register(UINib(nibName: "SearchResultTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchResultTableViewCell")
 
         
     }
@@ -199,17 +189,9 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
                 print(data)
                 
                 self.searchData = data as! [idSearchResponse]
-
-                let urls = self.searchData.map { $0.profileUrl }
-                let names = self.searchData.map { $0.name }
-                let handles = self.searchData.map { $0.userHandle }
-                
-                print("URLs: \(urls)")
-                print("Names: \(names)")
-                print("Handles: \(handles)")
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
+                    self.tableView.reloadData() // tableView를 새로고침하여 이미지 업데이트
                 }
             case .requestErr(let err):
                 print(err)
@@ -262,19 +244,14 @@ extension UploadViewController : UITextViewDelegate{
 extension UploadViewController: UICollectionViewDelegate, UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return self.tagId.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else{
             fatalError("셀 타입 캐스팅 실패2")
         }
-        //                let itemIndex = indexPath.item
-        //                if let cellData = self.userPosts{
-        //                    // 데이터가 있는 경우, cell 데이터를 전달
-        //                    cell.setupData(cellData[itemIndex].postImgUrl)
-        //                }
-        // <- 데이터 전달
+        cell.tagIdLabel.text = self.tagId[indexPath.item]
         return cell
         
     }
@@ -312,32 +289,50 @@ extension UploadViewController: UICollectionViewDelegateFlowLayout {
     // 옆 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
             return CGFloat(12)
-
-
+        
         }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            let totalCellWidth = collectionView.bounds.width - (12 * CGFloat(tagId.count - 1))
+            let cellWidth = totalCellWidth / CGFloat(tagId.count)
+            let inset = max((collectionView.bounds.width - CGFloat(tagId.count) * cellWidth - CGFloat(12 * (tagId.count - 1))) / 2, 0.0)
             
-    // cell 사이즈( 옆 라인을 고려하여 설정 )
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 77, height: 32)
-//    }
+            return UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        }
 }
 
 extension UploadViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchData.count ?? 0
+        return searchData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier, for: indexPath) as? SearchResultTableViewCell else{
-            fatalError("셀 타입 캐스팅 실패2")
-        }
-        //                let itemIndex = indexPath.item
-        //                if let cellData = self.userPosts{
-        //                    // 데이터가 있는 경우, cell 데이터를 전달
-        //                    cell.setupData(cellData[itemIndex].postImgUrl)
-        //                }
-        // <- 데이터 전달
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultTableViewCell", for: indexPath) as! SearchResultTableViewCell
+
+        let urls = self.searchData.map { $0.profileUrl }
+        let handles = self.searchData.map { $0.userHandle }
+        
+        cell.userHandle.text = handles[indexPath.item]
+        cell.configure(with: urls[indexPath.item])
+        cell.deleteBtn.isHidden = true
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 셀을 선택했을 때 수행할 동작을 여기에 추가합니다.
+        // 예를 들어, 선택한 셀의 정보를 가져와서 처리하거나 화면 전환 등을 수행할 수 있습니다.
+
+        let selectedUserData = searchData[indexPath.row] // 선택한 셀의 데이터 가져오기
+        let handles = self.searchData.map { $0.userHandle }
+        // 여기서 원하는 동작을 수행하세요.
+        tagId.append(handles[indexPath.item])
+        // 예시로, 선택한 사용자 정보를 출력하는 방법
+        print("Selected User Handle: \(selectedUserData.userHandle)")
+        print(tagId)
+        
+        // 원하는 작업을 수행한 후에 선택 해제
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.collectionView.reloadData()
+        self.tableView.isHidden = true
+        self.tagSearch.text = ""
     }
 }
