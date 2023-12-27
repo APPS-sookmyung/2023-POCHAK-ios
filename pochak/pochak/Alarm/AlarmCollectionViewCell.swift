@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AlarmCollectionViewCell: UICollectionViewCell {
     static let identifier = "AlarmCollectionViewCell"

@@ -7,21 +7,32 @@
 
 import Foundation
 
-struct IdSearchResponse: Codable {
-    let profileimgURL: String
-    let userHandle: String
-    let name: String
+struct IdSearchData: Codable {
+    let profileimgUrl: ProfileImageURL
+    let userHandle: UserHandleInfo
+    let name: NameInfo
 
     enum CodingKeys: String, CodingKey {
-        case profileimgURL = "profileimg_url"
-        case userHandle = "userHandle"
-        case name = "name"
+        case profileimgUrl = "profileimg_url"
+        case userHandle
+        case name
     }
+}
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        profileimgURL = try container.decodeIfPresent(String.self, forKey: .profileimgURL) ?? ""
-        userHandle = try container.decodeIfPresent(String.self, forKey: .userHandle) ?? ""
-        name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
-    }
+struct ProfileImageURL: Codable {
+    let S: String
+}
+
+struct UserHandleInfo: Codable {
+    let S: String
+}
+
+struct NameInfo: Codable {
+    let S: String
+}
+
+struct idSearchResponse:Codable{
+    let profileUrl: String
+    let name: String
+    let userHandle: String
 }

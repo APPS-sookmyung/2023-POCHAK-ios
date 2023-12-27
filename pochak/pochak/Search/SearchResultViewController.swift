@@ -22,7 +22,7 @@ class SearchResultViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! SearchResultTableViewCell
-        cell.nickname.text = "jisoo"
+        cell.userHandle.text = "jisoo"
         return cell
     }
 }
