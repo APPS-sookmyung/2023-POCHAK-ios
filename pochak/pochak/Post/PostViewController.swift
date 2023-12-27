@@ -179,9 +179,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         }
         
         // 프로필 이미지
-        url = URL(string: postDataResult.postOwnerProfileImage)
+        var profileUrl = URL(string: postDataResult.postOwnerProfileImage)
+        print(profileUrl)
         DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url!) {
+            if let data = try? Data(contentsOf: profileUrl!) {
                 if let image = UIImage(data: data){
                     DispatchQueue.main.async {
                         self?.profileImageView.image = image
@@ -376,7 +377,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
 //        else{
 //            btnLike.isSelected = true
 //        }
-    }    
+    }
 }
 
 
