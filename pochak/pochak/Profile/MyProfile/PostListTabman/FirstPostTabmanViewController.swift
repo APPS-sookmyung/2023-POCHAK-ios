@@ -8,12 +8,19 @@
 import UIKit
 
 class FirstPostTabmanViewController: UIViewController {
+    
     @IBOutlet weak var postCollectionView: UICollectionView!
+    
+    var imageArray : [PostDataModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // MARK: - Collection View 구현
         setupCollectionView()
+        
+        // 이미지 로드
+        loadImageData()
     }
     
 
@@ -26,6 +33,16 @@ class FirstPostTabmanViewController: UIViewController {
         postCollectionView.register(
             UINib(nibName: "ProfilePostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfilePostCollectionViewCell")
         }
+    
+    private func loadImageData() {
+        // 임시로 사용하는 loginUser
+        let handle = "dxxynni"
+        MyProfilePostDataManager.shared.myProfilePostDataManager(handle, {resultData in
+            self.imageArray = resultData
+            self.postCollectionView.reloadData()
+            print(self.imageArray)
+        })
+    }
 
 }
 
