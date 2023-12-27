@@ -16,6 +16,8 @@ class UploadDataService{
             "taggedUserHandles":taggedUserHandles
         ]
         
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU", "Content-type": "application/json"]
+        
         let dataRequest = AF.upload(multipartFormData: { multipartFormData in
             // 이미지 데이터를 multipart form data에 추가
             multipartFormData.append(postImage!, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")

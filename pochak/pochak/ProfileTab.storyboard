@@ -214,10 +214,16 @@
                     <navigationItem key="navigationItem" id="NdN-zO-r3B"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="followerCount" destination="4A4-qH-cYk" id="wgm-i7-mRE"/>
                         <outlet property="followerList" destination="sTB-4q-upk" id="KuI-w4-tqY"/>
+                        <outlet property="followingCount" destination="KT5-NJ-dPk" id="wDi-wi-Ok3"/>
                         <outlet property="followingList" destination="7fD-9l-3zy" id="QmW-MT-8WU"/>
+                        <outlet property="postCount" destination="5Nz-46-9EE" id="6eh-i5-vel"/>
                         <outlet property="profileBackground" destination="2GB-qC-Gq0" id="xQH-i8-nfC"/>
                         <outlet property="profileImage" destination="Sro-VX-bHh" id="Nkv-i7-jGD"/>
+                        <outlet property="userHandle" destination="JfN-RN-YQE" id="mED-to-pV4"/>
+                        <outlet property="userMessage" destination="FR9-sG-gxh" id="r2G-jx-KTE"/>
+                        <outlet property="userName" destination="DjP-Ai-epc" id="gDN-LA-0Ck"/>
                         <outlet property="whiteBackground1" destination="4au-cV-IAw" id="MzN-qB-eG4"/>
                         <outlet property="whiteBackground2" destination="v4H-Ku-RWI" id="ybV-nY-4c0"/>
                     </connections>
@@ -340,6 +346,7 @@
                     <view key="view" contentMode="scaleToFill" id="jIR-FU-jfn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="477"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="v0b-uu-eQ5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
