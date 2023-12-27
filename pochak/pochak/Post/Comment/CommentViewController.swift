@@ -14,14 +14,108 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     
     let textViewPlaceHolder = "이 게시물에 댓글을 달아보세요"
     
+    // postVC에서 넘겨주는 값
+    var postId: String!
+    var postUserHandle: String?
+    
+    private var commentDataResponse: CommentDataResponse?
+    private var commentDataResult: CommentDataResult?
+    private var commentList: [CommentData]?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        CommentDataService.shared.getComments(postId) {(response) in
+            // NetworkResult형 enum으로 분기 처리
+            switch(response){
+            case .success(let commentDataResponse):
+                self.commentDataResponse = commentDataResponse as? CommentDataResponse
+                self.commentDataResult = self.commentDataResponse?.result
+                self.commentList = self.commentDataResult?.comments
+                
+                // 대댓글있는지 다 확인?
+                
+                
+                self.initUI()
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serveErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+        
         /* commentView 초기 설정*/
+//        // commentView의 댓글 입력 창(uitextview) inset 제거
+//        commentTextView.textContainerInset = .zero
+//        commentTextView.textContainer.lineFragmentPadding = 0
+//        // delegate 설정
+//        commentTextView.delegate = self
+//        // 최대 줄 설정
+//        //commentTextView.textContainer.maximumNumberOfLines = 5
+//        // placeholder 설정
+//        commentTextView.text = textViewPlaceHolder
+//        commentTextView.textColor = UIColor(named: "gray03")
+//
+//        /* Keyboard 보여지고 숨겨질 때 발생되는 이벤트 등록 */
+//        NotificationCenter.default.addObserver(  // 키보드 보여질 때
+//            self,
+//            selector: #selector(keyboardWillShow),
+//            name: UIResponder.keyboardWillShowNotification,
+//            object: nil)
+//        NotificationCenter.default.addObserver(  // 키보드 숨겨질 때
+//            self,
+//            selector: #selector(keyboardWillHide),
+//            name: UIResponder.keyboardWillHideNotification,
+//            object: nil)
+//
+//        // tableView의 프로토콜
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none  // cell 간 구분선 스타일
+//
+//        // tableView가 자동으로 셀 컨텐츠 내용 계산해서 높이 맞추도록
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 90
+//
+//        // nib은 CommentTableViewCell << 이 파일임
+//        let commentNib = UINib(nibName: "CommentTableViewCell", bundle: nil)
+//        tableView.register(commentNib, forCellReuseIdentifier: "CommentTableViewCell")  // tableview에 이 cell을 등록
+//
+//        // 테이블뷰에 ReplyTableViewCell 등록
+//        let replyNib = UINib(nibName: "ReplyTableViewCell", bundle: nil)
+//        tableView.register(replyNib, forCellReuseIdentifier: "ReplyTableViewCell")
+//
+//        // 사용자 프로필 사진 크기 반만큼 radius
+//        userProfileImageView.layer.cornerRadius = 17.5
+
+    }
+    
+    private func initUI() {
+        // 사용자 프로필 이미지
+        var url = URL(string: (commentDataResult?.loginProfileImg)!)
+        // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
+        // 이를 방지하기 위해 다른 thread에서 처리함.
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url!) {
+                if let image = UIImage(data: data) {
+                    //UI 변경 작업은 main thread에서 해야함.
+                    DispatchQueue.main.async {
+                        self?.userProfileImageView.image = image
+                    }
+                }
+            }
+        }
+        
         // commentView의 댓글 입력 창(uitextview) inset 제거
         commentTextView.textContainerInset = .zero
         commentTextView.textContainer.lineFragmentPadding = 0
@@ -64,7 +158,9 @@ class CommentViewController: UIViewController {
         
         // 사용자 프로필 사진 크기 반만큼 radius
         userProfileImageView.layer.cornerRadius = 17.5
-
+        
+        // title 내용 설정
+        titleLabel.text = postUserHandle!+" 님의 게시물을 좋아하는 사람"
     }
     
     // 키보드 보여질 때
@@ -135,7 +231,7 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     
     // 한 섹션에 몇 개의 셀을 넣을지
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return commentList?.count ?? 0
     }
     
     // 어떤 셀을 보여줄지
@@ -145,13 +241,19 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
 //            return UITableViewCell()
 //        }
 //        return cell
+        
+        // 댓글에 대댓글이 있으면 한 번에...
+        
+        
         let section = indexPath.section
         
         switch section{
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
                 return UITableViewCell()
-                
+            }
+            if let cellData = self.commentList {
+                cell.setupData(cellData[indexPath.row])
             }
             return cell
         default:
