@@ -25,7 +25,11 @@ class CommentViewController: UIViewController {
     
     private var commentDataResponse: CommentDataResponse?
     private var commentDataResult: CommentDataResult?
-    private var commentList: [CommentData]?
+    private var commentDataList: [CommentData]?
+    private var childCommentDataResponse: ChildCommentDataResponse?
+    private var childCommentDataList: [ChildCommentData]?
+    
+    private var uiCommentList: [UICommentData]?  // 셀에 뿌릴 때 사용할 실제 데이터들
     
     private var postCommentResponse: PostCommentResponse?
     
@@ -83,18 +87,41 @@ class CommentViewController: UIViewController {
     
     // MARK: - Helpers
     private func loadCommentData(){
-        CommentDataService.shared.getComments(postId) {(response) in
+        CommentDataService.shared.getComments(postId) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let commentDataResponse):
                 self.commentDataResponse = commentDataResponse as? CommentDataResponse
                 self.commentDataResult = self.commentDataResponse?.result
-                self.commentList = self.commentDataResult?.comments
-                print(self.commentList)
+                self.commentDataList = self.commentDataResult?.comments
+                print(self.commentDataList)
                 
-                // 대댓글있는지 다 확인?
+//                if(self.commentDataList != nil){
+//                    for data in self.commentDataList!{
+//                        self.uiCommentList?.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true))
+//
+//                        // 자식 댓글이 있는 경우
+//                        if(data.recentComment != nil){
+//                            CommentDataService.shared.getChildComments(self.postId, data.commentSK!){ response in
+//                                switch(response) {
+//                                case .success(let childCommentDataResponse):
+//                                    self.childCommentDataResponse = childCommentDataResponse as? ChildCommentDataResponse
+//                                    self.childCommentDataList = self.childCommentDataResponse?.result
+//                                case .requestErr(let message):
+//                                    print("requestErr", message)
+//                                case .pathErr:
+//                                    print("pathErr")
+//                                case .serverErr:
+//                                    print("serveErr")
+//                                case .networkFail:
+//                                    print("networkFail")
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+                    // 대댓글있는지 다 확인?
                 self.initUI()
-                
                 self.tableView.reloadData()
             case .requestErr(let message):
                 print("requestErr", message)
@@ -168,9 +195,13 @@ class CommentViewController: UIViewController {
         userProfileImageView.layer.cornerRadius = 17.5
         
         // title 내용 설정
-        titleLabel.text = postUserHandle!+" 님의 게시물을 좋아하는 사람"
+        titleLabel.text = postUserHandle!+" 님의 게시물 댓글"
         
         //print(self.CommentInputViewBottomConstraint.constant)
+    }
+    
+    private func getCommentList(_ data: [CommentData]){
+        //data.
     }
     
     // 키보드 보여질 때
@@ -290,7 +321,7 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     
     // 한 섹션에 몇 개의 셀을 넣을지
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentList?.count ?? 0
+        return commentDataList?.count ?? 0
     }
     
     // 어떤 셀을 보여줄지
@@ -311,7 +342,7 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
                 return UITableViewCell()
             }
-            if let cellData = self.commentList {
+            if let cellData = self.commentDataList {
                 cell.setupData(cellData[indexPath.row])
             }
             return cell
