@@ -11,6 +11,8 @@ target 'pochak' do
 
   pod 'Kingfisher', '~> 7.0'
 
+  pod 'Tabman', '~> 2.9'
+
   # Pods for pochak
 
   target 'pochakTests' do
