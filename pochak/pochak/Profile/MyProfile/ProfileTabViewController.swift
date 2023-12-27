@@ -8,6 +8,7 @@
 import Tabman
 import Pageboy
 import UIKit
+import Kingfisher
 
 class ProfileTabViewController: TabmanViewController {
 
@@ -17,6 +18,13 @@ class ProfileTabViewController: TabmanViewController {
     @IBOutlet weak var followingList: UIStackView!
     @IBOutlet weak var whiteBackground1: UIView!
     @IBOutlet weak var whiteBackground2: UIView!
+    
+    @IBOutlet weak var userHandle: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userMessage: UILabel!
+    @IBOutlet weak var postCount: UILabel!
+    @IBOutlet weak var followerCount: UILabel!
+    @IBOutlet weak var followingCount: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +46,35 @@ class ProfileTabViewController: TabmanViewController {
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
+        // API
+        loadProfileData()
         
+    }
+    
+    private func loadProfileData() {
+        // 임시로 사용하는 loginUser
+        let handle = "dxxynni"
+        MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,{resultData in
+            
+            // 프로필 이미지
+            var imageURL = resultData.userProfileImg ?? ""
+            if let url = URL(string: imageURL) {
+                self.profileImage.kf.setImage(with: url) { result in
+                    switch result {
+                    case .success(let value):
+                        print("Image successfully loaded: \(value.image)")
+                    case .failure(let error):
+                        print("Image failed to load with error: \(error.localizedDescription)")
+                    }
+                }
+            }
+            self.userHandle.text = "@" + (resultData.handle ?? "")
+            self.userName.text = resultData.userName
+            self.userMessage.text = resultData.message
+            self.postCount.text = String(resultData.totalPostNum ?? 0)
+            self.followerCount.text = String(resultData.followerCount ?? 0)
+            self.followingCount.text = String(resultData.followingCount ?? 0)
+        })
     }
     
 
