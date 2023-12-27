@@ -11,6 +11,15 @@ class UploadDataService{
     static let shared = UploadDataService()
 
     func upload(postImage:Data?, caption:String, taggedUserHandles:Array<String>,completion: @escaping(NetworkResult<Any>) -> Void){
+        let body : Parameters = [
+            "caption":caption,
+            "taggedUserHandles":taggedUserHandles
+        ]
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
+                                            "Content-type": "application/json"  // multipart/form-data ???
+                                            ]
+    
+        
         let dataRequest = AF.upload(multipartFormData: { multipartFormData in
             // 이미지 데이터를 multipart form data에 추가
             multipartFormData.append(postImage!, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")

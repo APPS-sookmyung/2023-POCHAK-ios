@@ -28,6 +28,9 @@ class SocialJoinViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+        // Check Login State
+//        checkLoginState()
     }
     
     
@@ -78,28 +81,46 @@ class SocialJoinViewController: UIViewController {
                 guard let email = resultData.email else { return }
                 guard let socialType = resultData.socialType else { return }
                 guard let socialId = resultData.id else { return }
+                print(isNewMember)
+                print(accessToken)
                 self.toProfileSettingsPage(isNewMember, accessToken, email, socialType, socialId)
             })
         }
         
     }
+    
+//    private func checkLoginState(){
+//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+//            if error != nil || user != nil{
+//                print("Not Signed in")
+//            }
+//            else{
+//                print("Signed in User")
+//            }
+//            
+//        }
+//    }
     // MARK: - Apple Login
     
     
     // MARK: - profileSettingPage로 전환하기
     private func toProfileSettingsPage(_ isNewMember : Bool, _ accessToken : String,  _ email : String, _ socialType : String, _ socialId : String){
         if isNewMember == true {
+            // 프로필 설정 페이지로 이동
             guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
             makeProfileVC.accessToken = accessToken
             makeProfileVC.email = email
             makeProfileVC.socialType = socialType
             makeProfileVC.socialId = socialId
             self.navigationController?.pushViewController(makeProfileVC, animated: true)
-        }else{
-            guard let homeTabVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController else {return}
-            self.navigationController?.pushViewController(homeTabVC, animated: true)
+        } else {
+            // 홈 탭으로 이동
+            toHomeTabPage()
         }
     }
-
     
+    private func toHomeTabPage(){
+        guard let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabbarVC, animated: false)
+    }
 }
