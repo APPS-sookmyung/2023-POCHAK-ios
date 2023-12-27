@@ -27,4 +27,20 @@ class AlarmCollectionViewCell: UICollectionViewCell {
     private func setupAttribute(){
         img.layer.cornerRadius = 50/2
     }
+    func setupData(){
+        
+    }
+    func configure(with imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            img.kf.setImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    print("Image successfully loaded: \(value.image)")
+                case .failure(let error):
+                    print("Image failed to load with error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+
 }

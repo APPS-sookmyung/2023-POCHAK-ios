@@ -8,9 +8,17 @@
 import UIKit
 
 class MakeProfileViewController: UIViewController {
+    
+    var accessToken: String!
+    var email: String?
+    var socialType: String?
+    var socialId: String?
 
     
     @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var handleTextField: UITextField!
+    @IBOutlet weak var messageTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +43,22 @@ class MakeProfileViewController: UIViewController {
     
     // MARK: - 프로필 설정 완료 시 changeRootViewController
     @objc private func doneBtnTapped(_ sender: Any) {
+        // request : POST
+        JoinDataManager.shared.joinDataManager(accessToken, 
+                                               nameTextField.text!,
+                                               email!,
+                                               handleTextField.text!,
+                                               messageTextField.text!,
+                                               socialId!,
+                                               socialType!,
+                                               profileImg.image,
+                                               {resultData in
+            guard let isNewMember = resultData.isNewMember else { return }
+            print(isNewMember)
+        })
+        
+        
+        // 화면 전환
         guard let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabbarVC, animated: false)
     }
@@ -47,8 +71,6 @@ class MakeProfileViewController: UIViewController {
     4. 프로토콜 채택
      */
     let imagePickerController = UIImagePickerController()
-
-    
     @IBAction func profileBtnTapped(_ sender: Any) {
         self.imagePickerController.delegate = self
         self.imagePickerController.sourceType = .photoLibrary

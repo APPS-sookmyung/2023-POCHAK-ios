@@ -21,7 +21,6 @@ struct LikedUsersDataService{
         // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
         
         
-        
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
         // Request를 보내기 위한 정보
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/like",

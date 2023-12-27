@@ -80,6 +80,14 @@ class UploadViewController: UIViewController {
 
         //아이디 태그 collectionview
         setupCollectionView()
+        let tag = ["goeun","dayeon"]
+        var taggedUserHandles : [String] = []
+        for taggedUserHandle in tag {
+            print(taggedUserHandle)
+            taggedUserHandles.append(taggedUserHandle)
+        }
+
+        print(taggedUserHandles)
 
 
     }
@@ -109,8 +117,14 @@ class UploadViewController: UIViewController {
         let captionText = captionField.text ?? ""
         
         let imageData : Data? = captureImg.image?.jpegData(compressionQuality: 0.5)
+        
+        let tag = ["goeun","dayeon"]
+        var taggedUserHandles : [String] = []
+        for taggedUserHandle in tag {
+            taggedUserHandles.append(taggedUserHandle)
+        }
 
-        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: ["goeun"]){
+        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: tag){
             response in
                 switch response {
                 case .success(let data):
