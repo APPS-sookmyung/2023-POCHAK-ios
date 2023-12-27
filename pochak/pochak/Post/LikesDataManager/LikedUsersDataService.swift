@@ -48,6 +48,8 @@ struct LikedUsersDataService{
     
     func postLikeRequest(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         /* header 있는 자리 */
+        
+        
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/like",
                                      method: .post,
                                      encoding: URLEncoding.default,
