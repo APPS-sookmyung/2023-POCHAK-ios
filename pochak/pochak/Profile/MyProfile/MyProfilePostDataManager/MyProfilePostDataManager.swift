@@ -16,7 +16,7 @@ class MyProfilePostDataManager {
         
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU", "Content-type": "application/json"]
 
-        AF.request(url, 
+        AF.request(url,
                    method: .get,
                    encoding: URLEncoding.default,
                    headers: header)
@@ -54,3 +54,4 @@ class MyProfilePostDataManager {
            }
     }
 }
+
