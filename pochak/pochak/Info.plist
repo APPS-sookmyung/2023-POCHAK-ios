@@ -17,6 +17,11 @@
 	</array>
 	<key>GIDClientID</key>
 	<string>945839932916-6fnaq5ui2e4l9blgmkes438vbtf2rlb8.apps.googleusercontent.com</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Black.ttf</string>
@@ -48,11 +53,5 @@
 			</array>
 		</dict>
 	</dict>
-    <!-- API 통신 위한 키 -->
-    <key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSAllowsArbitraryLoads</key>
-            <true/>
-        </dict>
 </dict>
 </plist>

@@ -75,7 +75,10 @@ class SocialJoinViewController: UIViewController {
             let accessToken = user.accessToken.tokenString
             GoogleLoginDataManager.shared.googleLoginDataManager(accessToken, {resultData in
                 guard let isNewMember = resultData.isNewMember else { return }
-                self.toProfileSettingsPage(isNewMember)
+                guard let email = resultData.email else { return }
+                guard let socialType = resultData.socialType else { return }
+                guard let socialId = resultData.id else { return }
+                self.toProfileSettingsPage(isNewMember, accessToken, email, socialType, socialId)
             })
         }
         
@@ -84,9 +87,13 @@ class SocialJoinViewController: UIViewController {
     
     
     // MARK: - profileSettingPage로 전환하기
-    private func toProfileSettingsPage(_ isNewMember : Bool){
+    private func toProfileSettingsPage(_ isNewMember : Bool, _ accessToken : String,  _ email : String, _ socialType : String, _ socialId : String){
         if isNewMember == true {
             guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
+            makeProfileVC.accessToken = accessToken
+            makeProfileVC.email = email
+            makeProfileVC.socialType = socialType
+            makeProfileVC.socialId = socialId
             self.navigationController?.pushViewController(makeProfileVC, animated: true)
         }else{
             guard let homeTabVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController else {return}
