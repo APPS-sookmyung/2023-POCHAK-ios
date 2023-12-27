@@ -39,6 +39,10 @@
 		3769D6B22B3C300D00294CD1 /* GoogleLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6B12B3C300D00294CD1 /* GoogleLoginModel.swift */; };
 		3769D6B42B3C301B00294CD1 /* JoinDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6B32B3C301B00294CD1 /* JoinDataManager.swift */; };
 		3769D6B62B3C302C00294CD1 /* JoinDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6B52B3C302C00294CD1 /* JoinDataModel.swift */; };
+		3769D6B92B3C345800294CD1 /* ProfileTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6B82B3C345800294CD1 /* ProfileTabViewController.swift */; };
+		3769D6BB2B3C347000294CD1 /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6BA2B3C347000294CD1 /* FollowListViewController.swift */; };
+		3769D6BD2B3C348800294CD1 /* FirstTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6BC2B3C348800294CD1 /* FirstTabmanViewController.swift */; };
+		3769D6BF2B3C349D00294CD1 /* SecondTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3769D6BE2B3C349D00294CD1 /* SecondTabmanViewController.swift */; };
 		376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F125A2A8B7440005F469B /* SocialLoginViewController.swift */; };
 		A6D48ED7F8B86CF57C481991 /* Pods_pochak_pochakUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC75B5747D3AC9026B862E11 /* Pods_pochak_pochakUITests.framework */; };
 		AF5AAB97DDEAC75EAEDDCFE4 /* Pods_pochak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65A7656D9D72CC873C98FD4 /* Pods_pochak.framework */; };
@@ -136,6 +140,10 @@
 		3769D6B12B3C300D00294CD1 /* GoogleLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginModel.swift; sourceTree = "<group>"; };
 		3769D6B32B3C301B00294CD1 /* JoinDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDataManager.swift; sourceTree = "<group>"; };
 		3769D6B52B3C302C00294CD1 /* JoinDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDataModel.swift; sourceTree = "<group>"; };
+		3769D6B82B3C345800294CD1 /* ProfileTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabViewController.swift; sourceTree = "<group>"; };
+		3769D6BA2B3C347000294CD1 /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
+		3769D6BC2B3C348800294CD1 /* FirstTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTabmanViewController.swift; sourceTree = "<group>"; };
+		3769D6BE2B3C349D00294CD1 /* SecondTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabmanViewController.swift; sourceTree = "<group>"; };
 		376F125A2A8B7440005F469B /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		67EA6B5B881844A22EE2A55B /* Pods-pochak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pochak.debug.xcconfig"; path = "Target Support Files/Pods-pochak/Pods-pochak.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pochakTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,6 +362,17 @@
 			path = GoogleLoginDataManager;
 			sourceTree = "<group>";
 		};
+		3769D6B72B3C342900294CD1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3769D6B82B3C345800294CD1 /* ProfileTabViewController.swift */,
+				3769D6BA2B3C347000294CD1 /* FollowListViewController.swift */,
+				3769D6BC2B3C348800294CD1 /* FirstTabmanViewController.swift */,
+				3769D6BE2B3C349D00294CD1 /* SecondTabmanViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		A526D36E9922857B343AC7F0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +463,7 @@
 		EA1B0B592A49D23A00F86FBC /* pochak */ = {
 			isa = PBXGroup;
 			children = (
+				3769D6B72B3C342900294CD1 /* Profile */,
 				EAF918522AA468FF0037C270 /* Network */,
 				373815142A89E6BE0032066A /* Onboarding */,
 				EA2B09882A629EED0005EA8B /* Search */,
@@ -815,6 +835,7 @@
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
 				EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */,
 				3769D6B22B3C300D00294CD1 /* GoogleLoginModel.swift in Sources */,
+				3769D6BF2B3C349D00294CD1 /* SecondTabmanViewController.swift in Sources */,
 				373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */,
 				EA1289082B3B2823002EC93E /* AlarmDataModel.swift in Sources */,
 				3738151A2A8A09DA0032066A /* MakeProfileViewController.swift in Sources */,
@@ -834,9 +855,12 @@
 				EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */,
 				376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */,
 				EAF918512AA468670037C270 /* APIConstants.swift in Sources */,
+				3769D6BD2B3C348800294CD1 /* FirstTabmanViewController.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
+				3769D6B92B3C345800294CD1 /* ProfileTabViewController.swift in Sources */,
 				08FD3A392B357E6400574880 /* LikedUsersDataService.swift in Sources */,
 				081228CA2A699B5A00DFA094 /* LikedPeopleListTableViewCell.swift in Sources */,
+				3769D6BB2B3C347000294CD1 /* FollowListViewController.swift in Sources */,
 				3769D6B42B3C301B00294CD1 /* JoinDataManager.swift in Sources */,
 				EA1B0B5D2A49D23A00F86FBC /* SceneDelegate.swift in Sources */,
 				EAF918542AA4692E0037C270 /* NetworkResult.swift in Sources */,
