@@ -198,7 +198,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g1Z-gd-DZE">
                                                 <rect key="frame" x="25" y="17" width="50" height="50"/>
-                                                <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="GmY-TZ-4VV"/>
                                                     <constraint firstAttribute="height" constant="50" id="ZBW-1f-rpz"/>
