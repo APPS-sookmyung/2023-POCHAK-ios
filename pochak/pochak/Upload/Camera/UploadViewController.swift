@@ -11,7 +11,7 @@ import SwiftUI
 
 
 
-class UploadViewController: UIViewController,UISearchBarDelegate {
+class UploadViewController: UIViewController,UISearchBarDelegate{
     
     let textViewPlaceHolder = "한 줄 캡션 입력하기"
     
@@ -20,6 +20,10 @@ class UploadViewController: UIViewController,UISearchBarDelegate {
     @IBOutlet weak var captureImg: UIImageView!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var searchData : [idSearchResponse] = []
     
     lazy var backButton: UIBarButtonItem = { // 업로드 버튼
         let backBarButtonItem = UIBarButtonItem(image:UIImage(named: "back_btn"), style: .plain, target: self, action: #selector(backbuttonPressed(_:)))
@@ -80,6 +84,7 @@ class UploadViewController: UIViewController,UISearchBarDelegate {
         
         //아이디 태그 collectionview
         setupCollectionView()
+        setupTableView()
         let tag = ["goeun","dayeon"]
         var taggedUserHandles : [String] = []
         for taggedUserHandle in tag {
@@ -157,13 +162,32 @@ class UploadViewController: UIViewController,UISearchBarDelegate {
         
     }
     
+    private func setupTableView(){
+        //delegate 연결
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.isHidden = true
+
+        
+        //cell 등록
+        tableView.register(SearchResultTableViewCell.self, forCellReuseIdentifier: "SearchResultTableViewCell") // 셀 등록
+
+        
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            // 검색 바에 새로 입력된 텍스트 출력
-            print("New Search Text: \(searchText)")
-            sendTextToServer(searchText)
-            // 여기에서 원하는 작업을 수행할 수 있습니다.
-            // 예를 들어, 새로운 텍스트를 기반으로 서버에 검색을 요청하거나 필터링을 할 수 있습니다.
+        // 검색 바에 새로 입력된 텍스트 출력
+        print("New Search Text: \(searchText)")
+        sendTextToServer(searchText)
+        // 여기에서 원하는 작업을 수행할 수 있습니다.
+        // 예를 들어, 새로운 텍스트를 기반으로 서버에 검색을 요청하거나 필터링을 할 수 있습니다.
+    
+        if (!searchText.isEmpty) {
+            tableView.isHidden = false
+        } else {
+            tableView.isHidden = true
         }
+    }
     
     func sendTextToServer(_ searchText: String) {
         // searchText를 사용하여 서버에 요청을 보내는 로직을 작성
@@ -173,6 +197,20 @@ class UploadViewController: UIViewController,UISearchBarDelegate {
             case .success(let data):
                 print("success")
                 print(data)
+                
+                self.searchData = data as! [idSearchResponse]
+
+                let urls = self.searchData.map { $0.profileUrl }
+                let names = self.searchData.map { $0.name }
+                let handles = self.searchData.map { $0.userHandle }
+                
+                print("URLs: \(urls)")
+                print("Names: \(names)")
+                print("Handles: \(handles)")
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
+                }
             case .requestErr(let err):
                 print(err)
             case .pathErr:
@@ -285,3 +323,21 @@ extension UploadViewController: UICollectionViewDelegateFlowLayout {
 //    }
 }
 
+extension UploadViewController: UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchData.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.identifier, for: indexPath) as? SearchResultTableViewCell else{
+            fatalError("셀 타입 캐스팅 실패2")
+        }
+        //                let itemIndex = indexPath.item
+        //                if let cellData = self.userPosts{
+        //                    // 데이터가 있는 경우, cell 데이터를 전달
+        //                    cell.setupData(cellData[itemIndex].postImgUrl)
+        //                }
+        // <- 데이터 전달
+        return cell
+    }
+}
