@@ -11,7 +11,7 @@ import SwiftUI
 
 
 
-class UploadViewController: UIViewController {
+class UploadViewController: UIViewController,UISearchBarDelegate {
     
     let textViewPlaceHolder = "한 줄 캡션 입력하기"
     
@@ -77,7 +77,7 @@ class UploadViewController: UIViewController {
         tagSearch.searchTextField.attributedPlaceholder = attributedString
 
         tagSearch.searchTextField.font = UIFont(name: "Pretendard-medium",size:12)
-
+        
         //아이디 태그 collectionview
         setupCollectionView()
         let tag = ["goeun","dayeon"]
@@ -155,6 +155,34 @@ class UploadViewController: UIViewController {
             nibName: "TagCollectionViewCell",
             bundle: nil),forCellWithReuseIdentifier: TagCollectionViewCell.identifier)
         
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            // 검색 바에 새로 입력된 텍스트 출력
+            print("New Search Text: \(searchText)")
+            sendTextToServer(searchText)
+            // 여기에서 원하는 작업을 수행할 수 있습니다.
+            // 예를 들어, 새로운 텍스트를 기반으로 서버에 검색을 요청하거나 필터링을 할 수 있습니다.
+        }
+    
+    func sendTextToServer(_ searchText: String) {
+        // searchText를 사용하여 서버에 요청을 보내는 로직을 작성
+        // 서버 요청을 보내는 코드 작성
+        SearchDataService.shared.idSearchGet(keyword: searchText){ response in
+            switch response {
+            case .success(let data):
+                print("success")
+                print(data)
+            case .requestErr(let err):
+                print(err)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
     }
 }
 
