@@ -40,6 +40,31 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /* 1번만 해도 되는 초기화들.. */
+        // 크기에 맞게
+        scrollView.updateContentSize()
+        
+        // 네비게이션 바 밑줄 없애기
+        self.navigationController?.navigationBar.standardAppearance.shadowColor = .white  // 스크롤하지 않는 상태
+        self.navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .white  // 스크롤하고 있는 상태
+
+        // back button 커스텀
+        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        self.navigationController?.navigationBar.tintColor = .black
+        
+        // 프로필 사진 동그랗게 -> 크기 반만큼 radius
+        profileImageView.layer.cornerRadius = 25
+        
+        // 좋아요 누른 사람 수 라벨에 대한 제스쳐 등록 -> 액션 연결
+        let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
+        labelHowManyLikes.addGestureRecognizer(howManyLikesLabelGesture)
+        
+        self.followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
+        self.followingBtn.setTitle("팔로우", for: .normal)
+        self.followingBtn.setTitle("팔로잉", for: .selected)
+        followingBtn.layer.cornerRadius = 4.97
+        
         /*postId 전달 - 실시간인기포스트에서 전달하는 postId 입니다
         전달되는 id 없으면 위에서 설정된 id로 될거에요..
         나중에 홈에서도 id 이렇게 전달해서 쓰면 될 것 같습니다 ㅎㅎ */
@@ -53,117 +78,14 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         }
         
         loadPostDetailData()
-        
-        /* 서버 통신 */
-        // PostDataService 구조체에서 shared라는 공용 인스턴스에 접근 -> 싱글턴 패턴
-//        let queue = DispatchQueue.global()
-//        queue.sync{
-//            PostDataService.shared.getPostDetail(tempPostId) { (response) in
-////                print("1 queue")
-//                // NetworkResult형 enum으로 분기 처리
-//                switch(response){
-//                case .success(let postData):
-//                    self.postDataResponse = postData as? PostDataResponse
-//                    self.postDataResult = self.postDataResponse.result
-////                    print(self.postDataResult)
-////                    print(self.postDataResponse)
-//                    self.initUI()
-//                case .requestErr(let message):
-//                    print("requestErr", message)
-//                case .pathErr:
-//                    print("pathErr")
-//                case .serverErr:
-//                    print("serveErr")
-//                case .networkFail:
-//                    print("networkFail")
-//                }
-//            }
-//
-//        LikedUsersDataService.shared.getLikedUsers(tempPostId) {(response) in
-//            // NetworkResult형 enum으로 분기 처리
-//            switch(response){
-//            case .success(let likedUsersData):
-//                self.likeUsersDataResponse = likedUsersData as? LikedUsersDataResponse
-//                self.likedUsers = self.likeUsersDataResponse.result.likedUsers
-//            case .requestErr(let message):
-//                print("requestErr", message)
-//            case .pathErr:
-//                print("pathErr")
-//            case .serverErr:
-//                print("serveErr")
-//            case .networkFail:
-//                print("networkFail")
-//            }
-//        }
-//        }
-        
-//        queue.sync{
-//            print("2 queue")
-//            // 크키에 맞게
-//            scrollView.updateContentSize()
-//
-//            // 네비게이션 바 밑줄 없애기
-//            self.navigationController?.navigationBar.standardAppearance.shadowColor = .white  // 스크롤하지 않는 상태
-//            self.navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .white  // 스크롤하고 있는 상태
-//
-//            // 내비게이션 바 타이틀 세팅
-//            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]
-//            self.navigationItem.title = postDataResult.postOwnerHandle+" 님의 게시물"
-//
-//            // back button 커스텀
-//            self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
-//            self.navigationController?.navigationBar.tintColor = .black
-//
-//            // 태그된 사용자, 포착한 사용자
-//            self.taggedUsers.text = ""
-//            for handle in postDataResult.taggedUserHandles {
-//                if(handle == postDataResult.taggedUserHandles.last){
-//                    self.taggedUsers.text! += handle + " 님"
-//                }
-//                else{
-//                    self.taggedUsers.text! += handle + " 님 • "
-//                }
-//            }
-//            self.pochakUser.text = postDataResult.postOwnerHandle + " 님이 포착"
-//
-//            self.postOwnerHandle.text = postDataResult.postOwnerHandle
-//            self.postContent.text = postDataResult.caption
-//
-//            // 댓글 미리보기
-//            if(postDataResult.mainComment == nil){
-//                self.mainCommentContent.text = postDataResponse.message
-//            }
-//            else{
-//                self.mainCommentHandle.text = postDataResult.mainComment!.userHandle
-//                self.mainCommentContent.text = postDataResult.mainComment!.content
-//            }
-//
-//            // 프로필 사진 동그랗게 -> 크기 반만큼 radius
-//            profileImageView.layer.cornerRadius = 25
-//
-//            // 좋아요 누른 사람 수 라벨에 대한 제스쳐 등록 -> 액션 연결
-//            let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
-//            labelHowManyLikes.addGestureRecognizer(howManyLikesLabelGesture)
-//            self.labelHowManyLikes.text = "\(postDataResult.numOfHeart)명"
-//
-//            // 팔로잉 버튼
-//            //self.isFollowing = postDataResult.isFollow
-//            self.followingBtn.isSelected = postDataResult.isFollow
-//            self.followingBtn.backgroundColor = postDataResult.isFollow ?
-//            self.isFollowingColor : self.isNotFollowingColor
-//            self.followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
-//            self.followingBtn.setTitle("팔로우", for: .normal)
-//            self.followingBtn.setTitle("팔로잉", for: .selected)
-//            followingBtn.layer.cornerRadius = 4.97
-//        }
     }
     
     private func initUI(){
         // 크키에 맞게
-        scrollView.updateContentSize()
+//        scrollView.updateContentSize()
         
         // 포스트 이미지
-        var url = URL(string: postDataResult.postImageUrl)
+        let url = URL(string: postDataResult.postImageUrl)
         // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
         // 이를 방지하기 위해 다른 thread에서 처리함.
         DispatchQueue.global().async { [weak self] in
@@ -178,8 +100,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         }
         
         // 프로필 이미지
-        var profileUrl = URL(string: postDataResult.postOwnerProfileImage)
-        print(profileUrl)
+        let profileUrl = URL(string: postDataResult.postOwnerProfileImage)
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: profileUrl!) {
                 if let image = UIImage(data: data){
@@ -190,17 +111,9 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             }
         }
         
-        // 네비게이션 바 밑줄 없애기
-        self.navigationController?.navigationBar.standardAppearance.shadowColor = .white  // 스크롤하지 않는 상태
-        self.navigationController?.navigationBar.scrollEdgeAppearance?.shadowColor = .white  // 스크롤하고 있는 상태
-        
         // 내비게이션 바 타이틀 세팅
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]
         self.navigationItem.title = postDataResult.postOwnerHandle+" 님의 게시물"
-        
-        // back button 커스텀
-        self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        self.navigationController?.navigationBar.tintColor = .black
         
         // 태그된 사용자, 포착한 사용자
         self.taggedUsers.text = ""
@@ -230,9 +143,6 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             self.mainCommentContent.text = postDataResult.mainComment!.content
         }
         
-        // 프로필 사진 동그랗게 -> 크기 반만큼 radius
-        profileImageView.layer.cornerRadius = 25
-        
         // 좋아요 버튼 (내가 눌렀는지 안했는지)
         self.btnLike.isSelected = postDataResult.isLike
         print("isLike: ")
@@ -240,33 +150,23 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         print("like button status: ")
         print(self.btnLike.isSelected)
         
-        // 좋아요 누른 사람 수 라벨에 대한 제스쳐 등록 -> 액션 연결
-        let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
-        labelHowManyLikes.addGestureRecognizer(howManyLikesLabelGesture)
+        // 좋아요 누른 사람 수
         self.labelHowManyLikes.text = "\(postDataResult.numOfHeart)명"
         
         // 팔로잉 버튼
         //self.isFollowing = postDataResult.isFollow
-        print("following status: " + String(postDataResult.isFollow))
         self.followingBtn.isSelected = postDataResult.isFollow
         self.followingBtn.backgroundColor = postDataResult.isFollow ? self.isFollowingColor : self.isNotFollowingColor
-        self.followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
-        self.followingBtn.setTitle("팔로우", for: .normal)
-        self.followingBtn.setTitle("팔로잉", for: .selected)
-        followingBtn.layer.cornerRadius = 4.97
     }
     
     func loadPostDetailData(){
         PostDataService.shared.getPostDetail(tempPostId) { (response) in
-//                print("1 queue")
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let postData):
                 self.postDataResponse = postData as? PostDataResponse
                 self.postDataResult = self.postDataResponse.result
                 self.postOwnerHandle = self.postDataResult.postOwnerHandle
-//                    print(self.postDataResult)
-//                    print(self.postDataResponse)
                 self.initUI()
             case .requestErr(let message):
                 print("requestErr", message)
@@ -292,6 +192,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                     alert.addAction(action)
                     self.present(alert, animated: true)
                 }
+                // 바뀐 데이터 반영 위해 다시 포스트 상세 데이터 로드
                 self.loadPostDetailData()
             case .requestErr(let message):
                 print("requestErr", message)
@@ -303,17 +204,6 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                 print("networkFail")
             }
         }
-        
-//        // 언팔로우하기
-//        if followingBtn.isSelected {
-//            followingBtn.isSelected = false
-//            followingBtn.backgroundColor = isNotFollowingColor
-//        }
-//        // 팔로우하기
-//        else{
-//            followingBtn.isSelected = true
-//            followingBtn.backgroundColor = isFollowingColor
-//        }
     }
     
     @objc func showPeopleWhoLiked(sender: UITapGestureRecognizer){
@@ -390,16 +280,6 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                 print("networkFail")
             }
         }
-//        loadPostDetailData()
-        
-//        // 좋아요 취소
-//        if btnLike.isSelected {
-//            btnLike.isSelected = false
-//        }
-//        // 좋아요 하기
-//        else{
-//            btnLike.isSelected = true
-//        }
     }
 }
 
