@@ -15,7 +15,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var followingBtn: UIButton!
     @IBOutlet weak var labelHowManyLikes: UILabel!
     @IBOutlet weak var postImage: UIImageView!
-    @IBOutlet weak var postOwnerHandle: UILabel!
+    @IBOutlet weak var postOwnerHandleLabel: UILabel!
     @IBOutlet weak var postContent: UILabel!
     @IBOutlet weak var mainCommentHandle: UILabel!
     @IBOutlet weak var mainCommentContent: UILabel!
@@ -25,18 +25,17 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     
     var receivedData: String?
     var tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    var postOwnerHandle: String = ""  // 나중에 여기저기에서 사용할 수 있도록.. 미리 게시자 아이디 저장
     
-    //var postOwner: String = ""
-    //private var isFollowing: Bool = false  // 임시로 초깃값은 false -> 나중에 변경
     private var isFollowingColor: UIColor = UIColor(named: "gray03") ?? UIColor(hexCode: "FFB83A")
     private var isNotFollowingColor: UIColor = UIColor(named: "yellow00") ?? UIColor(hexCode: "C6CDD2")
     
     private var postDataResponse: PostDataResponse!
     private var postDataResult: PostDataResponseResult!
     
-//    private var likeUsersDataResponse: LikedUsersDataResponse!
-
     private var likePostResponse: LikePostDataResponse!
+    
+    private var followPostResponse: FollowDataResponse!
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -216,7 +215,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         self.pochakUser.text = postDataResult.postOwnerHandle + " 님이 포착"
         
         // 포스트 내용
-        self.postOwnerHandle.text = postDataResult.postOwnerHandle
+        self.postOwnerHandleLabel.text = postDataResult.postOwnerHandle
         self.postContent.text = postDataResult.caption
         
         
@@ -248,6 +247,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 팔로잉 버튼
         //self.isFollowing = postDataResult.isFollow
+        print("following status: " + String(postDataResult.isFollow))
         self.followingBtn.isSelected = postDataResult.isFollow
         self.followingBtn.backgroundColor = postDataResult.isFollow ? self.isFollowingColor : self.isNotFollowingColor
         self.followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
@@ -264,6 +264,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .success(let postData):
                 self.postDataResponse = postData as? PostDataResponse
                 self.postDataResult = self.postDataResponse.result
+                self.postOwnerHandle = self.postDataResult.postOwnerHandle
 //                    print(self.postDataResult)
 //                    print(self.postDataResponse)
                 self.initUI()
@@ -281,16 +282,38 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     
     // MARK: - Actions
     @IBAction func followinBtnTapped(_ sender: Any) {
-        // 언팔로우하기
-        if followingBtn.isSelected {
-            followingBtn.isSelected = false
-            followingBtn.backgroundColor = isNotFollowingColor
+        FollowDataService.shared.postFollow(postOwnerHandle) { response in
+            switch(response) {
+            case .success(let followData):
+                self.followPostResponse = followData as? FollowDataResponse
+                if(!self.followPostResponse.isSuccess){
+                    let alert = UIAlertController(title: "요청에 실패하였습니다.", message: "다시 시도해주세요.", preferredStyle: UIAlertController.Style.alert)
+                    let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+                    alert.addAction(action)
+                    self.present(alert, animated: true)
+                }
+                self.loadPostDetailData()
+            case .requestErr(let message):
+                print("requestErr", message)
+            case .pathErr:
+                print("pathErr")
+            case .serverErr:
+                print("serveErr")
+            case .networkFail:
+                print("networkFail")
+            }
         }
-        // 팔로우하기
-        else{
-            followingBtn.isSelected = true
-            followingBtn.backgroundColor = isFollowingColor
-        }
+        
+//        // 언팔로우하기
+//        if followingBtn.isSelected {
+//            followingBtn.isSelected = false
+//            followingBtn.backgroundColor = isNotFollowingColor
+//        }
+//        // 팔로우하기
+//        else{
+//            followingBtn.isSelected = true
+//            followingBtn.backgroundColor = isFollowingColor
+//        }
     }
     
     @objc func showPeopleWhoLiked(sender: UITapGestureRecognizer){
