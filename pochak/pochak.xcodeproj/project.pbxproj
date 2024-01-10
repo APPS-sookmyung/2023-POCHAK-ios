@@ -541,20 +541,12 @@
 		EA1718272A591271009168E6 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
-				EA817AB42B3C979D00E741E4 /* cell */,
-				EA9F5CB02B0EF7930021951F /* UploadDataManager */,
-				EA1718282A591282009168E6 /* Camera */,
-			);
-			path = Upload;
-			sourceTree = "<group>";
-		};
-		EA1718282A591282009168E6 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
 				EA1718292A5912A7009168E6 /* CameraViewController.swift */,
 				EA17182A2A5912A7009168E6 /* UploadViewController.swift */,
+				EA817AB42B3C979D00E741E4 /* cell */,
+				EA9F5CB02B0EF7930021951F /* UploadDataManager */,
 			);
-			path = Camera;
+			path = Upload;
 			sourceTree = "<group>";
 		};
 		EA17182D2A592A08009168E6 /* Alarm */ = {
