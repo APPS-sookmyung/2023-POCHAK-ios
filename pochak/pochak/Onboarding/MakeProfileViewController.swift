@@ -57,7 +57,6 @@ class MakeProfileViewController: UIViewController {
         
         UserDefaultsManager.setData(value: handle, key: .handle)
         UserDefaultsManager.setData(value: message, key: .message)
-        UserDefaultsManager.setData(value: profileImage, key: .profileImage)
         
         // request : POST
         JoinDataManager.shared.joinDataManager(accessToken, 
@@ -70,7 +69,9 @@ class MakeProfileViewController: UIViewController {
                                                profileImage,
                                                {resultData in
             guard let isNewMember = resultData.isNewMember else { return }
-            print(isNewMember) 
+            // 토큰 저장
+            TokenUtils().create("url주소", account: "accessToken", value: self.accessToken)
+            print(isNewMember)
         })
         
         
