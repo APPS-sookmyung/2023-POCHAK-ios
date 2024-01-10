@@ -241,6 +241,8 @@ extension UploadViewController : UITextViewDelegate{
     }
 }
 
+// MARK: - 선택 태그 collectionview
+
 extension UploadViewController: UICollectionViewDelegate, UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -310,6 +312,7 @@ extension UploadViewController: UICollectionViewDelegateFlowLayout {
         }
 }
 
+// MARK: - 태그 tableview
 extension UploadViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchData.count
