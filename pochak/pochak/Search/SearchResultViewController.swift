@@ -12,11 +12,11 @@ import SwiftUI
 
 class SearchResultViewController: UIViewController,UISearchResultsUpdating {
     
-    var tableView: UITableView = {
-            let tableView = UITableView()
-            tableView.translatesAutoresizingMaskIntoConstraints = false
-            return tableView
-        }()
+//    var tableView: UITableView = {
+//            let tableView = UITableView()
+//            tableView.translatesAutoresizingMaskIntoConstraints = false
+//            return tableView
+//        }()
     
 //    var leftLabel: UILabel = {
 //            let label = UILabel()
@@ -57,33 +57,33 @@ class SearchResultViewController: UIViewController,UISearchResultsUpdating {
     
     private func setupTableView(){
         
-        view.addSubview(leftLabel)
-        view.addSubview(rightLabel)
-        view.addSubview(tableView)
+//        view.addSubview(leftLabel)
+//        view.addSubview(rightLabel)
+//        view.addSubview(tableView)
                
         // Constraints 설정 (예시)
         
-        leftLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        leftLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        
-        rightLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        rightLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-                
-        tableView.topAnchor.constraint(equalTo: leftLabel.bottomAnchor, constant: 20).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        leftLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+//        leftLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+//        
+//        rightLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+//        rightLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+//                
+//        tableView.topAnchor.constraint(equalTo: leftLabel.bottomAnchor, constant: 20).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
        
         
         //delegate 연결
         
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        // TableView에 사용될 셀 등록
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchResultTableViewCell")
-        
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        
+//        // TableView에 사용될 셀 등록
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SearchResultTableViewCell")
+//        
     }
     
     private func setUpSearchController() {
@@ -124,7 +124,7 @@ class SearchResultViewController: UIViewController,UISearchResultsUpdating {
         // searchText를 사용하여 검색을 수행하고 결과를 searchResults 배열에 저장
         // 이후, 테이블 뷰를 업데이트하여 새로운 결과를 표시
         searchResults = performSearch(with: searchText)
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     // 검색을 수행하는 로직을 처리하는 메서드
