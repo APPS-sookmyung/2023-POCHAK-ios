@@ -257,22 +257,31 @@ extension UploadViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("view post btn tapped")
-
+        
+        // indexPath.item에 해당하는 값 가져오기
+        guard indexPath.item < tagId.count else {
+            return // 유효하지 않은 인덱스이면 종료
+        }
+        
+        let itemToRemove = tagId[indexPath.item]
+        
         let sheet = UIAlertController(title:"알림",message: "태그를 삭제하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
 
         sheet.addAction(UIAlertAction(title: "네", style: .destructive, handler: { _ in
-            if let navController = self.navigationController {
-                navController.popViewController(animated: true)
-            }
+            // 해당 인덱스의 값을 제거
+            self.tagId.remove(at: indexPath.item)
             
+            // collectionView 다시 로드하거나 업데이트
+            collectionView.reloadData()
+            print(self.tagId)
         }))
                 
         sheet.addAction(UIAlertAction(title: "아니요", style: .cancel, handler: nil))
         
-        
-        self.present(sheet,animated: true,completion: nil)
-        
-        }
+        self.present(sheet, animated: true, completion: nil)
+    }
+
+
 
 }
 
@@ -323,16 +332,24 @@ extension UploadViewController: UITableViewDelegate,UITableViewDataSource{
 
         let selectedUserData = searchData[indexPath.row] // 선택한 셀의 데이터 가져오기
         let handles = self.searchData.map { $0.userHandle }
-        // 여기서 원하는 동작을 수행하세요.
-        tagId.append(handles[indexPath.item])
-        // 예시로, 선택한 사용자 정보를 출력하는 방법
-        print("Selected User Handle: \(selectedUserData.userHandle)")
-        print(tagId)
         
+        // 선택한 핸들 가져오기
+        let selectedHandle = handles[indexPath.row]
+
+        // 중복을 체크하여 중복되지 않는 경우에만 추가
+        if !tagId.contains(selectedHandle) {
+            tagId.append(selectedHandle)
+            print("Selected User Handle: \(selectedUserData.userHandle)")
+            print(tagId)
+            self.collectionView.reloadData()
+        } else {
+            print("이미 추가된 핸들입니다.")
+        }
+
         // 원하는 작업을 수행한 후에 선택 해제
         tableView.deselectRow(at: indexPath, animated: true)
-        self.collectionView.reloadData()
         self.tableView.isHidden = true
         self.tagSearch.text = ""
     }
+
 }
