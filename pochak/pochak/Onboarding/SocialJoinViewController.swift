@@ -30,7 +30,7 @@ class SocialJoinViewController: UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
 //         Check Login State
-        checkLoginState()
+//        checkLoginState()
     }
     
     
@@ -82,11 +82,20 @@ class SocialJoinViewController: UIViewController {
                 guard let email = resultData.email else { return }
                 guard let socialType = resultData.socialType else { return }
                 guard let socialId = resultData.id else { return }
+                
+                // 사용자 기본 데이터 저장
                 UserDefaultsManager.setData(value: socialId, key: .socialId)
                 UserDefaultsManager.setData(value: name, key: .name)
                 UserDefaultsManager.setData(value: email, key: .email)
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
+                
+                // 토큰 저장
+                TokenUtils().create("url주소", account: "accessToken", value: accessToken)
+               
+                print(socialId)
+                print(isNewMember)
+                print(email)
                 self.toProfileSettingsPage(isNewMember, accessToken, email, socialType, socialId)
             })
         }
