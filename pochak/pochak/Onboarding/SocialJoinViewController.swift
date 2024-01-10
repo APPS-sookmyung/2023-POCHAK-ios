@@ -89,9 +89,6 @@ class SocialJoinViewController: UIViewController {
                 UserDefaultsManager.setData(value: email, key: .email)
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
-                
-                // 토큰 저장
-                TokenUtils().create("url주소", account: "accessToken", value: accessToken)
                
                 print(socialId)
                 print(isNewMember)

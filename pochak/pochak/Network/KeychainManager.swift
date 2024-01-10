@@ -71,5 +71,6 @@ class TokenUtils {
         
         let status = SecItemDelete(keyChainQuery)
         assert(status == noErr, "failed to delete the value, status code = \(status)")
+        print("토큰 삭제!")
     }
 }
