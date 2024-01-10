@@ -26,7 +26,9 @@ struct JoinDataManager {
             "email" : email,
             "handle" : handle,
             "message" : message,
-            "socialId" : socialId
+            "socialId" : socialId,
+            "profileImage" : profileImage,
+            "socialType" : socialType
         ]
         print(requestBody)
         
