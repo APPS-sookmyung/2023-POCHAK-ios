@@ -60,6 +60,15 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let howManyLikesLabelGesture = UITapGestureRecognizer(target: self, action: #selector(showPeopleWhoLiked))
         labelHowManyLikes.addGestureRecognizer(howManyLikesLabelGesture)
         
+        // 다른 프로필로 이동하는 제스쳐 등록 -> 액션 연결
+        // 프로필 사진, 유저 핸들 모두에 등록
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(setGestureRecognizer())
+        postOwnerHandleLabel.isUserInteractionEnabled = true
+        postOwnerHandleLabel.addGestureRecognizer(setGestureRecognizer())
+        pochakUser.isUserInteractionEnabled = true
+        pochakUser.addGestureRecognizer(setGestureRecognizer())
+        
         self.followingBtn.setTitleColor(UIColor.white, for: [.normal, .selected])
         self.followingBtn.setTitle("팔로우", for: .normal)
         self.followingBtn.setTitle("팔로잉", for: .selected)
@@ -79,7 +88,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         loadPostDetailData()
     }
-    
+    // MARK: - Helpers
     private func initUI(){
         // 크키에 맞게
 //        scrollView.updateContentSize()
@@ -178,6 +187,12 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                 print("networkFail")
             }
         }
+    }
+    
+    func setGestureRecognizer() -> UITapGestureRecognizer {
+        let moveToOthersProfile = UITapGestureRecognizer(target: self, action: #selector(moveToOthersProfile))
+        
+        return moveToOthersProfile
     }
     
     // MARK: - Actions
@@ -280,6 +295,22 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                 print("networkFail")
             }
         }
+    }
+    
+    // 프로필 이미지나 아이디 클릭 시 해당 사용자 프로필로 이동
+    @objc func moveToOthersProfile(sender: UITapGestureRecognizer){
+        print("move to other's profile")
+        let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+        let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
+        
+        self.navigationController?.pushViewController(profileTabVC, animated: true)
+        //commentVC.postId = tempPostId
+        //commentVC.postUserHandle = postDataResult.postOwnerHandle
+        
+        
+        //postVC.receivedData = imageArray[indexPath.item].partitionKey!.replacingOccurrences(of: "#", with: "%23")
+        
+        //present(profileTabVC, animated: true)
     }
 }
 
