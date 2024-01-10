@@ -134,6 +134,9 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
                 self.taggedUsers.text! += handle + " 님 • "
             }
         }
+        // 태그된 사용자에 프로필 이동 제스쳐 등록하기
+    //        let arr = taggedUsers.text?.split(separator: " • ")  // T를 기준으로 자름, ["2023-12-27", "19:03:32.701"]
+    //        print(arr)
         self.pochakUser.text = postDataResult.postOwnerHandle + " 님이 포착"
         
         // 포스트 내용

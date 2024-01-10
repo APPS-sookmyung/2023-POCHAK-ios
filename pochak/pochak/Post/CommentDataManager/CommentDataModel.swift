@@ -55,7 +55,7 @@ struct PostCommentResponse: Codable {
     let message: String?
 }
 
-// MARK: - UI에 보여주기 위해 쓸 데이터 모델.. 이게 맞나
+// MARK: - UI에 보여주기 위해 쓸 데이터 모델
 struct UICommentData {
     let userProfileImg: String  // 댓글을 작성한 유저의 프로필 이미지
     let userHandle: String  // 댓글을 작성한 유저의 핸들
@@ -63,4 +63,5 @@ struct UICommentData {
     let uploadedTime: String  //LocalDateTime?  // 댓글 작성 시간
     let content: String  // 내용
     let isParent: Bool
+    let hasChild: Bool  // 자식 댓글이 있는지
 }
