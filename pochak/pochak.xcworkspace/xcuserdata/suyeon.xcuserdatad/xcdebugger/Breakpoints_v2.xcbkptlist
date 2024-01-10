@@ -3,4 +3,102 @@
    uuid = "6BB0DDDD-D3CA-4353-A361-FD9A4C56C7B6"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EDFDC49C-F8F5-4C39-8046-34F846FF4A2E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/CommentDataManager/CommentDataService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "getChildComments(_:_:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EDFDC49C-F8F5-4C39-8046-34F846FF4A2E - c848a962783b3551"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in pochak.CommentDataService.getChildComments(_: Swift.String, _: Swift.String, completion: (pochak.NetworkResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/CommentDataManager/CommentDataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "484">
+               </Location>
+               <Location
+                  uuid = "EDFDC49C-F8F5-4C39-8046-34F846FF4A2E - c848a962783b3572"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in pochak.CommentDataService.getChildComments(_: Swift.String, _: Swift.String, completion: (pochak.NetworkResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/CommentDataManager/CommentDataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "408">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92FF1FA4-7E7C-419F-B072-391D35434EB3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/CommentDataManager/CommentDataService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "getChildComments(_:_:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "92FF1FA4-7E7C-419F-B072-391D35434EB3 - ba111b23ca0a4c39"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pochak.CommentDataService.getChildComments(_: Swift.String, _: Swift.String, completion: (pochak.NetworkResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/CommentDataManager/CommentDataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "396">
+               </Location>
+               <Location
+                  uuid = "92FF1FA4-7E7C-419F-B072-391D35434EB3 - ba111b23ca0a4c39"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pochak.CommentDataService.getChildComments(_: Swift.String, _: Swift.String, completion: (pochak.NetworkResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/CommentDataManager/CommentDataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "400">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

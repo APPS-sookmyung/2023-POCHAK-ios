@@ -48,27 +48,39 @@ struct CommentDataService {
     // 대댓글 조회
     func getChildComments(_ postId: String, _ commentId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
-                                            "Content-type": "application/json"  // multipart/form-data ???
-                                            ]
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
+                                            "Content-type": "application/json"
+                                    ]
+        print("-get child comments-")
+        
+        let semaphore = DispatchSemaphore(value: 0)
         
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/"+commentId+"/comment",
                                     method: .get,
                                     encoding: URLEncoding.default,
                                     headers: header)
-        
+        print("dataRequest:")
+        print(dataRequest)
+        print("dataReqeust.responseData:")
+        print(dataRequest.response)
         dataRequest.responseData { dataResponse in
+            print("responseData")
             switch dataResponse.result{
             case .success:
                 // 성공 시 통신 자체의 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
                 let networkResult = self.judgeStatus(by: statusCode, value, dataType: "ChildCommentData")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
+                print("get child comment, status code")
+                print(statusCode)
                 completion(networkResult)
             case .failure:
+                print("service fail")
                 completion(.networkFail)
             }
+            semaphore.signal()
         }
+        semaphore.wait()
     }
     
     // 댓글 등록
@@ -93,6 +105,7 @@ struct CommentDataService {
                 let networkResult = self.judgeStatus(by: statusCode, value, dataType: "PostCommentResponse")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
                 completion(networkResult)
             case .failure:
+
                 completion(.networkFail)
             }
         }
@@ -134,5 +147,10 @@ struct CommentDataService {
             }
             return .pathErr
         }
+    }
+    
+    // 댓글, 대댓글 데이터를 UICommentData 데이터 형식으로 변경하기
+    private func changeToUICommentData(){
+        
     }
 }
