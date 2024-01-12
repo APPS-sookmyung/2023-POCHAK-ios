@@ -11,10 +11,10 @@ class MakeProfileViewController: UIViewController {
     
     var accessToken: String!
     
-    let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "socialType not found"
-    let email = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "socialType not found"
-    let socialType = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "socialType not found"
-    let socialId = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "socialId not found"
+    let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
+    let email = UserDefaultsManager.getData(type: String.self, forKey: .email) ?? "email not found"
+    let socialType = UserDefaultsManager.getData(type: String.self, forKey: .socialType) ?? "socialType not found"
+    let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
 
 
     
@@ -69,8 +69,6 @@ class MakeProfileViewController: UIViewController {
                                                profileImage,
                                                {resultData in
             guard let isNewMember = resultData.isNewMember else { return }
-            // 토큰 저장
-            TokenUtils().create("url주소", account: "accessToken", value: self.accessToken)
             print(isNewMember)
         })
         

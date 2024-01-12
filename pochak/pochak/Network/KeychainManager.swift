@@ -7,70 +7,121 @@
 
 import Foundation
 
-class TokenUtils {
+enum KeychainError: Error {
+    case itemNotFound
+    case duplicateItem
+    case invalidItemFormat
+    case unknown(OSStatus)
+}
+
+class KeychainManager {
+    static let service = Bundle.main.bundleIdentifier
     
-    // TokenUtils.swift
-    // import Security, import Alamofire
+    // MARK: - Save
     
-    // Create
-    // service 파라미터는 url주소를 의미
-    func create(_ service: String, account: String, value: String) {
-        
-        // 1. query작성
-        let keyChainQuery: NSDictionary = [
-            kSecClass : kSecClassGenericPassword,
-            kSecAttrService: service,
-            kSecAttrAccount: account,
-            kSecValueData: value.data(using: .utf8, allowLossyConversion: false)!
-        ]
-        // allowLossyConversion은 인코딩 과정에서 손실이 되는 것을 허용할 것인지 설정
-        
-        // 2. Delete
-        // Key Chain은 Key값에 중복이 생기면 저장할 수 없기때문에 먼저 Delete
-        SecItemDelete(keyChainQuery)
-        
-        // 3. Create
-        let status: OSStatus = SecItemAdd(keyChainQuery, nil)
-        assert(status == noErr, "failed to saving Token")
-        print("create 성공!")
+    static func save(account: String, value: String, isForce: Bool = false) throws {
+        try save(account: account, value: value.data(using: .utf8)!, isForce: isForce)
     }
     
-    // Read
-    func read(_ service: String, account: String) -> String? {
-        let KeyChainQuery: NSDictionary = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: service,
-            kSecAttrAccount: account,
-            kSecReturnData: kCFBooleanTrue, // CFData타입으로 불러오라는 의미
-            kSecMatchLimit: kSecMatchLimitOne // 중복되는 경우 하나의 값만 가져오라는 의미
+    static func save(account: String, value: Data, isForce: Bool = false) throws {
+        let query: [String: AnyObject] = [
+            kSecAttrService as String: service as AnyObject,
+            kSecAttrAccount as String: account as AnyObject,
+            kSecClass as String: kSecClassGenericPassword,
+            kSecValueData as String: value as AnyObject,
         ]
-        // CFData 타입 -> AnyObject로 받고, Data로 타입변환해서 사용하면됨
         
-        // Read
-        var dataTypeRef: AnyObject?
-        let status = SecItemCopyMatching(KeyChainQuery, &dataTypeRef)
+        let status = SecItemAdd(query as CFDictionary, nil)
         
-        // Read 성공 및 실패한 경우
-        if(status == errSecSuccess) {
-            let retrievedData = dataTypeRef as! Data
-            let value = String(data: retrievedData, encoding: String.Encoding.utf8)
-            return value
-        } else {
-            print("failed to loading, status code = \(status)")
-            return nil
+        if status == errSecDuplicateItem {
+            if isForce {
+                try update(account: account, value: value)
+                return
+            } else {
+                throw KeychainError.duplicateItem
+            }
+        }
+        
+        guard status == errSecSuccess else {
+            throw KeychainError.unknown(status)
+        }
+        print("keychain created")
+    }
+    
+    // MARK: - Update
+    
+    static func update(account: String, value: String) throws {
+        try update(account: account, value: value.data(using: .utf8)!)
+    }
+    
+    static func update(account: String, value: Data) throws {
+        let query: [String: AnyObject] = [
+            kSecAttrService as String: service as AnyObject,
+            kSecAttrAccount as String: account as AnyObject,
+            kSecClass as String: kSecClassGenericPassword,
+            kSecValueData as String: value as AnyObject,
+        ]
+        
+        let attributes: [String: AnyObject] = [
+            kSecValueData as String: value as AnyObject
+        ]
+        
+        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+        
+        guard status != errSecDuplicateItem else {
+            throw KeychainError.duplicateItem
+        }
+        
+        guard status == errSecSuccess else {
+            throw KeychainError.unknown(status)
         }
     }
     
-    // Delete
-    func delete(_ service: String, account: String) {
-        let keyChainQuery: NSDictionary = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: service,
-            kSecAttrAccount: account
+    // MARK: - Load
+    
+    static func load(account: String) throws -> String {
+        try String(decoding: loadData(account: account), as: UTF8.self)
+    }
+    
+    static func loadData(account: String) throws -> Data {
+        let query: [String: AnyObject] = [
+            kSecAttrService as String: service as AnyObject,
+            kSecAttrAccount as String: account as AnyObject,
+            kSecClass as String: kSecClassGenericPassword,
+            kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecReturnData as String: kCFBooleanTrue,
         ]
         
-        let status = SecItemDelete(keyChainQuery)
-        assert(status == noErr, "failed to delete the value, status code = \(status)")
-        print("토큰 삭제!")
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        guard status != errSecItemNotFound else {
+            throw KeychainError.itemNotFound
+        }
+        
+        guard status == errSecSuccess else {
+            throw KeychainError.unknown(status)
+        }
+        
+        guard let password = result as? Data else {
+            throw KeychainError.invalidItemFormat
+        }
+        
+        return password
+    }
+    
+    // MARK: - Delete
+    
+    static func delete(account: String) throws {
+        let query: [String: AnyObject] = [
+            kSecAttrService as String: service as AnyObject,
+            kSecAttrAccount as String: account as AnyObject,
+            kSecClass as String: kSecClassGenericPassword
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        
+        guard status == errSecSuccess else {
+            throw KeychainError.unknown(status)
+        }
     }
 }
