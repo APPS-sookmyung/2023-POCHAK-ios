@@ -90,13 +90,9 @@ class SocialJoinViewController: UIViewController {
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
                
-                print(socialId)
-                print(isNewMember)
-                print(email)
                 self.toProfileSettingsPage(isNewMember, accessToken, email, socialType, socialId)
             })
         }
-        
     }
     
     private func checkLoginState(){

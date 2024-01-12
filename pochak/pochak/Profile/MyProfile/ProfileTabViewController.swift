@@ -113,7 +113,14 @@ class ProfileTabViewController: TabmanViewController {
     }
     
     @objc private func clickSettingButton(_ sender: UIButton) {
-        TokenUtils().delete("url", account: "accessToken")
+        print("setting button clicked")
+        guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
+        print(keySocialId)
+        do {
+            try  KeychainManager.delete(account: keySocialId)
+        } catch {
+            print(error)
+        }
     }
 }
 
