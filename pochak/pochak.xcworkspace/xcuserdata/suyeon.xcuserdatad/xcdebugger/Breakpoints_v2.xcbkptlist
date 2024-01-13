@@ -56,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "92FF1FA4-7E7C-419F-B072-391D35434EB3"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pochak/Post/CommentDataManager/CommentDataService.swift"
@@ -96,6 +96,69 @@
                   startingLineNumber = "54"
                   endingLineNumber = "54"
                   offsetFromSymbolStart = "400">
+               </Location>
+               <Location
+                  uuid = "92FF1FA4-7E7C-419F-B072-391D35434EB3 - ba111b23ca0a4c1a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pochak.CommentDataService.getChildComments(_: Swift.String, _: Swift.String, completion: (pochak.NetworkResult&lt;Any&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/CommentDataManager/CommentDataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "336">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "11B4F555-E9BB-4FA7-B074-37C268CAD723"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
+            landmarkName = "tableView(_:viewForFooterInSection:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "11B4F555-E9BB-4FA7-B074-37C268CAD723 - 31e07c9f3b2e08fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pochak.CommentViewController.tableView(_: __C.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __C.UITableViewCell"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "11B4F555-E9BB-4FA7-B074-37C268CAD723 - 3569ddd3e38ac6e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pochak.CommentViewController.tableView(_: __C.UITableView, viewForFooterInSection: Swift.Int) -&gt; Swift.Optional&lt;__C.UIView&gt;"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "494"
+                  endingLineNumber = "494"
+                  offsetFromSymbolStart = "188">
                </Location>
             </Locations>
          </BreakpointContent>
