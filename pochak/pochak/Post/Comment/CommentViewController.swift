@@ -511,7 +511,12 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
                 return .leastNonzeroMagnitude
             }
         }
-        return CGFloat(40)
+        return UITableView.automaticDimension
+    }
+    
+    // grouped 스타일 테이블뷰이기 때문에 자동 생성되는 헤더 높이를 0으로
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
     }
 }
 
