@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,35 +15,41 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azb-Tc-oEb">
-                    <rect key="frame" x="25" y="18" width="79" height="29"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3aU-tu-e8j">
+                    <rect key="frame" x="75" y="32" width="35" height="1"/>
+                    <color key="backgroundColor" name="gray05"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="35" id="lGp-LF-1dY"/>
+                        <constraint firstAttribute="height" constant="1" id="nqT-CC-0xo"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdx-DZ-CBf">
+                    <rect key="frame" x="113" y="18" width="79" height="29"/>
                     <color key="tintColor" name="gray05"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="대댓글 보기">
                         <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="seeChildCommentsBtnDidTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="jfh-ie-7oW"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemMintColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="azb-Tc-oEb" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Hfk-yI-0Ww"/>
-                <constraint firstItem="azb-Tc-oEb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="PFM-nT-3EW"/>
+                <constraint firstItem="3aU-tu-e8j" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="1bo-UZ-CdK"/>
+                <constraint firstItem="Kdx-DZ-CBf" firstAttribute="centerY" secondItem="3aU-tu-e8j" secondAttribute="centerY" id="bhJ-2x-xcr"/>
+                <constraint firstItem="3aU-tu-e8j" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="75" id="o4Y-nT-ka3"/>
+                <constraint firstItem="Kdx-DZ-CBf" firstAttribute="leading" secondItem="3aU-tu-e8j" secondAttribute="trailing" constant="3" id="wJK-tV-GCU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="seeChildCommentsBtn" destination="azb-Tc-oEb" id="lDP-ud-NK2"/>
-            </connections>
-            <point key="canvasLocation" x="63" y="21"/>
+            <point key="canvasLocation" x="61.832061068702288" y="20.422535211267608"/>
         </view>
     </objects>
     <resources>
         <namedColor name="gray05">
             <color red="0.42399999499320984" green="0.45899999141693115" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

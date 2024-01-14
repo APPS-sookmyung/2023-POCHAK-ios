@@ -53,8 +53,6 @@ struct CommentDataService {
                                     ]
         print("-get child comments-")
         
-        let semaphore = DispatchSemaphore(value: 0)
-        
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/"+commentId+"/comment",
                                     method: .get,
                                     encoding: URLEncoding.default,
@@ -78,9 +76,7 @@ struct CommentDataService {
                 print("service fail")
                 completion(.networkFail)
             }
-            semaphore.signal()
         }
-        semaphore.wait()
     }
     
     // 댓글 등록

@@ -23,13 +23,15 @@ class CommentViewController: UIViewController {
     var postId: String!
     var postUserHandle: String?
     
+    public var childCommentCntList = [Int]()  // 섹션 당 셀 개수 따로 저장해둘 리스트 필요함 (부모 댓글의 자식 댓글 개수 저장)
+    
     private var commentDataResponse: CommentDataResponse?
     private var commentDataResult: CommentDataResult?
-    private var commentDataList: [CommentData]?
+    public var commentDataList: [CommentData]?
     private var childCommentDataResponse: ChildCommentDataResponse?
     private var childCommentDataList: [ChildCommentData]?
     
-    private var uiCommentList = [UICommentData]()  // 셀에 뿌릴 때 사용할 실제 데이터들
+    var uiCommentList = [UICommentData]()  // 셀에 뿌릴 때 사용할 실제 데이터들
     private var tempChildCommentList = [UICommentData]()
     
     private var allCommentsList = NSMutableArray()  // 부모 댓글과 자식 댓글 저장할 NSArray
@@ -98,14 +100,27 @@ class CommentViewController: UIViewController {
                 self.commentDataResult = self.commentDataResponse?.result
                 self.commentDataList = self.commentDataResult?.comments
                 
-                // 댓글이 있을 때만 가져오기
+                //var index = 0
+                
+                // 댓글 있을 때만
                 if(self.commentDataList != nil){
-                    // 각 댓글을 UICommentData 형식으로 변경하여 uiCommentList에 추가 -> 안함
-                    for data in self.commentDataList!{
-                        print("parent comment data:")
-                        print(data)
-                        self.uiCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: data.recentComment != nil))
-                        print(self.uiCommentList.count)
+                    for data in self.commentDataList! {
+                        //print("index: " + String(index))
+                        self.uiCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: data.recentComment != nil, childCommentCnt: 0))
+                        //index += 1
+                        self.childCommentCntList.append(0)
+                    }
+                }
+                print(self.uiCommentList)
+                
+                // 댓글이 있을 때만 가져오기
+//                if(self.commentDataList != nil){
+//                    // 각 댓글을 UICommentData 형식으로 변경하여 uiCommentList에 추가 -> 안함
+//                    for data in self.commentDataList!{
+//                        print("parent comment data:")
+//                        print(data)
+//                        self.uiCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: data.recentComment != nil))
+//                        print(self.uiCommentList.count)
                         
 //                        // 자식 댓글이 있는 경우
 //                        if(data.recentComment != nil){
@@ -139,8 +154,8 @@ class CommentViewController: UIViewController {
 //                                }
 //                            }
 //                        }
-                    }
-                }
+//                    }
+//                }
                 // title 내용 설정
                 self.titleLabel.text = self.postUserHandle!+" 님의 게시물 댓글"
                 // 대댓글있는지 다 확인?
@@ -161,58 +176,6 @@ class CommentViewController: UIViewController {
             }
         }
         
-    }
-    
-    private func loadChildCommentData(){
-        print("=== load child comment data ===")
-        var index = 0;
-        
-        //let semaphore = DispatchSemaphore(value: 0)
-        
-        for comment in self.uiCommentList{
-            print("==for==")
-            print(self.uiCommentList)
-            //            semaphore.wait() // 세마포어 감소
-            //DispatchQueue.global().async {
-            // 자식 댓글이 있는 경우에만 api 호출
-            if(comment.hasChild){
-                print("-자식 댓글 있음-")
-                CommentDataService.shared.getChildComments(self.postId, comment.commentId.replacingOccurrences(of: "#", with: "%23")){ response in
-                    switch(response) {
-                    case .success(let childCommentDataResponse):
-                        self.childCommentDataResponse = childCommentDataResponse as? ChildCommentDataResponse
-                        self.childCommentDataList = self.childCommentDataResponse?.result
-                        print("자식 댓글: ")
-                        print(self.childCommentDataList)
-                        
-                        self.tempChildCommentList.removeAll()
-                        
-                        for data in self.childCommentDataList!{
-                            print("child comment data:")
-                            print(data)
-                            self.tempChildCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentId!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: false))
-                        }
-                        
-                        self.uiCommentList.insert(contentsOf: self.tempChildCommentList, at: index)
-                    case .requestErr(let message):
-                        print("requestErr", message)
-                    case .pathErr:
-                        print("pathErr")
-                    case .serverErr:
-                        print("serveErr")
-                    case .networkFail:
-                        print("networkFail")
-                    }
-                    //semaphore.signal()//세마포어 증가
-                }
-                //}
-                //semaphore.signal()//세마포어 증가
-                //semaphore.wait() // 세마포어 감소
-                index += 1;
-            }
-        }
-        print("final ui comment data list")
-        print(self.uiCommentList)
     }
            
 //        let queue = DispatchQueue.global()
@@ -447,56 +410,64 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
         return commentDataList?.count ?? 0
     }
     
-    // 한 섹션에 몇 개의 셀을 넣을지
+    // 한 섹션에 몇 개의 셀을 넣을지 -> 1(부모댓글 자신) + 자식댓글 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 1 + childCommentCntList[section]
     }
     
     // 어떤 셀을 보여줄지
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // 추후에 댓글인지 대댓글인지 분기하는 방식으로 수정할 것
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
-//            return UITableViewCell()
-//        }
-//        return cell
-        
-        // 댓글에 대댓글이 있으면 한 번에...
-        
         // 현재 보여줄 섹션
+        //let section = indexPath.section
+        //print("IndexPath: ")
+        //print(indexPath)
         let section = indexPath.section
+        let cellData = self.uiCommentList
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
-            return UITableViewCell()
+        // 셀을 그리기 위해 인덱스를 계산 해야 함
+        var childCommentsSoFar = 0
+        if(section != 0){
+            for index in 0...section - 1 {
+                childCommentsSoFar += self.childCommentCntList[index]
+            }
         }
-        if let cellData = self.commentDataList {
-            cell.setupData(cellData[section])
+        
+        var finalIndex = section + indexPath.row + childCommentsSoFar
+        
+        print("=== 현재 셀에 그리는 데이터 ===")
+        print(cellData[finalIndex])
+        
+        if !cellData[finalIndex].isParent {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyTableViewCell", for: indexPath)
+                    as? ReplyTableViewCell else{
+                return UITableViewCell()
+            }
+            cell.setupData(cellData[finalIndex])
+            return cell
         }
-        return cell
-//        switch section{
-//        case 0:
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
-//                return UITableViewCell()
-//            }
-//            if let cellData = self.commentDataList {
-//                cell.setupData(cellData[indexPath.row])
-//            }
-//            return cell
-//        default:
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyTableViewCell", for: indexPath) as? ReplyTableViewCell else{
-//                return UITableViewCell()
-//            }
-//            return cell
-//        }
+        else{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
+                return UITableViewCell()
+            }
+            cell.setupData(cellData[finalIndex])
+            return cell
+        }
     }
     
     // footer cell 등록, 보여주기
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
                       "CommentTableViewFooterView") as! CommentTableViewFooterView
+        // footer에게 CommentViewController 전달
+        //footerView.tableView = self.tableView
+        footerView.commentVC = self
+        footerView.postId = self.postId
+
 
         if let cellData = self.commentDataList {
             if cellData[section].recentComment != nil {
                 //footerView.backgroundColor = .blue
+                footerView.curCommentId = cellData[section].commentSK
                 return footerView
             }
             else {

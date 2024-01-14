@@ -24,7 +24,7 @@ struct CommentData: Codable {
     let commentSK: String?  // 댓글 Sort Key, 추후 댓글 업로드, 대댓글 조회 시에 사용하면 됩니닷
     let uploadedTime: String?  //LocalDateTime?  // 댓글 작성 시간
     let content: String?  // 내용
-    let recentComment: RecentComment?  // 제일 최신의 대댓글 (답댓글이 없을 경우 null)
+    var recentComment: RecentComment?  // 제일 최신의 대댓글 (답댓글이 없을 경우 null)
 }
 
 struct RecentComment: Codable {
@@ -64,4 +64,5 @@ struct UICommentData {
     let content: String  // 내용
     let isParent: Bool
     let hasChild: Bool  // 자식 댓글이 있는지
+    var childCommentCnt: Int  // 자식 댓글 개수, 부모나 자식이나 모두 디폴트 1로
 }

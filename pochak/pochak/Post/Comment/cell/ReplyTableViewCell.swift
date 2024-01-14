@@ -36,9 +36,9 @@ class ReplyTableViewCell: UITableViewCell {
     }
     
     // MARK: - Helpers
-    func setupData(_ commentData: ChildCommentData){
+    func setupData(_ commentData: UICommentData){
         // 프로필 이미지
-        if let profileImgStr = commentData.userProfileImg {
+        let profileImgStr = commentData.userProfileImg
             let url = URL(string: profileImgStr)
             // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
             // 이를 방지하기 위해 다른 thread에서 처리함.
@@ -52,7 +52,7 @@ class ReplyTableViewCell: UITableViewCell {
                     }
                 }
             }
-        }
+        
         
         // 유저 핸들
         userHandleLabel.text = commentData.userHandle
