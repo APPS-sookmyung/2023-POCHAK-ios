@@ -94,10 +94,6 @@ class CommentTableViewCell: UITableViewCell {
         //let startStr = format.string(from: startTime!)
         let endStr = format.string(from: currentTime)
         let endTime = format.date(from: endStr)
-
-        print("startTime: ")
-        print(uploadedTime)
-        print("currentTime: "+endStr)
         
         let timePassed = Int(endTime!.timeIntervalSince(startTime))  // 초단위 리턴
         // 초
@@ -122,22 +118,6 @@ class CommentTableViewCell: UITableViewCell {
         else{
             self.timePassedLabel.text = String(timePassed / (7*24*60*60)) + "주"
         }
-        //self.timePassedLabel.text = comment.uploadedTime  // -> 계산해야 함
-        
-//        if(comment.hasChild){
-//            seeChildCommentBtn.setTitle("대댓글 보기", for: .normal)
-//            seeChildCommentBtn.setTitleColor(UIColor(named: "gray05"), for: .normal)
-//            //seeChildCommentBtn.titleLabel?.textColor = .black
-//            seeChildCommentBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 12.0)
-//            
-//            self.addSubview(seeChildCommentBtn)
-//            
-//            self.childCommentBtn.bottomAnchor.constraint(equalTo: self.childCommentBtn.topAnchor, constant: 10.0).isActive = true
-//            seeChildCommentBtn.translatesAutoresizingMaskIntoConstraints = false // 오토리사이징x -> 코드로 작성하기 위해서 자동으로
-//            seeChildCommentBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 75.0).isActive = true
-////            seeChildCommentBtn.topAnchor.constraint(equalTo: self.childCommentBtn.bottomAnchor, constant: 10).isActive = true
-//            seeChildCommentBtn.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 10.0).isActive = true
-//        }
     }
 
 }
