@@ -77,7 +77,8 @@ class CommentTableViewFooterView: UITableViewHeaderFooterView {
                 }
                 //self.commentVC.uiCommentList[section].childCommentCnt = self.tempChildCommentList.count
                 self.commentVC.uiCommentList.insert(contentsOf: self.tempChildCommentList, at: section + childCommentsSoFar + 1)
-                self.commentVC.tableView.reloadData()
+                //self.commentVC.tableView.reloadData()
+                self.commentVC.tableView.reloadSections(IndexSet(integer: section), with: .fade)
                 print("==uicommentlist==")
                 print(self.commentVC.uiCommentList)
             case .requestErr(let message):
