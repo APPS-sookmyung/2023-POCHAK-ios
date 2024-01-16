@@ -363,10 +363,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     // 프로필 이미지나 아이디 클릭 시 해당 사용자 프로필로 이동
     @objc func moveToOthersProfile(sender: UITapGestureRecognizer){
         print("move to other's profile")
-        let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
-        let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
-        
-        self.navigationController?.pushViewController(profileTabVC, animated: true)
+//        let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+//        let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
+//        
+//        self.navigationController?.pushViewController(profileTabVC, animated: true)
         //commentVC.postId = tempPostId
         //commentVC.postUserHandle = postDataResult.postOwnerHandle
         
