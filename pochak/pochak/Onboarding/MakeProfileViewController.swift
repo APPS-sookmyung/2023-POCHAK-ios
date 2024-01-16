@@ -10,9 +10,12 @@ import UIKit
 class MakeProfileViewController: UIViewController {
     
     var accessToken: String!
-    var email: String?
-    var socialType: String?
-    var socialId: String?
+    
+    let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
+    let email = UserDefaultsManager.getData(type: String.self, forKey: .email) ?? "email not found"
+    let socialType = UserDefaultsManager.getData(type: String.self, forKey: .socialType) ?? "socialType not found"
+    let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
+
 
     
     @IBOutlet weak var profileImg: UIImageView!
@@ -37,21 +40,33 @@ class MakeProfileViewController: UIViewController {
         // Title
         self.navigationItem.title = "프로필 설정"
         
+        // Name 항목 채워넣기
+        nameTextField.text = name
+        
         // Back 버튼
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
     }
     
     // MARK: - 프로필 설정 완료 시 changeRootViewController
     @objc private func doneBtnTapped(_ sender: Any) {
+        
+        // userDefault에 데이터 추가
+        guard let handle = handleTextField.text  else {return}
+        guard let message = messageTextField.text  else {return}
+        guard let profileImage = profileImg.image  else {return}
+        
+        UserDefaultsManager.setData(value: handle, key: .handle)
+        UserDefaultsManager.setData(value: message, key: .message)
+        
         // request : POST
         JoinDataManager.shared.joinDataManager(accessToken, 
-                                               nameTextField.text!,
-                                               email!,
-                                               handleTextField.text!,
-                                               messageTextField.text!,
-                                               socialId!,
-                                               socialType!,
-                                               profileImg.image,
+                                               name,
+                                               email,
+                                               handle,
+                                               message,
+                                               socialId,
+                                               socialType,
+                                               profileImage,
                                                {resultData in
             guard let isNewMember = resultData.isNewMember else { return }
             print(isNewMember)

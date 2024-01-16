@@ -26,7 +26,8 @@ struct JoinDataManager {
             "email" : email,
             "handle" : handle,
             "message" : message,
-            "socialId" : socialId
+            "socialId" : socialId,
+            "socialType" : socialType
         ]
         print(requestBody)
         
@@ -44,13 +45,19 @@ struct JoinDataManager {
                 multipartFormData.append(image, withName: "profileImage", fileName: "image.png", mimeType: "image/png")
             }
         }, to: url, headers: header).validate().responseDecodable(of: JoinAPIResponse.self) { response in
-                print(response)
                 switch response.result {
                 case .success(let result):
                     let resultData = result.result
+                    print(resultData)
+                    guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
+                    do {
+                        try KeychainManager.save(account: keySocialId, value: accessToken, isForce: true)
+                    } catch {
+                        print(error)
+                    }
                     completion(resultData)
                 case .failure(let error):
-                    print("실패함")
+                    print("실패함!!!!")
                     print(error)
             }
         }

@@ -18,6 +18,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        // Main.storyboard 가져오기
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
+        
+        // 토큰 여부에 따른 첫 화면을 설정
+        if let keyChainToken = (try? KeychainManager.load(account: keySocialId)) {
+            // 로그인 된 상태
+            print("scene delegate login succeed")
+            print(keyChainToken)
+            guard let homeTabVC = storyboard.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
+            window?.rootViewController = homeTabVC
+        } else {
+            // 로그인 안된 상태
+            print("scene delegate login not yet!")
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -59,6 +75,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let url = URLContexts.first?.url else { return }
             let _ = GIDSignIn.sharedInstance.handle(url)
         }
+
 
 }
 

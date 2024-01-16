@@ -18,7 +18,6 @@ class ProfileTabViewController: TabmanViewController {
     @IBOutlet weak var followingList: UIStackView!
     @IBOutlet weak var whiteBackground1: UIView!
     @IBOutlet weak var whiteBackground2: UIView!
-    
     @IBOutlet weak var userHandle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userMessage: UILabel!
@@ -48,6 +47,15 @@ class ProfileTabViewController: TabmanViewController {
         
         // API
         loadProfileData()
+        
+        // settingButton
+        let settingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        settingButton.setImage(UIImage(named: "settingIcon"), for: .normal)
+        settingButton.addTarget(self, action: #selector(clickSettingButton), for: .touchUpInside)
+        
+        let barButton = UIBarButtonItem(customView: settingButton)
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
         
     }
     
@@ -103,7 +111,17 @@ class ProfileTabViewController: TabmanViewController {
         
         
     }
-
+    
+    @objc private func clickSettingButton(_ sender: UIButton) {
+        print("setting button clicked")
+        guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
+        print(keySocialId)
+        do {
+            try  KeychainManager.delete(account: keySocialId)
+        } catch {
+            print(error)
+        }
+    }
 }
 
 
