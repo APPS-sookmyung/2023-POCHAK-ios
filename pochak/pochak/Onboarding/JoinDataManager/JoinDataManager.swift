@@ -49,11 +49,11 @@ struct JoinDataManager {
                 case .success(let result):
                     print("inside joinDataManager")
                     let resultData = result.result
-                    guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
                     guard let accountAccessToken = resultData.accessToken else { return }
-                    
+                    guard let accountRefreshToken = resultData.refreshToken else { return }
                     do {
-                        try KeychainManager.save(account: keySocialId, value: accountAccessToken, isForce: true)
+                        try KeychainManager.save(account: "accessToken", value: accountAccessToken, isForce: true)
+                        try KeychainManager.save(account: "refreshToken", value: accountRefreshToken, isForce: true)
                     } catch {
                         print(error)
                     }
