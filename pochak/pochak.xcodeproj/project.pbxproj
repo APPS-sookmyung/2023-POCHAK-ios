@@ -27,6 +27,8 @@
 		089C758E2A51728A003AAB94 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75852A51728A003AAB94 /* Pretendard-ExtraBold.ttf */; };
 		089C758F2A51728A003AAB94 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75862A51728A003AAB94 /* Pretendard-Light.ttf */; };
 		089C75902A51728A003AAB94 /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 089C75872A51728A003AAB94 /* Pretendard-ExtraLight.ttf */; };
+		08B679612B528CB600F8D585 /* CommentTableViewFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B679602B528CB600F8D585 /* CommentTableViewFooterView.xib */; };
+		08B679632B528D7500F8D585 /* CommentTableViewFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B679622B528D7500F8D585 /* CommentTableViewFooterView.swift */; };
 		08D98C472AFEE8B300E9A097 /* PostDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C462AFEE8B300E9A097 /* PostDataModel.swift */; };
 		08D98C4A2AFEE8D700E9A097 /* LikedUsersDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D98C492AFEE8D700E9A097 /* LikedUsersDataModel.swift */; };
 		08DD9EC22B454356004CCD5F /* FollowDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD9EC12B454356004CCD5F /* FollowDataModel.swift */; };
@@ -149,6 +151,8 @@
 		089C75852A51728A003AAB94 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
 		089C75862A51728A003AAB94 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.ttf"; sourceTree = "<group>"; };
 		089C75872A51728A003AAB94 /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
+		08B679602B528CB600F8D585 /* CommentTableViewFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewFooterView.xib; sourceTree = "<group>"; };
+		08B679622B528D7500F8D585 /* CommentTableViewFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewFooterView.swift; sourceTree = "<group>"; };
 		08D98C462AFEE8B300E9A097 /* PostDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataModel.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		08D98C492AFEE8D700E9A097 /* LikedUsersDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedUsersDataModel.swift; sourceTree = "<group>"; };
 		08DD9EC12B454356004CCD5F /* FollowDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowDataModel.swift; sourceTree = "<group>"; };
@@ -311,6 +315,8 @@
 				0823B0722A5B0E780085002F /* CommentTableViewCell.swift */,
 				0820B18E2A63A18100604DA8 /* ReplyTableViewCell.swift */,
 				0820B18F2A63A18100604DA8 /* ReplyTableViewCell.xib */,
+				08B679602B528CB600F8D585 /* CommentTableViewFooterView.xib */,
+				08B679622B528D7500F8D585 /* CommentTableViewFooterView.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -827,6 +833,7 @@
 				084AF4C82A5D831100C6454A /* HomeCollectionViewCell.xib in Resources */,
 				089C758C2A51728A003AAB94 /* Pretendard-Medium.ttf in Resources */,
 				089C75902A51728A003AAB94 /* Pretendard-ExtraLight.ttf in Resources */,
+				08B679612B528CB600F8D585 /* CommentTableViewFooterView.xib in Resources */,
 				3769D6D62B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib in Resources */,
 				EABD20662A6CF5CC007543E9 /* TagCollectionViewCell.xib in Resources */,
 				089C758B2A51728A003AAB94 /* Pretendard-SemiBold.ttf in Resources */,
@@ -968,6 +975,7 @@
 				08FD3A3E2B3AFE7B00574880 /* CommentDataService.swift in Sources */,
 				3769D6CE2B3C563A00294CD1 /* PostListViewController.swift in Sources */,
 				EA0107A72A5CF73900A3AE85 /* AlarmViewController.swift in Sources */,
+				08B679632B528D7500F8D585 /* CommentTableViewFooterView.swift in Sources */,
 				EA01079C2A59556800A3AE85 /* PostTabViewController.swift in Sources */,
 				EA1289112B3C4F14002EC93E /* SearchDataService.swift in Sources */,
 				EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */,
