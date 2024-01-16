@@ -149,6 +149,7 @@ class CommentViewController: UIViewController {
     
     // MARK: - Helpers
     private func loadCommentData(){
+        print("postid: \(postId)")
         CommentDataService.shared.getComments(postId) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
@@ -343,7 +344,7 @@ class CommentViewController: UIViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    print("serveErr")
+                    print("serverErr")
                 case .networkFail:
                     print("networkFail")
                 }

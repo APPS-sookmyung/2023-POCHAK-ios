@@ -24,7 +24,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var moreCommentsBtn: UIButton!
     
     var receivedData: String?
-    var tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    var currentPostId:String!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
     var postOwnerHandle: String = ""  // 나중에 여기저기에서 사용할 수 있도록.. 미리 게시자 아이디 저장
     
     private var isFollowingColor: UIColor = UIColor(named: "gray03") ?? UIColor(hexCode: "FFB83A")
@@ -81,7 +81,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             // receivedData를 사용하여 원하는 작업을 수행합니다.
             // 예를 들어, 데이터를 표시하거나 다른 로직에 활용할 수 있습니다.
             print("Received Data: \(data)")
-            tempPostId = data
+            currentPostId = data
         } else {
             print("No data received.")
         }
@@ -172,7 +172,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     }
     
     func loadPostDetailData(){
-        PostDataService.shared.getPostDetail(tempPostId) { (response) in
+        PostDataService.shared.getPostDetail(currentPostId) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let postData):
@@ -230,7 +230,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         postLikesVC.modalPresentationStyle = .pageSheet
         // 좋아요 누른 사람 페이지에 포스트 아이디, 포스트 게시자 아이디 전달
-        postLikesVC.postId = self.tempPostId
+        postLikesVC.postId = self.currentPostId
         postLikesVC.postOwnerHandle = self.postDataResult.postOwnerHandle
         
         // half sheet
@@ -251,7 +251,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
         
         commentVC.modalPresentationStyle = .pageSheet
-        commentVC.postId = tempPostId
+        commentVC.postId = currentPostId
         commentVC.postUserHandle = postDataResult.postOwnerHandle
         
         // half sheet
@@ -276,7 +276,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
 
     @IBAction func likeBtnTapped(_ sender: Any) {
         // 서버 연결
-        LikedUsersDataService.shared.postLikeRequest(tempPostId){(response) in
+        LikedUsersDataService.shared.postLikeRequest(currentPostId){(response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let likePostResponse):

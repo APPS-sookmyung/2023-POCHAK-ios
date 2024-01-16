@@ -9,6 +9,9 @@ import Alamofire
 
 struct CommentDataService {
     static let shared = CommentDataService()
+    let header: HTTPHeaders = ["Authorization": GetAccessToken().getAccessToken(),
+                 "Content-type": "application/json"
+                 ]
     
     /// 댓글 등록 시 서버에 전달할 Body 생성
     /// - Parameters:
@@ -117,10 +120,11 @@ struct CommentDataService {
     ///   - parentCommentSK: (대댓글인 경우에만) 부모댓글의 아이디, 댓글인 경우에는 nil 전달..?
     ///   - completion: 댓글 등록 후 데이터 처리할 핸들러(뷰컨트롤러에서 처리)
     func postComment(_ postId: String, _ content: String, _ parentCommentSK: String?, completion: @escaping (NetworkResult<Any>) -> Void){
+        print("token: \(GetAccessToken().getAccessToken())")
         /* 헤더 있는 자리 */
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
-                                            "Content-type": "application/json"  // multipart/form-data ???
-                                            ]
+//        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
+//                                            "Content-type": "application/json"  // multipart/form-data ???
+//                                            ]
         
         let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/comment",
                                     method: .post,
@@ -133,11 +137,12 @@ struct CommentDataService {
             case .success:
                 // 성공 시 통신 자체의 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
+                print("=== dataResponse.response.statusCode: \(statusCode)")
                 guard let value = dataResponse.value else {return}
+                print("=== value: \(value.description)")
                 let networkResult = self.judgeStatus(by: statusCode, value, dataType: "PostCommentResponse")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
                 completion(networkResult)
             case .failure:
-
                 completion(.networkFail)
             }
         }
@@ -170,7 +175,6 @@ struct CommentDataService {
                 let networkResult = self.judgeStatus(by: statusCode, value, dataType: "DeleteCommentResponse")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
                 completion(networkResult)
             case .failure:
-
                 completion(.networkFail)
             }
         }
@@ -183,7 +187,7 @@ struct CommentDataService {
     ///   - dataType: 여기서는 여러 종류의 데이터를 다루고 있으므로 현재 다루고 있는 데이터 종류(모델명)
     /// - Returns: 네트워크 연결 결과 NetworkResult를 리턴
     private func judgeStatus(by statusCode: Int, _ data: Data, dataType: String) -> NetworkResult<Any> {
-        
+        print("=== judging status, code: \(statusCode)")
         switch statusCode {
         case 200: return isValidData(data: data, dataType: dataType)  // 성공 -> 데이터 가공해서 전달해야하므로 isValidData라는 함수로 데이터 넘겨주기
         case 400: return .pathErr  // 잘못된 요청
