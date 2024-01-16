@@ -155,6 +155,7 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
     }
     
     private func setupTableView(){
+        print(tableView)
         //delegate 연결
         tableView.delegate = self
         tableView.dataSource = self
@@ -162,7 +163,6 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
 
         tableView.register(UINib(nibName: "SearchResultTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchResultTableViewCell")
 
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -206,6 +206,7 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
     }
 }
 
+// MARK: - 캡션(50자 제한)
 extension UploadViewController : UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
