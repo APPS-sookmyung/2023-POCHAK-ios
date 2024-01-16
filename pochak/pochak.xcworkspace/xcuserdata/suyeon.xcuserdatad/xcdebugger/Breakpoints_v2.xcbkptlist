@@ -125,8 +125,8 @@
             filePath = "pochak/Post/Comment/CommentViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "tableView(_:viewForFooterInSection:)"
             landmarkType = "7">
             <Locations>
@@ -166,99 +166,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "907A268E-9DA4-40D9-BF69-54AD8BEDD0D8"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pochak/Post/Comment/CommentViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "loadCommentData()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "907A268E-9DA4-40D9-BF69-54AD8BEDD0D8 - f4d7da0d3e633726"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (pochak.NetworkResult&lt;Any&gt;) -&gt; () in pochak.CommentViewController.loadCommentData() -&gt; ()"
-                  moduleName = "pochak"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "1288">
-               </Location>
-               <Location
-                  uuid = "907A268E-9DA4-40D9-BF69-54AD8BEDD0D8 - 66b3bbe4cc80171f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (pochak.CommentData) -&gt; () in closure #1 (pochak.NetworkResult&lt;Any&gt;) -&gt; () in pochak.CommentViewController.loadCommentData() -&gt; ()"
-                  moduleName = "pochak"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "216">
-               </Location>
-               <Location
-                  uuid = "907A268E-9DA4-40D9-BF69-54AD8BEDD0D8 - 66b3bbe4cc80171f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (pochak.CommentData) -&gt; () in closure #1 (pochak.NetworkResult&lt;Any&gt;) -&gt; () in pochak.CommentViewController.loadCommentData() -&gt; ()"
-                  moduleName = "pochak"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "228">
-               </Location>
-               <Location
-                  uuid = "907A268E-9DA4-40D9-BF69-54AD8BEDD0D8 - f4d7da0d3e633726"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (pochak.NetworkResult&lt;Any&gt;) -&gt; () in pochak.CommentViewController.loadCommentData() -&gt; ()"
-                  moduleName = "pochak"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "1316">
-               </Location>
-               <Location
-                  uuid = "907A268E-9DA4-40D9-BF69-54AD8BEDD0D8 - f4d7da0d3e633726"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (pochak.NetworkResult&lt;Any&gt;) -&gt; () in pochak.CommentViewController.loadCommentData() -&gt; ()"
-                  moduleName = "pochak"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "105"
-                  endingLineNumber = "105"
-                  offsetFromSymbolStart = "1892">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "48233CB1-DF0A-4464-9D41-3E92E4ACB7B2"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -266,8 +173,8 @@
             filePath = "pochak/Post/Comment/CommentViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -407,6 +314,150 @@
                   offsetFromSymbolStart = "276">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DA998CC3-1D17-46D7-A5AB-05E9B696BAAA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "loadCommentData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B210F18E-1DDD-436B-A36E-42EF17B63F82"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "initUI()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B210F18E-1DDD-436B-A36E-42EF17B63F82 - 43291fcf4c21e2ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pochak.CommentViewController.initUI() -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  uuid = "B210F18E-1DDD-436B-A36E-42EF17B63F82 - 4a8f3626c7bb3940"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () -&gt; () in pochak.CommentViewController.initUI() -&gt; ()"
+                  moduleName = "pochak"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/suyeon/2023-POCHAK-ios/pochak/pochak/Post/Comment/CommentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "312">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB626DFC-0160-4F61-A33B-530453BCD63F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "initUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0D90AE66-CAE5-43D2-A19F-3870976AE077"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF5A874D-8316-443B-84CC-0B5340730C72"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3DC220C-CCF0-49A9-9CD0-E48C87359AF3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "setUpTableView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D42FB1BD-8811-4BD5-8797-B0E16E5370E9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pochak/Post/Comment/CommentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

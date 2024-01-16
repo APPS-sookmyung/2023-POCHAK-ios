@@ -77,7 +77,7 @@
 		<key>Kingfisher.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Pageboy.xcscheme_^#shared#^_</key>
 		<dict>
@@ -117,7 +117,7 @@
 		<key>Tabman.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>11</integer>
 		</dict>
 	</dict>
 </dict>
