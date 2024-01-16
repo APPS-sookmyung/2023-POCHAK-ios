@@ -51,10 +51,12 @@ class MakeProfileViewController: UIViewController {
     @objc private func doneBtnTapped(_ sender: Any) {
         
         // userDefault에 데이터 추가
+        guard let name = nameTextField.text  else {return}
         guard let handle = handleTextField.text  else {return}
         guard let message = messageTextField.text  else {return}
         guard let profileImage = profileImg.image  else {return}
         
+        UserDefaultsManager.setData(value: name, key: .message)
         UserDefaultsManager.setData(value: handle, key: .handle)
         UserDefaultsManager.setData(value: message, key: .message)
         
@@ -68,6 +70,7 @@ class MakeProfileViewController: UIViewController {
                                                socialType,
                                                profileImage,
                                                {resultData in
+            print(resultData)
             guard let isNewMember = resultData.isNewMember else { return }
             print(isNewMember)
         })

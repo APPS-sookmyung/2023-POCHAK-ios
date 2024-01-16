@@ -13,6 +13,7 @@ class GoogleLoginDataManager {
     
     func googleLoginDataManager(_ accessToken : String, _ completion: @escaping (GoogleLoginModel) -> Void) {
         let url = APIConstants.baseURL + "/google/login/" + accessToken
+        print(accessToken)
 
         //APIConstants.baseURL 로 바꾸기
         AF.request(url, method: .get).validate().responseDecodable(of: GoogleLoginResponse.self) { response in
