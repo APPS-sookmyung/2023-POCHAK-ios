@@ -10,7 +10,11 @@ import Alamofire
 struct CommentDataService {
     static let shared = CommentDataService()
     
-    // 댓글 등록 시 서버에 전달할 Body 만드는 함수
+    /// 댓글 등록 시 서버에 전달할 Body 생성
+    /// - Parameters:
+    ///   - content: 댓글 내용
+    ///   - parentCommentSK: 대댓글인 경우 부모댓글 아이디
+    /// - Returns: 전달받은 값으로 만들어진 Parameters
     private func makeBodyParameter(content : String, parentCommentSK : String?) -> Parameters {
         if(parentCommentSK != nil){
             return ["content": content, "parentCommentSK": parentCommentSK!]
@@ -20,6 +24,28 @@ struct CommentDataService {
         }
     }
     
+    
+    /// 댓글 삭제 시 서버에 전달할 Body 생성
+    /// - Parameters:
+    ///   - commentUploadedTime: 삭제하려는 댓글(대댓글) 업로드 시간
+    ///   - parentCommentUploadedTime: 대댓글을 삭제하는 경우 대댓글의 부모 댓글 업로드 시간
+    /// - Returns: 만들어진 Body Parameters
+    private func makeDeleteCommentBodyParameter(commentUploadedTime: String, parentCommentUploadedTime: String?) -> Parameters{
+        // 대댓글 삭제인 경우
+        if(parentCommentUploadedTime != nil){
+            return ["commentUploadedTime": commentUploadedTime, "parentCommentUploadedTime": parentCommentUploadedTime!]
+        }
+        // 댓글 삭제인 경우
+        else{
+            return ["commentUploadedTime": commentUploadedTime]
+        }
+    }
+    
+    
+    /// 댓글 조회
+    /// - Parameters:
+    ///   - postId: 조회하고자 하는 댓글이 등록된 게시글 아이디
+    ///   - completion: 댓글 조회 후 처리할 핸들러 (뷰컨트롤러에서 정의)
     func getComments(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
@@ -45,7 +71,12 @@ struct CommentDataService {
         }
     }
     
-    // 대댓글 조회
+    /// 대댓글 조회하기
+    /// - Parameters:
+    ///    - postId: 대댓글을 조회하고자 하는 게시글의 아이디
+    ///    - commentId:  대댓글의 부모 댓글 아이디
+    ///    - completion: 조회 완료 후 데이터 처리할 핸들러(뷰컨트롤러에 있음)
+    ///
     func getChildComments(_ postId: String, _ commentId: String, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
@@ -78,8 +109,13 @@ struct CommentDataService {
             }
         }
     }
-    
-    // 댓글 등록
+
+    /// 댓글 등록하기
+    /// - Parameters:
+    ///   - postId: 새로 댓글을 등록하고자 하는 게시글 아이디
+    ///   - content: 댓글 내용
+    ///   - parentCommentSK: (대댓글인 경우에만) 부모댓글의 아이디, 댓글인 경우에는 nil 전달..?
+    ///   - completion: 댓글 등록 후 데이터 처리할 핸들러(뷰컨트롤러에서 처리)
     func postComment(_ postId: String, _ content: String, _ parentCommentSK: String?, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
@@ -107,7 +143,45 @@ struct CommentDataService {
         }
     }
     
-    // 요청 후 받은 statusCode를 바탕으로 어떻게 결과값을 처리할 지 정의
+    
+    /// 댓글 삭제하기
+    /// - Parameters:
+    ///   - postId: <#postId description#>
+    ///   - commentUploadedTime: <#commentUploadedTime description#>
+    ///   - parentCommentUploadedTime: <#parentCommentUploadedTime description#>
+    ///   - completion: <#completion description#>
+    func deleteComment(_ postId: String, _ commentUploadedTime: String, _ parentCommentUploadedTime: String?, completion: @escaping (NetworkResult<Any>) -> Void){
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
+                                            "Content-type": "application/json"
+                                            ]
+        
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/comment",
+                                    method: .delete,
+                                    parameters: makeDeleteCommentBodyParameter(commentUploadedTime: commentUploadedTime, parentCommentUploadedTime: parentCommentUploadedTime),
+                                    encoding: JSONEncoding.default,
+                                    headers: header)
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result{
+            case .success:
+                // 성공 시 통신 자체의 상태코드와 데이터(value) 수신
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.value else {return}
+                let networkResult = self.judgeStatus(by: statusCode, value, dataType: "DeleteCommentResponse")  // 통신의 결과(성공이면 데이터, 아니면 에러내용)
+                completion(networkResult)
+            case .failure:
+
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    /// 요청 후 받은 statusCode를 바탕으로 결과값 처리할 방법 정의
+    /// - Parameters:
+    ///   - statusCode: statusCode
+    ///   - data: 요청 후 받은 데이터
+    ///   - dataType: 여기서는 여러 종류의 데이터를 다루고 있으므로 현재 다루고 있는 데이터 종류(모델명)
+    /// - Returns: 네트워크 연결 결과 NetworkResult를 리턴
     private func judgeStatus(by statusCode: Int, _ data: Data, dataType: String) -> NetworkResult<Any> {
         
         switch statusCode {
@@ -117,8 +191,12 @@ struct CommentDataService {
         default: return .networkFail  // 네트워크 에러
         }
     }
-    
-    // 통신 성공 시 데이터를 가공하기 위한 함수
+
+    /// 통신 성공 시 데이터를 원하는대로 가공하기 위한 함수
+    /// - Parameters:
+    ///   - data: 받은 데이터(가공 전)
+    ///   - dataType: 데이터 타입(현재 다루고 있는 데이터 모델 이름)
+    /// - Returns: 네트워크 연결 결과인 NetworkResult  리턴
     private func isValidData(data: Data, dataType: String) -> NetworkResult<Any> {
         do {
             let decoder = JSONDecoder()
@@ -130,8 +208,12 @@ struct CommentDataService {
                 let decodedData = try decoder.decode(ChildCommentDataResponse.self, from: data)
                 return .success(decodedData)
             }
-            else{  // 댓글 혹은 대댓글 등록
+            else if(dataType == "PostCommentResponse"){  // 댓글 혹은 대댓글 등록
                 let decodedData = try decoder.decode(PostCommentResponse.self, from: data)
+                return .success(decodedData)
+            }
+            else {  // 댓글 혹은 대댓글 삭제
+                let decodedData = try decoder.decode(DeleteCommentResponse.self, from: data)
                 return .success(decodedData)
             }
         } catch {
@@ -143,10 +225,5 @@ struct CommentDataService {
             }
             return .pathErr
         }
-    }
-    
-    // 댓글, 대댓글 데이터를 UICommentData 데이터 형식으로 변경하기
-    private func changeToUICommentData(){
-        
     }
 }

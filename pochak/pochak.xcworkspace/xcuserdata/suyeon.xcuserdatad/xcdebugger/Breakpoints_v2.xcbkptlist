@@ -14,8 +14,8 @@
             filePath = "pochak/Post/CommentDataManager/CommentDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "getChildComments(_:_:completion:)"
             landmarkType = "7">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "pochak/Post/CommentDataManager/CommentDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "getChildComments(_:_:completion:)"
             landmarkType = "7">
             <Locations>

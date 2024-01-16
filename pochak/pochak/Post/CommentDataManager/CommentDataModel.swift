@@ -55,6 +55,13 @@ struct PostCommentResponse: Codable {
     let message: String?
 }
 
+// MARK: - 댓글 삭제 Data Model (Response만 있음)
+struct DeleteCommentResponse: Codable {
+    let isSuccess: Bool?
+    let code: Int?
+    let message: String?
+}
+
 // MARK: - UI에 보여주기 위해 쓸 데이터 모델
 struct UICommentData {
     let userProfileImg: String  // 댓글을 작성한 유저의 프로필 이미지
