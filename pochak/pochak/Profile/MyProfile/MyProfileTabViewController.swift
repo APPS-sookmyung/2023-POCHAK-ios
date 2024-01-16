@@ -137,6 +137,8 @@ class MyProfileTabViewController: TabmanViewController {
     }
     
     @objc private func clickSettingButton(_ sender: UIButton) {
+        let accessToken = GetToken().getAccessToken()
+        print(accessToken)
         guard let updateProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileViewController else {return}
         self.navigationController?.pushViewController(updateProfileVC, animated: true)
     }

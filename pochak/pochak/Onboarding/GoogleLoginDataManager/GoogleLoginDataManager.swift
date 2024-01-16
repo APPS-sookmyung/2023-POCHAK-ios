@@ -20,6 +20,7 @@ class GoogleLoginDataManager {
                switch response.result {
                case .success(let result):
                    let resultData = result.result
+                   print(result)
                    completion(resultData)
                case .failure(let error):
                    print(error.localizedDescription)

@@ -10,11 +10,11 @@ import Kingfisher
 
 class PostTabViewController: UIViewController, UISearchResultsUpdating{
 
-    
-    
     @IBOutlet weak var collectionView: UICollectionView!
     var searchController = UISearchController(searchResultsController: SearchResultViewController())
-    var resultVC = SearchResultViewController()
+    
+    let resultVC = SearchResultViewController()
+    
     var imageArray : [PostTabDataModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,29 +79,21 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
 
         //usally good to set the presentation context
-        self.definesPresentationContext = true
         
         
         navigationItem.searchController = searchController
         
         searchController.searchBar.sizeToFit()
+
    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else  {
             return
         }
         print(text)
         sendTextToServer(text)
+        
     }
     
     func sendTextToServer(_ searchText: String) {
@@ -227,3 +219,25 @@ extension PostTabViewController: UICollectionViewDelegateFlowLayout {
         }
     }
 }
+
+//extension PostTabViewController: UISearchControllerDelegate {
+//    func willPresentSearchController(_ searchController: UISearchController) {
+//        // 검색창이 표시될 때 실행되는 메서드
+//        if searchController.searchBar.text?.isEmpty ?? true {
+//            // 검색창에 아무런 텍스트가 없으면 최근 검색어 뷰를 보여줍니다.
+//            self.resultVC.isHidden = false
+//        }
+//    }
+//}
+//
+//extension PostTabViewController: UISearchBarDelegate {
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchText.isEmpty {
+//            // 검색창에 아무런 텍스트가 없으면 최근 검색어 뷰를 보여줍니다.
+//            self.resultVC.isHidden = false
+//        } else {
+//            // 검색창에 텍스트가 입력되었으면 최근 검색어 뷰를 숨깁니다.
+//            self.resultVC.isHidden = true
+//        }
+//    }
+//}

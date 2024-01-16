@@ -9,7 +9,7 @@ import Foundation
 class GetToken {
     
     func getAccessToken() -> String {
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: "acessToken")) else {return ""}
+        guard let keyChainAccessToken = (try? KeychainManager.load(account: "accessToken")) else {return ""}
         return "Bearer " + keyChainAccessToken
     }
     

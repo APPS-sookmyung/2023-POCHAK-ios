@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CommentViewController: UIViewController {
 
@@ -18,18 +19,24 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var userProfileImageView: UIImageView!
     
     let textViewPlaceHolder = "이 게시물에 댓글을 달아보세요"
+    var loggedinUserHandle: String!  // 현재 로그인된 유저의 아이디
     
     // postVC에서 넘겨주는 값
     var postId: String!
     var postUserHandle: String?
     
+    public var childCommentCntList = [Int]()  // 섹션 당 셀 개수 따로 저장해둘 리스트 필요함 (부모 댓글의 자식 댓글 개수 저장)
+    
     private var commentDataResponse: CommentDataResponse?
     private var commentDataResult: CommentDataResult?
-    private var commentDataList: [CommentData]?
+    public var commentDataList: [CommentData]?
     private var childCommentDataResponse: ChildCommentDataResponse?
     private var childCommentDataList: [ChildCommentData]?
     
-    private var uiCommentList: [UICommentData]?  // 셀에 뿌릴 때 사용할 실제 데이터들
+    var uiCommentList = [UICommentData]()  // 셀에 뿌릴 때 사용할 실제 데이터들
+    private var tempChildCommentList = [UICommentData]()
+    
+    private var allCommentsList = NSMutableArray()  // 부모 댓글과 자식 댓글 저장할 NSArray
     
     private var postCommentResponse: PostCommentResponse?
     
@@ -37,6 +44,61 @@ class CommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UserDefaults에서 현재 로그인된 유저 핸들 가져오기
+        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        print("current logged in user handle is : \(loggedinUserHandle)")
+        
+        // 테이블 뷰 세팅
+        setUpTableView()
+        
+        /* 1번만 실행돼도 되는 초기화 과정 */
+        // commentView의 댓글 입력 창(uitextview) inset 제거
+        commentTextView.textContainerInset = .zero
+        commentTextView.textContainer.lineFragmentPadding = 0
+        // delegate 설정
+        commentTextView.delegate = self
+        // 최대 줄 설정
+        //commentTextView.textContainer.maximumNumberOfLines = 5
+        // placeholder 설정
+        commentTextView.text = textViewPlaceHolder
+        commentTextView.textColor = UIColor(named: "gray03")
+        
+        /* Keyboard 보여지고 숨겨질 때 발생되는 이벤트 등록 */
+        NotificationCenter.default.addObserver(  // 키보드 보여질 때
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(  // 키보드 숨겨질 때
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+        
+//        // tableView의 프로토콜
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none  // cell 간 구분선 스타일
+//        
+//        // tableView가 자동으로 셀 컨텐츠 내용 계산해서 높이 맞추도록
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 90
+//        
+//        // nib은 CommentTableViewCell << 이 파일임
+//        let commentNib = UINib(nibName: "CommentTableViewCell", bundle: nil)
+//        tableView.register(commentNib, forCellReuseIdentifier: "CommentTableViewCell")  // tableview에 이 cell을 등록
+//        
+//        // 테이블뷰에 ReplyTableViewCell 등록
+//        let replyNib = UINib(nibName: "ReplyTableViewCell", bundle: nil)
+//        tableView.register(replyNib, forCellReuseIdentifier: "ReplyTableViewCell")
+//        
+//        // 테이블뷰에 footer view nib 등록
+//        tableView.register(UINib(nibName: "CommentTableViewFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "CommentTableViewFooterView")
+        
+        // 사용자 프로필 사진 크기 반만큼 radius
+        userProfileImageView.layer.cornerRadius = 17.5
+        
+        // 댓글 데이터 조회
         loadCommentData()
         
         /* commentView 초기 설정*/
@@ -87,6 +149,7 @@ class CommentViewController: UIViewController {
     
     // MARK: - Helpers
     private func loadCommentData(){
+        print("postid: \(postId)")
         CommentDataService.shared.getComments(postId) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
@@ -94,39 +157,39 @@ class CommentViewController: UIViewController {
                 self.commentDataResponse = commentDataResponse as? CommentDataResponse
                 self.commentDataResult = self.commentDataResponse?.result
                 self.commentDataList = self.commentDataResult?.comments
-                print(self.commentDataList)
+
+                self.uiCommentList.removeAll()
+                self.childCommentCntList.removeAll()
                 
-//                if(self.commentDataList != nil){
-//                    for data in self.commentDataList!{
-//                        self.uiCommentList?.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true))
-//
-//                        // 자식 댓글이 있는 경우
-//                        if(data.recentComment != nil){
-//                            CommentDataService.shared.getChildComments(self.postId, data.commentSK!){ response in
-//                                switch(response) {
-//                                case .success(let childCommentDataResponse):
-//                                    self.childCommentDataResponse = childCommentDataResponse as? ChildCommentDataResponse
-//                                    self.childCommentDataList = self.childCommentDataResponse?.result
-//                                case .requestErr(let message):
-//                                    print("requestErr", message)
-//                                case .pathErr:
-//                                    print("pathErr")
-//                                case .serverErr:
-//                                    print("serveErr")
-//                                case .networkFail:
-//                                    print("networkFail")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                // 댓글 있을 때만
+                if(self.commentDataList != nil){
+                    for data in self.commentDataList! {
+                        //print("index: " + String(index))
+                        
+                        // 댓글 삭제 시 필요한 업로드 시간 추출
+                        var arr = data.commentSK!.split(separator: "#")  // #를 기준으로 자름 -> ["COMMENT", "PARENT", "2024-01-14T17:38:28.747131328"]
+                        let commentUploadedTime = arr[arr.endIndex - 1]
+                        
+                        self.uiCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, commentUploadedTime: String(commentUploadedTime), parentCommentUploadedTime: nil, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: data.recentComment != nil, childCommentCnt: 0))
+                        //index += 1
+                        self.childCommentCntList.append(0)
+                    }
+                }
+                print("=== loading comment data ===")
+                print(self.uiCommentList)
+                
+                print("=== init ui ===")
+                self.initUI()
+                
                 // title 내용 설정
                 self.titleLabel.text = self.postUserHandle!+" 님의 게시물 댓글"
                 // 대댓글있는지 다 확인?
-                if(self.commentDataList != nil){
-                    self.initUI()
-                }
-                self.tableView.reloadData()
+//                if(self.commentDataList != nil){
+//                    //self.loadChildCommentData()
+//                    self.initUI()
+//                }
+                
+                //self.tableView.reloadData()
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
@@ -137,47 +200,40 @@ class CommentViewController: UIViewController {
                 print("networkFail")
             }
         }
+        
     }
     
     private func initUI() {
         // 사용자 프로필 이미지
-        var url = URL(string: (commentDataResult?.loginProfileImg)!)
+        //var url = URL(string: (commentDataResult?.loginProfileImg)!)
         // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
         // 이를 방지하기 위해 다른 thread에서 처리함.
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url!) {
-                if let image = UIImage(data: data) {
-                    //UI 변경 작업은 main thread에서 해야함.
-                    DispatchQueue.main.async {
-                        self?.userProfileImageView.image = image
-                    }
+//        DispatchQueue.global().async { [weak self] in
+//            if let data = try? Data(contentsOf: url!) {
+//                if let image = UIImage(data: data) {
+//                    //UI 변경 작업은 main thread에서 해야함.
+//                    DispatchQueue.main.async {
+//                        self?.userProfileImageView.image = image
+//                    }
+//                }
+//            }
+//        }
+        if let url = URL(string: (commentDataResult?.loginProfileImg)!) {
+            self.userProfileImageView.kf.setImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    print("Image successfully loaded: \(value.image)")
+                case .failure(let error):
+                    print("Image failed to load with error: \(error.localizedDescription)")
                 }
             }
         }
         
-        // commentView의 댓글 입력 창(uitextview) inset 제거
-        commentTextView.textContainerInset = .zero
-        commentTextView.textContainer.lineFragmentPadding = 0
-        // delegate 설정
-        commentTextView.delegate = self
-        // 최대 줄 설정
-        //commentTextView.textContainer.maximumNumberOfLines = 5
-        // placeholder 설정
-        commentTextView.text = textViewPlaceHolder
-        commentTextView.textColor = UIColor(named: "gray03")
-        
-        /* Keyboard 보여지고 숨겨질 때 발생되는 이벤트 등록 */
-        NotificationCenter.default.addObserver(  // 키보드 보여질 때
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
-        NotificationCenter.default.addObserver(  // 키보드 숨겨질 때
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
-        
+        self.tableView.reloadData()
+    }
+    
+    private func setUpTableView(){
+        print("=== setting up table view ===")
         // tableView의 프로토콜
         tableView.delegate = self
         tableView.dataSource = self
@@ -195,17 +251,10 @@ class CommentViewController: UIViewController {
         let replyNib = UINib(nibName: "ReplyTableViewCell", bundle: nil)
         tableView.register(replyNib, forCellReuseIdentifier: "ReplyTableViewCell")
         
-        // 사용자 프로필 사진 크기 반만큼 radius
-        userProfileImageView.layer.cornerRadius = 17.5
+        // 테이블뷰에 footer view nib 등록
+        tableView.register(UINib(nibName: "CommentTableViewFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "CommentTableViewFooterView")
         
-//        // title 내용 설정
-//        titleLabel.text = postUserHandle!+" 님의 게시물 댓글"
-        
-        //print(self.CommentInputViewBottomConstraint.constant)
-    }
-    
-    private func getCommentList(_ data: [CommentData]){
-        //data.
+        print("=== tableview setup done ===")
     }
     
     // 키보드 보여질 때
@@ -288,13 +337,14 @@ class CommentViewController: UIViewController {
                         alert.addAction(action)
                         self.present(alert, animated: true)
                     }
+                    print("=== 새 댓글 등록, 데이터 업데이트 ===")
                     self.loadCommentData()
                 case .requestErr(let message):
                     print("requestErr", message)
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    print("serveErr")
+                    print("serverErr")
                 case .networkFail:
                     print("networkFail")
                 }
@@ -318,43 +368,74 @@ class CommentViewController: UIViewController {
 // MARK: - Extensions (TableView)
 extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     
-    // 다시 1개로 함 나중에 수정하기
+    // 댓글의 개수만큼 섹션 생성
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return commentDataList?.count ?? 0
     }
     
-    // 한 섹션에 몇 개의 셀을 넣을지
+    // 한 섹션에 몇 개의 셀을 넣을지 -> 1(부모댓글 자신) + 자식댓글 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentDataList?.count ?? 0
+        return 1 + childCommentCntList[section]
     }
     
     // 어떤 셀을 보여줄지
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // 추후에 댓글인지 대댓글인지 분기하는 방식으로 수정할 것
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
-//            return UITableViewCell()
-//        }
-//        return cell
-        
-        // 댓글에 대댓글이 있으면 한 번에...
-        
-        
         let section = indexPath.section
+        let cellData = self.uiCommentList
         
-        switch section{
-        case 0:
+        // 셀을 그리기 위해 인덱스를 계산 해야 함
+        var childCommentsSoFar = 0
+        if(section != 0){
+            for index in 0...section - 1 {
+                childCommentsSoFar += self.childCommentCntList[index]
+            }
+        }
+        
+        var finalIndex = section + indexPath.row + childCommentsSoFar
+        print("=== finalIndex: \(finalIndex)")
+        
+        print("=== 현재 셀에 그리는 데이터 ===")
+        print(cellData[finalIndex])
+        
+        if !cellData[finalIndex].isParent {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyTableViewCell", for: indexPath)
+                    as? ReplyTableViewCell else{
+                return UITableViewCell()
+            }
+            cell.setupData(cellData[finalIndex])
+            return cell
+        }
+        else{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
                 return UITableViewCell()
             }
-            if let cellData = self.commentDataList {
-                cell.setupData(cellData[indexPath.row])
-            }
+            cell.setupData(cellData[finalIndex])
             return cell
-        default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReplyTableViewCell", for: indexPath) as? ReplyTableViewCell else{
-                return UITableViewCell()
+        }
+    }
+    
+    // footer cell 등록, 보여주기
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
+                      "CommentTableViewFooterView") as! CommentTableViewFooterView
+        // footer에게 CommentViewController 전달
+        //footerView.tableView = self.tableView
+        footerView.commentVC = self
+        footerView.postId = self.postId
+
+
+        if let cellData = self.commentDataList {
+            if cellData[section].recentComment != nil {
+                //footerView.backgroundColor = .blue
+                footerView.curCommentId = cellData[section].commentSK
+                return footerView
             }
-            return cell
+            else {
+                return nil
+            }
+        }
+        else{
+            return nil
         }
     }
     
@@ -382,6 +463,21 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
 //        }
 //        tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
 //    }
+    
+    // 이상한 여백 제거?
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let cellData = self.commentDataList {
+            if cellData[section].recentComment == nil {
+                return .leastNonzeroMagnitude
+            }
+        }
+        return UITableView.automaticDimension
+    }
+    
+    // grouped 스타일 테이블뷰이기 때문에 자동 생성되는 헤더 높이를 0으로
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNonzeroMagnitude
+    }
 }
 
 // MARK: - Extension (UITextView 동적 높이 조절)
@@ -440,3 +536,5 @@ extension CommentViewController: UITextViewDelegate {
 //        }
     }
 }
+
+

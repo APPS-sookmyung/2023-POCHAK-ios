@@ -17,10 +17,17 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var childCommentBtn: UIButton!
     
     var taggedId: String = ""
+    var loggedinUserHandle: String?
+    var deleteButton = UIButton()
+    
+    let seeChildCommentBtn = UIButton()
     
     // MARK: - Action
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        
         /* commentTextView 초기화 */
         
         // commentTextView의 inset 제거
@@ -44,6 +51,8 @@ class CommentTableViewCell: UITableViewCell {
         // label이 터치 인식할 수 있도록 gesture recognizer 추가
         //let recognizer = UITapGestureRecognizer(target: self, action: #selector(taggedIdTapped))
         //commentLabel.addGestureRecognizer(recognizer)
+        
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -53,9 +62,9 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     // MARK: - Helpers
-    func setupData(_ comment: CommentData){
+    func setupData(_ comment: UICommentData){
         // 프로필 이미지
-        if let profileImgStr = comment.userProfileImg {
+        let profileImgStr = comment.userProfileImg
             let url = URL(string: profileImgStr)
             // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
             // 이를 방지하기 위해 다른 thread에서 처리함.
@@ -69,16 +78,32 @@ class CommentTableViewCell: UITableViewCell {
                     }
                 }
             }
-        }
+        
         self.commentUserHandleLabel.text = comment.userHandle
         self.commentTextView.text = comment.content
         
+        /* 로그인된 유저의 댓글인 경우 삭제 버튼 생성*/
+        if(comment.userHandle == loggedinUserHandle){
+            self.addSubview(deleteButton)
+            
+            // 오토레이아웃 설정
+            deleteButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            deleteButton.leadingAnchor.constraint(equalTo: self.childCommentBtn.trailingAnchor, constant: 5.0).isActive = true
+            deleteButton.centerYAnchor.constraint(equalTo: self.childCommentBtn.centerYAnchor).isActive = true
+            
+            deleteButton.setTitle("삭제", for: .normal)
+            deleteButton.setTitleColor(UIColor(named: "gray04"), for: .normal)
+            deleteButton.backgroundColor = .clear
+            deleteButton.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 11.0)
+        }
+        
         // comment.uploadedTime 값: 2023-12-27T19:03:32.701
         // 시간 계산
-        let arr = comment.uploadedTime?.split(separator: "T")  // T를 기준으로 자름, ["2023-12-27", "19:03:32.701"]
-        let timeArr = arr![arr!.endIndex - 1].split(separator: ".")  // ["19:03:32", "701"]
+        let arr = comment.uploadedTime.split(separator: "T")  // T를 기준으로 자름, ["2023-12-27", "19:03:32.701"]
+        let timeArr = arr[arr.endIndex - 1].split(separator: ".")  // ["19:03:32", "701"]
         
-        let uploadedTime = arr![arr!.startIndex] + " " + timeArr[timeArr.startIndex]
+        let uploadedTime = arr[arr.startIndex] + " " + timeArr[timeArr.startIndex]
         
         // 현재 시간
         let currentTime = Date()
@@ -90,10 +115,6 @@ class CommentTableViewCell: UITableViewCell {
         //let startStr = format.string(from: startTime!)
         let endStr = format.string(from: currentTime)
         let endTime = format.date(from: endStr)
-
-        print("startTime: ")
-        print(uploadedTime)
-        print("currentTime: "+endStr)
         
         let timePassed = Int(endTime!.timeIntervalSince(startTime))  // 초단위 리턴
         // 초
@@ -118,7 +139,6 @@ class CommentTableViewCell: UITableViewCell {
         else{
             self.timePassedLabel.text = String(timePassed / (7*24*60*60)) + "주"
         }
-        //self.timePassedLabel.text = comment.uploadedTime  // -> 계산해야 함
     }
 
 }
