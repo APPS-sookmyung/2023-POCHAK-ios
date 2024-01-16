@@ -8,9 +8,7 @@
 import UIKit
 
 class MakeProfileViewController: UIViewController {
-    
-    var accessToken: String!
-    
+        
     let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
     let email = UserDefaultsManager.getData(type: String.self, forKey: .email) ?? "email not found"
     let socialType = UserDefaultsManager.getData(type: String.self, forKey: .socialType) ?? "socialType not found"
@@ -61,8 +59,7 @@ class MakeProfileViewController: UIViewController {
         UserDefaultsManager.setData(value: message, key: .message)
         
         // request : POST
-        JoinDataManager.shared.joinDataManager(accessToken, 
-                                               name,
+        JoinDataManager.shared.joinDataManager(name,
                                                email,
                                                handle,
                                                message,
