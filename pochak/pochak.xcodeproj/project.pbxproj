@@ -101,6 +101,8 @@
 		EADE01842B383A8B00CECD5B /* PostTabDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE01832B383A8B00CECD5B /* PostTabDataModel.swift */; };
 		EADE01862B383A9700CECD5B /* PostTabDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE01852B383A9700CECD5B /* PostTabDataService.swift */; };
 		EAF885262B5677CB00BA184A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF885252B5677CB00BA184A /* libsqlite3.0.tbd */; };
+		EAF885292B567F4F00BA184A /* RecentSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF885282B567F4F00BA184A /* RecentSearchModel.swift */; };
+		EAF8852B2B569B6600BA184A /* RecentSearchRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF8852A2B569B6600BA184A /* RecentSearchRealmManager.swift */; };
 		EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */; };
 		EAF9184F2AA462C50037C270 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */; };
 		EAF918512AA468670037C270 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF918502AA468670037C270 /* APIConstants.swift */; };
@@ -233,6 +235,8 @@
 		EADE01832B383A8B00CECD5B /* PostTabDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabDataModel.swift; sourceTree = "<group>"; };
 		EADE01852B383A9700CECD5B /* PostTabDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabDataService.swift; sourceTree = "<group>"; };
 		EAF885252B5677CB00BA184A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		EAF885282B567F4F00BA184A /* RecentSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchModel.swift; sourceTree = "<group>"; };
+		EAF8852A2B569B6600BA184A /* RecentSearchRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchRealmManager.swift; sourceTree = "<group>"; };
 		EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		EAF918502AA468670037C270 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -538,6 +542,8 @@
 			children = (
 				EA1289102B3C4F14002EC93E /* SearchDataService.swift */,
 				EA1289122B3C4F1F002EC93E /* SearchDataModel.swift */,
+				EAF885282B567F4F00BA184A /* RecentSearchModel.swift */,
+				EAF8852A2B569B6600BA184A /* RecentSearchRealmManager.swift */,
 			);
 			path = SearchDataManager;
 			sourceTree = "<group>";
@@ -976,6 +982,7 @@
 				EA1289112B3C4F14002EC93E /* SearchDataService.swift in Sources */,
 				EA01079D2A59556800A3AE85 /* InfoViewController.swift in Sources */,
 				3769D6C72B3C4F0900294CD1 /* FollowingCollectionViewCell.swift in Sources */,
+				EAF885292B567F4F00BA184A /* RecentSearchModel.swift in Sources */,
 				08DD9EC22B454356004CCD5F /* FollowDataModel.swift in Sources */,
 				08D98C4A2AFEE8D700E9A097 /* LikedUsersDataModel.swift in Sources */,
 				EA0107B32A5ECB8A00A3AE85 /* PostCollectionViewCell.swift in Sources */,
@@ -1011,6 +1018,7 @@
 				08FD3A412B3C70BC00574880 /* HomeDataModel.swift in Sources */,
 				0893E1622B09083C003CF3D8 /* PostDataService.swift in Sources */,
 				37C3AF482B3CB2B300B4C79C /* MyProfilePochakedPostModel.swift in Sources */,
+				EAF8852B2B569B6600BA184A /* RecentSearchRealmManager.swift in Sources */,
 				EA1718362A592BE3009168E6 /* AlarmCollectionViewCell.swift in Sources */,
 				376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */,
 				EAF918512AA468670037C270 /* APIConstants.swift in Sources */,
