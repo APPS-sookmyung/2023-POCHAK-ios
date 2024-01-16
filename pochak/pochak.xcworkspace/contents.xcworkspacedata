@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jangnari/Documents/2023-POCHAK-ios/pochak/RecentSearchTerm+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/jangnari/Documents/2023-POCHAK-ios/pochak/RecentSearchTerm+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:pochak.xcodeproj">
    </FileRef>
    <FileRef

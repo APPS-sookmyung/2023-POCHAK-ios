@@ -24,8 +24,6 @@ class SearchResultViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         setupTableView()
         setUpSearchController()
-        
-        searchData = CoreDataManager.shared.loadFromCoreData(request: )
     }
     
     private func setUpSearchController() {
@@ -43,10 +41,7 @@ class SearchResultViewController: UIViewController {
         tableView.isHidden = true
 
         tableView.register(UINib(nibName: "SearchResultTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchResultTableViewCell")
-
-        
     }
-
 }
 
 //MARK: - 서치바 tableView

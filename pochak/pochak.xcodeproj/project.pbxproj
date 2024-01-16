@@ -100,8 +100,7 @@
 		EABD20662A6CF5CC007543E9 /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */; };
 		EADE01842B383A8B00CECD5B /* PostTabDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE01832B383A8B00CECD5B /* PostTabDataModel.swift */; };
 		EADE01862B383A9700CECD5B /* PostTabDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EADE01852B383A9700CECD5B /* PostTabDataService.swift */; };
-		EAF8851F2B5663F100BA184A /* RecentSearchModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EAF8851D2B5663F100BA184A /* RecentSearchModel.xcdatamodeld */; };
-		EAF885212B56653000BA184A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF885202B56653000BA184A /* CoreDataManager.swift */; };
+		EAF885262B5677CB00BA184A /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF885252B5677CB00BA184A /* libsqlite3.0.tbd */; };
 		EAF9184E2AA462C50037C270 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */; };
 		EAF9184F2AA462C50037C270 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */; };
 		EAF918512AA468670037C270 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF918502AA468670037C270 /* APIConstants.swift */; };
@@ -233,8 +232,7 @@
 		EABD20642A6CF5CC007543E9 /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
 		EADE01832B383A8B00CECD5B /* PostTabDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabDataModel.swift; sourceTree = "<group>"; };
 		EADE01852B383A9700CECD5B /* PostTabDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabDataService.swift; sourceTree = "<group>"; };
-		EAF8851E2B5663F100BA184A /* RecentSearchModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecentSearchModel.xcdatamodel; sourceTree = "<group>"; };
-		EAF885202B56653000BA184A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		EAF885252B5677CB00BA184A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		EAF9184C2AA462C50037C270 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		EAF9184D2AA462C50037C270 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 		EAF918502AA468670037C270 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -252,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF885262B5677CB00BA184A /* libsqlite3.0.tbd in Frameworks */,
 				AF5AAB97DDEAC75EAEDDCFE4 /* Pods_pochak.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +516,7 @@
 		BDC17F86F20255B8BDA204A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EAF885252B5677CB00BA184A /* libsqlite3.0.tbd */,
 				A65A7656D9D72CC873C98FD4 /* Pods_pochak.framework */,
 				BC75B5747D3AC9026B862E11 /* Pods_pochak_pochakUITests.framework */,
 				6E1916A70A802F298FF38F24 /* Pods_pochakTests.framework */,
@@ -538,8 +538,6 @@
 			children = (
 				EA1289102B3C4F14002EC93E /* SearchDataService.swift */,
 				EA1289122B3C4F1F002EC93E /* SearchDataModel.swift */,
-				EAF8851D2B5663F100BA184A /* RecentSearchModel.xcdatamodeld */,
-				EAF885202B56653000BA184A /* CoreDataManager.swift */,
 			);
 			path = SearchDataManager;
 			sourceTree = "<group>";
@@ -990,7 +988,6 @@
 				3769D6B22B3C300D00294CD1 /* GoogleLoginModel.swift in Sources */,
 				3769D6BF2B3C349D00294CD1 /* SecondTabmanViewController.swift in Sources */,
 				08DD9EC42B454405004CCD5F /* FollowDataService.swift in Sources */,
-				EAF8851F2B5663F100BA184A /* RecentSearchModel.xcdatamodeld in Sources */,
 				371D33782B4E83E90084FF6A /* UserDefaultsManager.swift in Sources */,
 				373815162A89E6D30032066A /* SocialJoinViewController.swift in Sources */,
 				EA1289082B3B2823002EC93E /* AlarmDataModel.swift in Sources */,
@@ -1018,7 +1015,6 @@
 				376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */,
 				EAF918512AA468670037C270 /* APIConstants.swift in Sources */,
 				3769D6BD2B3C348800294CD1 /* FirstTabmanViewController.swift in Sources */,
-				EAF885212B56653000BA184A /* CoreDataManager.swift in Sources */,
 				EA1B0B5B2A49D23A00F86FBC /* AppDelegate.swift in Sources */,
 				3769D6B92B3C345800294CD1 /* ProfileTabViewController.swift in Sources */,
 				08FD3A392B357E6400574880 /* LikedUsersDataService.swift in Sources */,
@@ -1388,19 +1384,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		EAF8851D2B5663F100BA184A /* RecentSearchModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				EAF8851E2B5663F100BA184A /* RecentSearchModel.xcdatamodel */,
-			);
-			currentVersion = EAF8851E2B5663F100BA184A /* RecentSearchModel.xcdatamodel */;
-			path = RecentSearchModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = EA1B0B4F2A49D23A00F86FBC /* Project object */;
 }
