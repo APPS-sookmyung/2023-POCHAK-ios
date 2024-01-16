@@ -67,6 +67,8 @@ struct UICommentData {
     let userProfileImg: String  // 댓글을 작성한 유저의 프로필 이미지
     let userHandle: String  // 댓글을 작성한 유저의 핸들
     let commentId: String  // 댓글 아이디
+    let commentUploadedTime: String  // 댓글 업로드 시간 (부모던 자식 댓글이던 값을 가짐)
+    let parentCommentUploadedTime: String?  // 부모 댓글 업로드 시간(부모 댓글인 경우 nil)
     let uploadedTime: String  //LocalDateTime?  // 댓글 작성 시간
     let content: String  // 내용
     let isParent: Bool
