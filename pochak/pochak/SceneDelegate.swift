@@ -28,6 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // 로그인 된 상태
             print("scene delegate login succeed")
             print(keyChainToken)
+            let access = GetAccessToken().getAccessToken()
+            print(access)
             guard let homeTabVC = storyboard.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
             window?.rootViewController = homeTabVC
         } else {
