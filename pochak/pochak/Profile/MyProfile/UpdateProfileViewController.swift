@@ -100,6 +100,7 @@ class UpdateProfileViewController: UIViewController {
             let message = resultData.message
             print(message)
         })
+        print(keyChainAccessToken)
          // Keychain Delete
         do {
             try KeychainManager.delete(account: "accessToken")

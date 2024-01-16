@@ -90,7 +90,7 @@ class SocialJoinViewController: UIViewController {
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
                
-                self.toProfileSettingsPage(isNewMember, accessToken, email, socialType, socialId)
+                self.toProfileSettingsPage(isNewMember)
             })
         }
     }
@@ -99,11 +99,10 @@ class SocialJoinViewController: UIViewController {
     
     
     // MARK: - profileSettingPage or HomeTabPage로 전환하기
-    private func toProfileSettingsPage(_ isNewMember : Bool, _ accessToken : String,  _ email : String, _ socialType : String, _ socialId : String){
+    private func toProfileSettingsPage(_ isNewMember : Bool){
         if isNewMember == true {
             // 프로필 설정 페이지로 이동
             guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
-            makeProfileVC.accessToken = accessToken
             self.navigationController?.pushViewController(makeProfileVC, animated: true)
         } else {
             toHomeTabPage()

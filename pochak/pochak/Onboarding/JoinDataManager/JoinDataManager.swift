@@ -11,8 +11,7 @@ struct JoinDataManager {
     
     static let shared = JoinDataManager()
     
-    func joinDataManager(_ accessToken : String,
-                         _ name : String,
+    func joinDataManager(_ name : String,
                          _ email : String,
                          _ handle : String,
                          _ message : String,
@@ -32,6 +31,7 @@ struct JoinDataManager {
         print(requestBody)
         
         let url = APIConstants.baseURL + "/api/v1/user/signup"
+        let accessToken = GetToken().getAccessToken()
         
         /*HEADER NEEDED TO BE INCLUDED BEFORE RUNNING*/
         let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "multipart/form-data"]
