@@ -17,12 +17,17 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var childCommentBtn: UIButton!
     
     var taggedId: String = ""
+    var loggedinUserHandle: String?
+    var deleteButton = UIButton()
     
     let seeChildCommentBtn = UIButton()
     
     // MARK: - Action
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        
         /* commentTextView 초기화 */
         
         // commentTextView의 inset 제거
@@ -76,6 +81,22 @@ class CommentTableViewCell: UITableViewCell {
         
         self.commentUserHandleLabel.text = comment.userHandle
         self.commentTextView.text = comment.content
+        
+        /* 로그인된 유저의 댓글인 경우 삭제 버튼 생성*/
+        if(comment.userHandle == loggedinUserHandle){
+            self.addSubview(deleteButton)
+            
+            // 오토레이아웃 설정
+            deleteButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            deleteButton.leadingAnchor.constraint(equalTo: self.childCommentBtn.trailingAnchor, constant: 5.0).isActive = true
+            deleteButton.centerYAnchor.constraint(equalTo: self.childCommentBtn.centerYAnchor).isActive = true
+            
+            deleteButton.setTitle("삭제", for: .normal)
+            deleteButton.setTitleColor(UIColor(named: "gray04"), for: .normal)
+            deleteButton.backgroundColor = .clear
+            deleteButton.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 11.0)
+        }
         
         // comment.uploadedTime 값: 2023-12-27T19:03:32.701
         // 시간 계산

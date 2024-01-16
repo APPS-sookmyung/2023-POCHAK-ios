@@ -14,9 +14,17 @@ class ReplyTableViewCell: UITableViewCell {
     @IBOutlet weak var userHandleLabel: UILabel!
     @IBOutlet weak var timePassedLabel: UILabel!
     @IBOutlet weak var contentLabel: MentionTextView!
+    @IBOutlet weak var childCommentBtn: UIButton!
+    
+    var loggedinUserHandle: String?
+    var deleteButton = UIButton()
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        // 현재 로그인된 유저 핸들 가져오기
+        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        
         // replyCommentTextView의 inset 제거
         replyCommentTextView.textContainerInset = .zero
         replyCommentTextView.textContainer.lineFragmentPadding = 0
@@ -53,6 +61,21 @@ class ReplyTableViewCell: UITableViewCell {
                 }
             }
         
+        /* 로그인된 유저의 댓글인 경우 삭제 버튼 생성*/
+        if(commentData.userHandle == "dxxynni"){
+            self.addSubview(deleteButton)
+            
+            // 오토 레이아웃 설정
+            deleteButton.translatesAutoresizingMaskIntoConstraints = false
+            
+            deleteButton.leadingAnchor.constraint(equalTo: self.childCommentBtn.trailingAnchor, constant: 5.0).isActive = true
+            deleteButton.centerYAnchor.constraint(equalTo: self.childCommentBtn.centerYAnchor).isActive = true
+            
+            deleteButton.setTitle("삭제", for: .normal)
+            deleteButton.setTitleColor(UIColor(named: "gray04"), for: .normal)
+            deleteButton.backgroundColor = .clear
+            deleteButton.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 11.0)
+        }
         
         // 유저 핸들
         userHandleLabel.text = commentData.userHandle

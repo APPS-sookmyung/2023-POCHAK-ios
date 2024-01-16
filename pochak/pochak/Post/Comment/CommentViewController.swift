@@ -19,6 +19,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var userProfileImageView: UIImageView!
     
     let textViewPlaceHolder = "이 게시물에 댓글을 달아보세요"
+    var loggedinUserHandle: String!  // 현재 로그인된 유저의 아이디
     
     // postVC에서 넘겨주는 값
     var postId: String!
@@ -43,6 +44,11 @@ class CommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // UserDefaults에서 현재 로그인된 유저 핸들 가져오기
+        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        print("current logged in user handle is : \(loggedinUserHandle)")
+        
+        // 테이블 뷰 세팅
         setUpTableView()
         
         /* 1번만 실행돼도 되는 초기화 과정 */
@@ -143,6 +149,7 @@ class CommentViewController: UIViewController {
     
     // MARK: - Helpers
     private func loadCommentData(){
+        print("postid: \(postId)")
         CommentDataService.shared.getComments(postId) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
@@ -158,7 +165,12 @@ class CommentViewController: UIViewController {
                 if(self.commentDataList != nil){
                     for data in self.commentDataList! {
                         //print("index: " + String(index))
-                        self.uiCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: data.recentComment != nil, childCommentCnt: 0))
+                        
+                        // 댓글 삭제 시 필요한 업로드 시간 추출
+                        var arr = data.commentSK!.split(separator: "#")  // #를 기준으로 자름 -> ["COMMENT", "PARENT", "2024-01-14T17:38:28.747131328"]
+                        let commentUploadedTime = arr[arr.endIndex - 1]
+                        
+                        self.uiCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentSK!, commentUploadedTime: String(commentUploadedTime), parentCommentUploadedTime: nil, uploadedTime: data.uploadedTime!, content: data.content!, isParent: true, hasChild: data.recentComment != nil, childCommentCnt: 0))
                         //index += 1
                         self.childCommentCntList.append(0)
                     }
@@ -332,7 +344,7 @@ class CommentViewController: UIViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    print("serveErr")
+                    print("serverErr")
                 case .networkFail:
                     print("networkFail")
                 }

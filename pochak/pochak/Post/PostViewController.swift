@@ -24,8 +24,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var moreCommentsBtn: UIButton!
     
     var receivedData: String?
-    var tempPostId = "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    var currentPostId:String!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
     var postOwnerHandle: String = ""  // 나중에 여기저기에서 사용할 수 있도록.. 미리 게시자 아이디 저장
+    
+    let pullDownMenuBtn = UIButton()
     
     private var isFollowingColor: UIColor = UIColor(named: "gray03") ?? UIColor(hexCode: "FFB83A")
     private var isNotFollowingColor: UIColor = UIColor(named: "yellow00") ?? UIColor(hexCode: "C6CDD2")
@@ -40,6 +42,46 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 로그인된 유저가 게시글의 소유자인 경우에만 실행하도록 고치기
+        let loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        //if(loggedinUserHandle == postOwnerHandle){
+//            setupPullDownMenu()
+        // 내비게이션 바에 오른쪽 아이템 추가 (ellipsis)
+        pullDownMenuBtn.setImage(UIImage(systemName:  "ellipsis"), for: .normal)
+//        let barButton = UIBarButtonItem(customView: pullDownMenuBtn)
+        let barButton = UIBarButtonItem(image: UIImage(systemName:  "ellipsis"), style: .plain, target: self, action: nil)
+        
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
+        
+        //pullDownMenuBtn.addTarget(self, action: #selector(pullDownBtnDidTap), for: .touchUpInside)
+        // Menu 만들기
+        let deletePost = UIAction(title: "게시글 삭제하기", attributes: .destructive) { action in
+            // 삭제하겠습니까? alert 만들기
+            let alert = UIAlertController(title: "정말 게시글을 삭제하시겠습니까?", message: nil, preferredStyle: UIAlertController.Style.alert)
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+            let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { action in
+                print("delete!!")
+                // 삭제 api 호출
+                
+                // 이전 화면으로 돌아가기
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(confirmAction)
+            
+            self.present(alert, animated: true)
+        }
+        //self.pullDownMenuBtn.menu = UIMenu(title: "", children: [deletePost])
+        barButton.menu = UIMenu(title: "", children: [deletePost])
+        //barButton.
+        // 추가적인 설정
+        pullDownMenuBtn.showsMenuAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
+        pullDownMenuBtn.changesSelectionAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
+        //}
+        //setupPullDownMenu()
         
         /* 1번만 해도 되는 초기화들.. */
         // 크기에 맞게
@@ -81,7 +123,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             // receivedData를 사용하여 원하는 작업을 수행합니다.
             // 예를 들어, 데이터를 표시하거나 다른 로직에 활용할 수 있습니다.
             print("Received Data: \(data)")
-            tempPostId = data
+            currentPostId = data
         } else {
             print("No data received.")
         }
@@ -172,7 +214,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     }
     
     func loadPostDetailData(){
-        PostDataService.shared.getPostDetail(tempPostId) { (response) in
+        PostDataService.shared.getPostDetail(currentPostId) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let postData):
@@ -196,6 +238,24 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let moveToOthersProfile = UITapGestureRecognizer(target: self, action: #selector(moveToOthersProfile))
         
         return moveToOthersProfile
+    }
+    
+    // 현재 로그인된 유저와 게시글의 소유자가 같을 때만
+    /* 필요없음 */
+//    func setupPullDownMenu() {
+//        // 내비게이션 바에 오른쪽 아이템 추가 (ellipsis)
+//        pullDownMenuBtn.setImage(UIImage(systemName:  "ellipsis"), for: .normal)
+//        //pullDownMenuBtn.addTarget(self, action: #selector(pullDownBtnDidTap), for: .touchUpInside)
+//        let barButton = UIBarButtonItem(customView: pullDownMenuBtn)
+//        //assign button to navigationbar
+//        self.navigationItem.rightBarButtonItem = barButton
+//        pullDownMenuBtn.showsMenuAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
+//        //pullDownMenuBtn.changesSelectionAsPrimaryAction = true
+//    }
+    
+    // 게시글 삭제하기 버튼 눌렸을 때
+    @objc func deletePost(){
+        
     }
     
     // MARK: - Actions
@@ -230,7 +290,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         postLikesVC.modalPresentationStyle = .pageSheet
         // 좋아요 누른 사람 페이지에 포스트 아이디, 포스트 게시자 아이디 전달
-        postLikesVC.postId = self.tempPostId
+        postLikesVC.postId = self.currentPostId
         postLikesVC.postOwnerHandle = self.postDataResult.postOwnerHandle
         
         // half sheet
@@ -251,7 +311,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
         
         commentVC.modalPresentationStyle = .pageSheet
-        commentVC.postId = tempPostId
+        commentVC.postId = currentPostId
         commentVC.postUserHandle = postDataResult.postOwnerHandle
         
         // half sheet
@@ -276,7 +336,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
 
     @IBAction func likeBtnTapped(_ sender: Any) {
         // 서버 연결
-        LikedUsersDataService.shared.postLikeRequest(tempPostId){(response) in
+        LikedUsersDataService.shared.postLikeRequest(currentPostId){(response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let likePostResponse):
@@ -303,10 +363,10 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     // 프로필 이미지나 아이디 클릭 시 해당 사용자 프로필로 이동
     @objc func moveToOthersProfile(sender: UITapGestureRecognizer){
         print("move to other's profile")
-        let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
-        let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
-        
-        self.navigationController?.pushViewController(profileTabVC, animated: true)
+//        let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+//        let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
+//        
+//        self.navigationController?.pushViewController(profileTabVC, animated: true)
         //commentVC.postId = tempPostId
         //commentVC.postUserHandle = postDataResult.postOwnerHandle
         

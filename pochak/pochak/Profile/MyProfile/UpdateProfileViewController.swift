@@ -94,7 +94,6 @@ class UpdateProfileViewController: UIViewController {
     
     @IBAction func logOut(_ sender: Any) {
         // API
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
         LogoutDataManager.shared.logoutDataManager(
             { resultData in
             let message = resultData.message
@@ -112,7 +111,6 @@ class UpdateProfileViewController: UIViewController {
     // MARK: - 회원탈퇴
     @IBAction func deleteAccount(_ sender: Any) {
         // API
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
         DeleteAccountDataManager.shared.deleteAccountDataManager(
             { resultData in
             let message = resultData.message
@@ -120,6 +118,7 @@ class UpdateProfileViewController: UIViewController {
         })
 //         Keychain Delete
         do {
+            print("deleting keychain")
             try KeychainManager.delete(account: "accessToken")
             try KeychainManager.delete(account: "refreshToken")
         } catch {

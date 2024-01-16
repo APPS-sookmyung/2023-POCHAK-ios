@@ -65,7 +65,17 @@ class CommentTableViewFooterView: UITableViewHeaderFooterView {
                 for data in self.childCommentDataList!{
                     //print("child comment data:")
                     //print(data)
-                    self.tempChildCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentId!, uploadedTime: data.uploadedTime!, content: data.content!, isParent: false, hasChild: false, childCommentCnt: 0))
+                    
+                    // 부모 comment id에서 uploaded time 추출
+                    // uploadedTime이 COMMENT#PARENT#2024-01-14T17:38:28.747131328인 경우,
+                    var arr = self.curCommentId.split(separator: "#")  // #를 기준으로 자름 -> ["COMMENT", "PARENT", "2024-01-14T17:38:28.747131328"]
+                    let parentUploadedTime = arr[arr.endIndex - 1]
+                    
+                    // 자식댓글 id에서 uploaded time 추출
+                    arr = (data.uploadedTime?.split(separator: "#"))!
+                    let childUploadedTime = arr[arr.endIndex - 1]
+                    
+                    self.tempChildCommentList.append(UICommentData(userProfileImg: data.userProfileImg!, userHandle: data.userHandle!, commentId: data.commentId!, commentUploadedTime: String(childUploadedTime), parentCommentUploadedTime: String(parentUploadedTime), uploadedTime: data.uploadedTime!, content: data.content!, isParent: false, hasChild: false, childCommentCnt: 0))
                 }
                 self.commentVC.childCommentCntList[section] = self.tempChildCommentList.count
                 // 제대로 된 자리에 대댓글 리스트를 삽입하기 위해서 지금까지 있는 대댓글 개수 세야 함
