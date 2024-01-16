@@ -35,8 +35,10 @@ class SecondPostTabmanViewController: UIViewController {
     
     private func loadImageData() {
         // 임시로 사용하는 loginUser
-        let handle = "dxxynni"
-        MyProfilePostDataManager.shared.myProfilePochakedPostDataManager(handle,{resultData in
+        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
+        let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
+        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
+        MyProfilePostDataManager.shared.myProfilePochakedPostDataManager(handle,keyChainAccessToken,{resultData in
             self.imageArray = resultData
             self.postCollectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
         })

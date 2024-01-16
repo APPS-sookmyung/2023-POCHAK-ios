@@ -47,11 +47,13 @@ struct JoinDataManager {
         }, to: url, headers: header).validate().responseDecodable(of: JoinAPIResponse.self) { response in
                 switch response.result {
                 case .success(let result):
+                    print("inside joinDataManager")
                     let resultData = result.result
-                    print(resultData)
                     guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
+                    guard let accountAccessToken = resultData.accessToken else { return }
+                    
                     do {
-                        try KeychainManager.save(account: keySocialId, value: accessToken, isForce: true)
+                        try KeychainManager.save(account: keySocialId, value: accountAccessToken, isForce: true)
                     } catch {
                         print(error)
                     }
