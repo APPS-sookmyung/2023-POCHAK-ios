@@ -60,7 +60,7 @@
 		3769D6D62B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */; };
 		376F125B2A8B7440005F469B /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F125A2A8B7440005F469B /* SocialLoginViewController.swift */; };
 		379A6A342B569DFA0087FAAC /* AuthenticationCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A6A332B569DFA0087FAAC /* AuthenticationCredential.swift */; };
-		379A6A362B569E660087FAAC /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A6A352B569E660087FAAC /* Authenticator.swift */; };
+		379A6A3A2B56BDBF0087FAAC /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A6A392B56BDBF0087FAAC /* Authenticator.swift */; };
 		37A284C12B52FC910023EB9D /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A284C02B52FC910023EB9D /* UpdateProfileViewController.swift */; };
 		37C3AF482B3CB2B300B4C79C /* MyProfilePochakedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3AF472B3CB2B300B4C79C /* MyProfilePochakedPostModel.swift */; };
 		37C3AF4A2B3CB2C700B4C79C /* MyProfilePochakPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C3AF492B3CB2C700B4C79C /* MyProfilePochakPostModel.swift */; };
@@ -194,7 +194,7 @@
 		3769D6D42B3C59F900294CD1 /* ProfilePostCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePostCollectionViewCell.xib; sourceTree = "<group>"; };
 		376F125A2A8B7440005F469B /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		379A6A332B569DFA0087FAAC /* AuthenticationCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationCredential.swift; sourceTree = "<group>"; };
-		379A6A352B569E660087FAAC /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Authenticator.swift; path = ../../../../../../Authenticator.swift; sourceTree = "<group>"; };
+		379A6A392B56BDBF0087FAAC /* Authenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		37A284C02B52FC910023EB9D /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		37C3AF452B3CB29A00B4C79C /* MyProfilePostDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePostDataManager.swift; sourceTree = "<group>"; };
 		37C3AF472B3CB2B300B4C79C /* MyProfilePochakedPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfilePochakedPostModel.swift; sourceTree = "<group>"; };
@@ -753,7 +753,7 @@
 				371D33792B4E8D1F0084FF6A /* KeychainManager.swift */,
 				37D311E22B56754D00A1D7C1 /* GetToken.swift */,
 				379A6A332B569DFA0087FAAC /* AuthenticationCredential.swift */,
-				379A6A352B569E660087FAAC /* Authenticator.swift */,
+				379A6A392B56BDBF0087FAAC /* Authenticator.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1046,7 +1046,7 @@
 				08D98C472AFEE8B300E9A097 /* PostDataModel.swift in Sources */,
 				3769D6C32B3C3A1600294CD1 /* FollowerCollectionViewCell.swift in Sources */,
 				EA1B0B5F2A49D23A00F86FBC /* ViewController.swift in Sources */,
-				379A6A362B569E660087FAAC /* Authenticator.swift in Sources */,
+				379A6A3A2B56BDBF0087FAAC /* Authenticator.swift in Sources */,
 				EA17182C2A5912A7009168E6 /* UploadViewController.swift in Sources */,
 				3769D6B22B3C300D00294CD1 /* GoogleLoginModel.swift in Sources */,
 				37D311E52B567AE000A1D7C1 /* OtherUserProfileViewController.swift in Sources */,
