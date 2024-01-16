@@ -10,8 +10,7 @@ import Alamofire
 class MyProfileUpdateDataManager{
     static let shared = MyProfileUpdateDataManager()
     
-    func updateDataManager(_ accessToken : String,
-                         _ name : String,
+    func updateDataManager(_ name : String,
                          _ handle : String,
                          _ message : String,
                          _ profileImage : UIImage?,
@@ -22,9 +21,10 @@ class MyProfileUpdateDataManager{
             "message" : message]
         
         let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle
+        let accessToken = GetToken().getAccessToken()
         
         /*HEADER NEEDED TO BE INCLUDED BEFORE RUNNING*/
-        let header : HTTPHeaders = ["Authorization": "Bearer " + accessToken, "Content-type": "multipart/form-data"]
+        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "multipart/form-data"]
         print(header[0])
         AF.upload(multipartFormData: { multipartFormData in
             //body 추가

@@ -102,6 +102,7 @@ class MyProfileTabViewController: TabmanViewController {
                     }
                 }
             }
+            self.profileImage.contentMode = .scaleAspectFill
             self.postCount.text = String(resultData.totalPostNum ?? 0)
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)
