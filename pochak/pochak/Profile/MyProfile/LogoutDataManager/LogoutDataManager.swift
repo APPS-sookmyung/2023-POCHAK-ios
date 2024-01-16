@@ -10,11 +10,12 @@ class LogoutDataManager{
     
     static let shared = LogoutDataManager()
     
-    func logoutDataManager(_ accessToken : String, _ completion: @escaping (LogoutDataModel) -> Void) {
+    func logoutDataManager(_ completion: @escaping (LogoutDataModel) -> Void) {
         
         let url = APIConstants.baseURL + "/api/v1/user/logout"
+        let accessToken = GetToken().getAccessToken()
         
-        let header : HTTPHeaders = ["Authorization": "Bearer " + accessToken, "Content-type": "application/json"]
+        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         print(header[0])
         
 //        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU", "Content-type": "application/json"]

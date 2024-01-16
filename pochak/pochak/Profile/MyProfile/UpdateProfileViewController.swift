@@ -70,7 +70,6 @@ class UpdateProfileViewController: UIViewController {
         guard let name = nameTextField.text  else {return}
         guard let message = messageTextField.text  else {return}
         guard let profileImage = profileImg.image  else {return}
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
 
         
         UserDefaultsManager.setData(value: name, key: .name)
@@ -78,8 +77,7 @@ class UpdateProfileViewController: UIViewController {
 
         
         // request : PATCH
-        MyProfileUpdateDataManager.shared.updateDataManager(keyChainAccessToken,
-                                                            name,
+        MyProfileUpdateDataManager.shared.updateDataManager(name,
                                                             handle,
                                                             message,
                                                             profileImage,
@@ -98,17 +96,17 @@ class UpdateProfileViewController: UIViewController {
         // API
         guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
         LogoutDataManager.shared.logoutDataManager(
-            keyChainAccessToken,
             { resultData in
             let message = resultData.message
             print(message)
         })
-//         Keychain Delete
-//        do {
-//            try KeychainManager.delete(account: socialId)
-//        } catch {
-//            print(error)
-//        }
+         // Keychain Delete
+        do {
+            try KeychainManager.delete(account: "accessToken")
+            try KeychainManager.delete(account: "refreshToken")
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - 회원탈퇴
@@ -116,14 +114,14 @@ class UpdateProfileViewController: UIViewController {
         // API
         guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
         DeleteAccountDataManager.shared.deleteAccountDataManager(
-            keyChainAccessToken,
             { resultData in
             let message = resultData.message
             print(message)
         })
 //         Keychain Delete
         do {
-            try KeychainManager.delete(account: socialId)
+            try KeychainManager.delete(account: "accessToken")
+            try KeychainManager.delete(account: "refreshToken")
         } catch {
             print(error)
         }

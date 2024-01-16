@@ -106,6 +106,7 @@ class SocialJoinViewController: UIViewController {
             makeProfileVC.accessToken = accessToken
             self.navigationController?.pushViewController(makeProfileVC, animated: true)
         } else {
+            toHomeTabPage()
             print("error in switching VC!")
         }
     }

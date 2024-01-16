@@ -11,11 +11,12 @@ class DeleteAccountDataManager{
     
     static let shared = DeleteAccountDataManager()
     
-    func deleteAccountDataManager(_ accessToken : String, _ completion: @escaping (DeleteAccountResponse) -> Void) {
+    func deleteAccountDataManager(_ completion: @escaping (DeleteAccountResponse) -> Void) {
         
         let url = APIConstants.baseURL + "/api/v1/user/signout"
+        let accessToken = GetToken().getAccessToken()
         
-        let header : HTTPHeaders = ["Authorization": "Bearer " + accessToken, "Content-type": "application/json"]
+        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         print(header[0])
         
         AF.request(url,

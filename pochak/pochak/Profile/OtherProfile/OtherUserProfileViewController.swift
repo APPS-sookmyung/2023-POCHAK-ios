@@ -1,30 +1,26 @@
 //
-//  ProfileTabViewController.swift
+//  OtherUseProfileViewController.swift
 //  pochak
 //
-//  Created by Seo Cindy on 12/27/23.
+//  Created by Seo Cindy on 1/16/24.
 //
 
-import Tabman
-import Pageboy
 import UIKit
-import Kingfisher
 
-class MyProfileTabViewController: TabmanViewController {
+class OtherUserProfileViewController: UIViewController {
 
     @IBOutlet weak var profileBackground: UIView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var followerList: UIStackView!
     @IBOutlet weak var followingList: UIStackView!
-    @IBOutlet weak var whiteBackground1: UIView!
-    @IBOutlet weak var whiteBackground2: UIView!
+    @IBOutlet weak var whiteBackground: UIView!
     @IBOutlet weak var userHandle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userMessage: UILabel!
     @IBOutlet weak var postCount: UILabel!
     @IBOutlet weak var followerCount: UILabel!
     @IBOutlet weak var followingCount: UILabel!
-    @IBOutlet weak var shareBtn: UIButton!
+    @IBOutlet weak var followToggleBtn: UIButton!
     
     let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
 
@@ -36,9 +32,9 @@ class MyProfileTabViewController: TabmanViewController {
         profileBackground.layer.cornerRadius = 50
         profileImage.layer.cornerRadius = 46
         
-        // 흰색 배경 디자인
-        whiteBackground1.layer.cornerRadius = 8
-        whiteBackground2.layer.cornerRadius = 8
+        // 둥근 모서리 적용
+        whiteBackground.layer.cornerRadius = 8
+        followToggleBtn.layer.cornerRadius = 8
     
         // 팔로워 / 팔로잉 레이블 선택
         viewFollowerList()
@@ -57,9 +53,7 @@ class MyProfileTabViewController: TabmanViewController {
         let barButton = UIBarButtonItem(customView: settingButton)
         //assign button to navigationbar
         self.navigationItem.rightBarButtonItem = barButton
-        
-        // shareButton
-        self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
+                
         
     }
     override func viewWillAppear(_ animated: Bool){
@@ -78,9 +72,7 @@ class MyProfileTabViewController: TabmanViewController {
         self.userHandle.text = "@" + handle
         self.userName.text = name
         self.userMessage.text = message
-        self.shareBtn.setTitle("pochak.site/@" + handle, for: .normal)
-        // font not changing? 스토리보드에서 버튼 style을 default로 변경
-        self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
+        
         
         guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
         print(keyChainAccessToken)
@@ -140,5 +132,3 @@ class MyProfileTabViewController: TabmanViewController {
         self.navigationController?.pushViewController(updateProfileVC, animated: true)
     }
 }
-
-
