@@ -24,6 +24,10 @@ class ProfileTabViewController: TabmanViewController {
     @IBOutlet weak var postCount: UILabel!
     @IBOutlet weak var followerCount: UILabel!
     @IBOutlet weak var followingCount: UILabel!
+    @IBOutlet weak var shareBtn: UIButton!
+    
+    let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +49,6 @@ class ProfileTabViewController: TabmanViewController {
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
-        // API
-        loadProfileData()
-        
         // settingButton
         let settingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         settingButton.setImage(UIImage(named: "settingIcon"), for: .normal)
@@ -57,15 +58,40 @@ class ProfileTabViewController: TabmanViewController {
         //assign button to navigationbar
         self.navigationItem.rightBarButtonItem = barButton
         
+        // shareButton
+        self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
+        
+    }
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        
+        // API
+        loadProfileData()
     }
     
     private func loadProfileData() {
-        // 임시로 사용하는 loginUser
-        let handle = "dxxynni"
-        MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,{resultData in
+        // LoginUser 정보 가져오기
+        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
+        let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
+        let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? "message not found"
+        
+        self.userHandle.text = "@" + handle
+        self.userName.text = name
+        self.userMessage.text = message
+        self.shareBtn.setTitle("pochak.site/@" + handle, for: .normal)
+        // font not changing? 스토리보드에서 버튼 style을 default로 변경
+        self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
+        
+        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
+        print(keyChainAccessToken)
+        
+        MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,keyChainAccessToken,{resultData in
+            print("myProfilePochakPostDataManager")
+            print(resultData)
             
             // 프로필 이미지
-            var imageURL = resultData.userProfileImg ?? ""
+            let imageURL = resultData.userProfileImg ?? ""
+            UserDefaultsManager.setData(value: imageURL, key: .profileImgUrl)
             if let url = URL(string: imageURL) {
                 self.profileImage.kf.setImage(with: url) { result in
                     switch result {
@@ -76,9 +102,6 @@ class ProfileTabViewController: TabmanViewController {
                     }
                 }
             }
-            self.userHandle.text = "@" + (resultData.handle ?? "")
-            self.userName.text = resultData.userName
-            self.userMessage.text = resultData.message
             self.postCount.text = String(resultData.totalPostNum ?? 0)
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)
@@ -113,14 +136,8 @@ class ProfileTabViewController: TabmanViewController {
     }
     
     @objc private func clickSettingButton(_ sender: UIButton) {
-        print("setting button clicked")
-        guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
-        print(keySocialId)
-        do {
-            try  KeychainManager.delete(account: keySocialId)
-        } catch {
-            print(error)
-        }
+        guard let updateProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileViewController else {return}
+        self.navigationController?.pushViewController(updateProfileVC, animated: true)
     }
 }
 

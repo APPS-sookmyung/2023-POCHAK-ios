@@ -95,18 +95,6 @@ class SocialJoinViewController: UIViewController {
         }
     }
     
-    private func checkLoginState(){
-        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if error != nil || user != nil{
-                print("Not Signed in")
-            }
-            else{
-                print("Signed in User")
-            }
-            
-        }
-    }
-    
     // MARK: - Apple Login
     
     
