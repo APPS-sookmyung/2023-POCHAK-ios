@@ -18,6 +18,8 @@ class SearchResultTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupAttribute()
         // Initialization code
+//         imageViewClickGesture()
+
     }
 
     private func setupAttribute(){

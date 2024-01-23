@@ -18,6 +18,11 @@ PODS:
   - GTMSessionFetcher/Core (3.1.1)
   - Kingfisher (7.6.2)
   - Pageboy (3.7.0)
+  - Realm (10.45.3):
+    - Realm/Headers (= 10.45.3)
+  - Realm/Headers (10.45.3)
+  - RealmSwift (10.45.3):
+    - Realm (= 10.45.3)
   - Tabman (2.13.0):
     - Pageboy (~> 3.7.0)
 
@@ -26,6 +31,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - GoogleSignInSwiftSupport
   - Kingfisher (~> 7.0)
+  - RealmSwift (~> 10)
   - Tabman (~> 2.9)
 
 SPEC REPOS:
@@ -38,6 +44,8 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Kingfisher
     - Pageboy
+    - Realm
+    - RealmSwift
     - Tabman
 
 SPEC CHECKSUMS:
@@ -49,8 +57,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   Pageboy: fe646118f7168960058bea7a96038386aa7c0da8
+  Realm: b277b843c7505c1e30e3a70322a24a09283e62bb
+  RealmSwift: f6690053e81733801e6619eb5b39993ab76f7050
   Tabman: 66ea44c44488327ec20f3c8dc5554a5d22f5908c
 
-PODFILE CHECKSUM: 9b1e0a7d1311150bc7d8406cb54525a0b6cedeba
+PODFILE CHECKSUM: f0adef95d69feeb571b80d8bc098e52d81c0d9d2
 
 COCOAPODS: 1.12.1
