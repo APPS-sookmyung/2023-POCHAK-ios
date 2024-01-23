@@ -147,10 +147,10 @@
             </objects>
             <point key="canvasLocation" x="172" y="678"/>
         </scene>
-        <!--SearchResultViewController-->
+        <!--Recent Search View Controller-->
         <scene sceneID="5Bk-bO-Vv1">
             <objects>
-                <viewController storyboardIdentifier="SearchResultVC" title="SearchResultViewController" id="uUh-xy-8Zg" customClass="SearchResultViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecentSearchVC" id="uUh-xy-8Zg" customClass="RecentSearchViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P99-rl-Lnd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

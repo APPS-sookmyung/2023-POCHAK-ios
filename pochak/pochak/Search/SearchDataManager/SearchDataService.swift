@@ -12,9 +12,10 @@ class SearchDataService{
     
     static let shared = SearchDataService()
     
-    func idSearchGet(keyword:String,completion: @escaping(NetworkResult<Any>) -> Void){
+    func getIdSearch(keyword:String,completion: @escaping(NetworkResult<Any>) -> Void){
         let parameters: [String: Any] = ["keyword": keyword]
-        
+        print("==getIdSearch==")
+        print(parameters)
         let dataRequest = AF.request("https://w2oa1nd4wb.execute-api.ap-northeast-2.amazonaws.com/default/elasticsearch_searchengine?keyword=\(keyword)",
                                      method: .get,
                                      encoding: URLEncoding.queryString).validate()

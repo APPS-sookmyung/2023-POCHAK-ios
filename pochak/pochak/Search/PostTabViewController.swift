@@ -11,9 +11,6 @@ import Kingfisher
 class PostTabViewController: UIViewController, UISearchBarDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
-//    var searchController = UISearchController(searchResultsController: SearchResultViewController())
-//    
-//    let resultVC = SearchResultViewController()
     
     let searchBar = UISearchBar()
 
@@ -29,6 +26,13 @@ class PostTabViewController: UIViewController, UISearchBarDelegate{
    // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Clear search bar text and resign first responder when returning to this page
+        self.searchBar.resignFirstResponder()
+    }
+
 
     private func setupCollectionView(){
         //delegate 연결
@@ -43,7 +47,6 @@ class PostTabViewController: UIViewController, UISearchBarDelegate{
     }
 
     private func setupData(){ // 서버 연결 시
-        //        UserFeedDataManager().getUserFeed(self)
         PostTabDataService.shared.recommandGet(){
             response in
                 switch response {
@@ -70,21 +73,15 @@ class PostTabViewController: UIViewController, UISearchBarDelegate{
     private func setUpSearchController() {
         self.searchBar.placeholder = "Search User"
         self.searchBar.delegate = self
-        self.searchBar.showsCancelButton = true
         self.navigationItem.titleView = searchBar
 
    }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // 서치바가 편집 모드로 들어갈 때 실행될 코드
-        // 여기에 다른 화면으로 전환하는 코드를 추가하세요.
-        
-        // 예시: 다른 화면으로 전환하는 코드 (네비게이션 컨트롤러를 사용하는 경우)
+        // 최근 검색어 화면으로 전환
         let storyboard = UIStoryboard(name:"PostTab", bundle: nil)
-        let searchResultVC = storyboard.instantiateViewController(withIdentifier: "SearchResultVC") as! SearchResultViewController
-        self.navigationController?.pushViewController(searchResultVC, animated: false)
-
-
+        let recentSearchVC = storyboard.instantiateViewController(withIdentifier: "RecentSearchVC") as! RecentSearchViewController
+        self.navigationController?.pushViewController(recentSearchVC, animated: false)
         // 편집 모드를 시작하려면 true를 반환해야 합니다.
         return true
     }

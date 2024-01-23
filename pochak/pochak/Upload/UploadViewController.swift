@@ -23,7 +23,7 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
-    var searchData : [idSearchResponse] = []
+    var searchResultData : [idSearchResponse] = []
     
     var tagId : [String] = []
     
@@ -81,7 +81,8 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
         
 
         tagSearch.searchTextField.attributedPlaceholder = attributedString
-
+        tagSearch.autocapitalizationType = .none
+        
         tagSearch.searchTextField.font = UIFont(name: "Pretendard-medium",size:12)
         
         //아이디 태그 collectionview
@@ -182,13 +183,13 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
     func sendTextToServer(_ searchText: String) {
         // searchText를 사용하여 서버에 요청을 보내는 로직을 작성
         // 서버 요청을 보내는 코드 작성
-        SearchDataService.shared.idSearchGet(keyword: searchText){ response in
+        SearchDataService.shared.getIdSearch(keyword: searchText){ response in
             switch response {
             case .success(let data):
                 print("success")
                 print(data)
                 
-                self.searchData = data as! [idSearchResponse]
+                self.searchResultData = data as! [idSearchResponse]
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData() // tableView를 새로고침하여 이미지 업데이트
@@ -316,14 +317,14 @@ extension UploadViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - 태그 tableview
 extension UploadViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchData.count
+        return searchResultData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultTableViewCell", for: indexPath) as! SearchResultTableViewCell
 
-        let urls = self.searchData.map { $0.profileUrl }
-        let handles = self.searchData.map { $0.userHandle }
+        let urls = self.searchResultData.map { $0.profileUrl }
+        let handles = self.searchResultData.map { $0.userHandle }
         
         cell.userHandle.text = handles[indexPath.item]
         cell.configure(with: urls[indexPath.item])
@@ -334,8 +335,8 @@ extension UploadViewController: UITableViewDelegate,UITableViewDataSource{
         // 셀을 선택했을 때 수행할 동작을 여기에 추가합니다.
         // 예를 들어, 선택한 셀의 정보를 가져와서 처리하거나 화면 전환 등을 수행할 수 있습니다.
 
-        let selectedUserData = searchData[indexPath.row] // 선택한 셀의 데이터 가져오기
-        let handles = self.searchData.map { $0.userHandle }
+        let selectedUserData = searchResultData[indexPath.row] // 선택한 셀의 데이터 가져오기
+        let handles = self.searchResultData.map { $0.userHandle }
         
         // 선택한 핸들 가져오기
         let selectedHandle = handles[indexPath.row]

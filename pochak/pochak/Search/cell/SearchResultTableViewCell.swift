@@ -22,7 +22,6 @@ class SearchResultTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupAttribute()
         // Initialization code
-        print("SearchResultTableViewCell")
         imageViewClickGesture()
     }
 
