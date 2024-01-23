@@ -5,6 +5,9 @@
 //  Created by Seo Cindy on 1/14/24.
 //
 
+// 추가로 구현 할 것!!!
+// 1. handle 바꾸려고 하면 알림창 뜨게하기
+
 import UIKit
 
 class UpdateProfileViewController: UIViewController {
@@ -59,6 +62,11 @@ class UpdateProfileViewController: UIViewController {
             }
         }
         
+        // 프로필 레이아웃
+        self.profileImg.contentMode = .scaleAspectFill
+        self.profileImg.layer.cornerRadius = 58
+
+        
         // Back 버튼
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
     }
@@ -93,38 +101,66 @@ class UpdateProfileViewController: UIViewController {
     // MARK: - 로그아웃
     
     @IBAction func logOut(_ sender: Any) {
-        // API
-        LogoutDataManager.shared.logoutDataManager(
-            { resultData in
-            let message = resultData.message
-            print(message)
+        // 알람! : 회원정보가 없습니다 회원가입하시겠습니까?
+        let alert = UIAlertController(title:"로그아웃 하시겠습니까?",message: "",preferredStyle: UIAlertController.Style.alert)
+        let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: {
+            action in
+            // API
+            LogoutDataManager.shared.logoutDataManager(
+                { resultData in
+                let message = resultData.message
+                print(message)
+            })
+             // Keychain Delete
+            do {
+                try KeychainManager.delete(account: "accessToken")
+                try KeychainManager.delete(account: "refreshToken")
+            } catch {
+                print(error)
+            }
+            // UserDefulats Delete
+            UserDefaultsManager.UserDefaultsKeys.allCases.forEach { key in
+                UserDefaultsManager.removeData(key: key)
+            }
+            // Main으로 화면 전환
+            self.toMainPage()
         })
-        print(keyChainAccessToken)
-         // Keychain Delete
-        do {
-            try KeychainManager.delete(account: "accessToken")
-            try KeychainManager.delete(account: "refreshToken")
-        } catch {
-            print(error)
-        }
+        alert.addAction(cancle)
+        alert.addAction(ok)
+        present(alert,animated: true,completion: nil)
     }
     
     // MARK: - 회원탈퇴
     @IBAction func deleteAccount(_ sender: Any) {
-        // API
-        DeleteAccountDataManager.shared.deleteAccountDataManager(
-            { resultData in
-            let message = resultData.message
-            print(message)
+        // 알람! : 회원정보가 없습니다 회원가입하시겠습니까?
+        let alert = UIAlertController(title:"회원을 탈퇴 하시겠습니까? :((",message: "",preferredStyle: UIAlertController.Style.alert)
+        let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: {
+            action in
+            // API
+            DeleteAccountDataManager.shared.deleteAccountDataManager(
+                { resultData in
+                let message = resultData.message
+                print(message)
+            })
+            
+            // Keychain Delete
+            do {
+                try KeychainManager.delete(account: "accessToken")
+                try KeychainManager.delete(account: "refreshToken")
+            } catch {
+                print(error)
+            }
+            // UserDefulats Delete
+            UserDefaultsManager.UserDefaultsKeys.allCases.forEach { key in
+                UserDefaultsManager.removeData(key: key)
+            }
+            self.toMainPage()
         })
-//         Keychain Delete
-        do {
-            print("deleting keychain")
-            try KeychainManager.delete(account: "accessToken")
-            try KeychainManager.delete(account: "refreshToken")
-        } catch {
-            print(error)
-        }
+        alert.addAction(cancle)
+        alert.addAction(ok)
+        present(alert,animated: true,completion: nil)
     }
     
     // MARK: - 프로필 사진 설정
@@ -140,10 +176,19 @@ class UpdateProfileViewController: UIViewController {
         self.imagePickerController.sourceType = .photoLibrary
         present(self.imagePickerController, animated: true, completion: nil)
     }
+    
+    // 회원가입 페이지로 이동
+    private func toMainPage(){
+        // Main.storyboard 가져오기
+        let mainVCBundle = UIStoryboard.init(name: "Main", bundle: nil)
+        // NavigationController 연결 안되는 문제 -> 해결 : inherit module from target 옵션 체크
+        guard let mainVC = mainVCBundle.instantiateViewController(withIdentifier: "NavigationVC") as? NavigationController else { return }
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainVC, animated: false)
+    }
+
    
     
 }
-
 // 앨범 사진 선택 프로토콜 채택
 extension UpdateProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

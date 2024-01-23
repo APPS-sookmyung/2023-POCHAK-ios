@@ -28,9 +28,6 @@ class SocialJoinViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
-        
-//         Check Login State
-//        checkLoginState()
     }
     
     
@@ -93,8 +90,9 @@ class SocialJoinViewController: UIViewController {
                 UserDefaultsManager.setData(value: email, key: .email)
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
-               
-                self.toProfileSettingsPage(isNewMember)
+                print(isNewMember)
+                
+                self.changeViewControllerAccordingToisNewMemeberState(isNewMember, resultData)
             })
         }
     }
@@ -103,15 +101,23 @@ class SocialJoinViewController: UIViewController {
     
     
     // MARK: - profileSettingPage or HomeTabPage로 전환하기
-    private func toProfileSettingsPage(_ isNewMember : Bool){
-
+    private func changeViewControllerAccordingToisNewMemeberState(_ isNewMember : Bool, _ resultData : GoogleLoginModel){
         if isNewMember == true {
             // 프로필 설정 페이지로 이동
             guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
             self.navigationController?.pushViewController(makeProfileVC, animated: true)
         } else {
+            // 토큰 정보 저장 @KeyChainManager
+            guard let accountAccessToken = resultData.accessToken else { return }
+            guard let accountRefreshToken = resultData.refreshToken else { return }
+            do {
+                try KeychainManager.save(account: "accessToken", value: accountAccessToken, isForce: true)
+                try KeychainManager.save(account: "refreshToken", value: accountRefreshToken, isForce: true)
+            } catch {
+                print(error)
+            }
+            // 홈탭으로 이동
             toHomeTabPage()
-            print("error in switching VC!")
         }
     }
     
@@ -119,4 +125,5 @@ class SocialJoinViewController: UIViewController {
         guard let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabbarVC, animated: false)
     }
+
 }

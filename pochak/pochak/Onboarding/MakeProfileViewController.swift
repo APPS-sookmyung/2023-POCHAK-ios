@@ -41,6 +41,10 @@ class MakeProfileViewController: UIViewController {
         // Name 항목 채워넣기
         nameTextField.text = name
         
+        // 프로필 레이아웃
+        self.profileImg.contentMode = .scaleAspectFill
+        self.profileImg.layer.cornerRadius = 58
+
         // Back 버튼
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
     }
@@ -54,7 +58,7 @@ class MakeProfileViewController: UIViewController {
         guard let message = messageTextField.text  else {return}
         guard let profileImage = profileImg.image  else {return}
         
-        UserDefaultsManager.setData(value: name, key: .message)
+        UserDefaultsManager.setData(value: name, key: .name)
         UserDefaultsManager.setData(value: handle, key: .handle)
         UserDefaultsManager.setData(value: message, key: .message)
         

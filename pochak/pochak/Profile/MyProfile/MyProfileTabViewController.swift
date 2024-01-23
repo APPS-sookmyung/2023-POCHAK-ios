@@ -62,14 +62,16 @@ class MyProfileTabViewController: TabmanViewController {
         self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
         
     }
+    
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
-        
         // API
         loadProfileData()
     }
     
     private func loadProfileData() {
+        print("inside ladProfileData!!!!!!!!!!")
+
         // LoginUser 정보 가져오기
         let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
         let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
@@ -81,12 +83,9 @@ class MyProfileTabViewController: TabmanViewController {
         self.shareBtn.setTitle("pochak.site/@" + handle, for: .normal)
         // font not changing? 스토리보드에서 버튼 style을 default로 변경
         self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
-        
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
-        print(keyChainAccessToken)
-        
+            
         MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,{resultData in
-            print("myProfilePochakPostDataManager")
+            print("inside myProfilePochakPostDataManager!!!!!")
             print(resultData)
             
             // 프로필 이미지
@@ -102,7 +101,8 @@ class MyProfileTabViewController: TabmanViewController {
                     }
                 }
             }
-            self.profileImage.contentMode = .scaleAspectFill
+
+            self.profileImage.contentMode = .scaleAspectFill // 원 면적에 사진 크기 맞춤
             self.postCount.text = String(resultData.totalPostNum ?? 0)
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)

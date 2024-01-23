@@ -163,6 +163,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="google_login"/>
+                                <connections>
+                                    <action selector="googleLoginAction:" destination="zPu-po-pcg" eventType="touchUpInside" id="ppA-Di-4i0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJ6-54-iFN">
                                 <rect key="frame" x="205.66666666666666" y="629.66666666666663" width="59.999999999999972" height="60"/>
@@ -430,7 +433,7 @@
         <!--Navigation Controller-->
         <scene sceneID="WVW-3u-0ew">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w5l-aB-8rx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="w5l-aB-8rx" customClass="NavigationController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Cl-l2-IMm">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

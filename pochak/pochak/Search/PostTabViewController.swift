@@ -8,13 +8,12 @@
 import UIKit
 import Kingfisher
 
-class PostTabViewController: UIViewController, UISearchResultsUpdating{
+class PostTabViewController: UIViewController, UISearchBarDelegate{
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var searchController = UISearchController(searchResultsController: SearchResultViewController())
     
-    let resultVC = SearchResultViewController()
-    
+    let searchBar = UISearchBar()
+
     var imageArray : [PostTabDataModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +26,13 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
    // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Clear search bar text and resign first responder when returning to this page
+        self.searchBar.resignFirstResponder()
+    }
+
 
     private func setupCollectionView(){
         //delegate 연결
@@ -40,9 +46,7 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
         
     }
 
-    
     private func setupData(){ // 서버 연결 시
-        //        UserFeedDataManager().getUserFeed(self)
         PostTabDataService.shared.recommandGet(){
             response in
                 switch response {
@@ -67,44 +71,25 @@ class PostTabViewController: UIViewController, UISearchResultsUpdating{
     }
     
     private func setUpSearchController() {
-        
-        // This view controller is interested in table view row selections.
-        
-        searchController = UISearchController(searchResultsController: resultVC)
-        searchController.searchBar.tintColor = .black
-        searchController.searchResultsUpdater  = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
-        // Change Cancel button value
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
-
-        //usally good to set the presentation context
-        
-        
-        navigationItem.searchController = searchController
-        
-        searchController.searchBar.sizeToFit()
+        self.searchBar.placeholder = "Search User"
+        self.searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
 
    }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else  {
-            return
-        }
-        print(text)
-        sendTextToServer(text)
-        
-    }
-    
-    func sendTextToServer(_ searchText: String) {
-        // searchText를 사용하여 서버에 요청을 보내는 로직을 작성
-        // 예: Alamofire 등의 네트워킹 라이브러리를 사용하여 서버에 요청을 보낼 수 있음
-        // Alamofire.request(...
-        // 서버 요청을 보내는 코드 작성
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        // 최근 검색어 화면으로 전환
+        let storyboard = UIStoryboard(name:"PostTab", bundle: nil)
+        let recentSearchVC = storyboard.instantiateViewController(withIdentifier: "RecentSearchVC") as! RecentSearchViewController
+        self.navigationController?.pushViewController(recentSearchVC, animated: false)
+        // 편집 모드를 시작하려면 true를 반환해야 합니다.
+        return true
     }
     
 }
-    
+
+
+//MARK: - 포스트 collectionView
 extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
