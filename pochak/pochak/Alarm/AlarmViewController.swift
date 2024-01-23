@@ -161,7 +161,7 @@ extension AlarmViewController: UICollectionViewDelegate, UICollectionViewDataSou
         else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "FOLLOW"){
             // 프로필로 이동
             let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
-            let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
+            let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! OtherUserProfileViewController
 
             self.navigationController?.pushViewController(profileTabVC, animated: true)
             
