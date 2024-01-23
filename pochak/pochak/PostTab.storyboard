@@ -170,7 +170,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wA0-Be-353">
                                 <rect key="frame" x="24" y="108.66666666666669" width="327" height="669.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="sectionIndexBackgroundColor" systemColor="labelColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TXI-7d-z2V"/>
@@ -182,13 +181,11 @@
                             <constraint firstItem="wA0-Be-353" firstAttribute="leading" secondItem="TXI-7d-z2V" secondAttribute="leading" constant="24" id="YK8-Fz-3EU"/>
                             <constraint firstItem="TXI-7d-z2V" firstAttribute="trailing" secondItem="wA0-Be-353" secondAttribute="trailing" constant="24" id="bSK-Gw-fid"/>
                             <constraint firstItem="jUU-fS-To3" firstAttribute="top" secondItem="TXI-7d-z2V" secondAttribute="top" constant="22" id="bnT-7D-w1S"/>
-                            <constraint firstItem="wA0-Be-353" firstAttribute="bottom" secondItem="TXI-7d-z2V" secondAttribute="bottom" id="hIy-Pa-nRU"/>
                             <constraint firstItem="TXI-7d-z2V" firstAttribute="trailing" secondItem="jUU-fS-To3" secondAttribute="trailing" constant="23" id="pee-oN-zIj"/>
                             <constraint firstItem="wA0-Be-353" firstAttribute="top" secondItem="jUU-fS-To3" secondAttribute="bottom" constant="18" id="qLh-a6-qCX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="deleteAllButton" destination="jUU-fS-To3" id="ZqF-ml-hFJ"/>
                         <outlet property="tableView" destination="wA0-Be-353" id="16v-Tw-CTQ"/>
                     </connections>
                 </viewController>

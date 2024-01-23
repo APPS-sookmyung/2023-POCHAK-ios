@@ -13,16 +13,13 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var userHandle: UILabel!
     @IBOutlet weak var deleteBtn: UIImageView!
-    
     static let identifier = "SearchResultTableViewCell"
-    
-    var deleteButtonAction: (() -> Void)?
-
     override func awakeFromNib() {
         super.awakeFromNib()
         setupAttribute()
         // Initialization code
-        imageViewClickGesture()
+//         imageViewClickGesture()
+
     }
 
     private func setupAttribute(){
@@ -33,21 +30,6 @@ class SearchResultTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    private func imageViewClickGesture(){
-        // UITapGestureRecognizer 생성
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
-
-        // 이미지뷰에 UITapGestureRecognizer 추가
-        deleteBtn.addGestureRecognizer(tapGesture)
-
-        // 사용자 상호 작용을 가능하게 하려면 반드시 다음을 설정해야 합니다.
-        deleteBtn.isUserInteractionEnabled = true
-    }
-
-    @objc func imageViewTapped() {
-           deleteButtonAction?()
     }
     
     // 이미지 설정 함수
