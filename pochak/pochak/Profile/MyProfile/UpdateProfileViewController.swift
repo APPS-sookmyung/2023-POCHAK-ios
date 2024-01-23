@@ -1,21 +1,21 @@
 //
-//  MakeProfileViewController.swift
+//  UpdateProfileViewController.swift
 //  pochak
 //
-//  Created by Seo Cindy on 2023/08/14.
+//  Created by Seo Cindy on 1/14/24.
 //
 
 import UIKit
 
-class MakeProfileViewController: UIViewController {
-        
+class UpdateProfileViewController: UIViewController {
+    
     let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
     let email = UserDefaultsManager.getData(type: String.self, forKey: .email) ?? "email not found"
-    let socialType = UserDefaultsManager.getData(type: String.self, forKey: .socialType) ?? "socialType not found"
     let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
+    let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
+    let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? "message not found"
+    let profileImgUrl = UserDefaultsManager.getData(type: String.self, forKey: .profileImgUrl) ?? "profileImgUrl not found"
 
-
-    
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var handleTextField: UITextField!
@@ -36,10 +36,28 @@ class MakeProfileViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = barButton
         
         // Title
-        self.navigationItem.title = "프로필 설정"
+        self.navigationItem.title = "설정"
         
-        // Name 항목 채워넣기
+        // textfied 항목 채워넣기
         nameTextField.text = name
+        handleTextField.text = handle
+        messageTextField.text = message
+        
+        // handle 수정 불가하도록 막아두기
+        handleTextField.isUserInteractionEnabled = false
+        handleTextField.textColor = UIColor(named: "gray03")
+        
+        // image 적용
+        if let url = URL(string: profileImgUrl) {
+            self.profileImg.kf.setImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    print("Image successfully loaded: \(value.image)")
+                case .failure(let error):
+                    print("Image failed to load with error: \(error.localizedDescription)")
+                }
+            }
+        }
         
         // Back 버튼
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
@@ -50,32 +68,63 @@ class MakeProfileViewController: UIViewController {
         
         // userDefault에 데이터 추가
         guard let name = nameTextField.text  else {return}
-        guard let handle = handleTextField.text  else {return}
         guard let message = messageTextField.text  else {return}
         guard let profileImage = profileImg.image  else {return}
+
         
-        UserDefaultsManager.setData(value: name, key: .message)
-        UserDefaultsManager.setData(value: handle, key: .handle)
+        UserDefaultsManager.setData(value: name, key: .name)
         UserDefaultsManager.setData(value: message, key: .message)
+
         
-        // request : POST
-        JoinDataManager.shared.joinDataManager(name,
-                                               email,
-                                               handle,
-                                               message,
-                                               socialId,
-                                               socialType,
-                                               profileImage,
+        // request : PATCH
+        MyProfileUpdateDataManager.shared.updateDataManager(name,
+                                                            handle,
+                                                            message,
+                                                            profileImage,
                                                {resultData in
-            print(resultData)
-            guard let isNewMember = resultData.isNewMember else { return }
-            print(isNewMember)
+            guard let name = resultData.name else { return }
+            print(name)
         })
         
-        
         // 화면 전환
-        guard let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabbarVC, animated: false)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - 로그아웃
+    
+    @IBAction func logOut(_ sender: Any) {
+        // API
+        LogoutDataManager.shared.logoutDataManager(
+            { resultData in
+            let message = resultData.message
+            print(message)
+        })
+        print(keyChainAccessToken)
+         // Keychain Delete
+        do {
+            try KeychainManager.delete(account: "accessToken")
+            try KeychainManager.delete(account: "refreshToken")
+        } catch {
+            print(error)
+        }
+    }
+    
+    // MARK: - 회원탈퇴
+    @IBAction func deleteAccount(_ sender: Any) {
+        // API
+        DeleteAccountDataManager.shared.deleteAccountDataManager(
+            { resultData in
+            let message = resultData.message
+            print(message)
+        })
+//         Keychain Delete
+        do {
+            print("deleting keychain")
+            try KeychainManager.delete(account: "accessToken")
+            try KeychainManager.delete(account: "refreshToken")
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - 프로필 사진 설정
@@ -96,7 +145,7 @@ class MakeProfileViewController: UIViewController {
 }
 
 // 앨범 사진 선택 프로토콜 채택
-extension MakeProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension UpdateProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // 선택한 사진 사용
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -110,5 +159,5 @@ extension MakeProfileViewController: UIImagePickerControllerDelegate, UINavigati
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
+
 }

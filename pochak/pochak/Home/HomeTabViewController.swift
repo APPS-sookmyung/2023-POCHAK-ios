@@ -118,6 +118,7 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
                 if let image = UIImage(data: data){
                     DispatchQueue.main.async {
                         cell.imageView.image = image
+                        cell.imageView.contentMode = .scaleAspectFill
                     }
                 }
             }

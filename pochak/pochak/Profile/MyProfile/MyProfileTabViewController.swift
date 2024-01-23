@@ -102,6 +102,7 @@ class MyProfileTabViewController: TabmanViewController {
                     }
                 }
             }
+            self.profileImage.contentMode = .scaleAspectFill
             self.postCount.text = String(resultData.totalPostNum ?? 0)
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)
@@ -136,6 +137,8 @@ class MyProfileTabViewController: TabmanViewController {
     }
     
     @objc private func clickSettingButton(_ sender: UIButton) {
+        let accessToken = GetToken().getAccessToken()
+        print(accessToken)
         guard let updateProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileViewController else {return}
         self.navigationController?.pushViewController(updateProfileVC, animated: true)
     }

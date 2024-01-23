@@ -21,13 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Main.storyboard 가져오기
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let keySocialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) else { return }
         
         // 토큰 여부에 따른 첫 화면을 설정
-        if let keyChainToken = (try? KeychainManager.load(account: keySocialId)) {
+        if let keyChainToken = (try? KeychainManager.load(account: "accessToken")) {
             // 로그인 된 상태
             print("scene delegate login succeed")
             print(keyChainToken)
+            let access = GetToken().getAccessToken()
+            print(access)
             guard let homeTabVC = storyboard.instantiateViewController(withIdentifier: "TabbarVC") as? TabbarController else { return }
             window?.rootViewController = homeTabVC
         } else {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -55,17 +55,18 @@
                             </imageView>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eur-Ui-z9y">
-                        <rect key="frame" x="132.66666666666666" y="81" width="41" height="37"/>
+                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eur-Ui-z9y">
+                        <rect key="frame" x="132.66666666666666" y="104.66666666666667" width="41" height="13.333333333333329"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" title="답글 달기">
                             <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="11"/>
-                            <directionalEdgeInsets key="contentInsets" top="5" leading="0.0" bottom="0.0" trailing="0.0"/>
+                            <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
                             <color key="baseForegroundColor" name="gray04"/>
                         </buttonConfiguration>
                     </button>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="대댓글대댓글대댓글대댓글대댓글대댓글대댓글대댓글대대대대대댓글ㄷㅅ댓글댓글댓글  @suyeon" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uov-ld-3z9" customClass="MentionTextView" customModule="pochak" customModuleProvider="target">
-                        <rect key="frame" x="132.66666666666666" y="31.333333333333343" width="283.33333333333337" height="44.666666666666657"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="대댓글대댓글대댓글대댓글대댓글대댓글대댓글대댓글대대대대대댓글ㄷㅅ댓글댓글댓글  @suyeon" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uov-ld-3z9" customClass="MentionTextView" customModule="pochak" customModuleProvider="target">
+                        <rect key="frame" x="132.66666666666666" y="31.333333333333336" width="283.33333333333337" height="68.333333333333314"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
@@ -96,6 +97,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="childCommentBtn" destination="eur-Ui-z9y" id="gOm-H1-D4U"/>
                 <outlet property="profileImageView" destination="glQ-bV-w4i" id="ryC-5r-8Gz"/>
                 <outlet property="replyCommentTextView" destination="Uov-ld-3z9" id="gUd-bg-Ldl"/>
                 <outlet property="timePassedLabel" destination="kGg-BT-6f2" id="6Bb-dL-7Xd"/>
@@ -113,7 +115,7 @@
             <color red="0.1289999932050705" green="0.14499999582767487" blue="0.16099999845027924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -16,6 +16,7 @@ class UserDefaultsManager {
         case isNewMember
         case handle
         case message
+        case profileImgUrl
     }
     
     static func setData<T>(value: T, key: UserDefaultsKeys) {

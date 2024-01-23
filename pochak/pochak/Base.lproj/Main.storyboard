@@ -227,13 +227,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdA-nt-NKo">
-                                <rect key="frame" x="30" y="259" width="29.666666666666671" height="21"/>
+                                <rect key="frame" x="30" y="265" width="29.666666666666671" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이름을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJu-4u-0mx">
-                                <rect key="frame" x="134.66666666666666" y="259.66666666666669" width="229.99999999999997" height="20"/>
+                                <rect key="frame" x="134.66666666666666" y="265.66666666666669" width="229.99999999999997" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="4It-DO-txF"/>
                                     <constraint firstAttribute="width" constant="230" id="Cee-Uc-ILp"/>
@@ -242,13 +242,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자 아이디" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybw-dj-lI2">
-                                <rect key="frame" x="30.000000000000007" y="315" width="92.666666666666686" height="21"/>
+                                <rect key="frame" x="30.000000000000007" y="321" width="92.666666666666686" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="앱 사용 시 표시되는 이름입니다" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z0D-3b-zGS">
-                                <rect key="frame" x="150.66666666666663" y="315.66666666666669" width="230" height="20"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="주의! 아이디는 가입 후 수정이 불가해요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z0D-3b-zGS">
+                                <rect key="frame" x="150.66666666666663" y="321.66666666666669" width="230" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="4Wc-MC-QsD"/>
                                     <constraint firstAttribute="height" constant="20" id="wHF-gC-a7N"/>
@@ -257,7 +257,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5NX-Us-umr">
-                                <rect key="frame" x="24" y="295" width="345" height="1"/>
+                                <rect key="frame" x="24" y="301" width="345" height="1"/>
                                 <color key="backgroundColor" name="gray01"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="0N7-Oe-dTM"/>
@@ -265,13 +265,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한 줄 소개" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24Z-0S-w17">
-                                <rect key="frame" x="30" y="371" width="68" height="21"/>
+                                <rect key="frame" x="30" y="377" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="한 줄 소개를 입력해주세요(최대 10자)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5lu-uT-qnd">
-                                <rect key="frame" x="136" y="371.66666666666669" width="230" height="20"/>
+                                <rect key="frame" x="136" y="377.66666666666669" width="230" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="YGJ-SW-f4e"/>
                                     <constraint firstAttribute="width" constant="230" id="fvG-Pm-vsn"/>
@@ -280,7 +280,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Kz-1m-xXB">
-                                <rect key="frame" x="24" y="407" width="345" height="1"/>
+                                <rect key="frame" x="24" y="413" width="345" height="1"/>
                                 <color key="backgroundColor" name="gray01"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="345" id="92j-MB-K1x"/>
@@ -288,7 +288,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJ5-ry-dDq">
-                                <rect key="frame" x="24" y="351" width="345" height="1"/>
+                                <rect key="frame" x="24" y="357" width="345" height="1"/>
                                 <color key="backgroundColor" name="gray01"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="345" id="0Qa-xd-ehZ"/>
@@ -303,7 +303,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yW8-dB-QdC">
-                                <rect key="frame" x="215" y="179" width="40" height="40"/>
+                                <rect key="frame" x="214.66666666666666" y="175" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Swl-yk-p51"/>
                                     <constraint firstAttribute="width" constant="40" id="TKF-aR-RW6"/>
@@ -319,10 +319,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8Kz-1m-xXB" firstAttribute="top" secondItem="24Z-0S-w17" secondAttribute="bottom" constant="15" id="2OP-Sw-zzg"/>
-                            <constraint firstItem="yW8-dB-QdC" firstAttribute="leading" secondItem="h9i-Pb-vJG" secondAttribute="leading" constant="215" id="5Ej-tx-NzN"/>
+                            <constraint firstItem="yW8-dB-QdC" firstAttribute="leading" secondItem="D6n-Hx-BSa" secondAttribute="trailing" constant="-40" id="5Ej-tx-NzN"/>
                             <constraint firstItem="8Kz-1m-xXB" firstAttribute="centerX" secondItem="Hkb-L2-eue" secondAttribute="centerX" id="EX0-CJ-qDP"/>
                             <constraint firstItem="5NX-Us-umr" firstAttribute="top" secondItem="wdA-nt-NKo" secondAttribute="bottom" constant="15" id="EtT-QC-Wl2"/>
-                            <constraint firstItem="yW8-dB-QdC" firstAttribute="top" secondItem="h9i-Pb-vJG" secondAttribute="top" constant="120" id="NPq-OR-Mrl"/>
+                            <constraint firstItem="yW8-dB-QdC" firstAttribute="top" secondItem="D6n-Hx-BSa" secondAttribute="bottom" constant="-40" id="NPq-OR-Mrl"/>
                             <constraint firstItem="z0D-3b-zGS" firstAttribute="leading" secondItem="Ybw-dj-lI2" secondAttribute="trailing" constant="28" id="QNe-U3-tot"/>
                             <constraint firstItem="D6n-Hx-BSa" firstAttribute="top" secondItem="h9i-Pb-vJG" secondAttribute="top" constant="40" id="Ycj-o0-iek"/>
                             <constraint firstItem="5lu-uT-qnd" firstAttribute="centerY" secondItem="24Z-0S-w17" secondAttribute="centerY" id="bru-vs-ZWN"/>
@@ -339,7 +339,7 @@
                             <constraint firstItem="24Z-0S-w17" firstAttribute="leading" secondItem="Ybw-dj-lI2" secondAttribute="leading" id="rfh-I7-SSE"/>
                             <constraint firstItem="zJu-4u-0mx" firstAttribute="centerY" secondItem="wdA-nt-NKo" secondAttribute="centerY" id="roj-Ec-mrq"/>
                             <constraint firstItem="zJu-4u-0mx" firstAttribute="leading" secondItem="wdA-nt-NKo" secondAttribute="trailing" constant="75" id="u5u-Jc-bza"/>
-                            <constraint firstItem="wdA-nt-NKo" firstAttribute="top" secondItem="h9i-Pb-vJG" secondAttribute="top" constant="200" id="w1r-89-Vh3"/>
+                            <constraint firstItem="wdA-nt-NKo" firstAttribute="top" secondItem="D6n-Hx-BSa" secondAttribute="bottom" constant="50" id="w1r-89-Vh3"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

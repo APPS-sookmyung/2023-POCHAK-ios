@@ -72,13 +72,17 @@ class SocialJoinViewController: UIViewController {
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
             guard error == nil else { return }
             guard let signInResult = signInResult else { return }
+            print(signInResult)
             
             // Get User Info
             let user = signInResult.user
             let accessToken = user.accessToken.tokenString
             GoogleLoginDataManager.shared.googleLoginDataManager(accessToken, {resultData in
                 guard let isNewMember = resultData.isNewMember else { return }
-                guard let name = resultData.name else { return }
+                print(isNewMember)
+                guard let name = resultData.name else { print("name")
+                    return }
+                print(name)
                 guard let email = resultData.email else { return }
                 guard let socialType = resultData.socialType else { return }
                 guard let socialId = resultData.id else { return }
@@ -90,20 +94,8 @@ class SocialJoinViewController: UIViewController {
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
                
-                self.toProfileSettingsPage(isNewMember, accessToken, email, socialType, socialId)
+                self.toProfileSettingsPage(isNewMember)
             })
-        }
-    }
-    
-    private func checkLoginState(){
-        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if error != nil || user != nil{
-                print("Not Signed in")
-            }
-            else{
-                print("Signed in User")
-            }
-            
         }
     }
     
@@ -111,13 +103,14 @@ class SocialJoinViewController: UIViewController {
     
     
     // MARK: - profileSettingPage or HomeTabPage로 전환하기
-    private func toProfileSettingsPage(_ isNewMember : Bool, _ accessToken : String,  _ email : String, _ socialType : String, _ socialId : String){
+    private func toProfileSettingsPage(_ isNewMember : Bool){
+
         if isNewMember == true {
             // 프로필 설정 페이지로 이동
             guard let makeProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "MakeProfileVC") as? MakeProfileViewController else {return}
-            makeProfileVC.accessToken = accessToken
             self.navigationController?.pushViewController(makeProfileVC, animated: true)
         } else {
+            toHomeTabPage()
             print("error in switching VC!")
         }
     }
