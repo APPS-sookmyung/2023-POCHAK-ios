@@ -68,4 +68,17 @@ class RecentSearchRealmManager {
         }
         print("Term deleted from Realm")
     }
+    
+    // MARK: - 전체 데이터 삭제
+        func deleteAllData() -> Bool {
+            do {
+                try realm.write {
+                    realm.deleteAll()
+                }
+                return true
+            } catch {
+                print("Error deleting all data: \(error.localizedDescription)")
+                return false
+            }
+        }
 }
