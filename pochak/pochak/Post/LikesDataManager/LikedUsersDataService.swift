@@ -48,12 +48,12 @@ struct LikedUsersDataService{
         }
     }
     
-    func postLikeRequest(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+    func postLikeRequest(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         /* header 있는 자리 */
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
                                             "Content-type": "application/json"  // multipart/form-data ???
                                             ]
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/like",
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/\(postId)/like",
                                      method: .post,
                                      encoding: URLEncoding.default,
                                      headers: header)
