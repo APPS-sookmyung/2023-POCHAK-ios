@@ -206,6 +206,7 @@ extension RecentSearchViewController:UITableViewDelegate, UITableViewDataSource 
             realmManager.addRecentSearch(term: handle)
             self.tableView.reloadData()
             // 화면전환
+            // TODO: handle 전달
             let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
             let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
 
@@ -217,7 +218,8 @@ extension RecentSearchViewController:UITableViewDelegate, UITableViewDataSource 
             realmManager.addRecentSearch(term: handle)
             self.tableView.reloadData()
 
-            // 화면전환
+            // 화면전환 -> handle 전달
+            // TODO: handle 전달
             let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
             let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
 
