@@ -41,19 +41,25 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
     
     private func setUpSearchController() {
         // Create an instance of the view controller that will display search results
+    
+        
         searchController = UISearchController(searchResultsController: resultVC)
-
         searchController.searchBar.tintColor = .black
         searchController.searchResultsUpdater  = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchController.searchBar.placeholder = "Search User"
         // Change Cancel button value
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchBar.autocapitalizationType = .none
         //usally good to set the presentation context
         
-        
-        navigationItem.searchController = searchController
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.searchBarStyle = UISearchBar.Style.minimal
+
+        // Include the search bar within the navigation bar.
+        self.navigationItem.titleView = self.searchController.searchBar
+        self.definesPresentationContext = true
         
         searchController.searchBar.sizeToFit()
         
