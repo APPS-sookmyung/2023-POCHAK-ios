@@ -67,7 +67,6 @@
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="대댓글대댓글대댓글대댓글대댓글대댓글대댓글대댓글대대대대대댓글ㄷㅅ댓글댓글댓글  @suyeon" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uov-ld-3z9" customClass="MentionTextView" customModule="pochak" customModuleProvider="target">
                         <rect key="frame" x="132.66666666666666" y="31.333333333333336" width="283.33333333333337" height="68.333333333333314"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -116,9 +115,6 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

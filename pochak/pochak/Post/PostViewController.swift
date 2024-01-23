@@ -307,7 +307,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
         
         commentVC.modalPresentationStyle = .pageSheet
-        //commentVC.postId = currentPostId
+        commentVC.postId = currentPostId
         commentVC.postUserHandle = postDataResult.ownerHandle
         
         // half sheet
