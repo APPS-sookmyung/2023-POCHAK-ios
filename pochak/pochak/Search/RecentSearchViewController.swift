@@ -37,9 +37,6 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
         setUpSearchController()
         
         loadRealm()
-        
-        labelClickGesture()
-        
     }
     
     private func setUpSearchController() {
@@ -96,17 +93,6 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
         recentSearchTerms = realmManager.getAllRecentSearchTerms()
         print(recentSearchTerms)
         tableView.reloadData()
-    }
-    
-    private func labelClickGesture(){
-        // UITapGestureRecognizer 생성
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(labelTapped))
-
-        // 이미지뷰에 UITapGestureRecognizer 추가
-        deleteAllButton.addGestureRecognizer(tapGesture)
-
-        // 사용자 상호 작용을 가능하게 하려면 반드시 다음을 설정해야 합니다.
-        deleteAllButton.isUserInteractionEnabled = true
     }
 
     @objc func labelTapped() {
