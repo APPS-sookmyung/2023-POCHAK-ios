@@ -24,7 +24,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var moreCommentsBtn: UIButton!
     
     var receivedData: String?
-    var currentPostId:String!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    var currentPostId: Int!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
     var postOwnerHandle: String = ""  // 나중에 여기저기에서 사용할 수 있도록.. 미리 게시자 아이디 저장
     
     let pullDownMenuBtn = UIButton()
@@ -51,7 +51,6 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         pullDownMenuBtn.setImage(UIImage(systemName:  "ellipsis"), for: .normal)
 //        let barButton = UIBarButtonItem(customView: pullDownMenuBtn)
         let barButton = UIBarButtonItem(image: UIImage(systemName:  "ellipsis"), style: .plain, target: self, action: nil)
-        
         //assign button to navigationbar
         self.navigationItem.rightBarButtonItem = barButton
         
@@ -123,7 +122,8 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             // receivedData를 사용하여 원하는 작업을 수행합니다.
             // 예를 들어, 데이터를 표시하거나 다른 로직에 활용할 수 있습니다.
             print("Received Data: \(data)")
-            currentPostId = data
+            //currentPostId = data
+            currentPostId = 2  // 임시로 2로 저장
         } else {
             print("No data received.")
         }
@@ -136,7 +136,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
 //        scrollView.updateContentSize()
         
         // 포스트 이미지
-        let url = URL(string: postDataResult.postImageUrl)
+        let url = URL(string: postDataResult.postImage)
         // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
         // 이를 방지하기 위해 다른 thread에서 처리함.
         DispatchQueue.global().async { [weak self] in
@@ -151,7 +151,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         }
         
         // 프로필 이미지
-        let profileUrl = URL(string: postDataResult.postOwnerProfileImage)
+        let profileUrl = URL(string: postDataResult.ownerProfileImage)
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: profileUrl!) {
                 if let image = UIImage(data: data){
@@ -164,12 +164,12 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 내비게이션 바 타이틀 세팅
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Pretendard-bold", size: 20)!]
-        self.navigationItem.title = postDataResult.postOwnerHandle+" 님의 게시물"
+        self.navigationItem.title = postDataResult.ownerHandle+" 님의 게시물"
         
         // 태그된 사용자, 포착한 사용자
         self.taggedUsers.text = ""
-        for handle in postDataResult.taggedUserHandles {
-            if(handle == postDataResult.taggedUserHandles.last){
+        for handle in postDataResult.taggedMemberHandle {
+            if(handle == postDataResult.taggedMemberHandle.last){
                 self.taggedUsers.text! += handle + " 님"
             }
             else{
@@ -179,33 +179,29 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         // 태그된 사용자에 프로필 이동 제스쳐 등록하기
     //        let arr = taggedUsers.text?.split(separator: " • ")  // T를 기준으로 자름, ["2023-12-27", "19:03:32.701"]
     //        print(arr)
-        self.pochakUser.text = postDataResult.postOwnerHandle + " 님이 포착"
+        self.pochakUser.text = postDataResult.ownerHandle + " 님이 포착"
         
         // 포스트 내용
-        self.postOwnerHandleLabel.text = postDataResult.postOwnerHandle
+        self.postOwnerHandleLabel.text = postDataResult.ownerHandle
         self.postContent.text = postDataResult.caption
         
         
         // 댓글 미리보기
         // 등록된 댓글이 없으면 없다는 내용 띄우고 댓글 더보기 버튼 삭제??
-        if(postDataResult.mainComment == nil){
+        if(postDataResult.recentComment == nil){
             self.mainCommentHandle.text = nil
             self.mainCommentContent.text = postDataResponse.message
         }
         else{
-            self.mainCommentHandle.text = postDataResult.mainComment!.userHandle
-            self.mainCommentContent.text = postDataResult.mainComment!.content
+            self.mainCommentHandle.text = postDataResult.recentComment.handle
+            self.mainCommentContent.text = postDataResult.recentComment.content
         }
         
         // 좋아요 버튼 (내가 눌렀는지 안했는지)
         self.btnLike.isSelected = postDataResult.isLike
-        print("isLike: ")
-        print(postDataResult.isLike)
-        print("like button status: ")
-        print(self.btnLike.isSelected)
         
         // 좋아요 누른 사람 수
-        self.labelHowManyLikes.text = "\(postDataResult.numOfHeart)명"
+        self.labelHowManyLikes.text = "\(postDataResult.likeCount)명"
         
         // 팔로잉 버튼
         //self.isFollowing = postDataResult.isFollow
@@ -220,7 +216,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .success(let postData):
                 self.postDataResponse = postData as? PostDataResponse
                 self.postDataResult = self.postDataResponse.result
-                self.postOwnerHandle = self.postDataResult.postOwnerHandle
+                self.postOwnerHandle = self.postDataResult.ownerHandle
                 self.initUI()
             case .requestErr(let message):
                 print("requestErr", message)
@@ -290,8 +286,8 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         postLikesVC.modalPresentationStyle = .pageSheet
         // 좋아요 누른 사람 페이지에 포스트 아이디, 포스트 게시자 아이디 전달
-        postLikesVC.postId = self.currentPostId
-        postLikesVC.postOwnerHandle = self.postDataResult.postOwnerHandle
+        //postLikesVC.postId = self.currentPostId
+        postLikesVC.postOwnerHandle = self.postDataResult.ownerHandle
         
         // half sheet
         if let sheet = postLikesVC.sheetPresentationController {
@@ -312,7 +308,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         commentVC.modalPresentationStyle = .pageSheet
         commentVC.postId = currentPostId
-        commentVC.postUserHandle = postDataResult.postOwnerHandle
+        commentVC.postUserHandle = postDataResult.ownerHandle
         
         // half sheet
         if let sheet = commentVC.sheetPresentationController {

@@ -7,24 +7,27 @@
 
 struct PostDataResponse: Codable {
     let isSuccess: Bool
-    let code: Int
+    let code: String
     let message: String
     let result: PostDataResponseResult
 }
 
 struct PostDataResponseResult: Codable {
-    let taggedUserHandles: [String]
-    let postOwnerProfileImage: String
-    let postOwnerHandle: String
+    let ownerHandle: String
+    let ownerProfileImage: String
+    let taggedMemberHandle: [String]
     let isFollow: Bool
+    let postImage: String
     let isLike: Bool
-    let postImageUrl: String
-    let numOfHeart: Int
+    let likeCount: Int
     let caption: String
-    let mainComment: MainComment?
+    let recentComment: RecentComment
 }
 
-struct MainComment: Codable {
-    let userHandle: String
+struct RecentComment: Codable {
+    let commentId: Int
+    let profileImage: String
+    let handle: String
+    let createdDate: String
     let content: String
 }
