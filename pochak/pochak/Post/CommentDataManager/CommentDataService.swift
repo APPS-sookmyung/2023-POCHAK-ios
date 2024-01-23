@@ -48,15 +48,17 @@ struct CommentDataService {
     /// 댓글 조회
     /// - Parameters:
     ///   - postId: 조회하고자 하는 댓글이 등록된 게시글 아이디
+    ///   - page: 조회하려는 댓글 페이지 번호
     ///   - completion: 댓글 조회 후 처리할 핸들러 (뷰컨트롤러에서 정의)
-    func getComments(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+    func getComments(_ postId: Int, page: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4",
                                             "Content-type": "application/json"  // multipart/form-data ???
                                             ]
         
-        let dataRequest = AF.request("http://15.165.84.249/api/v2/posts/\(postId)/comments",
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/posts/\(postId)/comments",
                                     method: .get,
+                                    parameters: ["page": page],
                                     encoding: URLEncoding.default,
                                     headers: header)
         
@@ -78,17 +80,19 @@ struct CommentDataService {
     /// - Parameters:
     ///    - postId: 대댓글을 조회하고자 하는 게시글의 아이디
     ///    - commentId:  대댓글의 부모 댓글 아이디
+    ///    - page: 조회하려는 대댓글의 페이지 번호
     ///    - completion: 조회 완료 후 데이터 처리할 핸들러(뷰컨트롤러에 있음)
     ///
-    func getChildComments(_ postId: String, _ commentId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+    func getChildComments(_ postId: Int, _ commentId: Int, page: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4",
                                             "Content-type": "application/json"
                                     ]
         print("-get child comments-")
         
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/"+commentId+"/comment",
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/posts/\(postId)/comments\(commentId)",
                                     method: .get,
+                                    parameters: ["page": page],
                                     encoding: URLEncoding.default,
                                     headers: header)
         print("dataRequest:")

@@ -15,7 +15,7 @@ struct CommentDataResponse: Codable {
 
 struct CommentDataResult: Codable {
     let parentCommentPageInfo: ParentCommentPageInfo?
-    let parentCommentList: [ParentCommentData]
+    var parentCommentList: [ParentCommentData]  // 대댓글을 추가로 페이징 조회했을 때 변경하기 위해서
     let loginMemberProfileImage: String
 }
 
@@ -32,12 +32,12 @@ struct ParentCommentData: Codable {
     let handle: String
     let createdDate: String
     let content: String
-    let childCommentPageInfo: ChildCommentPageInfo
-    let childCommentList: [ChildCommentData]
+    var childCommentPageInfo: ChildCommentPageInfo  // 대댓글을 추가로 페이징 조회했을 때 변경하기 위해서
+    var childCommentList: [ChildCommentData]  // 대댓글을 추가로 페이징 조회했을 때 변경하기 위해서
 }
 
 struct ChildCommentPageInfo: Codable {
-    let lastPage: Bool
+    var lastPage: Bool  // 대댓글을 추가로 페이징 조회했을 때 변경하기 위해서
     let totalPages: Int
     let totalElements: Int
     let size: Int
@@ -56,16 +56,18 @@ struct ChildCommentDataResponse: Codable {
     let isSuccess: Bool?
     let code: String?
     let message: String?
-    let result: [ParentCommentData]?
+    var result: ChildCommentDataResult
 }
 
-//struct ChildCommentData: Codable {
-//    let userProfileImg: String?
-//    let userHandle: String?
-//    let commentId: String?  // 댓글 ID (추후 삭제.. 등등에 쓰시면 됨다)
-//    let uploadedTime: String?
-//    let content: String?
-//}
+struct ChildCommentDataResult: Codable {
+    let commentId: Int  // 부모 댓글 아이디
+    let profileImage: String  // 부모 댓글 작성자 프로필 사진
+    let handle: String  // 부모 댓글 작성자 아이디
+    let createdDate: String  // 부모 댓글 작성 시간
+    let content: String  // 부모 댓글 내용
+    var childCommentPageInfo: ChildCommentPageInfo
+    let childCommentList: [ChildCommentData]
+}
 
 // MARK: - 댓글 등록 Data Model (Response만 존재)
 struct PostCommentResponse: Codable {

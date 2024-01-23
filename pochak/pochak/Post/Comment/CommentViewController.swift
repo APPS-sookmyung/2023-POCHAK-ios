@@ -28,10 +28,8 @@ class CommentViewController: UIViewController {
     public var childCommentCntList = [Int]()  // 섹션 당 셀 개수 따로 저장해둘 리스트 필요함 (부모 댓글의 자식 댓글 개수 저장)
     
     private var commentDataResponse: CommentDataResponse?
-    private var commentDataResult: CommentDataResult?
+    public var commentDataResult: CommentDataResult?
     private var parentCommentList: [ParentCommentData]?  // 부모댓글 + 자식댓글 있는 list
-    private var childCommentDataResponse: ChildCommentDataResponse?
-    private var childCommentDataList: [ChildCommentData]?
     
     var uiCommentList = [UICommentData]()  // 셀에 뿌릴 때 사용할 실제 데이터들
     private var tempChildCommentList = [UICommentData]()
@@ -83,7 +81,7 @@ class CommentViewController: UIViewController {
     // MARK: - Helpers
     private func loadCommentData(){
         print("postid: \(postId)")
-        CommentDataService.shared.getComments(postId!) { (response) in
+        CommentDataService.shared.getComments(postId!, page: 0) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let commentDataResponse):
@@ -114,13 +112,6 @@ class CommentViewController: UIViewController {
                 
                 // title 내용 설정
                 self.titleLabel.text = self.postUserHandle!+" 님의 게시물 댓글"
-                // 대댓글있는지 다 확인?
-//                if(self.commentDataList != nil){
-//                    //self.loadChildCommentData()
-//                    self.initUI()
-//                }
-                
-                //self.tableView.reloadData()
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
@@ -173,6 +164,19 @@ class CommentViewController: UIViewController {
         tableView.register(UINib(nibName: "CommentTableViewFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "CommentTableViewFooterView")
         
         print("=== tableview setup done ===")
+    }
+    
+    public func toUICommentData(parentCommentList: [ParentCommentData]){
+        self.uiCommentList.removeAll()
+        
+        for parentData in self.parentCommentList ?? [] {
+            self.uiCommentList.append(UICommentData(commentId: parentData.commentId, profileImage: parentData.profileImage, handle: parentData.handle, createdDate: parentData.createdDate, content: parentData.content, isParent: true))
+            
+            // 부모 댓글의 자식 댓글을 리스트에 추가
+            for childData in parentData.childCommentList {
+                self.uiCommentList.append(UICommentData(commentId: childData.commentId, profileImage: childData.profileImage, handle: childData.handle, createdDate: childData.createdDate, content: childData.content, isParent: false))
+            }
+        }
     }
     
     // 키보드 보여질 때
@@ -286,43 +290,45 @@ class CommentViewController: UIViewController {
 // MARK: - Extensions (TableView)
 extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     
-    // 추후 섹션 2개로 생성하도록 수정 -> 0번째는 댓글, 1번째는 로딩 인디케이터로
+    // 마지막 섹션은 인디케이터로 해야하는디..
+    // 일단 부모 댓글의 개수만큼 섹션 생성
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return parentCommentList?.count ?? 0
     }
     
-    // 한 섹션에 몇 개의 셀을 넣을지 -> 1(부모댓글 자신) + 자식댓글 개수
+    // 한 섹션에 몇 개의 셀을 넣을지 -> 각 부모댓글의 자식댓글 개수 + 1(부모댓글 자신)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return uiCommentList.count
+        return parentCommentList![section].childCommentList.count + 1
     }
     
     // 어떤 셀을 보여줄지
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
+        let row = indexPath.row
+        
         let cellData = self.uiCommentList
         
         // 셀을 그리기 위해 인덱스를 계산 해야 함
-//        var childCommentsSoFar = 0
-//        if(section != 0){
-//            for index in 0...section - 1 {
-//                childCommentsSoFar += self.childCommentCntList[index]
-//            }
-//        }
-//        
-//        var finalIndex = section + indexPath.row + childCommentsSoFar
-//        print("=== finalIndex: \(finalIndex)")
-//        
-//        print("=== 현재 셀에 그리는 데이터 ===")
-//        print(cellData[finalIndex])
+        var childCommentsSoFar = 0
+        if(section != 0){
+            for index in 0...section - 1 {
+                //childCommentsSoFar += self.childCommentCntList[index]
+                childCommentsSoFar += self.parentCommentList![index].childCommentList.count
+            }
+        }
+        
+        var finalIndex = section + indexPath.row + childCommentsSoFar
+        print("=== finalIndex: \(finalIndex)")
+        print("=== 현재 셀에 그리는 데이터 ===")
+        print(cellData[finalIndex])
         
         // 부모 댓글인 경우
-        if cellData[indexPath.row].isParent {
+        if cellData[finalIndex].isParent {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
                 return UITableViewCell()
             }
-            cell.setupData(cellData[indexPath.row])
+            cell.setupData(cellData[finalIndex])
             return cell
-            
         }
         // 자식 댓글인 경우
         else{
@@ -330,37 +336,37 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
                     as? ReplyTableViewCell else{
                 return UITableViewCell()
             }
-            cell.setupData(cellData[indexPath.row])
+            cell.setupData(cellData[finalIndex])
             return cell
         }
     }
     
-    // 나중에 대댓글 더 조회해야 될 때 변경..
-    
-//    // footer cell 등록, 보여주기
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
-//                      "CommentTableViewFooterView") as! CommentTableViewFooterView
-//        // footer에게 CommentViewController 전달
-//        //footerView.tableView = self.tableView
-//        footerView.commentVC = self
-//        footerView.postId = self.postId
-//
-//
-//        if let cellData = self.commentDataList {
-//            if cellData[section].recentComment != nil {
-//                //footerView.backgroundColor = .blue
-//                footerView.curCommentId = cellData[section].commentSK
-//                return footerView
-//            }
-//            else {
-//                return nil
-//            }
-//        }
-//        else{
-//            return nil
-//        }
-//    }
+    // 더 보여줄 대댓글이 있을 때 대댓글 더보기 버튼이 있는 footer
+    // footer cell 등록, 보여주기
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier:
+                      "CommentTableViewFooterView") as! CommentTableViewFooterView
+        // footer에게 CommentViewController 전달
+        //footerView.tableView = self.tableView
+        footerView.commentVC = self
+        footerView.postId = self.postId
+
+
+        if let cellData = self.parentCommentList {
+            // 현재 부모댓글의 자식 댓글들이 last page가 아니면 footer 추가
+            if !cellData[section].childCommentPageInfo.lastPage {
+                //footerView.backgroundColor = .blue
+                footerView.curCommentId = cellData[section].commentId
+                return footerView
+            }
+            else {
+                return nil
+            }
+        }
+        else{
+            return nil
+        }
+    }
     
     // TableView의 rowHeight속성에 AutometicDimension을 통해 테이블의 row가 유동적이라는 것을 선언
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -388,14 +394,15 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
 //    }
     
     // 이상한 여백 제거?
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if let cellData = self.commentDataList {
-//            if cellData[section].recentComment == nil {
-//                return .leastNonzeroMagnitude
-//            }
-//        }
-//        return UITableView.automaticDimension
-//    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let cellData = self.parentCommentList {
+            // 자식 댓글이 마지막 페이지이면 여백 없애기
+            if cellData[section].childCommentPageInfo.lastPage {
+                return .leastNonzeroMagnitude
+            }
+        }
+        return UITableView.automaticDimension
+    }
     
     // grouped 스타일 테이블뷰이기 때문에 자동 생성되는 헤더 높이를 0으로
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
