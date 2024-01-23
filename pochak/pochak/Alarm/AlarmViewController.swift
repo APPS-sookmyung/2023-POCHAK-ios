@@ -82,7 +82,6 @@ extension AlarmViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let section = indexPath.section
         if(self.responseData?.result.alarmList[indexPath.item].alarmType == "COMMENT"){
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OtherCollectionViewCell.identifier, for: indexPath) as? OtherCollectionViewCell else{
                 fatalError("셀 타입 캐스팅 실패")
@@ -145,6 +144,50 @@ extension AlarmViewController: UICollectionViewDelegate, UICollectionViewDataSou
             }
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if(self.responseData?.result.alarmList[indexPath.item].alarmType == "COMMENT"){
+            // 게시물로 이동
+//            var selectedData = self.responseData?.result.alarmList[indexPath.item]
+//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+
+            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            print(postVC)
+//            postVC.receivedData = modifiedString
+            self.navigationController?.pushViewController(postVC, animated: true)
+        }
+        else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "FOLLOW"){
+            // 프로필로 이동
+            let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+            let profileTabVC = storyboard.instantiateViewController(withIdentifier: "ProfileTabVC") as! ProfileTabViewController
+
+            self.navigationController?.pushViewController(profileTabVC, animated: true)
+            
+            //해당 핸들 같이 보내기
+            
+        }
+        else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "LIKE"){
+            // 게시물로 이동
+//            var selectedData = self.responseData?.result.alarmList[indexPath.item]
+//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+
+            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            print(postVC)
+//            postVC.receivedData = modifiedString
+            self.navigationController?.pushViewController(postVC, animated: true)
+            
+        }
+        else if(self.responseData?.result.alarmList[indexPath.item].alarmType == "POST_REQUEST"){
+            // 게시물 미리보기
+            
+        }
+        else{
+            
+        }
+        
     }
 }
     

@@ -147,20 +147,51 @@
             </objects>
             <point key="canvasLocation" x="172" y="678"/>
         </scene>
-        <!--SearchResultViewController-->
+        <!--Recent Search View Controller-->
         <scene sceneID="5Bk-bO-Vv1">
             <objects>
-                <viewController storyboardIdentifier="SearchResultViewController" title="SearchResultViewController" id="uUh-xy-8Zg" customClass="SearchResultViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecentSearchVC" id="uUh-xy-8Zg" customClass="RecentSearchViewController" customModule="pochak" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P99-rl-Lnd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 삭제" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUU-fS-To3">
+                                <rect key="frame" x="292" y="72" width="60" height="18.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
+                                <color key="textColor" name="gray04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 검색어" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU6-yU-EU7">
+                                <rect key="frame" x="20" y="72" width="74" height="18.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
+                                <color key="textColor" name="gray04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wA0-Be-353">
+                                <rect key="frame" x="24" y="108.66666666666669" width="327" height="669.33333333333326"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="TXI-7d-z2V"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eU6-yU-EU7" firstAttribute="top" secondItem="TXI-7d-z2V" secondAttribute="top" constant="22" id="C6B-Gf-thd"/>
+                            <constraint firstItem="eU6-yU-EU7" firstAttribute="leading" secondItem="TXI-7d-z2V" secondAttribute="leading" constant="20" id="OzZ-qZ-R14"/>
+                            <constraint firstItem="TXI-7d-z2V" firstAttribute="bottom" secondItem="wA0-Be-353" secondAttribute="bottom" id="WGy-ga-je4"/>
+                            <constraint firstItem="wA0-Be-353" firstAttribute="leading" secondItem="TXI-7d-z2V" secondAttribute="leading" constant="24" id="YK8-Fz-3EU"/>
+                            <constraint firstItem="TXI-7d-z2V" firstAttribute="trailing" secondItem="wA0-Be-353" secondAttribute="trailing" constant="24" id="bSK-Gw-fid"/>
+                            <constraint firstItem="jUU-fS-To3" firstAttribute="top" secondItem="TXI-7d-z2V" secondAttribute="top" constant="22" id="bnT-7D-w1S"/>
+                            <constraint firstItem="TXI-7d-z2V" firstAttribute="trailing" secondItem="jUU-fS-To3" secondAttribute="trailing" constant="23" id="pee-oN-zIj"/>
+                            <constraint firstItem="wA0-Be-353" firstAttribute="top" secondItem="jUU-fS-To3" secondAttribute="bottom" constant="18" id="qLh-a6-qCX"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="wA0-Be-353" id="16v-Tw-CTQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8M-Gg-iBY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="1392.8571428571429"/>
+            <point key="canvasLocation" x="172" y="1620"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="kPy-rr-5B2">
@@ -482,6 +513,9 @@
         </namedColor>
         <namedColor name="gray01">
             <color red="0.91399997472763062" green="0.92500001192092896" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gray04">
+            <color red="0.63499999046325684" green="0.66699999570846558" blue="0.69800001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray05">
             <color red="0.42399999499320984" green="0.45899999141693115" blue="0.49000000953674316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
