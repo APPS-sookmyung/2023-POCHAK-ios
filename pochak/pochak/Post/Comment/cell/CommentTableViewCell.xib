@@ -59,7 +59,6 @@
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="T0j-xF-IY9" customClass="MentionTextView" customModule="pochak" customModuleProvider="target">
                         <rect key="frame" x="75" y="36.000000000000007" width="255" height="93.666666666666686"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <string key="text">Here goes the comment content which can be very very very very long....  @hello still can be long and long and long and long and long... and long and long and ...</string>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="12"/>
@@ -99,9 +98,6 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

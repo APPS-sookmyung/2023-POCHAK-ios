@@ -9,7 +9,7 @@ import Alamofire
 
 struct CommentDataService {
     static let shared = CommentDataService()
-    let header: HTTPHeaders = ["Authorization": GetAccessToken().getAccessToken(),
+    let header: HTTPHeaders = ["Authorization": GetToken().getAccessToken(),
                  "Content-type": "application/json"
                  ]
     
@@ -49,13 +49,13 @@ struct CommentDataService {
     /// - Parameters:
     ///   - postId: 조회하고자 하는 댓글이 등록된 게시글 아이디
     ///   - completion: 댓글 조회 후 처리할 핸들러 (뷰컨트롤러에서 정의)
-    func getComments(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
+    func getComments(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         /* 헤더 있는 자리 */
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
                                             "Content-type": "application/json"  // multipart/form-data ???
                                             ]
         
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/comment",
+        let dataRequest = AF.request("http://15.165.84.249/api/v2/posts/\(postId)/comments",
                                     method: .get,
                                     encoding: URLEncoding.default,
                                     headers: header)
@@ -119,14 +119,14 @@ struct CommentDataService {
     ///   - content: 댓글 내용
     ///   - parentCommentSK: (대댓글인 경우에만) 부모댓글의 아이디, 댓글인 경우에는 nil 전달..?
     ///   - completion: 댓글 등록 후 데이터 처리할 핸들러(뷰컨트롤러에서 처리)
-    func postComment(_ postId: String, _ content: String, _ parentCommentSK: String?, completion: @escaping (NetworkResult<Any>) -> Void){
-        print("token: \(GetAccessToken().getAccessToken())")
+    func postComment(_ postId: Int, _ content: String, _ parentCommentSK: String?, completion: @escaping (NetworkResult<Any>) -> Void){
+        print("token: \(GetToken().getAccessToken())")
         /* 헤더 있는 자리 */
 //        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
 //                                            "Content-type": "application/json"  // multipart/form-data ???
 //                                            ]
         
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/comment",
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/\(postId)/comment",
                                     method: .post,
                                     parameters: makeBodyParameter(content: content, parentCommentSK: parentCommentSK),
                                     encoding: JSONEncoding.default,

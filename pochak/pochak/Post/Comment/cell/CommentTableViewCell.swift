@@ -64,7 +64,7 @@ class CommentTableViewCell: UITableViewCell {
     // MARK: - Helpers
     func setupData(_ comment: UICommentData){
         // 프로필 이미지
-        let profileImgStr = comment.userProfileImg
+        let profileImgStr = comment.profileImage
             let url = URL(string: profileImgStr)
             // main thread에서 load할 경우 URL 로딩이 길면 화면이 멈춘다.
             // 이를 방지하기 위해 다른 thread에서 처리함.
@@ -79,11 +79,11 @@ class CommentTableViewCell: UITableViewCell {
                 }
             }
         
-        self.commentUserHandleLabel.text = comment.userHandle
+        self.commentUserHandleLabel.text = comment.handle
         self.commentTextView.text = comment.content
         
         /* 로그인된 유저의 댓글인 경우 삭제 버튼 생성*/
-        if(comment.userHandle == loggedinUserHandle){
+        if(comment.handle == loggedinUserHandle){
             self.addSubview(deleteButton)
             
             // 오토레이아웃 설정
@@ -100,7 +100,7 @@ class CommentTableViewCell: UITableViewCell {
         
         // comment.uploadedTime 값: 2023-12-27T19:03:32.701
         // 시간 계산
-        let arr = comment.uploadedTime.split(separator: "T")  // T를 기준으로 자름, ["2023-12-27", "19:03:32.701"]
+        let arr = comment.createdDate.split(separator: "T")  // T를 기준으로 자름, ["2023-12-27", "19:03:32.701"]
         let timeArr = arr[arr.endIndex - 1].split(separator: ".")  // ["19:03:32", "701"]
         
         let uploadedTime = arr[arr.startIndex] + " " + timeArr[timeArr.startIndex]

@@ -8,45 +8,64 @@
 // MARK: - 댓글 조회 Data Model
 struct CommentDataResponse: Codable {
     let isSuccess: Bool?
-    let code: Int?
+    let code: String?
     let message: String?
     let result: CommentDataResult?
 }
 
 struct CommentDataResult: Codable {
-    let loginProfileImg: String?
-    let comments: [CommentData]
+    let parentCommentPageInfo: ParentCommentPageInfo?
+    let parentCommentList: [ParentCommentData]
+    let loginMemberProfileImage: String
 }
 
-struct CommentData: Codable {
-    let userProfileImg: String?  // 댓글을 작성한 유저의 프로필 이미지
-    let userHandle: String?  // 댓글을 작성한 유저의 핸들
-    let commentSK: String?  // 댓글 Sort Key, 추후 댓글 업로드, 대댓글 조회 시에 사용하면 됩니닷
-    let uploadedTime: String?  //LocalDateTime?  // 댓글 작성 시간
-    let content: String?  // 내용
-    var recentComment: RecentComment?  // 제일 최신의 대댓글 (답댓글이 없을 경우 null)
+struct ParentCommentPageInfo: Codable {
+    let lastPage: Bool
+    let totalPages: Int  // 부모 댓글 페이징 정보 : 총 페이지 수
+    let totalElements: Int  // 부모 댓글 페이징 정보 : 총 부모 댓글의 수
+    let size: Int  // 부모 댓글 페이징 정보 : 페이징 사이즈
 }
 
-struct RecentComment: Codable {
-    let childCommentProfileImg: String?
-    let content: String?
+struct ParentCommentData: Codable {
+    let commentId: Int
+    let profileImage: String
+    let handle: String
+    let createdDate: String
+    let content: String
+    let childCommentPageInfo: ChildCommentPageInfo
+    let childCommentList: [ChildCommentData]
+}
+
+struct ChildCommentPageInfo: Codable {
+    let lastPage: Bool
+    let totalPages: Int
+    let totalElements: Int
+    let size: Int
+}
+
+struct ChildCommentData: Codable {
+    let commentId: Int
+    let profileImage: String
+    let handle: String
+    let createdDate: String
+    let content: String
 }
 
 // MARK: - 대댓글 조회 Data Model
 struct ChildCommentDataResponse: Codable {
     let isSuccess: Bool?
-    let code: Int?
+    let code: String?
     let message: String?
-    let result: [ChildCommentData]?
+    let result: [ParentCommentData]?
 }
 
-struct ChildCommentData: Codable {
-    let userProfileImg: String?
-    let userHandle: String?
-    let commentId: String?  // 댓글 ID (추후 삭제.. 등등에 쓰시면 됨다)
-    let uploadedTime: String?
-    let content: String?
-}
+//struct ChildCommentData: Codable {
+//    let userProfileImg: String?
+//    let userHandle: String?
+//    let commentId: String?  // 댓글 ID (추후 삭제.. 등등에 쓰시면 됨다)
+//    let uploadedTime: String?
+//    let content: String?
+//}
 
 // MARK: - 댓글 등록 Data Model (Response만 존재)
 struct PostCommentResponse: Codable {
@@ -64,14 +83,10 @@ struct DeleteCommentResponse: Codable {
 
 // MARK: - UI에 보여주기 위해 쓸 데이터 모델
 struct UICommentData {
-    let userProfileImg: String  // 댓글을 작성한 유저의 프로필 이미지
-    let userHandle: String  // 댓글을 작성한 유저의 핸들
-    let commentId: String  // 댓글 아이디
-    let commentUploadedTime: String  // 댓글 업로드 시간 (부모던 자식 댓글이던 값을 가짐)
-    let parentCommentUploadedTime: String?  // 부모 댓글 업로드 시간(부모 댓글인 경우 nil)
-    let uploadedTime: String  //LocalDateTime?  // 댓글 작성 시간
-    let content: String  // 내용
+    let commentId: Int
+    let profileImage: String
+    let handle: String
+    let createdDate: String
+    let content: String
     let isParent: Bool
-    let hasChild: Bool  // 자식 댓글이 있는지
-    var childCommentCnt: Int  // 자식 댓글 개수, 부모나 자식이나 모두 디폴트 1로
 }
