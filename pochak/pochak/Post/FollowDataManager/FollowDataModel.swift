@@ -7,7 +7,6 @@
 
 struct FollowDataResponse: Codable {
     let isSuccess: Bool
-    let code: Int
+    let code: String
     let message: String
-    let result: String?
 }
