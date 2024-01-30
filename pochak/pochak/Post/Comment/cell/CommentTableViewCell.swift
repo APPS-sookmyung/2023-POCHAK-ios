@@ -20,6 +20,10 @@ class CommentTableViewCell: UITableViewCell {
     var loggedinUserHandle: String?
     var deleteButton = UIButton()
     
+    // comment view controller에서 받는 댓글 입력창
+    var editingCommentTextView: UITextView!
+    var tableView: UITableView!
+    
     let seeChildCommentBtn = UIButton()
     
     // MARK: - Action
@@ -57,8 +61,26 @@ class CommentTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
+    }
+    
+    // MARK: - Actions
+    @IBAction func postChildCmmtBtnDidTap(_ sender: UIButton) {
+        let indexPath = tableView.indexPath(for: self)
+        // 답글을 다려는 셀을 맨 위로 이동
+        tableView.scrollToRow(at: indexPath!, at: .top, animated: true)
+        
+        // fade in, fade out 으로 색상 변경 
+        let oldColor = self.backgroundColor
+        UIView.animate(withDuration: 0.9, animations: {
+            self.backgroundColor = UIColor(named: "navy03")
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.5) {
+                    self.backgroundColor = oldColor
+                }
+        })
+        editingCommentTextView.becomeFirstResponder()
     }
     
     // MARK: - Helpers
@@ -112,7 +134,6 @@ class CommentTableViewCell: UITableViewCell {
         format.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let startTime = format.date(from: String(uploadedTime))!
-        //let startStr = format.string(from: startTime!)
         let endStr = format.string(from: currentTime)
         let endTime = format.date(from: endStr)
         

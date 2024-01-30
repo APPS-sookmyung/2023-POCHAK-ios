@@ -82,6 +82,10 @@ class CommentTableViewFooterView: UITableViewHeaderFooterView {
                 self.commentVC.commentDataResult?.parentCommentList[section].childCommentList.append(contentsOf: self.childCommentDataList)
 
                 //self.commentVC.tableView.reloadData()
+                
+                // 여기서 다시 되길...
+                self.commentVC.toUICommentData()
+                
                 self.commentVC.tableView.reloadSections(IndexSet(integer: section), with: .fade)
                 print("==uicommentlist==")
                 print(self.commentVC.uiCommentList)

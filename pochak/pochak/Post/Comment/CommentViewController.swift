@@ -152,6 +152,9 @@ class CommentViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 90
         
+        // 여러 개의 셀 선택 안되도록 설정
+        tableView.allowsMultipleSelection = false
+        
         // nib은 CommentTableViewCell << 이 파일임
         let commentNib = UINib(nibName: "CommentTableViewCell", bundle: nil)
         tableView.register(commentNib, forCellReuseIdentifier: "CommentTableViewCell")  // tableview에 이 cell을 등록
@@ -166,7 +169,7 @@ class CommentViewController: UIViewController {
         print("=== tableview setup done ===")
     }
     
-    public func toUICommentData(parentCommentList: [ParentCommentData]){
+    public func toUICommentData(){
         self.uiCommentList.removeAll()
         
         for parentData in self.parentCommentList ?? [] {
@@ -327,6 +330,8 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentTableViewCell", for: indexPath) as? CommentTableViewCell else{
                 return UITableViewCell()
             }
+            cell.editingCommentTextView = self.commentTextView
+            cell.tableView = self.tableView
             cell.setupData(cellData[finalIndex])
             return cell
         }
@@ -336,6 +341,8 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
                     as? ReplyTableViewCell else{
                 return UITableViewCell()
             }
+            cell.editingCommentTextView = self.commentTextView
+            cell.tableView = self.tableView
             cell.setupData(cellData[finalIndex])
             return cell
         }
@@ -466,5 +473,3 @@ extension CommentViewController: UITextViewDelegate {
 //        }
     }
 }
-
-
