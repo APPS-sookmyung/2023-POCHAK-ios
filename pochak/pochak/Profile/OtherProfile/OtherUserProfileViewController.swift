@@ -78,7 +78,7 @@ class OtherUserProfileViewController: UIViewController {
             print(resultData)
             
             // 프로필 이미지
-            let imageURL = resultData.userProfileImg ?? ""
+            let imageURL = resultData.profileImage ?? ""
             UserDefaultsManager.setData(value: imageURL, key: .profileImgUrl)
             if let url = URL(string: imageURL) {
                 self.profileImage.kf.setImage(with: url) { result in

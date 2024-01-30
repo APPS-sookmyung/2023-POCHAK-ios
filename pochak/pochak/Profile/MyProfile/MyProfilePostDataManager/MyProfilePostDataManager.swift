@@ -16,7 +16,9 @@ class MyProfilePostDataManager {
     let refreshToken = GetToken().getRefreshToken()
     
     func myProfileUserAndPochakedPostDataManager(_ handle : String, _ completion: @escaping (MyProfileUserAndPochakedPostModel) -> Void) {
-        let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle
+//        let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle
+        
+        let url = "http://15.165.84.249/api/v2/members/dxxynni"
                 
 //        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         
@@ -59,7 +61,7 @@ class MyProfilePostDataManager {
             switch response.result {
             case .success(let result):
                 print("inside PochakDM!!!!!!")
-                let resultData = result.result.uploadPosts
+                let resultData = result.result.postList
                 completion(resultData)
             case .failure(let error):
                 print("inside PochakDM~~~~")

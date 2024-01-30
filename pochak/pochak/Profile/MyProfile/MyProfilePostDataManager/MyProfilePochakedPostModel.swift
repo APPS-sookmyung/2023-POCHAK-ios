@@ -13,10 +13,6 @@ struct MyProfilePochakPostResponse: Codable {
 }
 
 struct MyProfilePochakPostModel : Codable {
-    var uploadPosts : [PostDataModel]
-}
-
-struct PostDataModel : Codable {
-    var postPK : String?
-    var postImg : String?
+    var pageInfo : PageDataModel
+    var postList : [PostDataModel]
 }

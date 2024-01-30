@@ -17,7 +17,7 @@ class ProfilePostCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profilePostImage: UIImageView!
     
     func configure(_ postDataModel : PostDataModel){
-        var imageURL = postDataModel.postImg ?? ""
+        var imageURL = postDataModel.postImage ?? ""
         if let url = URL(string: imageURL) {
             profilePostImage.kf.setImage(with: url) { result in
                 switch result {
