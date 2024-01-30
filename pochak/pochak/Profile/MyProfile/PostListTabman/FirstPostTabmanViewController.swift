@@ -42,7 +42,7 @@ class FirstPostTabmanViewController: UIViewController {
     
     private func loadImageData() {
         MyProfilePostDataManager.shared.myProfileUserAndPochakedPostDataManager(handle,{resultData in
-            self.imageArray = resultData.taggedPosts
+            self.imageArray = resultData.postList
             self.postCollectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
         })
     }

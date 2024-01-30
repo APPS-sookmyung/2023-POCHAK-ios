@@ -86,7 +86,7 @@ class MyProfileTabViewController: TabmanViewController {
         MyProfilePostDataManager.shared.myProfileUserAndPochakedPostDataManager(handle,{ [self]resultData in
       
             // 프로필 이미지
-            let imageURL = resultData.userProfileImg ?? ""
+            let imageURL = resultData.profileImage ?? ""
             UserDefaultsManager.setData(value: imageURL, key: .profileImgUrl)
             if let url = URL(string: imageURL) {
                 self.profileImage.kf.setImage(with: url) { result in
@@ -100,7 +100,7 @@ class MyProfileTabViewController: TabmanViewController {
             }
 
             self.profileImage.contentMode = .scaleAspectFill // 원 면적에 사진 크기 맞춤
-            self.userName.text = String(resultData.userName ?? "")
+            self.userName.text = String(resultData.name ?? "")
             self.userMessage.text = String(resultData.message ?? "")
             self.shareBtn.setTitle("pochak.site/@" + String(resultData.handle ?? ""), for: .normal)
             // font not changing? 스토리보드에서 버튼 style을 default로 변경
@@ -109,7 +109,7 @@ class MyProfileTabViewController: TabmanViewController {
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)
             
-            UserDefaultsManager.setData(value: resultData.userName, key: .name)
+            UserDefaultsManager.setData(value: resultData.name, key: .name)
             UserDefaultsManager.setData(value: resultData.message, key: .message)
             
         })
@@ -127,20 +127,19 @@ class MyProfileTabViewController: TabmanViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewFollowingTapped))
         followingList.addGestureRecognizer(tapGestureRecognizer)
     }
-        
-    @objc private func viewFollowingTapped(){
-        guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
-        self.navigationController?.pushViewController(followListVC, animated: true)
-        
-        
-    }
     
     @objc private func viewFollowerTapped(){
         guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
+        followListVC.index = 0
         self.navigationController?.pushViewController(followListVC, animated: true)
-        
-        
     }
+        
+    @objc private func viewFollowingTapped(){
+        guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
+        followListVC.index = 1
+        self.navigationController?.pushViewController(followListVC, animated: true)
+    }
+
     
     @objc private func clickSettingButton(_ sender: UIButton) {
         let accessToken = GetToken().getAccessToken()

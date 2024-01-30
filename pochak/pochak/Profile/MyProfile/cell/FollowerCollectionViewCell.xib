@@ -26,15 +26,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="418" height="111"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfR-SN-GsJ">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfR-SN-GsJ">
                         <rect key="frame" x="25" y="20.666666666666671" width="70" height="70"/>
-                        <color key="backgroundColor" name="pink00"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="BiH-F3-b1N"/>
                             <constraint firstAttribute="width" constant="70" id="koW-1n-cDr"/>
                         </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain"/>
                     </button>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="u2x-vq-ScL">
                         <rect key="frame" x="110" y="38.666666666666671" width="35" height="33.666666666666671"/>
@@ -55,16 +55,19 @@
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeb-rw-ZRP">
                         <rect key="frame" x="344" y="40.666666666666664" width="49" height="29.999999999999993"/>
-                        <color key="backgroundColor" name="gray04"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="49" id="7qf-Rm-EwP"/>
                             <constraint firstAttribute="height" constant="30" id="azG-55-LgS"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="삭제">
-                            <fontDescription key="titleFontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
-                            <color key="baseForegroundColor" name="gray07"/>
-                        </buttonConfiguration>
+                        <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="14"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal">
+                            <color key="titleColor" name="gray07"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteFollowerBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XnB-VD-Idz"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -89,17 +92,11 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="gray04">
-            <color red="0.63499999046325684" green="0.66699999570846558" blue="0.69800001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="gray06">
             <color red="0.20399999618530273" green="0.22699999809265137" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="gray07">
             <color red="0.1289999932050705" green="0.14499999582767487" blue="0.16099999845027924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="pink00">
-            <color red="1" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

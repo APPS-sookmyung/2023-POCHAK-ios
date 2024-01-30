@@ -10,35 +10,34 @@ import Pageboy
 import UIKit
 
 class FollowListViewController: TabmanViewController {
-
+    
     // Tabbar로 넘길 VC 배열 선언
-    private var viewControllers: [UIViewController] = []
+    var viewControllers: [UIViewController] = []
+    var index: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // MARK: - Add Navigation Item
         
         // Title : 데이터 받아와서 넣기
-        self.navigationItem.title = "bbaek"
-        
-//        // Collection View
-//        setupCollectionView()
+        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        self.navigationItem.title = handle
         
         // Tabman 사용
         // tab에 보여질 VC 추가
         if let firstVC = storyboard?.instantiateViewController(withIdentifier: "FirstTabmanVC") as? FirstTabmanViewController {
-                    viewControllers.append(firstVC)
-                }
+            viewControllers.append(firstVC)
+        }
         if let secondVC = storyboard?.instantiateViewController(withIdentifier: "SecondTabmanVC") as? SecondTabmanViewController {
-                    viewControllers.append(secondVC)
-                }
+            viewControllers.append(secondVC)
+        }
         
         self.dataSource = self
-
+        
         // 바 생성 + tabbar 에 관한 디자인처리를 여기서 하면 된다.
         let bar = TMBar.ButtonBar()
-//        bar.layout.transitionStyle = .none
+        //        bar.layout.transitionStyle = .none
         
         // 배경색
         bar.backgroundView.style = .clear
@@ -47,13 +46,15 @@ class FollowListViewController: TabmanViewController {
         bar.indicator.weight = .custom(value: 2)
         bar.indicator.tintColor = UIColor(named: "yellow00")
         
-        
+        // padding 설정
+        bar.layout.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+
         // tap center
         bar.layout.alignment = .centerDistributed
         
         // tap 사이 간격
         bar.layout.contentMode = .fit //  버튼 화면에 딱 맞도록 구현
-//        bar.layout.interButtonSpacing = 20
+        //        bar.layout.interButtonSpacing = 20
         
         // tap 선택 / 미선택
         bar.buttons.customize { (button) in
@@ -66,33 +67,7 @@ class FollowListViewController: TabmanViewController {
         addBar(bar, dataSource: self, at:.top)
     }
     
-    
-    // MARK: - 상단 탭바 직접 구현해보기
-    /*
-     <구현 아이디어>
-     1. 페이지 구분 -> UICollectionView : scrollView의 scrollDirection = .horizontal 사용
-     2. 현재 페이지 표시 -> UIView(Indicator View)
-     3. 콘텐츠 표시 -> UICollectionView
-     
-     <로직 설계>
-     state : targetIndex(목표 페이지) / currentIndex(현재 페이지)
-     상단 스크롤, 하단 콘텐츠 모두 클라이언트 코드(FollowListViewController) 쪽 한 곳에서 관리
-     */
-    
-//    // Tab Header View 구현
-//    private func setupCollectionView(){
-//        tabBarHeaderCollectionView.delegate = self
-//        tabBarHeaderCollectionView.dataSource = self
-//
-//        // Cell 등록
-//        tabBarHeaderCollectionView.register(
-//            UINib(nibName: "TabbarHeadingCollectionViewCell", bundle: nil),
-//            forCellWithReuseIdentifier: TabbarHeadingCollectionViewCell.identifier)
-//
-//    }
-
 }
-
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 // DataSource Extension
 extension FollowListViewController: PageboyViewControllerDataSource, TMBarDataSource {
@@ -107,9 +82,8 @@ extension FollowListViewController: PageboyViewControllerDataSource, TMBarDataSo
     }
 
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return nil
-        
-        // return .at(index: 0) -> index를 통해 처음에 보이는 탭을 설정할 수 있다.
+        // index를 통해 처음에 보이는 탭을 설정할 수 있다.
+         return .at(index: index)
     }
     
     // 추가 구현해야 하는 기능
