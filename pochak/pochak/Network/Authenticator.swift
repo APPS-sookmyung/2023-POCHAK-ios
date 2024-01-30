@@ -35,7 +35,9 @@ class MyAuthenticator : Authenticator {
 //        if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
 //            print("Failure Data: \(errorMessage)")
 //        }
-        print(response)
+        print(response, "부분입니다~~~")
+        print(error)
+        print(response.statusCode)
         return response.statusCode == 401
     }
     
@@ -49,6 +51,8 @@ class MyAuthenticator : Authenticator {
     
     // token을 refresh하는 부분
     func refresh(_ credential: MyAuthenticationCredential, for session: Alamofire.Session, completion: @escaping (Result<MyAuthenticationCredential, Error>) -> Void) {
+        
+        // refreshtoken 만료 시 로그아웃 하도록!!
         
         print("refresh Function 실행중~~~~~!!")
 
