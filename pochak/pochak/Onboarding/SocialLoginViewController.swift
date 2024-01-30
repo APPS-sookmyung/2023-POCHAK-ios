@@ -64,10 +64,12 @@ class SocialLoginViewController: UIViewController {
                 guard let socialId = resultData.id else { return }
                 
                 // 사용자 기본 데이터 저장
+                UserDefaultsManager.setData(value: name, key: .name)
                 UserDefaultsManager.setData(value: socialId, key: .socialId)
                 UserDefaultsManager.setData(value: email, key: .email)
                 UserDefaultsManager.setData(value: socialType, key: .socialType)
                 UserDefaultsManager.setData(value: isNewMember, key: .isNewMember)
+                print("This is google LOGIN~~~~~~~~~~~")
                 print(isNewMember)
                 
                 self.changeViewControllerAccordingToisNewMemeberState(isNewMember, resultData)
@@ -88,13 +90,16 @@ class SocialLoginViewController: UIViewController {
             alert.addAction(cancle)
             alert.addAction(ok)
             present(alert,animated: true,completion: nil)
-        } else {
+        } else if isNewMember == false{
             // 토큰 정보 저장 @KeyChainManager
             guard let accountAccessToken = resultData.accessToken else { return }
             guard let accountRefreshToken = resultData.refreshToken else { return }
+            print("Login Again!!!!!")
+            print(accountAccessToken)
+            print(accountRefreshToken)
             do {
-                try KeychainManager.save(account: "accessToken", value: accountAccessToken, isForce: true)
-                try KeychainManager.save(account: "refreshToken", value: accountRefreshToken, isForce: true)
+                try KeychainManager.save(account: "accessToken", value: accountAccessToken, isForce: false)
+                try KeychainManager.save(account: "refreshToken", value: accountRefreshToken, isForce: false)
             } catch {
                 print(error)
             }
