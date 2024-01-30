@@ -17,7 +17,7 @@ class MyProfilePostDataManager {
     
     func myProfileUserAndPochakedPostDataManager(_ handle : String, _ completion: @escaping (MyProfileUserAndPochakedPostModel) -> Void) {
         let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle
-        
+                
 //        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         
         let authenticator = MyAuthenticator()

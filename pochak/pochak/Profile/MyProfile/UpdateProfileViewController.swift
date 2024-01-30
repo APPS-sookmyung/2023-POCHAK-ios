@@ -161,10 +161,6 @@ class UpdateProfileViewController: UIViewController {
             }
             // UserDefulats Delete
             UserDefaultsManager.UserDefaultsKeys.allCases.forEach { key in
-                if("\(key)" == "handle"){
-                    // forEach는 반복문이 아니기 때문에 break 혹은 continue 사용 불가
-                    return
-                }
                 UserDefaultsManager.removeData(key: key)
             }
             self.toMainPage()
