@@ -114,15 +114,22 @@ class UploadViewController: UIViewController,UISearchBarDelegate{
         
         let captionText = captionField.text ?? ""
         
-        let imageData : Data? = captureImg.image?.jpegData(compressionQuality: 0.5)
+        let imageData : Data? = captureImg.image?.jpegData(compressionQuality: 0.2)
         
         
         var taggedUserHandles : [String] = []
         for taggedUserHandle in tagId {
             taggedUserHandles.append(taggedUserHandle)
         }
+        
+        // Create an instance of UploadDataRequest
+        var request = UploadDataRequest(caption: "", taggedMemberHandleList: [])
 
-        UploadDataService.shared.upload(postImage: imageData, caption: captionText, taggedUserHandles: taggedUserHandles){
+        // Populate the properties
+        request.caption = captionText
+        request.taggedMemberHandleList = taggedUserHandles
+
+        UploadDataService.shared.upload(postImage: imageData, request: request){
             response in
                 switch response {
                 case .success(let data):

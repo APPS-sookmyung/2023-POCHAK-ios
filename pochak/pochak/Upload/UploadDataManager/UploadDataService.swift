@@ -10,57 +10,54 @@ import Alamofire
 class UploadDataService{
     static let shared = UploadDataService()
 
-    func upload(postImage:Data?, caption:String, taggedUserHandles:Array<String>,completion: @escaping(NetworkResult<Any>) -> Void){
-        let body : Parameters = [
-            "caption":caption,
-            "taggedUserHandles":taggedUserHandles
-        ]
-        
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU", "Content-type": "application/json"]
-        
-        let dataRequest = AF.upload(multipartFormData: { multipartFormData in
-            // 이미지 데이터를 multipart form data에 추가
-            multipartFormData.append(postImage!, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")
-            
-            if let captionData = caption.data(using: .utf8) {
-                multipartFormData.append(captionData, withName: "caption")
-            }
+    func upload(postImage:Data?, request : UploadDataRequest, completion: @escaping(NetworkResult<Any>) -> Void){
+        print("==upload==")
+        let header : HTTPHeaders = ["Authorization": GetToken().getAccessToken(), "Content-type": "multipart/form-data"]
+        // Create an Alamofire upload request
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                // Append image data as multipart form data
+                if let imageData = postImage {
+                    multipartFormData.append(imageData, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")
+                }
 
-            // Add taggedUserHandles data
-            for tag in taggedUserHandles {
-                if let tagData = tag.data(using: .utf8) {
-                            multipartFormData.append(tagData, withName: "taggedUserHandles")
-                        }
-            }
-        }, to: APIConstants.baseURL + "/api/v1/post", headers: header)
-        
-        dataRequest.responseJSON { response in
+                // Convert request object to JSON data and append it as a part with name "request"
+                do {
+                    let requestData = try JSONEncoder().encode(request)
+                    multipartFormData.append(requestData, withName: "request")
+                } catch {
+                    print("Error encoding UploadDataRequest: \(error)")
+                    completion(.networkFail)
+                }
+            },
+            to: APIConstants.baseURLv2 + "/api/v2/posts",
+            method: .post,
+            headers: header
+        )
+        .responseJSON { response in
+            // Handle the response
             switch response.result {
-            case .success(let value): // 데이터 통신이 성공한 경우
-                if let dict = value as? [String: Any] {
-                    if let code = dict["code"] as? Int {
-                        switch code {
-                        case 1000:
-                            completion(.success(dict))
-                        default:
-                            print("Unknown code: \(code)")
-                            completion(.networkFail)
-                        }
+            case .success(let value):
+                print(value)
+                if let dict = value as? [String: Any], let code = dict["code"] as? String {
+                    switch code {
+                    case "POST2001":
+                        completion(.success(dict))
+                    default:
+                        print("Unknown code: \(code)")
+                        completion(.networkFail)
                     }
                 }
-            case .failure(let error): // 데이터 통신이 실패한 경우
+            case .failure(let error):
+                print("Failure Error: \(error.localizedDescription)")
                 if let statusCode = response.response?.statusCode {
                     print("Failure Status Code: \(statusCode)")
-                    completion(.networkFail)
                 }
-                print("Failure Error: \(error.localizedDescription)")
-                
                 if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
                     print("Failure Data: \(errorMessage)")
-                    completion(.networkFail)
                 }
+                completion(.networkFail)
             }
         }
     }
 }
-
