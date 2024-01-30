@@ -9,10 +9,11 @@ import Alamofire
 
 class UploadDataService{
     static let shared = UploadDataService()
+    let accessToken = GetToken().getAccessToken()
 
     func upload(postImage:Data?, request : UploadDataRequest, completion: @escaping(NetworkResult<Any>) -> Void){
         print("==upload==")
-        let header : HTTPHeaders = ["Authorization": GetToken().getAccessToken(), "Content-type": "multipart/form-data"]
+        let header : HTTPHeaders = ["Authorization":accessToken, "Content-type": "multipart/form-data"]
         // Create an Alamofire upload request
         AF.upload(
             multipartFormData: { multipartFormData in

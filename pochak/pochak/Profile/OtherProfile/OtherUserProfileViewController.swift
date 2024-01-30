@@ -73,11 +73,7 @@ class OtherUserProfileViewController: UIViewController {
         self.userName.text = name
         self.userMessage.text = message
         
-        
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
-        print(keyChainAccessToken)
-        
-        MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,{resultData in
+        MyProfilePostDataManager.shared.myProfileUserAndPochakedPostDataManager(handle,{resultData in
             print("myProfilePochakPostDataManager")
             print(resultData)
             

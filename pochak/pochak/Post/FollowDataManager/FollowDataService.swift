@@ -10,15 +10,16 @@ import Alamofire
 struct FollowDataService {
     static let shared = FollowDataService()
     
-    // handle: 팔로우 혹은 팔로우 취소하고자 하는 유저 아이디
+    /// 팔로우 혹은 팔로우 취소하는 api
+    /// - Parameters:
+    ///   - handle: 팔로우 혹은 팔로우 취소하고자 하는 사용자의 핸들
+    ///   - completion: post 요청 완료 후 데이터 처리할 핸들러 (뷰컨트롤러에 있음)
     func postFollow(_ handle: String, completion: @escaping (NetworkResult<Any>) -> Void){
-        
         // dxxynni 토큰
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
                                             "Content-type": "application/json"
                                     ]
-        
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/user/profile/"+handle,
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/members/\(handle)/follow",
                                     method: .post,
                                     encoding: URLEncoding.default,
                                     headers: header)

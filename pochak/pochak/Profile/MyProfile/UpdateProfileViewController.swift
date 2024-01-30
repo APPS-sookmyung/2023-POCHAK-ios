@@ -119,9 +119,16 @@ class UpdateProfileViewController: UIViewController {
             } catch {
                 print(error)
             }
+            
             // UserDefulats Delete
+            // enum -> CaseIterable 설정해두면 allCases로 내부요소 접근 가능
             UserDefaultsManager.UserDefaultsKeys.allCases.forEach { key in
-                UserDefaultsManager.removeData(key: key)
+                if("\(key)" == "handle"){
+                    // forEach는 반복문이 아니기 때문에 break 혹은 continue 사용 불가
+                    return
+                }else{
+                    UserDefaultsManager.removeData(key: key)
+                }
             }
             // Main으로 화면 전환
             self.toMainPage()
@@ -154,6 +161,10 @@ class UpdateProfileViewController: UIViewController {
             }
             // UserDefulats Delete
             UserDefaultsManager.UserDefaultsKeys.allCases.forEach { key in
+                if("\(key)" == "handle"){
+                    // forEach는 반복문이 아니기 때문에 break 혹은 continue 사용 불가
+                    return
+                }
                 UserDefaultsManager.removeData(key: key)
             }
             self.toMainPage()
@@ -189,6 +200,7 @@ class UpdateProfileViewController: UIViewController {
    
     
 }
+
 // 앨범 사진 선택 프로토콜 채택
 extension UpdateProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

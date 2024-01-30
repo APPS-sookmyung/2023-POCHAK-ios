@@ -5,14 +5,14 @@
 //  Created by Seo Cindy on 12/28/23.
 //
 
-struct MyProfilePochakedPostResponse: Codable {
+struct MyProfilePochakPostResponse: Codable {
     let isSuccess: Bool
     let code: Int
     let message: String
-    let result: MyProfilePochakedPostModel
+    let result: MyProfilePochakPostModel
 }
 
-struct MyProfilePochakedPostModel : Codable {
+struct MyProfilePochakPostModel : Codable {
     var uploadPosts : [PostDataModel]
 }
 
