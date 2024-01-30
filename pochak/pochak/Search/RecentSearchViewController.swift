@@ -28,7 +28,7 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
     var recentSearchTerms: Results<RecentSearchModel>!
     
     var searchResultData : [idSearchResponse] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("==RecentSearchViewController==")
@@ -41,19 +41,25 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
     
     private func setUpSearchController() {
         // Create an instance of the view controller that will display search results
+    
+        
         searchController = UISearchController(searchResultsController: resultVC)
-
         searchController.searchBar.tintColor = .black
         searchController.searchResultsUpdater  = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchController.searchBar.placeholder = "Search User"
         // Change Cancel button value
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchBar.autocapitalizationType = .none
         //usally good to set the presentation context
         
-        
-        navigationItem.searchController = searchController
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.searchBarStyle = UISearchBar.Style.minimal
+
+        // Include the search bar within the navigation bar.
+        self.navigationItem.titleView = self.searchController.searchBar
+        self.definesPresentationContext = true
         
         searchController.searchBar.sizeToFit()
         
@@ -72,6 +78,7 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
         tableView.delegate = self
         tableView.dataSource = self
 
+        tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "SearchResultTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchResultTableViewCell")
     }
     func addRealm(){
@@ -199,13 +206,31 @@ extension RecentSearchViewController:UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 셀을 선택했을 때 수행할 동작을 여기에 추가합니다.
-        // 예를 들어, 선택한 셀의 정보를 가져와서 처리하거나 화면 전환 등을 수행할 수 있습니다.
+        if tableView == self.tableView {
+            let selectedUserData = recentSearchTerms[indexPath.row] // 선택한 셀의 데이터 가져오기
+            let handle = selectedUserData.term
+            realmManager.addRecentSearch(term: handle)
+            self.tableView.reloadData()
+            // 화면전환
+            // TODO: handle 전달
+            let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+            let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
 
-        let selectedUserData = recentSearchTerms[indexPath.row] // 선택한 셀의 데이터 가져오기
-        let handles = self.recentSearchTerms.map { $0.term }
-        
-        // 화면전환
-        
+            self.navigationController?.pushViewController(profileTabVC, animated: true)
+            
+        } else if tableView == self.resultVC.tableView {
+            let selectedUserData = searchResultData[indexPath.row] // 선택한 셀의 데이터 가져오기
+            let handle = selectedUserData.userHandle
+            realmManager.addRecentSearch(term: handle)
+            self.tableView.reloadData()
+
+            // 화면전환 -> handle 전달
+            // TODO: handle 전달
+            let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+            let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
+
+            self.navigationController?.pushViewController(profileTabVC, animated: true)
+            
+        }
     }
 }

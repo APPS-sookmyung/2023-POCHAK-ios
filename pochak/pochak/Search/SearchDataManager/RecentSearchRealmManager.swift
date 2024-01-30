@@ -22,7 +22,7 @@ class RecentSearchRealmManager {
             try! realm.write {
                 existingSearchTerm.date = Date()
             }
-            print("Term date updated in Realm")
+            print("Term updated")
         } else {
             // Term does not exist, add it to Realm
             let searchTerm = RecentSearchModel(term: term)
@@ -36,23 +36,21 @@ class RecentSearchRealmManager {
     // MARK: - Read
     func getAllRecentSearchTerms() -> Results<RecentSearchModel> {
         // Retrieve all RecentSearchModel objects from Realm
-        return realm.objects(RecentSearchModel.self)
+        return realm.objects(RecentSearchModel.self).sorted(byKeyPath: "date", ascending: false)
     }
 
     // MARK: - Update
-    func updateRecentSearchTerm(originalTerm: String, newTerm: String) {
-        guard let searchTerm = realm.objects(RecentSearchModel.self).filter("term == %@", originalTerm).first else {
+    func updateRecentSearchTerm(term: String) {
+        guard let searchTerm = realm.objects(RecentSearchModel.self).filter("term == %@", term).first else {
             print("Original term not found in Realm")
             return
         }
-
+        
         try! realm.write {
-            // Update the term with a new value
-            searchTerm.term = newTerm
             // Update the date to reflect the modification
             searchTerm.date = Date()
         }
-        print("Term updated in Realm")
+        print("Term updated in Realm")// After updating, refresh the list by sorting it based on the date
     }
 
     // MARK: - Delete
