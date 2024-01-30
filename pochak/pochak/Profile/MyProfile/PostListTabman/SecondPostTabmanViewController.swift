@@ -10,7 +10,7 @@ import UIKit
 class SecondPostTabmanViewController: UIViewController {
 
     @IBOutlet weak var postCollectionView: UICollectionView!
-    
+    let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
     var imageArray : [PostDataModel] = []
     
     override func viewDidLoad() {
@@ -19,8 +19,16 @@ class SecondPostTabmanViewController: UIViewController {
         // MARK: - Collection View 구현
         setupCollectionView()
         
+        // post API
         loadImageData()
     }
+    
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        // API
+        loadImageData()
+    }
+
     
 
     // MARK: - Helper
@@ -35,10 +43,7 @@ class SecondPostTabmanViewController: UIViewController {
     
     private func loadImageData() {
         // 임시로 사용하는 loginUser
-        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
-        let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
-        guard let keyChainAccessToken = (try? KeychainManager.load(account: socialId)) else {return}
-        MyProfilePostDataManager.shared.myProfilePochakedPostDataManager(handle,{resultData in
+        MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,{resultData in
             self.imageArray = resultData
             self.postCollectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
         })

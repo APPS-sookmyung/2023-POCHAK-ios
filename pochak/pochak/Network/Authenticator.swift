@@ -24,20 +24,25 @@ class MyAuthenticator : Authenticator {
         
     // api요청 시 AuthenticatorIndicator객체가 존재하면, 요청 전에 가로채서 apply에서 Header에 bearerToken 추가
     func apply(_ credential: Credential, to urlRequest: inout URLRequest) {
-        if(credential.requiresRefresh){
-            urlRequest.headers.add(.authorization(bearerToken: credential.accessToken))
-            urlRequest.addValue(credential.refreshToken, forHTTPHeaderField: "RefreshToken")
-        }
+        print("reply Function 실행중~~~~~!!")
+        urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-type")
     }
     
     // api요청 후 error가 떨어진 경우, 401에러(인증에러)인 경우만 refresh가 되도록 필터링
     func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: Error) -> Bool {
+        print("didRequest Function 실행중~~~~~!!")
+//        if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+//            print("Failure Data: \(errorMessage)")
+//        }
+        print(response)
         return response.statusCode == 401
     }
     
     // 인증이 필요한 urlRequest에 대해서만 refresh가 되도록, 이 경우에만 true를 리턴하여 refresh 요청
     func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: MyAuthenticationCredential) -> Bool {
         // bearerToken의 urlRequest대해서만 refresh를 시도 (true)
+        print("isRequest Function 실행중~~~~~!!")
         let bearerToken = HTTPHeader.authorization(bearerToken: credential.accessToken).value
         return urlRequest.headers["Authorization"] == bearerToken
     }
@@ -45,11 +50,13 @@ class MyAuthenticator : Authenticator {
     // token을 refresh하는 부분
     func refresh(_ credential: MyAuthenticationCredential, for session: Alamofire.Session, completion: @escaping (Result<MyAuthenticationCredential, Error>) -> Void) {
         
+        print("refresh Function 실행중~~~~~!!")
+
         let url = APIConstants.baseURL + "/api/v1/user/refresh"
-//        let header : HTTPHeaders = ["Authorization": accessToken, "RefreshToken" : refreshToken, "Content-type": "application/json"]
+        let header : HTTPHeaders = ["Authorization": accessToken, "RefreshToken" : refreshToken, "Content-type": "application/json"]
         
         AF.request(url,
-                   method: .get,
+                   method: .post,
                    encoding: URLEncoding.default)
         .validate()
         .responseDecodable(of: TokenRefreshResponse.self) { response in

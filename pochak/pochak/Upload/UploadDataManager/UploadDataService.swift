@@ -9,6 +9,7 @@ import Alamofire
 
 class UploadDataService{
     static let shared = UploadDataService()
+    let accessToken = GetToken().getAccessToken()
 
     func upload(postImage:Data?, caption:String, taggedUserHandles:Array<String>,completion: @escaping(NetworkResult<Any>) -> Void){
         let body : Parameters = [
@@ -16,7 +17,7 @@ class UploadDataService{
             "taggedUserHandles":taggedUserHandles
         ]
         
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU", "Content-type": "application/json"]
+        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         
         let dataRequest = AF.upload(multipartFormData: { multipartFormData in
             // 이미지 데이터를 multipart form data에 추가

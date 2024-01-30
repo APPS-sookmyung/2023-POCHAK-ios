@@ -27,8 +27,6 @@ class MyProfileTabViewController: TabmanViewController {
     @IBOutlet weak var shareBtn: UIButton!
     
     let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +41,7 @@ class MyProfileTabViewController: TabmanViewController {
         // 팔로워 / 팔로잉 레이블 선택
         viewFollowerList()
         viewFollowingList()
-        
+    
         // Back 버튼 커스텀
         let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: nil, action: nil)
         backBarButtonItem.tintColor = .black
@@ -61,6 +59,9 @@ class MyProfileTabViewController: TabmanViewController {
         // shareButton
         self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
         
+        // API
+        loadProfileData()
+    
     }
     
     override func viewWillAppear(_ animated: Bool){
@@ -69,25 +70,21 @@ class MyProfileTabViewController: TabmanViewController {
         loadProfileData()
     }
     
+    
     private func loadProfileData() {
-        print("inside ladProfileData!!!!!!!!!!")
-
-        // LoginUser 정보 가져오기
-        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
-        let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
-        let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? "message not found"
-        
+        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? ""
         self.userHandle.text = "@" + handle
-        self.userName.text = name
-        self.userMessage.text = message
-        self.shareBtn.setTitle("pochak.site/@" + handle, for: .normal)
-        // font not changing? 스토리보드에서 버튼 style을 default로 변경
-        self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
-            
-        MyProfilePostDataManager.shared.myProfilePochakPostDataManager(handle,{resultData in
-            print("inside myProfilePochakPostDataManager!!!!!")
-            print(resultData)
-            
+        
+//        let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? ""
+//        self.userMessage.text = message
+//        
+//        let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? ""
+//        self.userName.text = name
+
+        print("handle 있는지 검사-------------------")
+        print(handle)
+        MyProfilePostDataManager.shared.myProfileUserAndPochakedPostDataManager(handle,{ [self]resultData in
+      
             // 프로필 이미지
             let imageURL = resultData.userProfileImg ?? ""
             UserDefaultsManager.setData(value: imageURL, key: .profileImgUrl)
@@ -103,9 +100,18 @@ class MyProfileTabViewController: TabmanViewController {
             }
 
             self.profileImage.contentMode = .scaleAspectFill // 원 면적에 사진 크기 맞춤
+            self.userName.text = String(resultData.userName ?? "")
+            self.userMessage.text = String(resultData.message ?? "")
+            self.shareBtn.setTitle("pochak.site/@" + String(resultData.handle ?? ""), for: .normal)
+            // font not changing? 스토리보드에서 버튼 style을 default로 변경
+            self.shareBtn.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
             self.postCount.text = String(resultData.totalPostNum ?? 0)
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)
+            
+            UserDefaultsManager.setData(value: resultData.userName, key: .name)
+            UserDefaultsManager.setData(value: resultData.message, key: .message)
+            
         })
     }
     

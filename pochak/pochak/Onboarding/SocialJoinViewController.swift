@@ -76,10 +76,7 @@ class SocialJoinViewController: UIViewController {
             let accessToken = user.accessToken.tokenString
             GoogleLoginDataManager.shared.googleLoginDataManager(accessToken, {resultData in
                 guard let isNewMember = resultData.isNewMember else { return }
-                print(isNewMember)
-                guard let name = resultData.name else { print("name")
-                    return }
-                print(name)
+                guard let name = resultData.name else {return }
                 guard let email = resultData.email else { return }
                 guard let socialType = resultData.socialType else { return }
                 guard let socialId = resultData.id else { return }
@@ -111,8 +108,8 @@ class SocialJoinViewController: UIViewController {
             guard let accountAccessToken = resultData.accessToken else { return }
             guard let accountRefreshToken = resultData.refreshToken else { return }
             do {
-                try KeychainManager.save(account: "accessToken", value: accountAccessToken, isForce: true)
-                try KeychainManager.save(account: "refreshToken", value: accountRefreshToken, isForce: true)
+                try KeychainManager.save(account: "accessToken", value: accountAccessToken, isForce: false)
+                try KeychainManager.save(account: "refreshToken", value: accountRefreshToken, isForce: false)
             } catch {
                 print(error)
             }
