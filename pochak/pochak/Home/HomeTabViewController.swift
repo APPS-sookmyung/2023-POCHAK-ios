@@ -13,15 +13,20 @@ class HomeTabViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var imageArray: [HomeDataBody] = []
+    private var postList: [HomeDataPostList]! = []
+    private var isLastPage: Bool = false
+    private var currentFetchingPage: Int = 0
+    private var homeDataResponse: HomeDataResponse!
+    private var homeDataResult: HomeDataResult!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupData()
+        
         // set up collection view
         setupCollectionView()
-
-        setupData()
         
         // 내비게이션 바에 로고 이미지
         let logoImage = UIImage(named: "logo_full.png")
@@ -71,14 +76,21 @@ class HomeTabViewController: UIViewController {
     
     private func setupData(){
         // 임시로 유저 핸들 지수로
-        HomeDataService.shared.getHomeData("dxxynni") { response in
+        HomeDataService.shared.getHomeData(page: currentFetchingPage) { response in
             switch response {
             case .success(let data):
-                self.imageArray = data as! [HomeDataBody]
-                print(self.imageArray)
+                print(data)
+                self.homeDataResponse = data as? HomeDataResponse
+                self.homeDataResult = self.homeDataResponse.result
+                print(self.homeDataResult!)
+                self.postList = self.homeDataResult.postList
+                print(self.postList)
+                self.isLastPage = self.homeDataResult.pageInfo.lastPage
+                
                 DispatchQueue.main.async {
                     self.collectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
                 }
+                self.currentFetchingPage += 1;  // 다음 페이지로
             case .requestErr(let err):
                 print(err)
             case .pathErr:
@@ -98,10 +110,8 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
     
     // section 당 아이템 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        /* 추후 수정 */
-        return imageArray.count
+        return postList.count
     }
-    
     
     // cell 등록
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -114,7 +124,7 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
 //        cell.imageView.kf.setImage(with: imageArray[indexPath.item].imgUrl)
         //url = URL(string: imageArray[indexPath.item].imgUrl)
         DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: URL(string: (self?.imageArray[indexPath.item].imgUrl!)!)!) {
+            if let data = try? Data(contentsOf: URL(string: (self?.postList[indexPath.item].postImage)!)!) {
                 if let image = UIImage(data: data){
                     DispatchQueue.main.async {
                         cell.imageView.image = image
@@ -133,7 +143,7 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
         guard let postVC = postTabSb.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
             else { return }
         
-        postVC.receivedData = imageArray[indexPath.item].partitionKey!.replacingOccurrences(of: "#", with: "%23")
+        postVC.receivedPostId = postList[indexPath.item].postId
         self.navigationController?.pushViewController(postVC, animated: true)
     }
     
@@ -152,5 +162,16 @@ extension HomeTabViewController: UICollectionViewDataSource, UICollectionViewDel
         
         let width = CGFloat((collectionView.frame.width - 58) / 3)  // 24+24+5+5 = 58
         return CGSize(width: width, height: width * 4 / 3)  // 3:4 비율로
+    }
+}
+
+extension HomeTabViewController: UIScrollViewDelegate {
+    // 스크롤이 끝까지 닿았는지 판단 .. 50% 로?
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (collectionView.contentOffset.y > (collectionView.contentSize.height - collectionView.bounds.size.height)){
+            if (!isLastPage) {
+                setupData()
+            }
+        }
     }
 }
