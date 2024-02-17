@@ -10,28 +10,27 @@ import Alamofire
 struct HomeDataService {
     static let shared = HomeDataService()
     
-    func getHomeData(_ userHandle: String, completion: @escaping (NetworkResult<Any>) -> Void){
-        let dataRequest = AF.request("https://uy9prt4dk9.execute-api.ap-northeast-2.amazonaws.com/default/homefunction?myname="+userHandle,
-                        method: .get,
-                        encoding: JSONEncoding.default)
+    func getHomeData(page: Int, completion: @escaping (NetworkResult<Any>) -> Void){
+        let parameters: Parameters = [ "page": page ]
         
-        dataRequest.responseJSON { response in
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4",
+                                            "Content-type": "application/json"
+                                            ]
+        
+        let dataRequest = AF.request(APIConstants.baseURLv2 + "/api/v2/posts?page=\(page)",
+                        method: .get,
+                        encoding: JSONEncoding.default,
+                        headers: header)
+        
+        dataRequest.responseData { response in
             switch response.result {
             case .success(let value): // 데이터 통신이 성공한 경우
-                guard let jsonArray = value as? [[String: Any]] else {
-                    completion(.networkFail)
-                    return
-                }
-                // imgUrl과 partitionKey를 사용하여 ImageAndId 모델로 변환하여 저장
-                var imageAndIdArray = jsonArray.compactMap { dict -> HomeDataBody? in
-                    guard let imgUrl = dict["imgUrl"] as? String,
-                          let partitionKey = dict["partitionKey"] as? String else {
-                        return nil
-                    }
-                    
-                    return HomeDataBody(imgUrl: imgUrl, partitionKey: partitionKey)
-                }
-                completion(.success(imageAndIdArray))
+                guard let statusCode = response.response?.statusCode else {return}
+                guard let value = response.value else {return}
+                
+                let networkResult = judgeStatus(by: statusCode, value)
+                completion(networkResult)
+                
             case .failure(let error): // 데이터 통신이 실패한 경우
                 if let statusCode = response.response?.statusCode {
                     print("Failure Status Code: \(statusCode)")

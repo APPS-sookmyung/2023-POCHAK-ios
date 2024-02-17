@@ -16,12 +16,12 @@ struct PostDataResponseResult: Codable {
     let ownerHandle: String
     let ownerProfileImage: String
     let taggedMemberHandle: [String]
-    let isFollow: Bool
+    let isFollow: Bool?  // 현재 로그인한 유저가 게시자라면 null이 됨
     let postImage: String
     let isLike: Bool
     let likeCount: Int
     let caption: String
-    let recentComment: RecentComment
+    let recentComment: RecentComment?
 }
 
 struct RecentComment: Codable {

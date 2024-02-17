@@ -23,7 +23,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var pochakUser: UILabel!
     @IBOutlet weak var moreCommentsBtn: UIButton!
     
-    var receivedData: String?
+    var receivedPostId: Int?
     var currentPostId: Int!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
     var postOwnerHandle: String = ""  // 나중에 여기저기에서 사용할 수 있도록.. 미리 게시자 아이디 저장
     
@@ -118,12 +118,12 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         /*postId 전달 - 실시간인기포스트에서 전달하는 postId 입니다
         전달되는 id 없으면 위에서 설정된 id로 될거에요..
         나중에 홈에서도 id 이렇게 전달해서 쓰면 될 것 같습니다 ㅎㅎ */
-        if let data = receivedData {
+        if let data = receivedPostId {
             // receivedData를 사용하여 원하는 작업을 수행합니다.
             // 예를 들어, 데이터를 표시하거나 다른 로직에 활용할 수 있습니다.
             print("Received Data: \(data)")
             //currentPostId = data
-            currentPostId = 2  // 임시로 2로 저장
+            //currentPostId = 2  // 임시로 2로 저장
         } else {
             print("No data received.")
         }
@@ -190,11 +190,11 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         // 등록된 댓글이 없으면 없다는 내용 띄우고 댓글 더보기 버튼 삭제??
         if(postDataResult.recentComment == nil){
             self.mainCommentHandle.text = nil
-            self.mainCommentContent.text = postDataResponse.message
+            self.mainCommentContent.text = "아직 등록된 댓글이 없습니다."
         }
         else{
-            self.mainCommentHandle.text = postDataResult.recentComment.handle
-            self.mainCommentContent.text = postDataResult.recentComment.content
+            self.mainCommentHandle.text = postDataResult.recentComment?.handle
+            self.mainCommentContent.text = postDataResult.recentComment?.content
         }
         
         // 좋아요 버튼 (내가 눌렀는지 안했는지)
@@ -205,12 +205,18 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 팔로잉 버튼
         //self.isFollowing = postDataResult.isFollow
-        self.followingBtn.isSelected = postDataResult.isFollow
-        self.followingBtn.backgroundColor = postDataResult.isFollow ? self.isFollowingColor : self.isNotFollowingColor
+        if(self.postDataResult.isFollow == nil){
+            self.followingBtn.isHidden = true
+        }
+        else{
+            self.followingBtn.isHidden = false
+            self.followingBtn.isSelected = postDataResult.isFollow!
+            self.followingBtn.backgroundColor = postDataResult.isFollow! ? self.isFollowingColor : self.isNotFollowingColor
+        }
     }
     
     func loadPostDetailData(){
-        PostDataService.shared.getPostDetail(currentPostId) { (response) in
+        PostDataService.shared.getPostDetail(receivedPostId!) { (response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let postData):
@@ -223,7 +229,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .pathErr:
                 print("pathErr")
             case .serverErr:
-                print("serveErr")
+                print("serverErr")
             case .networkFail:
                 print("networkFail")
             }
@@ -273,7 +279,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .pathErr:
                 print("pathErr")
             case .serverErr:
-                print("serveErr")
+                print("serverErr")
             case .networkFail:
                 print("networkFail")
             }
@@ -307,7 +313,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let commentVC = storyboard.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
         
         commentVC.modalPresentationStyle = .pageSheet
-        commentVC.postId = currentPostId
+        commentVC.postId = receivedPostId
         commentVC.postUserHandle = postDataResult.ownerHandle
         
         // half sheet
@@ -332,7 +338,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
 
     @IBAction func likeBtnTapped(_ sender: Any) {
         // 서버 연결
-        LikedUsersDataService.shared.postLikeRequest(currentPostId){(response) in
+        LikedUsersDataService.shared.postLikeRequest(receivedPostId!){(response) in
             // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let likePostResponse):
@@ -349,7 +355,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .pathErr:
                 print("pathErr")
             case .serverErr:
-                print("serveErr")
+                print("serverErr")
             case .networkFail:
                 print("networkFail")
             }
