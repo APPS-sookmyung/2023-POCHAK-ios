@@ -190,11 +190,11 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         // 등록된 댓글이 없으면 없다는 내용 띄우고 댓글 더보기 버튼 삭제??
         if(postDataResult.recentComment == nil){
             self.mainCommentHandle.text = nil
-            self.mainCommentContent.text = postDataResponse.message
+            self.mainCommentContent.text = "아직 등록된 댓글이 없습니다."
         }
         else{
-            self.mainCommentHandle.text = postDataResult.recentComment.handle
-            self.mainCommentContent.text = postDataResult.recentComment.content
+            self.mainCommentHandle.text = postDataResult.recentComment?.handle
+            self.mainCommentContent.text = postDataResult.recentComment?.content
         }
         
         // 좋아요 버튼 (내가 눌렀는지 안했는지)
@@ -205,8 +205,14 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         
         // 팔로잉 버튼
         //self.isFollowing = postDataResult.isFollow
-        self.followingBtn.isSelected = postDataResult.isFollow
-        self.followingBtn.backgroundColor = postDataResult.isFollow ? self.isFollowingColor : self.isNotFollowingColor
+        if(self.postDataResult.isFollow == nil){
+            self.followingBtn.isHidden = true
+        }
+        else{
+            self.followingBtn.isHidden = false
+            self.followingBtn.isSelected = postDataResult.isFollow!
+            self.followingBtn.backgroundColor = postDataResult.isFollow! ? self.isFollowingColor : self.isNotFollowingColor
+        }
     }
     
     func loadPostDetailData(){
@@ -223,7 +229,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .pathErr:
                 print("pathErr")
             case .serverErr:
-                print("serveErr")
+                print("serverErr")
             case .networkFail:
                 print("networkFail")
             }
@@ -273,7 +279,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .pathErr:
                 print("pathErr")
             case .serverErr:
-                print("serveErr")
+                print("serverErr")
             case .networkFail:
                 print("networkFail")
             }
@@ -349,7 +355,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
             case .pathErr:
                 print("pathErr")
             case .serverErr:
-                print("serveErr")
+                print("serverErr")
             case .networkFail:
                 print("networkFail")
             }

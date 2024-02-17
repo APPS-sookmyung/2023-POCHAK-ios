@@ -22,18 +22,11 @@ struct PostDataService{
         let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4",
                                             "Content-type": "application/json"  // multipart/form-data ???
                                             ]
-        // 김다연 token 사용하기
-        
-        // 임시로 사용하는 loginUser
-//        let body : Parameters = [
-//                    "loginUser": "jisoo"
-//                ]
         
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
         // Request를 보내기 위한 정보
-        let dataRequest = AF.request("http://15.165.84.249"+"/api/v2/posts/\(postId)",
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/posts/\(postId)",
                                     method: .get,
-//                                    parameters: body,
                                     encoding: URLEncoding.default,
                                     headers: header)
         
@@ -46,18 +39,8 @@ struct PostDataService{
                 // 성공 시 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
-//                print("statusCode =")
-//                print(statusCode)
-//                print("description=")
-//                print(value.description)
-//                print("dataresponse = ")
-//                print(dataResponse)
-//                print("error")
-//                print(dataResponse.error)
-//                print("request")
-//                print(dataResponse.request)
                 let networkResult = self.judgeStatus(by: statusCode, value)
-                //print(networkResult)
+
                 completion(networkResult)
             case .failure:
                 completion(.networkFail)
