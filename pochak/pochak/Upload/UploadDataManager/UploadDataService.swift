@@ -11,9 +11,10 @@ class UploadDataService{
     static let shared = UploadDataService()
     let accessToken = GetToken().getAccessToken()
 
-    func upload(postImage:Data?, request : UploadDataRequest, completion: @escaping(NetworkResult<Any>) -> Void){
+    func upload(postImage:Data?,  caption:String, taggedMemberHandleList:Array<String>, completion: @escaping(NetworkResult<Any>) -> Void){
         print("==upload==")
-        let header : HTTPHeaders = ["Authorization":accessToken, "Content-type": "multipart/form-data"]
+        
+        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "multipart/form-data"]
         // Create an Alamofire upload request
         AF.upload(
             multipartFormData: { multipartFormData in
@@ -21,21 +22,25 @@ class UploadDataService{
                 if let imageData = postImage {
                     multipartFormData.append(imageData, withName: "postImage", fileName: "image.jpg", mimeType: "image/jpeg")
                 }
-
-                // Convert request object to JSON data and append it as a part with name "request"
-                do {
-                    let requestData = try JSONEncoder().encode(request)
-                    multipartFormData.append(requestData, withName: "request")
-                } catch {
-                    print("Error encoding UploadDataRequest: \(error)")
-                    completion(.networkFail)
+                
+                if let captionData = caption.data(using: .utf8) {
+                    multipartFormData.append(captionData, withName: "caption")
                 }
+                
+                // Add taggedUserHandles data
+               for tag in taggedMemberHandleList {
+                   if let tagData = tag.data(using: .utf8) {
+                       multipartFormData.append(tagData, withName: "taggedMemberHandleList")
+                   }
+               }
+            
             },
             to: APIConstants.baseURLv2 + "/api/v2/posts",
             method: .post,
             headers: header
         )
         .responseJSON { response in
+            debugPrint(response)
             // Handle the response
             switch response.result {
             case .success(let value):
@@ -44,6 +49,9 @@ class UploadDataService{
                     switch code {
                     case "POST2001":
                         completion(.success(dict))
+                    case "MEMBER4001":
+                        print("유효하지 않은 멤버의 handle입니다.")
+                        completion(.networkFail)
                     default:
                         print("Unknown code: \(code)")
                         completion(.networkFail)
