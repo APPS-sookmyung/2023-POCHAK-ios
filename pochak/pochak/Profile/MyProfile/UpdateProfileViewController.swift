@@ -135,7 +135,7 @@ class UpdateProfileViewController: UIViewController {
         })
         alert.addAction(cancle)
         alert.addAction(ok)
-        present(alert,animated: true,completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - 회원탈퇴

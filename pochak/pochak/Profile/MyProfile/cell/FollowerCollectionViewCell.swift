@@ -15,6 +15,10 @@ class FollowerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var deleteBtn: UIButton!
     
     var localHandle: String = ""
+    var parentVC: UIViewController!
+
+    weak var delegate: RemoveImageDelegate?
+        
     
     // Collection View가 생성할 cell임을 명시
     static let identifier = "FollowerCollectionViewCell"
@@ -33,18 +37,22 @@ class FollowerCollectionViewCell: UICollectionViewCell {
         }
         userId.text = memberDataModel.handle
         userName.text = memberDataModel.name
+        localHandle = memberDataModel.handle ?? ""
     }
     
-    
-//    @IBAction func deleteFollowerBtn(_ sender: Any) {
-//        let handle = localHandle
-//        FollowToggleDataManager.shared.followToggleDataManager(handle, { resultData in
-//            print(resultData.message)
-//        })
-//        
-//        // cell 삭제
-//    }
-//    
+    @IBAction func deleteFollowerBtn(_ sender: Any) {
+        let handle = localHandle
+        print("inside deleteFollowerBtn!!!!!")
+        // index
+        guard let superView = self.superview as? UICollectionView else {
+            print("superview is not a UICollectionView - getIndexPath")
+            return
+        }
+        guard let indexPath = superView.indexPath(for: self) else {return}
+        print(indexPath.row)
+        delegate?.removeFromCollectionView(at: indexPath, handle)
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // 프로필 레이아웃

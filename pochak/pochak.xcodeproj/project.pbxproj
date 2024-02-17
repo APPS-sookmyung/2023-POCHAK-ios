@@ -514,13 +514,13 @@
 			isa = PBXGroup;
 			children = (
 				37A284C02B52FC910023EB9D /* UpdateProfileViewController.swift */,
+				3769D6B82B3C345800294CD1 /* MyProfileTabViewController.swift */,
 				37D311DD2B566C3D00A1D7C1 /* DeleteAccountDataManager */,
 				37D311D82B53131D00A1D7C1 /* LogoutDataManager */,
 				37D311D32B53053C00A1D7C1 /* MyProfileUpdateDataManager */,
 				37C3AF442B3CB26000B4C79C /* MyProfilePostDataManager */,
 				3769D6CC2B3C560200294CD1 /* PostListTabman */,
 				3769D6CB2B3C55E500294CD1 /* FollowListTabman */,
-				3769D6B82B3C345800294CD1 /* MyProfileTabViewController.swift */,
 				3769D6C02B3C39EA00294CD1 /* cell */,
 			);
 			path = MyProfile;

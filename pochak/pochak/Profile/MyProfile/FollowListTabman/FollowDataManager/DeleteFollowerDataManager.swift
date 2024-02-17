@@ -30,7 +30,7 @@ class DeleteFollowerDataManager {
                                                                     credential: credential)
         
         AF.request(url,
-                   method: .post,
+                   method: .delete,
                    encoding: URLEncoding.default,
                    interceptor: myAuthencitationInterceptor)
         .validate()
