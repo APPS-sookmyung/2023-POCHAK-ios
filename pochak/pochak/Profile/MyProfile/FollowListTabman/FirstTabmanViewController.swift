@@ -7,10 +7,12 @@
 
 import UIKit
 
+protocol RemoveImageDelegate: AnyObject {
+    func removeFromCollectionView(at indexPath: IndexPath, _ handle: String)
+}
+
 class FirstTabmanViewController: UIViewController{
     @IBOutlet weak var followerCollectionView: UICollectionView!
-        
-    
     var imageArray : [MemberListDataModel] = []
     
     override func viewDidLoad() {
@@ -60,13 +62,18 @@ extension FirstTabmanViewController : UICollectionViewDelegate, UICollectionView
             for: indexPath) as? FollowerCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let memberListData = imageArray[indexPath.item]
+        
+        // 데이터 전달
         // indexPath 안에는 섹션에 대한 정보, 섹션에 들어가는 데이터 정보 등이 있다
+        let memberListData = imageArray[indexPath.item]
         cell.configure(memberListData)
+        cell.parentVC = self
+        
+        // delegate 위임받음
+        cell.delegate = self
         return cell
     }
-    
-    
+
 }
 
 // CollectionView Cell 크기(높이, 너비 지정)
@@ -75,5 +82,30 @@ extension FirstTabmanViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: followerCollectionView.bounds.width,
                       height: 80)
+    }
+    
+}
+
+// cell 삭제 로직
+extension FirstTabmanViewController: RemoveImageDelegate {
+    func removeFromCollectionView(at indexPath: IndexPath, _ handle: String) {
+        // 알람! : 팔로워에서 삭제하시겠습니까?
+        let alert = UIAlertController(title:"팔로워를 삭제하시겠습니까?",message: "",preferredStyle: UIAlertController.Style.alert)
+        let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
+        let ok = UIAlertAction(title: "삭제", style: .destructive, handler: {
+            action in
+            // API
+            DeleteFollowerDataManager.shared.deleteFollowerDataManager(handle, { resultData in
+                print(resultData.message)
+            })
+            // cell 삭제
+            print("inside removeFromCollectionView!!!!!")
+//            self.followerCollectionView.deleteItems(at: [IndexPath(item: indexPath.row, section: 0)])
+            self.imageArray.remove(at: indexPath.row)
+            self.followerCollectionView.reloadData()
+        })
+        alert.addAction(cancle)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil) // present는 VC에서만 동작
     }
 }
