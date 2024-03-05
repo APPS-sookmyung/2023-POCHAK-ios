@@ -18,6 +18,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var photoData = Data(count: 0)
     
+    @IBOutlet weak var flashBtnBg: UIButton!
+    
     var flashMode: AVCaptureDevice.FlashMode = .off
     
     let hapticImpact = UIImpactFeedbackGenerator()
@@ -126,6 +128,11 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     func switchFlash() {
         isFlashOn.toggle()
         flashMode = isFlashOn == true ? .on : .off
+        
+        // 이미지 설정
+        let buttonImageName = isFlashOn ? "flashActiveBg" : "flashBg"
+        flashBtnBg.setImage(UIImage(named: buttonImageName), for: .normal)
+        
     }
     //카메라 세팅
     func setUpCamera(){

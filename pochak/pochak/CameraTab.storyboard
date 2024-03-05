@@ -96,6 +96,7 @@
                     <navigationItem key="navigationItem" id="h4f-4Q-9cY"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="flashBtnBg" destination="9I5-l5-fuG" id="Ga6-HV-Nuv"/>
                         <outlet property="flashbtn" destination="9I5-l5-fuG" id="un6-h7-Cm1"/>
                         <outlet property="previewView" destination="NaT-JD-3RV" id="frh-nW-p5c"/>
                     </connections>
