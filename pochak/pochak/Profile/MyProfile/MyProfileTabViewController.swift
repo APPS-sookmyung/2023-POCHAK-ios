@@ -73,7 +73,8 @@ class MyProfileTabViewController: TabmanViewController {
     
     private func loadProfileData() {
         let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? ""
-        self.userHandle.text = "@" + handle
+//        self.userHandle.text = "@" + handle
+        self.userHandle.text = "@dxxynni"
         
 //        let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? ""
 //        self.userMessage.text = message
