@@ -255,7 +255,11 @@ extension AlarmViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }
         // MARK: - 다른 사람이 날 팔로우했을 경우 FOLLOW
         else if(self.alarmList[indexPath.item].alarmType == AlarmType.follow){
-            // 다른 사람 프로필로 이동
+            let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
+            let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
+            
+            profileTabVC.recievedHandle = alarmList[indexPath.item].handle
+            self.navigationController?.pushViewController(profileTabVC, animated: true)
         }
         // MARK: - 내가 올린 게시물에 좋아요가 달릴 경우 LIKE
         else if(self.alarmList[indexPath.item].alarmType == AlarmType.like){

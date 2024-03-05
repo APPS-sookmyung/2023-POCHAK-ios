@@ -10,9 +10,14 @@ import Alamofire
 class AlarmDataService{
     static let shared = AlarmDataService()
     
+    let accessToken = GetToken().getAccessToken()
+    
+    // 임시로 넣어두는 다연 토큰
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
+                 "Content-type": "application/json"
+                 ]
+    
     func getAlarm(completion: @escaping (NetworkResult<Any>) -> Void){
-        // header 있는 자리!
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdS55ZW9ubl8iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzA5NTUzNzE3LCJleHAiOjE3ODczMTM3MTd9.1z__UGnchm_UcZ7Znv-VtzZYpuyv77FXn0rGiJ_3UIY", "Content-type": "application/json"]
         
         let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/alarms",
                                     method: .get,
