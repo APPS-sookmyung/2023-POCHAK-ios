@@ -281,7 +281,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zk6-cZ-Xnd">
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zk6-cZ-Xnd" userLabel="Content Stack View">
                                                 <rect key="frame" x="24" y="570" width="327" height="172.33333333333337"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Kyle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiP-WD-doD">
@@ -305,7 +305,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="1YR-qK-OJZ"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="tHn-2D-Kcr">
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="tHn-2D-Kcr" userLabel="Comment Stack View">
                                                 <rect key="frame" x="24" y="619.66666666666652" width="327" height="14.333333333333371"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="bbaek" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2G4-E0-LJR">
