@@ -13,8 +13,11 @@ class PostTabViewController: UIViewController, UISearchBarDelegate{
     @IBOutlet weak var collectionView: UICollectionView!
     
     let searchBar = UISearchBar()
-
-    var imageArray : [PostTabDataModel] = []
+    
+    private var postTabDataResponse: PostTabDataResponse!
+    private var postTabDataResult: PostTabDataResult!
+    private var postList: [PostTabDataPostList]! = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -53,8 +56,11 @@ class PostTabViewController: UIViewController, UISearchBarDelegate{
                 case .success(let data):
                     print("success")
                     print(data)
-                    self.imageArray = data as! [PostTabDataModel]
-                    print(self.imageArray)
+                    self.postTabDataResponse = data as? PostTabDataResponse
+                    self.postTabDataResult = self.postTabDataResponse.result
+                    print(self.postTabDataResult!)
+                    self.postList = self.postTabDataResult.postList
+                    print(self.postList)
                     DispatchQueue.main.async {
                         self.collectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
                     }
@@ -99,7 +105,7 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
         case 0:
             return 2
         default:
-            return max(0,(imageArray.count)-2)
+            return max(0,(postList.count)-2)
         }
         
     }
@@ -112,8 +118,8 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
                 fatalError("셀 타입 캐스팅 실패")
             }
             // 이미지 설정
-            if(!imageArray.isEmpty){
-                cell.configure(with: imageArray[indexPath.item])
+            if(!postList.isEmpty){
+                cell.configure(with: postList[indexPath.item].postImage)
             }
             return cell
         default:
@@ -121,8 +127,8 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
                 fatalError("셀 타입 캐스팅 실패2")
             }
             // 이미지 설정
-            if(!imageArray.isEmpty){
-                cell.configure(with: imageArray[indexPath.item+2])
+            if(!postList.isEmpty){
+                cell.configure(with: postList[indexPath.item+2].postImage)
             }
             
             return cell
@@ -133,30 +139,25 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch section {
         case 0:
             print("view post btn tapped")
-//            var selectedData = imageArray[indexPath.item].postId
-//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
-//
-//            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-//                else { return }
-//            print(postVC)
-//            postVC.receivedPostId = modifiedString
-//            self.navigationController?.pushViewController(postVC, animated: true)
+            
+            let postTabSb = UIStoryboard(name: "PostTab", bundle: nil)
+            guard let postVC = postTabSb.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            
+            postVC.receivedPostId = postList[indexPath.item].postId
+            self.navigationController?.pushViewController(postVC, animated: true)
+            
+            
         default:
             print("view post btn tapped")
-//            var selectedData = imageArray[indexPath.item+2].postId
-//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
-//
-//            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-//                else { return }
-//            print(postVC)
-//            postVC.receivedPostId = modifiedString
-//            self.navigationController?.pushViewController(postVC, animated: true)
+            let postTabSb = UIStoryboard(name: "PostTab", bundle: nil)
+            guard let postVC = postTabSb.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            
+            postVC.receivedPostId = postList[indexPath.item+2].postId
+            self.navigationController?.pushViewController(postVC, animated: true)
+            
         }
-        
-        //        let sb = UIStoryboard(name: "PostTab", bundle: nil)
-        //        let postVC = sb.instantiateViewController(withIdentifier: "PostVC") as! PostViewController
-        //        postVC.modalPresentationStyle = .fullScreen
-        //        self.present(postVC, animated: true, completion: nil)
     }
 }
 

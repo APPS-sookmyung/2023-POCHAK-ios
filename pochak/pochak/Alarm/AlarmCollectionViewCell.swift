@@ -14,10 +14,20 @@ class AlarmCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var img: UIImageView!
     
 
-    @IBAction func acceptBtn(_ sender: Any) {
+    @IBOutlet weak var acceptBtn: UIButton!
+    @IBOutlet weak var refuseBtn: UIButton!
+    
+    var acceptButtonAction: (() -> Void)?
+    var refuseButtonAction: (() -> Void)?
+
+    
+    @IBAction func acceptBtnTapped(_ sender: Any) {
+        acceptButtonAction?()
     }
-    @IBAction func refuseBtn(_ sender: Any) {
+    @IBAction func refuseBtnTapped(_ sender: Any) {
+        refuseButtonAction?()
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,6 +47,8 @@ class AlarmCollectionViewCell: UICollectionViewCell {
                 switch result {
                 case .success(let value):
                     print("Image successfully loaded: \(value.image)")
+                    self.img.contentMode = .scaleAspectFill
+
                 case .failure(let error):
                     print("Image failed to load with error: \(error.localizedDescription)")
                 }
