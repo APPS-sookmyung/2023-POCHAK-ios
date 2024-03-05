@@ -12,10 +12,11 @@ class RecentSearchRealmManager {
     init() {
         // Get the default Realm
         self.realm = try! Realm()
+        
     }
 
     // MARK: - Create
-    func addRecentSearch(term: String) {
+    func addRecentSearch(term: String, profileImg: String) {
         // Check if the term already exists in Realm
         if let existingSearchTerm = realm.objects(RecentSearchModel.self).filter("term == %@", term).first {
             // Term already exists, update the date
@@ -25,7 +26,7 @@ class RecentSearchRealmManager {
             print("Term updated")
         } else {
             // Term does not exist, add it to Realm
-            let searchTerm = RecentSearchModel(term: term)
+            let searchTerm = RecentSearchModel(term: term, profileImg: profileImg)
             try! realm.write {
                 realm.add(searchTerm)
             }

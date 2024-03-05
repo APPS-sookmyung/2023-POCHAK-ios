@@ -10,6 +10,7 @@ import Kingfisher
 
 class AlarmCollectionViewCell: UICollectionViewCell {
     static let identifier = "AlarmCollectionViewCell"
+    
     @IBOutlet weak var comment: UILabel!
     @IBOutlet weak var img: UIImageView!
     
