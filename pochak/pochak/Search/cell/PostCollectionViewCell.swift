@@ -19,8 +19,8 @@ class PostCollectionViewCell: UICollectionViewCell {
     }
     
     // 이미지 설정 함수
-    func configure(with imageUrl: PostTabDataModel) {
-        if let url = URL(string: imageUrl.imgUrl) {
+    func configure(with imageUrl: String) {
+        if let url = URL(string: imageUrl) {
             imageView.kf.setImage(with: url) { result in
                 switch result {
                 case .success(let value):
