@@ -120,7 +120,7 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCollectionViewCell.identifier, for: indexPath) as? PostCollectionViewCell else{
                 fatalError("셀 타입 캐스팅 실패2")
             }
-            // 이미지 설정            
+            // 이미지 설정
             if(!imageArray.isEmpty){
                 cell.configure(with: imageArray[indexPath.item+2])
             }
@@ -133,24 +133,24 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch section {
         case 0:
             print("view post btn tapped")
-            var selectedData = imageArray[indexPath.item].postId
-            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
-
-            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-                else { return }
-            print(postVC)
-            postVC.receivedData = modifiedString
-            self.navigationController?.pushViewController(postVC, animated: true)
+//            var selectedData = imageArray[indexPath.item].postId
+//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+//
+//            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+//                else { return }
+//            print(postVC)
+//            postVC.receivedPostId = modifiedString
+//            self.navigationController?.pushViewController(postVC, animated: true)
         default:
             print("view post btn tapped")
-            var selectedData = imageArray[indexPath.item+2].postId
-            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
-
-            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-                else { return }
-            print(postVC)
-            postVC.receivedData = modifiedString
-            self.navigationController?.pushViewController(postVC, animated: true)
+//            var selectedData = imageArray[indexPath.item+2].postId
+//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
+//
+//            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+//                else { return }
+//            print(postVC)
+//            postVC.receivedPostId = modifiedString
+//            self.navigationController?.pushViewController(postVC, animated: true)
         }
         
         //        let sb = UIStoryboard(name: "PostTab", bundle: nil)

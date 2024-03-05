@@ -140,8 +140,7 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
                 print(data)
                 self.searchResultData = data as! [idSearchResponse]
                 DispatchQueue.main.async {
-                    print("!!!!!!SearchResultData!!!!!!")
-                    print(self.searchResultData)
+                    print("!!!!!!SearchResultData!!!!!! \(self.searchResultData)")
                     self.resultVC.tableView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
                 }
             case .requestErr(let err):
