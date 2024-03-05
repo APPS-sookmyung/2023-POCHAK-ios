@@ -24,7 +24,7 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     @IBOutlet weak var moreCommentsBtn: UIButton!
     
     var receivedPostId: Int?
-    var currentPostId: Int!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
+    //var currentPostId: Int!//= "POST%23eb472472-97ea-40ab-97e7-c5fdf57136a0"
     var postOwnerHandle: String = ""  // 나중에 여기저기에서 사용할 수 있도록.. 미리 게시자 아이디 저장
     
     let pullDownMenuBtn = UIButton()
@@ -39,48 +39,18 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     
     private var followPostResponse: FollowDataResponse!
     
+    private var deletePostResponse: PostDeleteResponse!
+    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // 로그인된 유저가 게시글의 소유자인 경우에만 실행하도록 고치기
-        let loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+        //let loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
         //if(loggedinUserHandle == postOwnerHandle){
 //            setupPullDownMenu()
         // 내비게이션 바에 오른쪽 아이템 추가 (ellipsis)
-        pullDownMenuBtn.setImage(UIImage(systemName:  "ellipsis"), for: .normal)
-//        let barButton = UIBarButtonItem(customView: pullDownMenuBtn)
-        let barButton = UIBarButtonItem(image: UIImage(systemName:  "ellipsis"), style: .plain, target: self, action: nil)
-        //assign button to navigationbar
-        self.navigationItem.rightBarButtonItem = barButton
         
-        //pullDownMenuBtn.addTarget(self, action: #selector(pullDownBtnDidTap), for: .touchUpInside)
-        // Menu 만들기
-        let deletePost = UIAction(title: "게시글 삭제하기", attributes: .destructive) { action in
-            // 삭제하겠습니까? alert 만들기
-            let alert = UIAlertController(title: "정말 게시글을 삭제하시겠습니까?", message: nil, preferredStyle: UIAlertController.Style.alert)
-            let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-            let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { action in
-                print("delete!!")
-                // 삭제 api 호출
-                
-                // 이전 화면으로 돌아가기
-                self.navigationController?.popViewController(animated: true)
-            }
-            
-            alert.addAction(cancelAction)
-            alert.addAction(confirmAction)
-            
-            self.present(alert, animated: true)
-        }
-        //self.pullDownMenuBtn.menu = UIMenu(title: "", children: [deletePost])
-        barButton.menu = UIMenu(title: "", children: [deletePost])
-        //barButton.
-        // 추가적인 설정
-        pullDownMenuBtn.showsMenuAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
-        pullDownMenuBtn.changesSelectionAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
-        //}
-        //setupPullDownMenu()
         
         /* 1번만 해도 되는 초기화들.. */
         // 크기에 맞게
@@ -181,6 +151,9 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     //        print(arr)
         self.pochakUser.text = postDataResult.ownerHandle + " 님이 포착"
         
+        // 삭제 메뉴 등록
+        setDeleteMenu(postOwnerHandle: postDataResult.ownerHandle)
+        
         // 포스트 내용
         self.postOwnerHandleLabel.text = postDataResult.ownerHandle
         self.postContent.text = postDataResult.caption
@@ -242,22 +215,63 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         return moveToOthersProfile
     }
     
-    // 현재 로그인된 유저와 게시글의 소유자가 같을 때만
-    /* 필요없음 */
-//    func setupPullDownMenu() {
-//        // 내비게이션 바에 오른쪽 아이템 추가 (ellipsis)
-//        pullDownMenuBtn.setImage(UIImage(systemName:  "ellipsis"), for: .normal)
-//        //pullDownMenuBtn.addTarget(self, action: #selector(pullDownBtnDidTap), for: .touchUpInside)
-//        let barButton = UIBarButtonItem(customView: pullDownMenuBtn)
-//        //assign button to navigationbar
-//        self.navigationItem.rightBarButtonItem = barButton
-//        pullDownMenuBtn.showsMenuAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
-//        //pullDownMenuBtn.changesSelectionAsPrimaryAction = true
-//    }
-    
-    // 게시글 삭제하기 버튼 눌렸을 때
-    @objc func deletePost(){
-        
+    // 포스트 작성자가 조회할 때만 되게 함. (현재는 dayeonHandle로 고정)
+    func setDeleteMenu(postOwnerHandle: String){
+        if (postOwnerHandle == APIConstants.dayeonHandle){
+            pullDownMenuBtn.setImage(UIImage(systemName:  "ellipsis"), for: .normal)
+            let barButton = UIBarButtonItem(image: UIImage(systemName:  "ellipsis"), style: .plain, target: self, action: nil)
+            self.navigationItem.rightBarButtonItem = barButton
+            
+            // Menu 만들기
+            let deletePost = UIAction(title: "게시글 삭제하기", attributes: .destructive) { action in
+                // 삭제하겠습니까? alert 만들기
+                let alert = UIAlertController(title: "정말 게시글을 삭제하시겠습니까?", message: nil, preferredStyle: UIAlertController.Style.alert)
+                let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+                let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { action in
+                    print("=== delete!! ===")
+                    // 삭제 api 호출
+                    PostDataService.shared.deletePost(self.receivedPostId!) { response in
+                        switch (response){
+                        case .success(let deletePostResponse):
+                            self.deletePostResponse = deletePostResponse as? PostDeleteResponse
+                            // 삭제 실패한 경우
+                            if(!self.deletePostResponse.isSuccess){
+                                let alert = UIAlertController(title: "알림", message: "게시물 삭제가 제대로 이루어지지 않았습니다. 다시 시도해주세요.", preferredStyle: .alert)
+                                let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+                                alert.addAction(action)
+                                self.present(alert, animated: true)
+                                
+                                print(self.deletePostResponse.message)
+                                return
+                            }
+                            print(self.deletePostResponse.message)
+                        case .requestErr(let message):
+                            print("requestErr", message)
+                        case .pathErr:
+                            print("pathErr")
+                        case .serverErr:
+                            print("serverErr")
+                        case .networkFail:
+                            print("networkFail")
+                        }
+                    }
+                    // 이전 화면으로 돌아가기
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
+                alert.addAction(cancelAction)
+                alert.addAction(confirmAction)
+                
+                self.present(alert, animated: true)
+            }
+            
+            //self.pullDownMenuBtn.menu = UIMenu(title: "", children: [deletePost])
+            barButton.menu = UIMenu(title: "", children: [deletePost])
+            //barButton.
+            // 추가적인 설정
+            pullDownMenuBtn.showsMenuAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
+            pullDownMenuBtn.changesSelectionAsPrimaryAction = true  // 버튼을 클릭하거나 선택하면 팝업 메뉴 표시
+        }
     }
     
     // MARK: - Actions
@@ -290,10 +304,11 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
         let storyboard = UIStoryboard(name: "PostTab", bundle: nil)
         let postLikesVC = storyboard.instantiateViewController(withIdentifier: "PostLikesVC") as! PostLikesViewController
         
+        postLikesVC.postId = self.receivedPostId
+        postLikesVC.postOwnerHandle = self.postDataResult.ownerHandle
         postLikesVC.modalPresentationStyle = .pageSheet
         // 좋아요 누른 사람 페이지에 포스트 아이디, 포스트 게시자 아이디 전달
-        //postLikesVC.postId = self.currentPostId
-        postLikesVC.postOwnerHandle = self.postDataResult.ownerHandle
+        
         
         // half sheet
         if let sheet = postLikesVC.sheetPresentationController {
@@ -337,19 +352,23 @@ class PostViewController: UIViewController, UISheetPresentationControllerDelegat
     }
 
     @IBAction func likeBtnTapped(_ sender: Any) {
-        // 서버 연결
         LikedUsersDataService.shared.postLikeRequest(receivedPostId!){(response) in
-            // NetworkResult형 enum으로 분기 처리
             switch(response){
             case .success(let likePostResponse):
                 self.likePostResponse = likePostResponse as? LikePostDataResponse
                 if(!self.likePostResponse.isSuccess!){
                     // 인스턴스 생성
-                    //let alert = UIAlertController(title: "알림", message: "좋아요가 반영되지 못했습니다.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "알림", message: "좋아요가 반영되지 못했습니다.", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+                    alert.addAction(action)
+                    self.present(alert, animated: true)
                     print(self.likePostResponse.message)
+                    return
                 }
                 print(self.likePostResponse.message)
+                //self.btnLike.isSelected.toggle()
                 self.loadPostDetailData()
+                
             case .requestErr(let message):
                 print("requestErr", message)
             case .pathErr:
