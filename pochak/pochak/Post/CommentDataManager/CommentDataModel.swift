@@ -71,9 +71,9 @@ struct ChildCommentDataResult: Codable {
 
 // MARK: - 댓글 등록 Data Model (Response만 존재)
 struct PostCommentResponse: Codable {
-    let isSuccess: Bool?
-    let code: Int?
-    let message: String?
+    let isSuccess: Bool
+    let code: String
+    let message: String
 }
 
 // MARK: - 댓글 삭제 Data Model (Response만 있음)
@@ -91,4 +91,5 @@ struct UICommentData {
     let createdDate: String
     let content: String
     let isParent: Bool
+    let parentId: Int?
 }

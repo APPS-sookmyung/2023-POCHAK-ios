@@ -19,11 +19,15 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var userProfileImageView: UIImageView!
     
     let textViewPlaceHolder = "이 게시물에 댓글을 달아보세요"
-    var loggedinUserHandle: String!  // 현재 로그인된 유저의 아이디
+    //var loggedinUserHandle: String!  // 현재 로그인된 유저의 아이디
     
     // postVC에서 넘겨주는 값
     var postId: Int?
     var postUserHandle: String?
+    
+    // 댓글 셀에서 받을 정보
+    var isPostingChildComment: Bool = false
+    var parentCommentId: Int?
     
     public var childCommentCntList = [Int]()  // 섹션 당 셀 개수 따로 저장해둘 리스트 필요함 (부모 댓글의 자식 댓글 개수 저장)
     
@@ -41,8 +45,8 @@ class CommentViewController: UIViewController {
         super.viewDidLoad()
         
         // UserDefaults에서 현재 로그인된 유저 핸들 가져오기
-        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
-        print("current logged in user handle is : \(loggedinUserHandle)")
+//        loggedinUserHandle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
+//        print("current logged in user handle is : \(loggedinUserHandle)")
         
         // 테이블 뷰 세팅
         setUpTableView()
@@ -96,11 +100,11 @@ class CommentViewController: UIViewController {
                 if(self.parentCommentList != nil){
                     // 부모 댓글 자체를 부모 댓글인지의 여부가 있는 UICommentData형으로 만들어서 추가
                     for parentData in self.parentCommentList ?? [] {
-                        self.uiCommentList.append(UICommentData(commentId: parentData.commentId, profileImage: parentData.profileImage, handle: parentData.handle, createdDate: parentData.createdDate, content: parentData.content, isParent: true))
+                        self.uiCommentList.append(UICommentData(commentId: parentData.commentId, profileImage: parentData.profileImage, handle: parentData.handle, createdDate: parentData.createdDate, content: parentData.content, isParent: true, parentId: nil))
                         
                         // 부모 댓글의 자식 댓글을 리스트에 추가
                         for childData in parentData.childCommentList {
-                            self.uiCommentList.append(UICommentData(commentId: childData.commentId, profileImage: childData.profileImage, handle: childData.handle, createdDate: childData.createdDate, content: childData.content, isParent: false))
+                            self.uiCommentList.append(UICommentData(commentId: childData.commentId, profileImage: childData.profileImage, handle: childData.handle, createdDate: childData.createdDate, content: childData.content, isParent: false, parentId: parentData.commentId))
                         }
                     }
                 }
@@ -173,11 +177,11 @@ class CommentViewController: UIViewController {
         self.uiCommentList.removeAll()
         
         for parentData in self.parentCommentList ?? [] {
-            self.uiCommentList.append(UICommentData(commentId: parentData.commentId, profileImage: parentData.profileImage, handle: parentData.handle, createdDate: parentData.createdDate, content: parentData.content, isParent: true))
+            self.uiCommentList.append(UICommentData(commentId: parentData.commentId, profileImage: parentData.profileImage, handle: parentData.handle, createdDate: parentData.createdDate, content: parentData.content, isParent: true, parentId: nil))
             
             // 부모 댓글의 자식 댓글을 리스트에 추가
             for childData in parentData.childCommentList {
-                self.uiCommentList.append(UICommentData(commentId: childData.commentId, profileImage: childData.profileImage, handle: childData.handle, createdDate: childData.createdDate, content: childData.content, isParent: false))
+                self.uiCommentList.append(UICommentData(commentId: childData.commentId, profileImage: childData.profileImage, handle: childData.handle, createdDate: childData.createdDate, content: childData.content, isParent: false, parentId: parentData.commentId))
             }
         }
     }
@@ -251,7 +255,7 @@ class CommentViewController: UIViewController {
         if(!commentTextView.text.isEmpty && commentTextView.text! != textViewPlaceHolder){
             print("textview is not empty")
             // 임시로 parentCommentSK는 nil로 지정
-            CommentDataService.shared.postComment(postId!, commentTextView.text, nil) { (response) in
+            CommentDataService.shared.postComment(postId!, commentTextView.text, self.isPostingChildComment ? self.parentCommentId : nil) { (response) in
                 switch(response){
                 case .success(let data):
                     self.postCommentResponse = (data as! PostCommentResponse)
@@ -287,6 +291,8 @@ class CommentViewController: UIViewController {
         
         // 뷰컨트롤러 새로고침하기(데이터 다시 받아오기)
         
+        // 댓글 종류 초기화
+        self.isPostingChildComment = false
     }
 }
 
@@ -332,6 +338,7 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.editingCommentTextView = self.commentTextView
             cell.tableView = self.tableView
+            cell.commentVC = self
             cell.setupData(cellData[finalIndex])
             return cell
         }
@@ -343,6 +350,7 @@ extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell.editingCommentTextView = self.commentTextView
             cell.tableView = self.tableView
+            cell.commentVC = self
             cell.setupData(cellData[finalIndex])
             return cell
         }

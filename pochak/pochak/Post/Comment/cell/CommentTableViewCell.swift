@@ -19,6 +19,8 @@ class CommentTableViewCell: UITableViewCell {
     var taggedId: String = ""
     var loggedinUserHandle: String?
     var deleteButton = UIButton()
+    var commentVC: CommentViewController!
+    var commentId: Int!
     
     // comment view controller에서 받는 댓글 입력창
     var editingCommentTextView: UITextView!
@@ -67,6 +69,10 @@ class CommentTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func postChildCmmtBtnDidTap(_ sender: UIButton) {
+        // 부모 댓글을 단다는 것을 comment vc에 알려야 함
+        commentVC.isPostingChildComment = true
+        commentVC.parentCommentId = self.commentId
+        
         let indexPath = tableView.indexPath(for: self)
         // 답글을 다려는 셀을 맨 위로 이동
         tableView.scrollToRow(at: indexPath!, at: .top, animated: true)
@@ -85,6 +91,9 @@ class CommentTableViewCell: UITableViewCell {
     
     // MARK: - Helpers
     func setupData(_ comment: UICommentData){
+        // 현재 댓글 아이디 저장
+        self.commentId = comment.commentId
+        
         // 프로필 이미지
         let profileImgStr = comment.profileImage
             let url = URL(string: profileImgStr)
