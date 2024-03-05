@@ -54,6 +54,7 @@ class FollowingCollectionViewCell: UICollectionViewCell {
         })
         
         if sender.isSelected {
+            // 팔로우 취소 알림창
             sender.setTitle("팔로우", for: .normal)
             sender.backgroundColor = UIColor(named: "yellow00")
             sender.setTitleColor(UIColor(named: "gray07"), for: .normal)

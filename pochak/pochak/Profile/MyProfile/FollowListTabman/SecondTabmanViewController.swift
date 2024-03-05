@@ -11,6 +11,7 @@ class SecondTabmanViewController: UIViewController {
 
     @IBOutlet weak var followingCollectionView: UICollectionView!
     var imageArray : [MemberListDataModel] = []
+    var recievedHandle : String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +37,8 @@ class SecondTabmanViewController: UIViewController {
         }
     
     private func loadFollowingListData() {
-        let handle = "dxxynni" // !!임시 핸들!!
-        FollowListDataManager.shared.followingDataManager(handle,{resultData in
+//        let handle = "dxxynni" // !!임시 핸들!!
+        FollowListDataManager.shared.followingDataManager(recievedHandle ?? "",{resultData in
             self.imageArray = resultData
             self.followingCollectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
         })

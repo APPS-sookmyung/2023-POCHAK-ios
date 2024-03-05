@@ -72,7 +72,8 @@ class MyProfileTabViewController: TabmanViewController {
     
     
     private func loadProfileData() {
-        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? ""
+//        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? ""
+        let handle = "dxxynni" // 임시 핸들
 //        self.userHandle.text = "@" + handle
         self.userHandle.text = "@dxxynni"
         
@@ -132,12 +133,14 @@ class MyProfileTabViewController: TabmanViewController {
     @objc private func viewFollowerTapped(){
         guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
         followListVC.index = 0
+        followListVC.handle = "dxxynni"
         self.navigationController?.pushViewController(followListVC, animated: true)
     }
         
     @objc private func viewFollowingTapped(){
         guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
         followListVC.index = 1
+        followListVC.handle = "dxxynni"
         self.navigationController?.pushViewController(followListVC, animated: true)
     }
 
