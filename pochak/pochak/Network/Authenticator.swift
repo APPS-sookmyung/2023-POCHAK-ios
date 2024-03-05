@@ -25,8 +25,8 @@ class MyAuthenticator : Authenticator {
     // api요청 시 AuthenticatorIndicator객체가 존재하면, 요청 전에 가로채서 apply에서 Header에 bearerToken 추가
     func apply(_ credential: Credential, to urlRequest: inout URLRequest) {
         print("apply Function 실행중~~~~~!!")
-        urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-//        urlRequest.addValue("Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4", forHTTPHeaderField: "Authorization")
+//        urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4", forHTTPHeaderField: "Authorization")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-type")
         print(urlRequest.headers)
     }
@@ -48,7 +48,10 @@ class MyAuthenticator : Authenticator {
         // bearerToken의 urlRequest대해서만 refresh를 시도 (true)
         print("isRequest Function 실행중~~~~~!!")
         let bearerToken = HTTPHeader.authorization(bearerToken: credential.accessToken).value
-        return urlRequest.headers["Authorization"] == bearerToken
+        let startIndex = bearerToken.index(bearerToken.startIndex, offsetBy: 7)
+        let newBearerToken = String(bearerToken[startIndex...]) // 12:00:00
+        print("beartoken이 맞는건지 확인합니다~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", newBearerToken)
+        return urlRequest.headers["Authorization"] == newBearerToken
     }
     
     // token을 refresh하는 부분
