@@ -14,6 +14,7 @@ protocol RemoveImageDelegate: AnyObject {
 class FirstTabmanViewController: UIViewController{
     @IBOutlet weak var followerCollectionView: UICollectionView!
     var imageArray : [MemberListDataModel] = []
+    var recievedHandle : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,8 @@ class FirstTabmanViewController: UIViewController{
         }
 
     private func loadFollowerListData() {
-        let handle = "dxxynni" // !!임시 핸들!!
-        FollowListDataManager.shared.followerDataManager(handle,{resultData in
+//        let handle = "dxxynni" // !!임시 핸들!!
+        FollowListDataManager.shared.followerDataManager(recievedHandle ?? "",{resultData in
             self.imageArray = resultData
             self.followerCollectionView.reloadData() // collectionView를 새로고침하여 이미지 업데이트
         })

@@ -494,7 +494,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="szv-0Q-tM3"/>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Ur8-ID-cDm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBI-dY-zhy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -706,18 +706,17 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xB-q2-OTa">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xB-q2-OTa">
                                         <rect key="frame" x="36.666666666666657" y="313.66666666666669" width="320" height="45"/>
-                                        <color key="backgroundColor" name="yellow00"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="SL1-aB-FC4"/>
                                             <constraint firstAttribute="width" constant="320" id="dIK-hw-ssc"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="팔로우">
-                                            <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="16"/>
-                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <connections>
+                                            <action selector="followToggleButton:" destination="Q7E-7M-sQ2" eventType="touchUpInside" id="eKd-Lc-q5m"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="navy00"/>
@@ -742,6 +741,9 @@
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nu7-Hu-QaT">
                                 <rect key="frame" x="0.0" y="375" width="393" height="477"/>
+                                <connections>
+                                    <segue destination="A0Y-2h-uUD" kind="embed" id="iU8-LN-qc1"/>
+                                </connections>
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NuM-08-Lx7"/>
@@ -777,9 +779,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8y-1p-yO7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="878.62595419847321" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-985" y="831"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="d82-1u-71m"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chooseImage" width="26" height="26"/>
         <image name="linkCopyIcon" width="18" height="22"/>
@@ -794,9 +799,6 @@
         </namedColor>
         <namedColor name="navy00">
             <color red="0.086274509803921567" green="0.14117647058823529" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="yellow00">
-            <color red="1" green="0.72200000286102295" blue="0.23100000619888306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

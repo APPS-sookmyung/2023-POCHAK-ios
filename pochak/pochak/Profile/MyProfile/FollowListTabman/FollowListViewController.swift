@@ -14,6 +14,7 @@ class FollowListViewController: TabmanViewController {
     // Tabbar로 넘길 VC 배열 선언
     var viewControllers: [UIViewController] = []
     var index: Int = 0
+    var handle : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +22,17 @@ class FollowListViewController: TabmanViewController {
         // MARK: - Add Navigation Item
         
         // Title : 데이터 받아와서 넣기
-        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle)
-        self.navigationItem.title = handle
+        self.navigationItem.title = handle ?? ""
         
         // Tabman 사용
         // tab에 보여질 VC 추가
         if let firstVC = storyboard?.instantiateViewController(withIdentifier: "FirstTabmanVC") as? FirstTabmanViewController {
             viewControllers.append(firstVC)
+            firstVC.recievedHandle = handle ?? ""
         }
         if let secondVC = storyboard?.instantiateViewController(withIdentifier: "SecondTabmanVC") as? SecondTabmanViewController {
             viewControllers.append(secondVC)
+            secondVC.recievedHandle = handle ?? ""
         }
         
         self.dataSource = self
