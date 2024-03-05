@@ -12,11 +12,9 @@ class AlarmDataService{
     
     func getAlarm(completion: @escaping (NetworkResult<Any>) -> Void){
         // header 있는 자리!
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqaXNvbyIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE2OTkwOTMzNTIsImV4cCI6MTc3Njg1MzM1Mn0.8Cz-E0OmD8aK9wC8YApk1JenueXM86O9lPH0_pUcnLc",
-                                            "Content-type": "application/json"  // multipart/form-data ???
-                                            ]
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJfc2tmX18xMSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MDU2MjA0NDQsImV4cCI6MTc4MzM4MDQ0NH0.kTAxpfm4iQs6L3ggLmw8G1gJNglAHPqGMvTkngZdkSw", "Content-type": "multipart/form-data"]
         
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/alarm/",
+        let dataRequest = AF.request(APIConstants.baseURL+"/api/v2/alarms",
                                     method: .get,
                                     encoding: URLEncoding.default,
                                     headers: header)
@@ -30,16 +28,7 @@ class AlarmDataService{
                 // 성공 시 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
-//                print("statusCode =")
-//                print(statusCode)
-//                print("description=")
-//                print(value.description)
-//                print("dataresponse = ")
-//                print(dataResponse)
-//                print("error")
-//                print(dataResponse.error)
-//                print("request")
-//                print(dataResponse.request)
+
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
             case .failure:
