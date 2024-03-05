@@ -17,6 +17,7 @@ class PostTabViewController: UIViewController, UISearchBarDelegate{
     private var postTabDataResponse: PostTabDataResponse!
     private var postTabDataResult: PostTabDataResult!
     private var postList: [PostTabDataPostList]! = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delegate
@@ -138,30 +139,25 @@ extension PostTabViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch section {
         case 0:
             print("view post btn tapped")
-//            var selectedData = imageArray[indexPath.item].postId
-//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
-//
-//            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-//                else { return }
-//            print(postVC)
-//            postVC.receivedPostId = modifiedString
-//            self.navigationController?.pushViewController(postVC, animated: true)
+            
+            let postTabSb = UIStoryboard(name: "PostTab", bundle: nil)
+            guard let postVC = postTabSb.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            
+            postVC.receivedPostId = postList[indexPath.item].postId
+            self.navigationController?.pushViewController(postVC, animated: true)
+            
+            
         default:
             print("view post btn tapped")
-//            var selectedData = imageArray[indexPath.item+2].postId
-//            let modifiedString = selectedData.replacingOccurrences(of: "#", with: "%23")
-//
-//            guard let postVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
-//                else { return }
-//            print(postVC)
-//            postVC.receivedPostId = modifiedString
-//            self.navigationController?.pushViewController(postVC, animated: true)
+            let postTabSb = UIStoryboard(name: "PostTab", bundle: nil)
+            guard let postVC = postTabSb.instantiateViewController(withIdentifier: "PostVC") as? PostViewController
+                else { return }
+            
+            postVC.receivedPostId = postList[indexPath.item+2].postId
+            self.navigationController?.pushViewController(postVC, animated: true)
+            
         }
-        
-        //        let sb = UIStoryboard(name: "PostTab", bundle: nil)
-        //        let postVC = sb.instantiateViewController(withIdentifier: "PostVC") as! PostViewController
-        //        postVC.modalPresentationStyle = .fullScreen
-        //        self.present(postVC, animated: true, completion: nil)
     }
 }
 
