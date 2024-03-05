@@ -30,6 +30,7 @@ class OtherCollectionViewCell: UICollectionViewCell {
                 switch result {
                 case .success(let value):
                     print("Image successfully loaded: \(value.image)")
+                    self.img.contentMode = .scaleAspectFill
                 case .failure(let error):
                     print("Image failed to load with error: \(error.localizedDescription)")
                 }

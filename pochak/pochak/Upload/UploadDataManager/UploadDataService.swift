@@ -14,7 +14,7 @@ class UploadDataService{
     func upload(postImage:Data?,  caption:String, taggedMemberHandleList:Array<String>, completion: @escaping(NetworkResult<Any>) -> Void){
         print("==upload==")
         
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJfc2tmX18xMSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MDU2MjA0NDQsImV4cCI6MTc4MzM4MDQ0NH0.kTAxpfm4iQs6L3ggLmw8G1gJNglAHPqGMvTkngZdkSw", "Content-type": "multipart/form-data"]
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4", "Content-type": "multipart/form-data"]
         // Create an Alamofire upload request
         AF.upload(
             multipartFormData: { multipartFormData in

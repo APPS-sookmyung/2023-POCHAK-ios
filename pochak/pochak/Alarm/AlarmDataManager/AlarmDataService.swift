@@ -12,9 +12,9 @@ class AlarmDataService{
     
     func getAlarm(completion: @escaping (NetworkResult<Any>) -> Void){
         // header 있는 자리!
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJfc2tmX18xMSIsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MDU2MjA0NDQsImV4cCI6MTc4MzM4MDQ0NH0.kTAxpfm4iQs6L3ggLmw8G1gJNglAHPqGMvTkngZdkSw", "Content-type": "multipart/form-data"]
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdS55ZW9ubl8iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzA5NTUzNzE3LCJleHAiOjE3ODczMTM3MTd9.1z__UGnchm_UcZ7Znv-VtzZYpuyv77FXn0rGiJ_3UIY", "Content-type": "application/json"]
         
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v2/alarms",
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/alarms",
                                     method: .get,
                                     encoding: URLEncoding.default,
                                     headers: header)
@@ -25,12 +25,37 @@ class AlarmDataService{
             // dataResponse.result는 통신 성공/실패 여부
             switch dataResponse.result{
             case .success:
+                print(dataResponse.response)
                 // 성공 시 상태코드와 데이터(value) 수신
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
 
                 let networkResult = self.judgeStatus(by: statusCode, value)
                 completion(networkResult)
+            case .failure:
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    func postTagAccept(tagId: Int, isAccept: Bool, completion: @escaping (NetworkResult<Any>) -> Void){
+        // header 있는 자리!
+        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdS55ZW9ubl8iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzA5NTUzNzE3LCJleHAiOjE3ODczMTM3MTd9.1z__UGnchm_UcZ7Znv-VtzZYpuyv77FXn0rGiJ_3UIY", "Content-type": "application/json"]
+        
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/tags/\(tagId)?isAccept=\(isAccept)",
+                                    method: .post,
+                                    encoding: URLEncoding.default,
+                                    headers: header)
+        
+        // 통신 성공했는지에 대한 여부
+        dataRequest.responseData { dataResponse in
+            // dataResponse 안에는 통신에 대한 결과물
+            // dataResponse.result는 통신 성공/실패 여부
+            switch dataResponse.result{
+            case .success:
+                print(dataResponse.response)
+                // 성공 시 상태코드와 데이터(value) 수신
+                completion(.success("success"))
             case .failure:
                 completion(.networkFail)
             }

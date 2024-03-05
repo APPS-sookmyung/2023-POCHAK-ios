@@ -1,13 +1,13 @@
 struct AlarmResponse: Codable {
     let isSuccess: Bool
-    let code: Int
+    let code: String
     let message: String
     let result: AlarmResult
 }
 
 struct AlarmResult: Codable {
     let pageInfo: PageInfo
-    let alarmElementList: [TagApprovalElement]
+    let alarmElementList: [AlarmElementList]
 }
 
 struct PageInfo: Codable {
@@ -26,13 +26,21 @@ enum AlarmType: String, Codable {
     case like = "LIKE"
 }
 
-struct TagApprovalElement: Codable {
+struct AlarmElementList: Codable {
     let alarmId: Int
     let alarmType: AlarmType
     let isChecked: Bool
+    let tagId: Int?
     let ownerHandle: String?
     let ownerName: String?
     let ownerProfileImage: String?
     let postId: Int?
     let postImage: String?
+    let memberHandle: String?
+    let memberName: String?
+    let memberProfileImage: String?
+    let commentId: Int?
+    let commentContent: String?
+    let handle: String?
+    let profileImage: String?
 }
