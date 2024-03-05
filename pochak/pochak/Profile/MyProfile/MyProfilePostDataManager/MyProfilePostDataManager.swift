@@ -19,6 +19,8 @@ class MyProfilePostDataManager {
 //        let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle
         
         let url = "http://15.165.84.249/api/v2/members/" + handle
+//        let url = "http://15.165.84.249/api/v2/members/dxxynni"
+
                 
 //        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         
@@ -50,6 +52,7 @@ class MyProfilePostDataManager {
     func myProfilePochakPostDataManager(_ handle : String, _ completion: @escaping ([PostDataModel]) -> Void) {
 //        let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle + "/pochak"
         let url = "http://15.165.84.249/api/v2/members/" + handle + "/upload"
+//        let url = "http://15.165.84.249/api/v2/members/dxxynni/upload"
         
 //        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         
