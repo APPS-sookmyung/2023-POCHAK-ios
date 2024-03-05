@@ -62,7 +62,7 @@ class LikedPeopleListTableViewCell: UITableViewCell {
     }
     
     // MARK: - Helper
-    func setupData(_ likedUser: LikedUsers){
+    func setupData(_ likedUser: LikeMember){
         // 프로필 이미지
         if let profileImgStr = likedUser.profileImage {
             let url = URL(string: profileImgStr)
@@ -81,7 +81,7 @@ class LikedPeopleListTableViewCell: UITableViewCell {
         }
         
         // 유저 핸들
-        userHandleLabel.text = likedUser.userHandle
+        userHandleLabel.text = likedUser.handle
         
         // 유저 이름
         userNameLabel.text = likedUser.name
