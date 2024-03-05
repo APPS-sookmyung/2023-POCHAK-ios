@@ -12,21 +12,19 @@ struct LikedUsersDataService{
     // shared를 통해 여러 VC가 같은 인스턴스에 접근 가능
     static let shared = LikedUsersDataService()
     
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
+                 "Content-type": "application/json"
+                 ]
+    
     // 해당 포스트에 좋아요 누른 회원 조회하기
     // completion 클로저를 @escaping closure로 정의
     // -> getPersonInfo 함수가 종료되든 말든 상관없이 completion은 탈출 클로저이기 때문에, 전달된다면 이후에 외부에서도 사용가능
     // 네트워크 작업이 끝나면 completion 클로저에 네트워크의 결과를 담아서 호출하게 되고, VC에서 꺼내서 처리할 예정
-    func getLikedUsers(_ postId: String, completion: @escaping (NetworkResult<Any>) -> Void){
-        // json 형태로 받아오기 위해
-        // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
-        let header : HTTPHeaders = ["Authorization": "Bearer  eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
-                                            "Content-type": "application/json"  // multipart/form-data ???
-                                            ]
-        
+    func getLikedUsers(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
         
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
         // Request를 보내기 위한 정보
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/"+postId+"/like",
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/posts/\(postId)/like",
                                     method: .get,
                                     encoding: URLEncoding.default,
                                     headers: header)
@@ -49,14 +47,12 @@ struct LikedUsersDataService{
     }
     
     func postLikeRequest(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
-        /* header 있는 자리 */
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwMzY5MDExNywiZXhwIjoxNzgxNDUwMTE3fQ.2kaatfaOOZeor-RrK09ZCBaxizKI8KGs14Pt-j_uuoU",
-                                            "Content-type": "application/json"  // multipart/form-data ???
-                                            ]
-        let dataRequest = AF.request(APIConstants.baseURL+"/api/v1/post/\(postId)/like",
+        
+        let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/posts/\(postId)/like",
                                      method: .post,
                                      encoding: URLEncoding.default,
                                      headers: header)
+        
         dataRequest.responseData { dataResponse in
             switch dataResponse.result{
             case .success:

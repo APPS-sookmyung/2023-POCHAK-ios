@@ -12,12 +12,12 @@ class PostLikesViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    public var postId: String!
+    public var postId: Int!
     public var postOwnerHandle: String!
     
     private var likeUsersDataResponse: LikedUsersDataResponse!
     private var likedUserDataResult: LikedUserDataResult!
-    private var likedUsers: [LikedUsers]!
+    private var likedUsers: [LikeMember]!
     
     // MARK: - Lifecycle
 //    override func loadView() {
@@ -49,7 +49,7 @@ class PostLikesViewController: UIViewController {
             switch(response){
             case .success(let likedUsersData):
                 self.likeUsersDataResponse = likedUsersData as? LikedUsersDataResponse
-                self.likedUsers = self.likeUsersDataResponse.result.likedUsers
+                self.likedUsers = self.likeUsersDataResponse.result.likeMembersList
                 self.initUI()
                 //print(self.likedUsers)
             case .requestErr(let message):

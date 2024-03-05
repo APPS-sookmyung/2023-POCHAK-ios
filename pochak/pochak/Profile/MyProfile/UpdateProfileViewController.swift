@@ -43,7 +43,8 @@ class UpdateProfileViewController: UIViewController {
         
         // textfied 항목 채워넣기
         nameTextField.text = name
-        handleTextField.text = handle
+//        handleTextField.text = handle
+        handleTextField.text = "dxxynni"
         messageTextField.text = message
         
         // handle 수정 불가하도록 막아두기

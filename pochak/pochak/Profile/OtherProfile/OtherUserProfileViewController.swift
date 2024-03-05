@@ -23,6 +23,7 @@ class OtherUserProfileViewController: UIViewController {
     @IBOutlet weak var followToggleBtn: UIButton!
     
     let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
+    var recievedHandle: String?
 
     
     override func viewDidLoad() {
@@ -48,12 +49,21 @@ class OtherUserProfileViewController: UIViewController {
         // settingButton
         let settingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         settingButton.setImage(UIImage(named: "settingIcon"), for: .normal)
-        settingButton.addTarget(self, action: #selector(clickSettingButton), for: .touchUpInside)
+//        settingButton.addTarget(self, action: #selector(clickSettingButton), for: .touchUpInside)
         
         let barButton = UIBarButtonItem(customView: settingButton)
         //assign button to navigationbar
         self.navigationItem.rightBarButtonItem = barButton
                 
+        // API
+        loadProfileData()
+        
+        // 버튼 레이아웃
+        followToggleBtn.setTitle("팔로잉", for: .normal)
+        followToggleBtn.backgroundColor = UIColor(named: "gray03")
+        followToggleBtn.setTitleColor(UIColor(named: "gray07"), for: .normal)
+        followToggleBtn.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 14) // 폰트 설정
+        followToggleBtn.layer.cornerRadius = 5
         
     }
     override func viewWillAppear(_ animated: Bool){
@@ -64,22 +74,21 @@ class OtherUserProfileViewController: UIViewController {
     }
     
     private func loadProfileData() {
-        // LoginUser 정보 가져오기
-        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
-        let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
-        let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? "message not found"
-        
-        self.userHandle.text = "@" + handle
-        self.userName.text = name
-        self.userMessage.text = message
-        
-        MyProfilePostDataManager.shared.myProfileUserAndPochakedPostDataManager(handle,{resultData in
+//        // LoginUser 정보 가져오기
+//        let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? "handle not found"
+//        let name = UserDefaultsManager.getData(type: String.self, forKey: .name) ?? "name not found"
+//        let message = UserDefaultsManager.getData(type: String.self, forKey: .message) ?? "message not found"
+//        
+        self.userHandle.text = "@" + (recievedHandle ?? "handle not found")
+//        self.userName.text = name
+//        self.userMessage.text = message
+//        
+        MyProfilePostDataManager.shared.myProfileUserAndPochakedPostDataManager(recievedHandle ?? "",{resultData in
             print("myProfilePochakPostDataManager")
             print(resultData)
             
             // 프로필 이미지
             let imageURL = resultData.profileImage ?? ""
-            UserDefaultsManager.setData(value: imageURL, key: .profileImgUrl)
             if let url = URL(string: imageURL) {
                 self.profileImage.kf.setImage(with: url) { result in
                     switch result {
@@ -90,13 +99,64 @@ class OtherUserProfileViewController: UIViewController {
                     }
                 }
             }
+            self.userName.text = String(resultData.name ?? "")
+            self.userMessage.text = String(resultData.message ?? "")
             self.postCount.text = String(resultData.totalPostNum ?? 0)
             self.followerCount.text = String(resultData.followerCount ?? 0)
             self.followingCount.text = String(resultData.followingCount ?? 0)
+            
+            print("new tosdifasofoasuhfd~~~~~~~~~~~~~~~~~", resultData.isFollow)
+            
+            if resultData.isFollow == true {
+                // 버튼 레이아웃
+                self.followToggleBtn.setTitle("팔로잉", for: .normal)
+                self.followToggleBtn.backgroundColor = UIColor(named: "gray03")
+                self.followToggleBtn.setTitleColor(UIColor(named: "gray07"), for: .normal)
+                self.followToggleBtn.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 14) // 폰트 설정
+                self.followToggleBtn.layer.cornerRadius = 5
+            } else {
+                self.followToggleBtn.setTitle("팔로우", for: .normal)
+                self.followToggleBtn.backgroundColor = UIColor(named: "yellow00")
+                self.followToggleBtn.setTitleColor(UIColor(named: "gray07"), for: .normal)
+                self.followToggleBtn.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 14) // 폰트 설정
+                self.followToggleBtn.layer.cornerRadius = 5
+            }
         })
     }
     
-
+    // MARK: - follow toggle
+    
+    @IBAction func followToggleButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        
+        
+        FollowToggleDataManager.shared.followToggleDataManager(recievedHandle ?? "", { resultData in
+            print(resultData.message)
+        })
+        
+        if sender.isSelected {
+            // 알림창
+            let alert = UIAlertController(title:"팔로우를 취소할까요?",message: "팔로우를 취소하면, 피드에 업로드된 관련 사진이 사라집니다.",preferredStyle: UIAlertController.Style.alert)
+            let cancle = UIAlertAction(title: "나가기", style: .default, handler: nil)
+            let ok = UIAlertAction(title: "계속하기", style: .destructive, handler: {
+                action in
+                sender.setTitle("팔로우", for: .normal)
+                sender.backgroundColor = UIColor(named: "yellow00")
+                sender.setTitleColor(UIColor(named: "gray07"), for: .normal)
+                sender.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 14) // 폰트 설정
+            })
+            alert.addAction(cancle)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil) // present는 VC에서만 동작
+        } else {
+            sender.setTitle("팔로잉", for: .normal)
+            sender.backgroundColor = UIColor(named: "gray03")
+            sender.setTitleColor(UIColor(named: "gray07"), for: .normal)
+            sender.titleLabel?.font = UIFont(name: "Pretendard-Bold", size: 14) // 폰트 설정
+        }
+        
+    }
+    
     // MARK: - view Follower / Following List
     //  UITapGestureRecognizer 사용
     private func viewFollowerList() {
@@ -108,23 +168,23 @@ class OtherUserProfileViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewFollowingTapped))
         followingList.addGestureRecognizer(tapGestureRecognizer)
     }
-        
-    @objc private func viewFollowingTapped(){
-        guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
-        self.navigationController?.pushViewController(followListVC, animated: true)
-        
-        
-    }
     
     @objc private func viewFollowerTapped(){
         guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
+        followListVC.index = 0
+        followListVC.handle = recievedHandle ?? ""
         self.navigationController?.pushViewController(followListVC, animated: true)
+    }
         
-        
+    @objc private func viewFollowingTapped(){
+        guard let followListVC = self.storyboard?.instantiateViewController(withIdentifier: "FollowListVC") as? FollowListViewController else {return}
+        followListVC.index = 1
+        followListVC.handle = recievedHandle ?? ""
+        self.navigationController?.pushViewController(followListVC, animated: true)
     }
     
-    @objc private func clickSettingButton(_ sender: UIButton) {
-        guard let updateProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileViewController else {return}
-        self.navigationController?.pushViewController(updateProfileVC, animated: true)
-    }
+//    @objc private func clickSettingButton(_ sender: UIButton) {
+//        guard let updateProfileVC = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileVC") as? UpdateProfileViewController else {return}
+//        self.navigationController?.pushViewController(updateProfileVC, animated: true)
+//    }
 }

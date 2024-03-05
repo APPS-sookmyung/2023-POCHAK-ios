@@ -20,7 +20,9 @@ class FollowListDataManager {
     func followerDataManager(_ handle : String, _ completion: @escaping ([MemberListDataModel]) -> Void) {
 //        let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle
         
-        let url = "http://15.165.84.249/api/v2/members/dxxynni/follower"
+        let url = "http://15.165.84.249/api/v2/members/" + handle + "/follower"
+//        let url = "http://15.165.84.249/api/v2/members/dxxynni/follower"
+
                     
         let authenticator = MyAuthenticator()
         let credential = MyAuthenticationCredential(accessToken: accessToken,
@@ -50,8 +52,10 @@ class FollowListDataManager {
     func followingDataManager(_ handle : String, _ completion: @escaping ([MemberListDataModel]) -> Void) {
 //        let url = APIConstants.baseURL + "/api/v1/user/profile/" + handle + "/pochak"
         
-        let url = "http://15.165.84.249/api/v2/members/habongee/following"
-        
+        let url = "http://15.165.84.249/api/v2/members/" + handle + "/following"
+//        let url = "http://15.165.84.249/api/v2/members/dxxynni/following"
+
+
 //        let header : HTTPHeaders = ["Authorization": accessToken, "Content-type": "application/json"]
         
         let authenticator = MyAuthenticator()

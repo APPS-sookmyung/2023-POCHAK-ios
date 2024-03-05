@@ -10,11 +10,15 @@ import Alamofire
 class UploadDataService{
     static let shared = UploadDataService()
     let accessToken = GetToken().getAccessToken()
+    
+    // 임시로 넣어두는 다연 토큰
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
+                 "Content-type": "application/json"
+                 ]
 
     func upload(postImage:Data?,  caption:String, taggedMemberHandleList:Array<String>, completion: @escaping(NetworkResult<Any>) -> Void){
         print("==upload==")
         
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4", "Content-type": "multipart/form-data"]
         // Create an Alamofire upload request
         AF.upload(
             multipartFormData: { multipartFormData in

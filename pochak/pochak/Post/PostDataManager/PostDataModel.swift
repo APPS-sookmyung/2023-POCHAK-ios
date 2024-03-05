@@ -5,6 +5,7 @@
 //  Created by Suyeon Hwang on 11/10/23.
 //
 
+// MARK: - Post Detail
 struct PostDataResponse: Codable {
     let isSuccess: Bool
     let code: String
@@ -31,3 +32,11 @@ struct RecentComment: Codable {
     let createdDate: String
     let content: String
 }
+
+// MARK: - Post Delete
+struct PostDeleteResponse: Codable {
+  let isSuccess : Bool
+  let code : String
+  let message : String
+}
+
