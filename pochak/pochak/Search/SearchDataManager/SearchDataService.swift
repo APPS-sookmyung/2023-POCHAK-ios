@@ -31,17 +31,15 @@ class SearchDataService{
                 var searchData = [idSearchResponse]()
                                 
                 for dict in jsonArray {
-                    if let profileDict = dict["profileimg_url"] as? [String: Any],
-                       let profileUrl = profileDict["S"] as? String,
-                       let userHandleDict = dict["userHandle"] as? [String: Any],
-                       let userHandle = userHandleDict["S"] as? String,
-                       let nameDict = dict["name"] as? [String: Any],
-                       let name = nameDict["S"] as? String {
-                        
-                        let searchDataItem = idSearchResponse(profileUrl: profileUrl, name: name, userHandle: userHandle)
+                    if let profileUrl = dict["profileimg_url"] as? String,
+                       let userHandle = dict["userHandle"] as? String,
+                       let id = dict["id"] as? String {
+
+                        let searchDataItem = idSearchResponse(profileUrl: profileUrl, id: id, userHandle: userHandle)
                         searchData.append(searchDataItem)
                     }
                 }
+                print(searchData)
                 
                 completion(.success(searchData))
                 

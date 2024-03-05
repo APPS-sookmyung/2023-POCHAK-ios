@@ -8,31 +8,14 @@
 import Foundation
 
 struct IdSearchData: Codable {
-    let profileimgUrl: ProfileImageURL
-    let userHandle: UserHandleInfo
-    let name: NameInfo
-
-    enum CodingKeys: String, CodingKey {
-        case profileimgUrl = "profileimg_url"
-        case userHandle
-        case name
-    }
+    let profileimgUrl: String
+    let userHandle: String
+    let id: String
 }
 
-struct ProfileImageURL: Codable {
-    let S: String
-}
-
-struct UserHandleInfo: Codable {
-    let S: String
-}
-
-struct NameInfo: Codable {
-    let S: String
-}
 
 struct idSearchResponse:Codable{
     let profileUrl: String
-    let name: String
+    let id: String
     let userHandle: String
 }
