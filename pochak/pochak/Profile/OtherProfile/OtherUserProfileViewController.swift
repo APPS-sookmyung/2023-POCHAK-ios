@@ -23,7 +23,7 @@ class OtherUserProfileViewController: UIViewController {
     @IBOutlet weak var followToggleBtn: UIButton!
     
     let socialId = UserDefaultsManager.getData(type: String.self, forKey: .socialId) ?? "socialId not found"
-    var recievedHandle: String = "habongee"
+    var recievedHandle: String?
 
     
     override func viewDidLoad() {
