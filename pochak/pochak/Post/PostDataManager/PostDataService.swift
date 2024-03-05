@@ -12,16 +12,15 @@ struct PostDataService{
     // shared를 통해 여러 VC가 같은 인스턴스에 접근 가능
     static let shared = PostDataService()
     
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
+                 "Content-type": "application/json"
+                 ]
+    
     // 포스트 상세 페이지 가져오기
     // completion 클로저를 @escaping closure로 정의
     // -> getPersonInfo 함수가 종료되든 말든 상관없이 completion은 탈출 클로저이기 때문에, 전달된다면 이후에 외부에서도 사용가능
     // 네트워크 작업이 끝나면 completion 클로저에 네트워크의 결과를 담아서 호출하게 되고, VC에서 꺼내서 처리할 예정
     func getPostDetail(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void){
-        // json 형태로 받아오기 위해
-        // header 있는 자리! 토큰 때문에 이 줄은 삭제하고 커밋합니다
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4",
-                                            "Content-type": "application/json"
-                                            ]
         
         // JSONEncoding 인코딩 방식으로 헤더 정보와 함께
         // Request를 보내기 위한 정보
@@ -51,9 +50,6 @@ struct PostDataService{
     }
     
     func deletePost(_ postId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
-        let header : HTTPHeaders = ["Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4",
-                                            "Content-type": "application/json"
-                                            ]
         
         let dataRequest = AF.request(APIConstants.baseURLv2+"/api/v2/posts/\(postId)",
                                     method: .delete,
