@@ -81,21 +81,7 @@ class RecentSearchViewController: UIViewController, UISearchResultsUpdating {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "SearchResultTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchResultTableViewCell")
     }
-    func addRealm(){
-        let searchTermValue = "sdf"
-        // Check if the term already exists in Realm
-        if realm.objects(RecentSearchModel.self).filter("term == %@", searchTermValue).isEmpty {
-            // Term does not exist, add it to Realm
-            let searchTerm = RecentSearchModel(term: searchTermValue)
-            try! realm.write {
-                realm.add(searchTerm)
-            }
-            print("Term added to Realm")
-        } else {
-            // Term already exists, handle accordingly
-            print("Term already exists in Realm")
-        }
-    }
+
     func loadRealm(){
         recentSearchTerms = realmManager.getAllRecentSearchTerms()
         print(recentSearchTerms)
@@ -174,14 +160,7 @@ extension RecentSearchViewController:UITableViewDelegate, UITableViewDataSource 
             print(recentSearchTerm)
             print(recentSearchTerm.term)
             cell.userHandle.text = recentSearchTerm.term
-            cell.configure(with: "https://pochak-image-upload-bucket.s3.ap-northeast-2.amazonaws.com/post/1ef9957a-ce37-4fe9-acce-13521add89d9sy1_35031014_02.jpg")
-            // handle은 recentSearchTerm에 저장되어있음
-            
-    //        let urls = self.searchData.map { $0.profileUrl }
-    //        let handles = self.searchData.map { $0.userHandle }
-    //
-    //        cell.userHandle.text = handles[indexPath.item]
-    //        cell.configure(with: urls[indexPath.item])
+            cell.configure(with: recentSearchTerm.profileImg)
             cell.deleteBtn.isHidden = false
             
             cell.deleteButtonAction = {
@@ -208,26 +187,32 @@ extension RecentSearchViewController:UITableViewDelegate, UITableViewDataSource 
         if tableView == self.tableView {
             let selectedUserData = recentSearchTerms[indexPath.row] // 선택한 셀의 데이터 가져오기
             let handle = selectedUserData.term
-            realmManager.addRecentSearch(term: handle)
+            let profileImg = selectedUserData.profileImg
+            
+            realmManager.addRecentSearch(term: handle, profileImg: profileImg)
             self.tableView.reloadData()
             // 화면전환
             // TODO: handle 전달
             let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
             let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
-
+            
+            profileTabVC.recievedHandle = handle
             self.navigationController?.pushViewController(profileTabVC, animated: true)
             
         } else if tableView == self.resultVC.tableView {
             let selectedUserData = searchResultData[indexPath.row] // 선택한 셀의 데이터 가져오기
             let handle = selectedUserData.userHandle
-            realmManager.addRecentSearch(term: handle)
+            let profileImg = selectedUserData.profileUrl
+
+            realmManager.addRecentSearch(term: handle, profileImg: profileImg)
             self.tableView.reloadData()
 
             // 화면전환 -> handle 전달
             // TODO: handle 전달
             let storyboard = UIStoryboard(name: "ProfileTab", bundle: nil)
             let profileTabVC = storyboard.instantiateViewController(withIdentifier: "OtherUserProfileVC") as! OtherUserProfileViewController
-
+            
+            profileTabVC.recievedHandle = handle
             self.navigationController?.pushViewController(profileTabVC, animated: true)
             
         }
