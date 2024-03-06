@@ -26,7 +26,7 @@ class MyAuthenticator : Authenticator {
     func apply(_ credential: Credential, to urlRequest: inout URLRequest) {
         print("apply Function 실행중~~~~~!!")
 //        urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-        urlRequest.addValue("Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkeHh5bm5pIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcwNTYyMDMwOCwiZXhwIjoxNzgzMzgwMzA4fQ.2u1cQI59e1n9yPEeCiJxuocU6CR9eMIPRTfJgkFJzX4", forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdS55ZW9ubl8iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzA5NTUzNzE3LCJleHAiOjE3ODczMTM3MTd9.1z__UGnchm_UcZ7Znv-VtzZYpuyv77FXn0rGiJ_3UIY", forHTTPHeaderField: "Authorization")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-type")
         print(urlRequest.headers)
     }

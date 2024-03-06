@@ -11,7 +11,7 @@ class FirstPostTabmanViewController: UIViewController {
     
     @IBOutlet weak var postCollectionView: UICollectionView!
     // let handle = UserDefaultsManager.getData(type: String.self, forKey: .handle) ?? ""
-    let handle = "dxxynni" // 임시 핸들
+    let handle = "su.yeonn_" // 임시 핸들
 
     
     var imageArray : [PostDataModel] = []
