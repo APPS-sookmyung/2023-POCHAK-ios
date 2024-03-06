@@ -87,13 +87,18 @@ class LikedPeopleListTableViewCell: UITableViewCell {
         userNameLabel.text = likedUser.name
         
         // 팔로잉 버튼
-        if(likedUser.follow!){
-            followingBtn.isSelected = true
+        if likedUser.follow == nil {
+            followingBtn.isHidden = true
         }
         else{
-            followingBtn.isSelected = false
+            if(likedUser.follow!){
+                followingBtn.isSelected = true
+            }
+            else{
+                followingBtn.isSelected = false
+            }
+            followingBtn.backgroundColor = likedUser.follow! ? self.isFollowingColor : self.isNotFollowingColor
         }
-        followingBtn.backgroundColor = likedUser.follow! ? self.isFollowingColor : self.isNotFollowingColor
     }
     
 }

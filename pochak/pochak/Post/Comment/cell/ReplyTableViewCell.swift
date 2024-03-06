@@ -18,10 +18,12 @@ class ReplyTableViewCell: UITableViewCell {
     
     var loggedinUserHandle: String?
     var deleteButton = UIButton()
+    var parentCommentId: Int!
     
     // comment view controller에서 받는 댓글 입력창
     var editingCommentTextView: UITextView!
     var tableView: UITableView!
+    var commentVC: CommentViewController!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +51,10 @@ class ReplyTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func postChildCmmtBtnDidTap(_ sender: UIButton) {
+        // 현재 대댓글 등록 중임을 comment view controller에 알려야 함
+        commentVC.isPostingChildComment = true
+        commentVC.parentCommentId = self.parentCommentId
+        
         let indexPath = tableView.indexPath(for: self)
         // 답글을 다려는 셀을 맨 위로 이동
         tableView.scrollToRow(at: indexPath!, at: .top, animated: true)
@@ -67,6 +73,9 @@ class ReplyTableViewCell: UITableViewCell {
     
     // MARK: - Helpers
     func setupData(_ commentData: UICommentData){
+        // 부모 댓글 아이디 저장
+        parentCommentId = commentData.parentId
+        
         // 프로필 이미지
         let profileImgStr = commentData.profileImage
             let url = URL(string: profileImgStr)

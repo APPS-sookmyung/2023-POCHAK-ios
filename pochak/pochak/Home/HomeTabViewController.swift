@@ -57,6 +57,12 @@ class HomeTabViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = .black
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("view will appear - home")
+        currentFetchingPage = 0
+        self.setupData()
+    }
+    
     // MARK: - Action
     @objc func infoBtnTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "HomeTab", bundle: nil)
