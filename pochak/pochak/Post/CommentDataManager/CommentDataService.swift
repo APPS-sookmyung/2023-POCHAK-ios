@@ -9,7 +9,7 @@ import Alamofire
 
 struct CommentDataService {
     static let shared = CommentDataService()
-    let header: HTTPHeaders = ["Authorization": APIConstants.suyeonToken,
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
                  "Content-type": "application/json"
                  ]
     

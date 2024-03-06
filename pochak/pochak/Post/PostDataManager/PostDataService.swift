@@ -12,7 +12,7 @@ struct PostDataService{
     // shared를 통해 여러 VC가 같은 인스턴스에 접근 가능
     static let shared = PostDataService()
     
-    let header: HTTPHeaders = ["Authorization": APIConstants.suyeonToken,
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
                  "Content-type": "application/json"
                  ]
     

@@ -10,7 +10,7 @@ import Alamofire
 struct FollowDataService {
     static let shared = FollowDataService()
     
-    let header: HTTPHeaders = ["Authorization": APIConstants.suyeonToken,
+    let header: HTTPHeaders = ["Authorization": APIConstants.dayeonToken,
                  "Content-type": "application/json"
                  ]
     
